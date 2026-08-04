@@ -166,13 +166,15 @@ function readRequestBody(request) {
 async function serveFile(response, root, requestedPath) {
   const pathname = requestedPath === "/" ? "/index.html" : requestedPath;
   const relativePath = pathname.replace(/^\/+/, "");
-  const filePath = path.resolve(root, relativePath);
+  let filePath = path.resolve(root, relativePath);
   if (!filePath.startsWith(root + path.sep) && filePath !== path.join(root, "index.html")) {
     sendJson(response, 403, { error: "Forbidden" });
     return;
   }
 
   try {
+    const stat = await fs.stat(filePath);
+    if (stat.isDirectory()) filePath = path.join(filePath, "index.html");
     const file = await fs.readFile(filePath);
     response.writeHead(200, {
       "Content-Type": mimeTypes[path.extname(filePath).toLowerCase()] || "application/octet-stream",
