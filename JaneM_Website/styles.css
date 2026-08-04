@@ -95,6 +95,7 @@ h1 span { color: var(--gold-dark); font-style: italic; }
 .look-card { position: relative; overflow: hidden; min-height: 0; background: #ddd; }
 .look-card--large { grid-row: 1 / 3; }
 .look-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s ease; }
+.look-card picture { display: block; width: 100%; height: 100%; }
 .look-card:hover img { transform: scale(1.025); }
 .look-overlay {
   position: absolute; inset: auto 0 0; padding: 80px 30px 28px; color: white;
@@ -183,6 +184,32 @@ footer a, footer p { display: block; color: #bcb2a8; text-decoration: none; marg
   padding: 13px 18px; border-radius: 999px; box-shadow: 0 10px 35px rgba(0,0,0,.22);
 }
 
+/* Search landing pages retain the approved visual language while providing crawlable content. */
+.site-nav--seo { margin-left: auto; }
+.seo-breadcrumb { display: flex; gap: 9px; padding-top: 24px; color: var(--muted); font-size: .82rem; }
+.seo-breadcrumb a { color: inherit; }
+.seo-copy { background: var(--paper); }
+.seo-copy__inner { max-width: 760px; font-size: 1.08rem; color: var(--muted); }
+.seo-copy__inner p { margin: 0 0 20px; }
+.seo-section { padding: 70px 0; background: var(--cream); }
+.seo-section h2 { font-size: clamp(2.7rem, 5vw, 4.5rem); margin-bottom: 24px; }
+.seo-link-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.seo-link-grid a { padding: 24px; border: 1px solid var(--line); background: #fff; color: var(--black); font-family: var(--serif); font-size: 1.55rem; text-decoration: none; }
+.seo-link-grid a:hover, .seo-link-grid a:focus-visible { border-color: var(--gold-dark); }
+.seo-form { display: grid; gap: 16px; margin-top: 24px; }
+.seo-form label { display: grid; gap: 7px; font-weight: 800; }
+.seo-form input, .seo-form textarea { width: 100%; border: 1px solid var(--line); padding: 12px; background: #fff; color: var(--black); font: inherit; }
+.seo-form .btn { justify-self: start; }
+.cookie-consent { position: fixed; z-index: 200; inset: auto 16px 16px auto; width: min(440px, calc(100% - 32px)); padding: 22px; background: #15120f; color: #fff; box-shadow: 0 18px 45px rgba(0,0,0,.28); }
+.cookie-consent p { margin: 8px 0 16px; color: #ded5cc; font-size: .88rem; }
+.cookie-consent__actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.cookie-consent button { appearance: none; border: 1px solid #d9b87b; padding: 9px 13px; background: transparent; color: #fff; cursor: pointer; font: inherit; font-weight: 800; }
+.cookie-consent button:first-child { background: #d9b87b; color: #15120f; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}
+
 @media (max-width: 860px) {
   .nav-toggle { display: block; }
   .site-nav {
@@ -219,4 +246,5 @@ footer a, footer p { display: block; color: #bcb2a8; text-decoration: none; marg
   .brand { width: 166px; height: 54px; }
   .catalogue-section { padding-top: 45px; }
   .catalogue-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .seo-link-grid { grid-template-columns: 1fr; }
 }

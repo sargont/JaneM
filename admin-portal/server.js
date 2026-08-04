@@ -32,6 +32,15 @@ const defaultContent = {
   },
   contact: {
     email: "officialjanem@gmail.com"
+  },
+  localSeo: {
+    businessName: "Jane.M Lesotho",
+    country: "Lesotho",
+    serviceArea: "Maseru, Lesotho",
+    telephone: "+26662790946",
+    whatsApp: "https://wa.me/26662790946",
+    openingHours: "By appointment",
+    googleBusinessProfileUrl: ""
   }
 };
 
@@ -76,6 +85,7 @@ function normalizeContent(input) {
   const promotion = input?.promotion || {};
   const social = input?.social || {};
   const contact = input?.contact || {};
+  const localSeo = input?.localSeo || {};
   const ga = text(analytics.googleAnalyticsMeasurementId, "", 40).toUpperCase();
   const gtm = text(analytics.googleTagManagerContainerId, "", 40).toUpperCase();
   const email = text(contact.email, fallback.contact.email, 254).toLowerCase();
@@ -103,6 +113,15 @@ function normalizeContent(input) {
     },
     contact: {
       email
+    },
+    localSeo: {
+      businessName: text(localSeo.businessName, fallback.localSeo.businessName, 100),
+      country: text(localSeo.country, fallback.localSeo.country, 80),
+      serviceArea: text(localSeo.serviceArea, fallback.localSeo.serviceArea, 180),
+      telephone: text(localSeo.telephone, fallback.localSeo.telephone, 40),
+      whatsApp: httpsUrl(localSeo.whatsApp, fallback.localSeo.whatsApp),
+      openingHours: text(localSeo.openingHours, fallback.localSeo.openingHours, 120),
+      googleBusinessProfileUrl: localSeo.googleBusinessProfileUrl ? httpsUrl(localSeo.googleBusinessProfileUrl, "") : ""
     }
   };
 }

@@ -14,6 +14,7 @@ nav.querySelectorAll('a').forEach(link => {
   });
 });
 
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -29,4 +30,4 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.12 });
 
-document.querySelectorAll('.section-heading, .look-card, .promo-card, .steps li').forEach(el => observer.observe(el));
+if (!prefersReducedMotion) document.querySelectorAll('.section-heading, .look-card, .promo-card, .steps li').forEach(el => observer.observe(el));

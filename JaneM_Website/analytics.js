@@ -29,6 +29,13 @@
     appendScript("https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(measurementId));
   }
 
-  window.addEventListener("janemcontentready", registerTags, { once: true });
-  registerTags();
+  function consentGranted() {
+    return window.localStorage?.getItem("janem-analytics-consent") === "granted";
+  }
+
+  window.addEventListener("janemcontentready", () => {
+    if (consentGranted()) registerTags();
+  }, { once: true });
+  window.addEventListener("janemanalyticsconsent", registerTags, { once: true });
+  if (consentGranted()) registerTags();
 }());

@@ -6,6 +6,9 @@ on:
       - main
     paths:
       - "JaneM_Website/**"
+      - "scripts/build-seo-site.js"
+      - "scripts/validate-seo.js"
+      - "package.json"
       - ".github/workflows/deploy-janem-pages.yml"
   workflow_dispatch:
 
@@ -31,6 +34,11 @@ jobs:
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
+
+      - name: Build and validate SEO site
+        run: |
+          npm run build
+          npm run test:seo
 
       - name: Upload Jane.M website
         uses: actions/upload-pages-artifact@v4

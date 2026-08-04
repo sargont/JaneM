@@ -24,6 +24,8 @@
     preview.alt = pageTitle + " from the Jane.M Graduation Collection 2026";
     preview.loading = page <= 6 ? "eager" : "lazy";
     preview.decoding = "async";
+    preview.width = 720;
+    preview.height = 1019;
     label.textContent = "Page " + pageNumber;
     privacyMask.className = "face-privacy-mask";
     privacyMask.setAttribute("aria-hidden", "true");
@@ -40,6 +42,7 @@
     image.src = preview.src;
     image.alt = preview.alt;
     caption.textContent = button.querySelector("span:not(.face-privacy-mask)").textContent + " - Jane.M Graduation Collection 2026";
+    window.JaneMAnalytics?.track("catalogue_view", { catalogue_page: button.getAttribute("aria-label") });
     dialog.showModal();
   });
 

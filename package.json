@@ -1,0 +1,9 @@
+{
+  "name": "janem-website",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build-seo-site.js",
+    "test:seo": "node scripts/validate-seo.js",
+    "test": "npm run build && npm run test:seo"
+  }
+}

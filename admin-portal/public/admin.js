@@ -31,7 +31,11 @@ function contentFromForm() {
       description: data.get("promotion.description")
     },
     social: { youtube: data.get("social.youtube"), facebook: data.get("social.facebook"), instagram: data.get("social.instagram") },
-    contact: { email: data.get("contact.email") }
+    contact: { email: data.get("contact.email") },
+    localSeo: {
+      businessName: data.get("localSeo.businessName"), country: data.get("localSeo.country"), serviceArea: data.get("localSeo.serviceArea"),
+      telephone: data.get("localSeo.telephone"), whatsApp: data.get("localSeo.whatsApp"), openingHours: data.get("localSeo.openingHours"), googleBusinessProfileUrl: data.get("localSeo.googleBusinessProfileUrl")
+    }
   };
 }
 

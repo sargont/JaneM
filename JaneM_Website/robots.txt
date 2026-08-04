@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /admin.html
+Disallow: /assets/catalogue.pdf
+
+Sitemap: https://sargont.github.io/JaneM/sitemap.xml

@@ -24,6 +24,7 @@
         <a href="#promotion">Promotion</a>
         <a href="#social-links">Social links</a>
         <a href="#contact-details">Contact</a>
+        <a href="#local-seo">Local SEO</a>
         <a href="#google-tags">Google tags</a>
       </nav>
       <p class="sidebar__note">This portal only runs on your laptop at <code>127.0.0.1</code>. It does not use a public login.</p>
@@ -48,6 +49,10 @@
         <section id="contact-details" class="panel">
           <div class="panel__heading"><div><p class="eyebrow">Contact</p><h3>Email address</h3></div><p>This email address is shown on the public website and opens the visitor's email app.</p></div>
           <label>Public email address<input name="contact.email" type="email" maxlength="254" required /></label>
+        </section>
+        <section id="local-seo" class="panel">
+          <div class="panel__heading"><div><p class="eyebrow">Search visibility</p><h3>Local SEO settings</h3></div><p>These settings are retained in the local content API for the public business profile. Do not add a street address until it is confirmed for publication.</p></div>
+          <div class="field-grid"><label>Business name<input name="localSeo.businessName" maxlength="100" required /></label><label>Country<input name="localSeo.country" maxlength="80" required /></label><label>Service area<input name="localSeo.serviceArea" maxlength="180" required /></label><label>Telephone<input name="localSeo.telephone" maxlength="40" required /></label><label>WhatsApp URL<input name="localSeo.whatsApp" type="url" required /></label><label>Opening hours<input name="localSeo.openingHours" maxlength="120" required /></label><label>Google Business Profile URL (optional)<input name="localSeo.googleBusinessProfileUrl" type="url" /></label></div>
         </section>
         <section id="google-tags" class="panel panel--gold">
           <div class="panel__heading"><div><p class="eyebrow">Measurement</p><h3>Google tags</h3></div><p>Register either Google Analytics 4, Google Tag Manager, or both. If a GTM container is present, GA4 is expected to be configured inside GTM to avoid duplicate page views.</p></div>
