@@ -14,7 +14,6 @@
     const listItem = document.createElement("li");
     const button = document.createElement("button");
     const preview = document.createElement("img");
-    const privacyMask = document.createElement("span");
     const label = document.createElement("span");
 
     button.type = "button";
@@ -27,10 +26,8 @@
     preview.width = 720;
     preview.height = 1019;
     label.textContent = "Page " + pageNumber;
-    privacyMask.className = "face-privacy-mask";
-    privacyMask.setAttribute("aria-hidden", "true");
 
-    button.append(preview, privacyMask, label);
+    button.append(preview, label);
     listItem.append(button);
     gallery.append(listItem);
   }
@@ -41,7 +38,7 @@
     const preview = button.querySelector("img");
     image.src = preview.src;
     image.alt = preview.alt;
-    caption.textContent = button.querySelector("span:not(.face-privacy-mask)").textContent + " - Jane.M Graduation Collection 2026";
+    caption.textContent = button.querySelector("span").textContent + " - Jane.M Graduation Collection 2026";
     window.JaneMAnalytics?.track("catalogue_view", { catalogue_page: button.getAttribute("aria-label") });
     dialog.showModal();
   });
