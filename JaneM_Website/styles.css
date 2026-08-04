@@ -36,6 +36,7 @@ a { color: inherit; }
 .brand img { width: 210px; max-width: none; height: auto; transform: translate(-12px, -114px); }
 .site-nav { display: flex; gap: 20px; align-items: center; }
 .site-nav a { text-decoration: none; font-size: .87rem; font-weight: 700; letter-spacing: .02em; }
+.site-nav a[aria-current="page"] { color: var(--gold-dark); }
 .site-nav a:not(.nav-cta):hover { color: var(--gold-dark); }
 .nav-cta { color: white; background: var(--black); padding: 12px 18px; border-radius: 999px; }
 .nav-toggle { display: none; border: 1px solid var(--line); background: transparent; padding: 9px 12px; border-radius: 8px; font-weight: 700; }
@@ -206,6 +207,38 @@ footer a, footer p { display: block; color: #bcb2a8; text-decoration: none; marg
 .seo-form label { display: grid; gap: 7px; font-weight: 800; }
 .seo-form input, .seo-form textarea { width: 100%; border: 1px solid var(--line); padding: 12px; background: #fff; color: var(--black); font: inherit; }
 .seo-form .btn { justify-self: start; }
+
+/* JaneM TV — a dedicated editorial video destination. */
+.janem-tv-hero { padding: 100px 0 78px; background: radial-gradient(circle at 78% 8%, rgba(179,138,69,.25), transparent 28%), linear-gradient(135deg, #15120f 0%, #211b16 56%, #5b4225 100%); color: #fff; }
+.janem-tv-hero__inner { max-width: 880px; }
+.janem-tv-hero h1 { font-size: clamp(4rem, 8vw, 7.8rem); line-height: .86; margin: 18px 0 28px; }
+.janem-tv-hero h1 span { color: var(--gold); font-style: italic; }
+.janem-tv-hero p:not(.eyebrow) { max-width: 660px; color: #ded5cc; font-size: 1.08rem; margin-bottom: 32px; }
+.janem-tv-feature { background: var(--paper); }
+.janem-tv-gallery { background: var(--cream); }
+.janem-tv-intro { display: grid; grid-template-columns: .65fr 1.35fr; gap: 36px; align-items: start; margin-bottom: 34px; }
+.janem-tv-intro h2 { font-size: clamp(3rem, 5vw, 5.6rem); line-height: .92; margin: 0 0 12px; }
+.janem-tv-intro p:not(.eyebrow) { max-width: 640px; color: var(--muted); }
+.janem-tv-player { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: linear-gradient(135deg, #201914, #090807); box-shadow: 0 22px 55px rgba(34,23,13,.22); }
+.janem-tv-player iframe { width: 100%; height: 100%; border: 0; }
+.janem-tv__unavailable { position: absolute; inset: 0; display: grid; place-content: center; padding: 30px; text-align: center; background: radial-gradient(circle at 50% 35%, rgba(179,138,69,.35), transparent 30%), linear-gradient(135deg, #17120e, #080706); color: #fff; }
+.janem-tv__unavailable span { color: var(--gold); font-weight: 800; letter-spacing: .16em; text-transform: uppercase; font-size: .72rem; }
+.janem-tv__unavailable strong { margin: 14px 0 8px; font-family: var(--serif); font-size: clamp(2rem, 4vw, 4rem); font-weight: 600; }
+.janem-tv__unavailable p { max-width: 420px; margin: 0; color: #ded5cc; }
+.janem-tv-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.janem-tv-card-wrap { display: grid; gap: 9px; }
+.janem-tv-card { width: 100%; padding: 0; overflow: hidden; border: 1px solid var(--line); background: #fff; color: var(--black); text-align: left; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.janem-tv-card:hover, .janem-tv-card:focus-visible, .janem-tv-card[aria-pressed="true"] { transform: translateY(-4px); border-color: var(--gold-dark); box-shadow: var(--shadow); }
+.janem-tv-card__image { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; background: #191511; }
+.janem-tv-card__image img, .janem-tv-card__fallback { width: 100%; height: 100%; object-fit: cover; }
+.janem-tv-card__fallback { display: block; background: linear-gradient(130deg, rgba(29,22,17,.05), rgba(29,22,17,.6)), url("assets/look-gold.jpg") center 35% / cover; filter: saturate(.78); }
+.janem-tv-card__play { position: absolute; left: 15px; bottom: 15px; padding: 8px 11px; background: var(--gold); color: var(--black); font-size: .7rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+.janem-tv-card__copy { display: grid; gap: 8px; padding: 20px; }
+.janem-tv-card__copy strong { font-family: var(--serif); font-size: 1.7rem; line-height: 1; }
+.janem-tv-card__copy span { color: var(--muted); font-size: .84rem; line-height: 1.55; }
+.janem-tv-card__youtube-link { justify-self: start; color: var(--gold-dark); font-size: .82rem; font-weight: 800; text-underline-offset: .22em; }
+.janem-tv-card__youtube-link:hover, .janem-tv-card__youtube-link:focus-visible { color: var(--black); }
+.janem-tv-channel-cta { margin-top: 34px; }
 .cookie-consent { position: fixed; z-index: 200; inset: auto 16px 16px auto; width: min(440px, calc(100% - 32px)); padding: 22px; background: #15120f; color: #fff; box-shadow: 0 18px 45px rgba(0,0,0,.28); }
 .cookie-consent p { margin: 8px 0 16px; color: #ded5cc; font-size: .88rem; }
 .cookie-consent__actions { display: flex; gap: 10px; flex-wrap: wrap; }
@@ -253,4 +286,6 @@ footer a, footer p { display: block; color: #bcb2a8; text-decoration: none; marg
   .catalogue-section { padding-top: 45px; }
   .catalogue-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
   .seo-link-grid { grid-template-columns: 1fr; }
+  .janem-tv-intro { grid-template-columns: 1fr; gap: 14px; }
+  .janem-tv-cards { grid-template-columns: 1fr; }
 }
