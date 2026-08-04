@@ -1,0 +1,18 @@
+JANE.M GRADUATION ORDER FORM
+
+Client name:
+Phone:
+Graduation date:
+Collection date required:
+Outfit type:
+Colour preference:
+Inspiration photo received: Yes / No
+Budget range:
+Measurements received: Yes / No
+Quoted amount:
+Deposit required, 60%:
+Deposit paid: Yes / No
+Balance due:
+Fitting date:
+Production status: New / Deposit Paid / Cutting / Sewing / Fitting / Alterations / Ready / Collected
+Notes:

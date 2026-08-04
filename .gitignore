@@ -1,0 +1,14 @@
+.DS_Store
+**/.DS_Store
+~$*
+
+# Local runtime and generated audit outputs
+.next/
+node_modules/
+coverage/
+playwright-report/
+test-results/
+.env
+.env.*
+!.env.example
+
