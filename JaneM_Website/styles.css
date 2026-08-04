@@ -228,8 +228,7 @@ footer a, footer p { display: block; color: #bcb2a8; text-decoration: none; marg
 .janem-tv-player__preview-content .eyebrow { margin: 0; color: var(--gold); }
 .janem-tv-player__preview-content strong { font-family: var(--serif); font-size: clamp(2rem, 4.5vw, 4.7rem); line-height: .92; }
 .janem-tv-player__actions { display: flex; gap: 11px; flex-wrap: wrap; }
-.janem-tv-player__actions button, .janem-tv-player__actions a { border: 1px solid var(--gold); padding: 11px 15px; background: var(--gold); color: var(--black); font: inherit; font-size: .82rem; font-weight: 800; text-decoration: none; cursor: pointer; }
-.janem-tv-player__actions a { background: transparent; color: #fff; }
+.janem-tv-player__actions button { border: 1px solid var(--gold); padding: 11px 15px; background: var(--gold); color: var(--black); font: inherit; font-size: .82rem; font-weight: 800; cursor: pointer; }
 .janem-tv-player__help { margin: 13px 0 0; color: var(--muted); font-size: .87rem; }
 .janem-tv-player__help a { color: var(--gold-dark); font-weight: 800; text-underline-offset: .22em; }
 .janem-tv__unavailable { position: absolute; inset: 0; display: grid; place-content: center; padding: 30px; text-align: center; background: radial-gradient(circle at 50% 35%, rgba(179,138,69,.35), transparent 30%), linear-gradient(135deg, #17120e, #080706); color: #fff; }

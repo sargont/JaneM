@@ -5,7 +5,8 @@
     window.dispatchEvent(new CustomEvent("janem:analytics", { detail: { event, ...detail } }));
     if (!hasConsent()) return;
     window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event, ...detail });
+    if (typeof window.gtag === "function") window.gtag("event", event, detail);
+    else window.dataLayer.push({ event, ...detail });
   };
   window.JaneMAnalytics = { track };
 

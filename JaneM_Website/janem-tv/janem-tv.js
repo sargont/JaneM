@@ -23,47 +23,43 @@
   const title = document.querySelector("[data-janem-tv-title]");
   const description = document.querySelector("[data-janem-tv-description]");
   const cards = document.querySelector("[data-janem-tv-cards]");
-  const directLinks = document.querySelectorAll("[data-janem-tv-direct]");
   if (!config || !player || !cards) return;
 
   const validId = (id) => /^[A-Za-z0-9_-]{11}$/.test(id || "");
+  const track = (event, detail = {}) => {
+    window.JaneMAnalytics?.track(event, detail);
+  };
   const videos = [{
     id: config.featuredVideoId,
     title: config.featuredVideoTitle || "Featured from JaneM TV",
     description: config.featuredVideoDescription || "Fashion inspiration and stories from the JaneM studio."
   }, ...config.videos];
 
-  function mountInlinePlayer(video, watchUrl) {
+  function mountInlinePlayer(video) {
     player.replaceChildren();
     const iframe = document.createElement("iframe");
-    // Loading the frame only after an explicit visitor action avoids automatic
-    // Google consent redirect loops while retaining optional inline playback.
-    iframe.src = "https://www.youtube.com/embed/" + encodeURIComponent(video.id) + "?rel=0&playsinline=1";
+    iframe.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(video.id) + "?rel=0&playsinline=1";
     iframe.title = video.title + " — JaneM TV";
     iframe.loading = "lazy";
     iframe.referrerPolicy = "strict-origin-when-cross-origin";
     iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
     iframe.allowFullscreen = true;
     player.append(iframe);
-    directLinks.forEach((link) => { link.href = watchUrl; });
+    track("janem_tv_video_start", { video_id: video.id });
   }
 
   function showVideo(video) {
     title.textContent = video.title;
     description.textContent = video.description;
     player.replaceChildren();
-    const watchUrl = validId(video.id)
-      ? `https://www.youtube.com/watch?v=${encodeURIComponent(video.id)}`
-      : config.channelUrl;
-    directLinks.forEach((link) => { link.href = watchUrl; });
     if (!validId(video.id)) {
       player.innerHTML = '<div class="janem-tv__unavailable"><span>JaneM TV</span><strong>Video details are being prepared.</strong><p>Visit the official channel to watch JaneM TV.</p></div>';
       return;
     }
     const preview = document.createElement("div");
     preview.className = "janem-tv-player__preview";
-    preview.innerHTML = `<img src="https://i.ytimg.com/vi/${encodeURIComponent(video.id)}/hqdefault.jpg" alt=""><div class="janem-tv-player__preview-content"><span class="eyebrow">JaneM TV</span><strong>${video.title}</strong><div class="janem-tv-player__actions"><button type="button">Play here</button><a href="${watchUrl}" target="_blank" rel="noopener noreferrer">Watch on YouTube</a></div></div>`;
-    preview.querySelector("button").addEventListener("click", () => mountInlinePlayer(video, watchUrl));
+    preview.innerHTML = `<img src="https://i.ytimg.com/vi/${encodeURIComponent(video.id)}/hqdefault.jpg" alt=""><div class="janem-tv-player__preview-content"><span class="eyebrow">JaneM TV</span><strong>${video.title}</strong><div class="janem-tv-player__actions"><button type="button">Play here</button></div></div>`;
+    preview.querySelector("button").addEventListener("click", () => mountInlinePlayer(video));
     player.append(preview);
   }
 
@@ -71,9 +67,6 @@
     const wrapper = document.createElement("article");
     const card = document.createElement("button");
     const hasVideo = validId(video.id);
-    const watchUrl = hasVideo
-      ? `https://www.youtube.com/watch?v=${encodeURIComponent(video.id)}`
-      : config.channelUrl;
     wrapper.className = "janem-tv-card-wrap";
     card.className = "janem-tv-card";
     card.type = "button";
@@ -84,15 +77,9 @@
       cards.querySelectorAll("button").forEach((item) => item.setAttribute("aria-pressed", "false"));
       card.setAttribute("aria-pressed", "true");
       player.closest(".janem-tv-feature").scrollIntoView({ behavior: "smooth", block: "start" });
-      window.JaneMAnalytics?.track("janem_tv_video_select", { position: index + 1, video_id: video.id || "unconfigured" });
+      track("janem_tv_video_select", { position: index + 1, video_id: video.id || "unconfigured" });
     });
-    const watchLink = document.createElement("a");
-    watchLink.className = "janem-tv-card__youtube-link";
-    watchLink.href = watchUrl;
-    watchLink.target = "_blank";
-    watchLink.rel = "noopener noreferrer";
-    watchLink.textContent = "Watch on YouTube";
-    wrapper.append(card, watchLink);
+    wrapper.append(card);
     cards.append(wrapper);
   });
 
