@@ -1,0 +1,24 @@
+path,kind,bytes,sha256,disposition,public_migration_note
+JaneM_Website/assets/logo.jpg,image,35649,44773387f78b00af92077d256132adc7d5aafc785ad7f68a55300f2e8d3b6866,Approved baseline,Root source WhatsApp Image 2026-08-03 at 09.30.22.jpeg is byte-identical; preserve original and create approved display derivative.
+JaneM_Website/assets/look-gold.jpg,image,95065,4fcdf333524ffc830c7662093e54eedf5543e0ada044522688c2d9cdf11b278c,Approved baseline,Root source WhatsApp Image 2026-08-03 at 09.15.42.jpeg is byte-identical; homepage Look 01 only.
+JaneM_Website/assets/look-sleeves.jpg,image,122966,4ec34ed11e5b9842ad31a51a49af34082e8a0fb5c333f9816d53eb66cb9591b5,Approved baseline,Root source WhatsApp Image 2026-08-03 at 09.18.30.jpeg is byte-identical; homepage Look 02 only.
+JaneM_Website/assets/look-blue.jpg,image,54502,a001a3ae42a4ae5f29c8f4bb298b06f128406e4a1f331e1e5b98449a2a99970e,Approved baseline,Root source WhatsApp Image 2026-08-03 at 11.47.14.jpeg is byte-identical; homepage Look 03 only.
+JaneM_Website/assets/promo-video.mp4,video,999810,3a2d86e780a2f6c5d6e1bbcc57e1c3f07d37426ae833ef018f7718e9712e46d3,Approved baseline,15 second 720x1280 H.264 source; make a poster and accessible treatment before production.
+JaneM_Website/assets/catalogue.pdf,pdf,25962524,19e4eb9f5b9f5fcf4d87f7fa5605a34ed6f479a07bcf675fe1b4395c608b287c,Approved baseline,49 pages; byte-identical to JaneM_Full_Premium_Graduation_Catalogue_2026.pdf; select a canonical controlled download later.
+JaneM_Full_Premium_Graduation_Catalogue_2026.pdf,pdf,25962524,19e4eb9f5b9f5fcf4d87f7fa5605a34ed6f479a07bcf675fe1b4395c608b287c,Approved baseline,Duplicate of current static catalogue; retain for provenance and do not create a second public record.
+JaneM_Lookbook_Catalogue_Aug-Oct_2026.pdf,pdf,13911468,1750ab1a4e784411346146dc0b3a2427b961fb144324254ddcec21acfcb99677,Review before use,23-page source defining Look 01 through Look 19; individual imagery requires visual/hash/provenance review.
+JaneM_Refined_Graduation_Catalogue_2026.pdf,pdf,4748185,9f4db15645ad830eb5b9e7528c15c594c1d642f57018ad6084c6a2cf506bdb7f,Review before use,8-page source; exact duplicate of the 20266 filename variant.
+JaneM_Refined_Graduation_Catalogue_20266.pdf,pdf,4748185,9f4db15645ad830eb5b9e7528c15c594c1d642f57018ad6084c6a2cf506bdb7f,Review before use,Exact duplicate of JaneM_Refined_Graduation_Catalogue_2026.pdf.
+Catalog Photos.zip,archive,7648942,a87a3fe7e7cd4f2a26605418c94cd1a45a0e406360d9111eef7f855d98c39f9a,Review before use,77 archive entries; 38 photos and 36 exact-hash-unique photos; keep quarantined until item-level review.
+JaneM_Graduation_WhatsApp_Ad_Pack.zip,archive,2123904,e93c938311b25df2155db077d16f65416f6e471fdd701a70f1fad3552031706f,Internal only,Campaign pack includes outdated contact information and conflicting 50% discount terms.
+JaneM_Graduation_WhatsApp_Ad_Pack/,campaign pack,2148972,mixed,Internal only,Unpacked campaign copy/images are preserved for history but must not be seeded or published.
+JaneM_Graduation_Promo_Refresh_Creative_Pack.zip,archive,1229761,9906fc37a808417eea0fdac050339e2779bb0cf1bb5867491c81f55e1c64d192,Internal only,Campaign pack advertises conflicting 50% discount terms.
+JaneM_Graduation_Promo_Refresh_Creative_Pack/,campaign pack,1345520,mixed,Internal only,Unpacked campaign creative/copy remains internal; no public migration.
+JaneM_Fashion_Turnaround_Playbook.docx,document,2114963,221f2aacd241c59c060abd9040cb2c527cf6be05a4a0ad24dc7031bf942f8e21,Internal only,Operational strategy reference.
+JaneM_Fashion_Turnaround_Playbook.pdf,pdf,431828,7881ac9ed770099f7d0a9e8864a0b06d6bd513b77d306157add4f1f35c0f53ee,Internal only,Operational strategy reference.
+JaneM_Fashion_Turnaround_Strategy_Deck.pptx,presentation,6745440,2ec08421637fdc0a775db6a9acdb3af759539043abf1ae9a1bd7f432d5a2d71c,Internal only,Operational strategy reference.
+JaneM_Fashion_Turnaround_Strategy_Deck.pdf,pdf,1110461,a86f1ccd20deae3d803d877425b289d99236c68227d61ee8d78bb660ffa0c408,Internal only,16-page operational strategy reference.
+JaneM_Graduation_Promo_3_Month_Projection.xlsx,spreadsheet,13501,06a01c603ca2ad281e636d2aa7f071bbf4bb2b8e046704acf3fa04d9c8e91e86,Internal only,Forecast reference; do not serve publicly.
+JaneM_Graduation_Promo_3_Month_Projection_Final.xlsx,spreadsheet,13763,bea7f45c689d527121a54186fbd4868771ebeffd988b2fbbbdf376a743e993f0,Internal only,Forecast reference; do not serve publicly.
+JaneM_Turnaround_Execution_Tracker.xlsx,spreadsheet,37395,dd33c128093c2ecfff343c38a0aa5a9ef524a34a4e0abdae839e56bd9f16a140,Internal only,Execution tracking reference; do not serve publicly.
+Receipt_Expense_Register_Aug2026.xlsx,spreadsheet,15885,8c5771d70de38968c9af373c99fafcab8a7cfe43a9aa2ee1b0ca9e2c129091d1,Exclude,Contains unrelated/private travel receipt data; exclude from application migration and uploads.
