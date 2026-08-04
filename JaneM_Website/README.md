@@ -42,4 +42,4 @@ Upload this folder to:
 - Replace placeholder operating hours or email if needed.
 - Add a permanent address when available.
 - Connect a custom domain.
-- Add Meta Pixel / Google Analytics only after consent and privacy wording are ready.
+- Keep analytics configuration and the privacy wording aligned before adding any additional tracking tools.

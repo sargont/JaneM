@@ -29,13 +29,8 @@
     appendScript("https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(measurementId));
   }
 
-  function consentGranted() {
-    return window.localStorage?.getItem("janem-analytics-consent") === "granted";
-  }
-
-  window.addEventListener("janemcontentready", () => {
-    if (consentGranted()) registerTags();
-  }, { once: true });
-  window.addEventListener("janemanalyticsconsent", registerTags, { once: true });
-  if (consentGranted()) registerTags();
+  // The site currently measures aggregate usage immediately. No visitor form
+  // fields or message contents are passed to Google Analytics.
+  registerTags();
+  window.addEventListener("janemcontentready", registerTags, { once: true });
 }());
