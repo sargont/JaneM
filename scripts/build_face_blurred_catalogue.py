@@ -37,14 +37,15 @@ def detect(image):
 
 def blur_faces(image, faces):
     result = image.copy()
-    softened = cv2.GaussianBlur(image, (0, 0), 22)
+    softened = cv2.GaussianBlur(image, (0, 0), 18)
     for x, y, width, height in faces:
-        pad_x, pad_y = int(width * .35), int(height * .45)
         centre = (x + width // 2, y + height // 2)
-        axes = (width // 2 + pad_x, height // 2 + pad_y)
+        # Keep the privacy mask confined to the recognised face. Earlier
+        # padding spread into nearby catalogue headings and garment details.
+        axes = (max(1, int(width * .48)), max(1, int(height * .5)))
         mask = np.zeros(image.shape[:2], dtype=np.uint8)
         cv2.ellipse(mask, centre, axes, 0, 0, 360, 255, -1)
-        mask = cv2.GaussianBlur(mask, (0, 0), 10)
+        mask = cv2.GaussianBlur(mask, (0, 0), 4)
         alpha = (mask.astype(np.float32) / 255)[:, :, None]
         result = (softened * alpha + result * (1 - alpha)).astype(np.uint8)
     return result

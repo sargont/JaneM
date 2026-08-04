@@ -165,7 +165,7 @@ footer a, footer p { display: block; color: #bcb2a8; text-decoration: none; marg
 .catalogue-restricted p:not(.eyebrow), .catalogue-access-dialog p:not(.eyebrow) { max-width: 620px; color: var(--muted); font-size: 1.03rem; margin-bottom: 26px; }
 .catalogue-card { position: relative; display: block; width: 100%; padding: 0; overflow: hidden; border: 1px solid var(--line); background: #fff; color: var(--black); text-align: left; cursor: zoom-in; box-shadow: 0 12px 32px rgba(34,23,13,.08); transition: transform .2s ease, box-shadow .2s ease; }
 .catalogue-card:hover, .catalogue-card:focus-visible { transform: translateY(-4px); box-shadow: var(--shadow); }
-.catalogue-card img { width: 100%; aspect-ratio: 1 / 1.414; object-fit: cover; }
+.catalogue-card img { display: block; width: 100%; height: auto; aspect-ratio: auto; object-fit: contain; background: var(--paper); }
 .catalogue-card > span { display: block; padding: 12px 15px; font-size: .75rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
 .catalogue-dialog { width: min(920px, calc(100% - 30px)); max-height: calc(100vh - 30px); padding: 18px; border: 0; background: var(--paper); box-shadow: 0 24px 80px rgba(0,0,0,.42); }
 .catalogue-dialog::backdrop { background: rgba(0,0,0,.74); }
