@@ -23,6 +23,7 @@
   const title = document.querySelector("[data-janem-tv-title]");
   const description = document.querySelector("[data-janem-tv-description]");
   const cards = document.querySelector("[data-janem-tv-cards]");
+  const directLinks = document.querySelectorAll("[data-janem-tv-direct]");
   if (!config || !player || !cards) return;
 
   const validId = (id) => /^[A-Za-z0-9_-]{11}$/.test(id || "");
@@ -32,21 +33,38 @@
     description: config.featuredVideoDescription || "Fashion inspiration and stories from the JaneM studio."
   }, ...config.videos];
 
+  function mountInlinePlayer(video, watchUrl) {
+    player.replaceChildren();
+    const iframe = document.createElement("iframe");
+    // Loading the frame only after an explicit visitor action avoids automatic
+    // Google consent redirect loops while retaining optional inline playback.
+    iframe.src = "https://www.youtube.com/embed/" + encodeURIComponent(video.id) + "?rel=0&playsinline=1";
+    iframe.title = video.title + " — JaneM TV";
+    iframe.loading = "lazy";
+    iframe.referrerPolicy = "strict-origin-when-cross-origin";
+    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    iframe.allowFullscreen = true;
+    player.append(iframe);
+    directLinks.forEach((link) => { link.href = watchUrl; });
+  }
+
   function showVideo(video) {
     title.textContent = video.title;
     description.textContent = video.description;
     player.replaceChildren();
+    const watchUrl = validId(video.id)
+      ? `https://www.youtube.com/watch?v=${encodeURIComponent(video.id)}`
+      : config.channelUrl;
+    directLinks.forEach((link) => { link.href = watchUrl; });
     if (!validId(video.id)) {
       player.innerHTML = '<div class="janem-tv__unavailable"><span>JaneM TV</span><strong>Video details are being prepared.</strong><p>Visit the official channel to watch JaneM TV.</p></div>';
       return;
     }
-    const iframe = document.createElement("iframe");
-    iframe.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(video.id);
-    iframe.title = video.title + " — JaneM TV";
-    iframe.loading = "lazy";
-    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-    iframe.allowFullscreen = true;
-    player.append(iframe);
+    const preview = document.createElement("div");
+    preview.className = "janem-tv-player__preview";
+    preview.innerHTML = `<img src="https://i.ytimg.com/vi/${encodeURIComponent(video.id)}/hqdefault.jpg" alt=""><div class="janem-tv-player__preview-content"><span class="eyebrow">JaneM TV</span><strong>${video.title}</strong><div class="janem-tv-player__actions"><button type="button">Play here</button><a href="${watchUrl}" target="_blank" rel="noopener noreferrer">Watch on YouTube</a></div></div>`;
+    preview.querySelector("button").addEventListener("click", () => mountInlinePlayer(video, watchUrl));
+    player.append(preview);
   }
 
   videos.slice(1, 4).forEach((video, index) => {
