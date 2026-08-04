@@ -30,7 +30,8 @@ function contentFromForm() {
       datesText: data.get("promotion.datesText"),
       description: data.get("promotion.description")
     },
-    social: { youtube: data.get("social.youtube"), facebook: data.get("social.facebook"), instagram: data.get("social.instagram") }
+    social: { youtube: data.get("social.youtube"), facebook: data.get("social.facebook"), instagram: data.get("social.instagram") },
+    contact: { email: data.get("contact.email") }
   };
 }
 

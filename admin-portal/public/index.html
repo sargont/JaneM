@@ -23,6 +23,7 @@
         <a href="#website-copy">Website copy</a>
         <a href="#promotion">Promotion</a>
         <a href="#social-links">Social links</a>
+        <a href="#contact-details">Contact</a>
         <a href="#google-tags">Google tags</a>
       </nav>
       <p class="sidebar__note">This portal only runs on your laptop at <code>127.0.0.1</code>. It does not use a public login.</p>
@@ -43,6 +44,10 @@
         <section id="social-links" class="panel">
           <div class="panel__heading"><div><p class="eyebrow">Audience</p><h3>Social links</h3></div><p>Use complete secure URLs. The icons and labels remain unchanged on the public site.</p></div>
           <div class="field-grid"><label>YouTube URL<input name="social.youtube" type="url" required /></label><label>Facebook URL<input name="social.facebook" type="url" required /></label><label>Instagram URL<input name="social.instagram" type="url" required /></label></div>
+        </section>
+        <section id="contact-details" class="panel">
+          <div class="panel__heading"><div><p class="eyebrow">Contact</p><h3>Email address</h3></div><p>This email address is shown on the public website and opens the visitor's email app.</p></div>
+          <label>Public email address<input name="contact.email" type="email" maxlength="254" required /></label>
         </section>
         <section id="google-tags" class="panel panel--gold">
           <div class="panel__heading"><div><p class="eyebrow">Measurement</p><h3>Google tags</h3></div><p>Register either Google Analytics 4, Google Tag Manager, or both. If a GTM container is present, GA4 is expected to be configured inside GTM to avoid duplicate page views.</p></div>

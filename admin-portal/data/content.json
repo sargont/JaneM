@@ -1,7 +1,7 @@
 {
   "updatedAt": "2026-08-04T10:11:57.390Z",
   "analytics": {
-    "googleAnalyticsMeasurementId": "",
+    "googleAnalyticsMeasurementId": "G-LZ7JHY0VQ8",
     "googleTagManagerContainerId": ""
   },
   "hero": {
@@ -17,5 +17,8 @@
     "youtube": "https://youtube.com/@janemtv",
     "facebook": "https://www.facebook.com/share/1CvrANPy9Q/",
     "instagram": "https://www.instagram.com/___jane_m/"
+  },
+  "contact": {
+    "email": "officialjanem@gmail.com"
   }
 }

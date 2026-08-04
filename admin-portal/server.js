@@ -13,7 +13,7 @@ const maxRequestBytes = 250_000;
 const defaultContent = {
   updatedAt: "",
   analytics: {
-    googleAnalyticsMeasurementId: "",
+    googleAnalyticsMeasurementId: "G-LZ7JHY0VQ8",
     googleTagManagerContainerId: ""
   },
   hero: {
@@ -29,6 +29,9 @@ const defaultContent = {
     youtube: "https://youtube.com/@janemtv",
     facebook: "https://www.facebook.com/share/1CvrANPy9Q/",
     instagram: "https://www.instagram.com/___jane_m/"
+  },
+  contact: {
+    email: "officialjanem@gmail.com"
   }
 };
 
@@ -72,11 +75,14 @@ function normalizeContent(input) {
   const hero = input?.hero || {};
   const promotion = input?.promotion || {};
   const social = input?.social || {};
+  const contact = input?.contact || {};
   const ga = text(analytics.googleAnalyticsMeasurementId, "", 40).toUpperCase();
   const gtm = text(analytics.googleTagManagerContainerId, "", 40).toUpperCase();
+  const email = text(contact.email, fallback.contact.email, 254).toLowerCase();
 
   if (ga && !/^G-[A-Z0-9]+$/.test(ga)) throw new Error("Google Analytics ID must look like G-ABC123DEF4.");
   if (gtm && !/^GTM-[A-Z0-9]+$/.test(gtm)) throw new Error("Google Tag Manager ID must look like GTM-ABC123.");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error("Contact email must be a valid email address.");
 
   return {
     updatedAt: new Date().toISOString(),
@@ -94,6 +100,9 @@ function normalizeContent(input) {
       youtube: httpsUrl(social.youtube, fallback.social.youtube),
       facebook: httpsUrl(social.facebook, fallback.social.facebook),
       instagram: httpsUrl(social.instagram, fallback.social.instagram)
+    },
+    contact: {
+      email
     }
   };
 }
