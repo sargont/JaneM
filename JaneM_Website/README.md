@@ -25,7 +25,7 @@ For the editable local website and Content Studio, use the server documented in 
 
 ## Routes
 - `/` — public homepage
-- `/catalogue.html` — responsive, on-site gallery of all 49 approved Graduation Collection 2026 pages, with a PDF download option
+- `/catalogue.html` — a temporary, privacy-first catalogue availability page. The original PDF and gallery derivatives are retained outside the deployed website until image permissions are confirmed.
 - `/admin.html` — admin portal setup page; this static version intentionally has no login or customer-data controls
 
 ## Google Analytics
