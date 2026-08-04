@@ -19,6 +19,16 @@ python3 -m http.server 4173 --bind 127.0.0.1 --directory JaneM_Website
 
 Open `http://127.0.0.1:4173/`.
 
+## Run the local Content Studio
+
+To use the public website with its local content-management API, run:
+
+```bash
+node admin-portal/server.js
+```
+
+Open the public website at `http://127.0.0.1:4173/` and the local Content Studio at `http://127.0.0.1:4173/admin/`. The portal is deliberately loopback-only and unauthenticated for laptop-local use; see `admin-portal/README.md` before exposing it anywhere else.
+
 ## Phase 0 documentation
 
 - [Current-state audit](docs/CURRENT_STATE_AUDIT.md)

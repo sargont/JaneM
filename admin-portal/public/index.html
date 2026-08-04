@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Jane.M Local Content Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="View Jane.M website"><span>Jane</span>.M <small>Lesotho</small></a>
+    <div class="topbar__actions"><span class="local-pill">Local-only CMS</span><a href="/" target="_blank" rel="noopener noreferrer">View website</a></div>
+  </header>
+  <main class="layout">
+    <aside class="sidebar">
+      <p class="eyebrow">Content studio</p>
+      <h1>Manage your<br><em>website.</em></h1>
+      <nav aria-label="Content sections">
+        <a href="#website-copy">Website copy</a>
+        <a href="#promotion">Promotion</a>
+        <a href="#social-links">Social links</a>
+        <a href="#google-tags">Google tags</a>
+      </nav>
+      <p class="sidebar__note">This portal only runs on your laptop at <code>127.0.0.1</code>. It does not use a public login.</p>
+    </aside>
+    <section class="content">
+      <div class="page-heading"><div><p class="eyebrow">Jane.M Lesotho</p><h2>Content management</h2></div><p id="save-status" class="status" role="status">Loading local content…</p></div>
+      <form id="content-form">
+        <section id="website-copy" class="panel">
+          <div class="panel__heading"><div><p class="eyebrow">Homepage</p><h3>Website copy</h3></div><p>These fields update the public homepage through the local API.</p></div>
+          <label>Hero eyebrow<input name="hero.eyebrow" maxlength="140" required /></label>
+          <label>Hero introduction<textarea name="hero.lead" rows="4" maxlength="360" required></textarea></label>
+        </section>
+        <section id="promotion" class="panel">
+          <div class="panel__heading"><div><p class="eyebrow">Commercial content</p><h3>Promotion</h3></div><p>Keep dates and discount wording aligned with your active offer.</p></div>
+          <div class="field-grid"><label>Discount wording<input name="promotion.discountText" maxlength="80" required /></label><label>Dates wording<input name="promotion.datesText" maxlength="80" required /></label></div>
+          <label>Promotion description<textarea name="promotion.description" rows="4" maxlength="420" required></textarea></label>
+        </section>
+        <section id="social-links" class="panel">
+          <div class="panel__heading"><div><p class="eyebrow">Audience</p><h3>Social links</h3></div><p>Use complete secure URLs. The icons and labels remain unchanged on the public site.</p></div>
+          <div class="field-grid"><label>YouTube URL<input name="social.youtube" type="url" required /></label><label>Facebook URL<input name="social.facebook" type="url" required /></label><label>Instagram URL<input name="social.instagram" type="url" required /></label></div>
+        </section>
+        <section id="google-tags" class="panel panel--gold">
+          <div class="panel__heading"><div><p class="eyebrow">Measurement</p><h3>Google tags</h3></div><p>Register either Google Analytics 4, Google Tag Manager, or both. If a GTM container is present, GA4 is expected to be configured inside GTM to avoid duplicate page views.</p></div>
+          <div class="field-grid"><label>GA4 Measurement ID<input name="analytics.googleAnalyticsMeasurementId" placeholder="G-ABC123DEF4" pattern="G-[A-Za-z0-9]+" /></label><label>Google Tag Manager container ID<input name="analytics.googleTagManagerContainerId" placeholder="GTM-ABC123" pattern="GTM-[A-Za-z0-9]+" /></label></div>
+        </section>
+        <div class="form-actions"><button id="save-button" type="submit">Save website content</button><p>Saved changes take effect on the next public-page refresh.</p></div>
+      </form>
+    </section>
+  </main>
+  <script src="admin.js"></script>
+</body>
+</html>

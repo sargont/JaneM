@@ -1,0 +1,205 @@
+const http = require("node:http");
+const fs = require("node:fs/promises");
+const path = require("node:path");
+
+const host = "127.0.0.1";
+const port = Number(process.env.PORT || 4173);
+const projectRoot = path.resolve(__dirname, "..");
+const publicRoot = path.join(projectRoot, "JaneM_Website");
+const adminRoot = path.join(__dirname, "public");
+const contentFile = path.join(__dirname, "data", "content.json");
+const maxRequestBytes = 250_000;
+
+const defaultContent = {
+  updatedAt: "",
+  analytics: {
+    googleAnalyticsMeasurementId: "",
+    googleTagManagerContainerId: ""
+  },
+  hero: {
+    eyebrow: "Jane.M Lesotho • Graduation Collection 2026",
+    lead: "Made-to-measure fashion for women who want their graduation look to feel personal, refined and unforgettable."
+  },
+  promotion: {
+    discountText: "30% off design fees",
+    datesText: "1 Aug — 31 Oct 2026",
+    description: "The promotion runs from 1 August to 31 October 2026. Material costs are charged separately after the design and fabric have been confirmed."
+  },
+  social: {
+    youtube: "https://youtube.com/@janemtv",
+    facebook: "https://www.facebook.com/share/1CvrANPy9Q/",
+    instagram: "https://www.instagram.com/___jane_m/"
+  }
+};
+
+const mimeTypes = {
+  ".css": "text/css; charset=utf-8",
+  ".html": "text/html; charset=utf-8",
+  ".ico": "image/x-icon",
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".js": "text/javascript; charset=utf-8",
+  ".json": "application/json; charset=utf-8",
+  ".mp4": "video/mp4",
+  ".pdf": "application/pdf",
+  ".png": "image/png",
+  ".svg": "image/svg+xml",
+  ".webp": "image/webp"
+};
+
+function cloneDefaults() {
+  return structuredClone(defaultContent);
+}
+
+function text(value, fallback, maxLength) {
+  if (typeof value !== "string") return fallback;
+  return value.trim().slice(0, maxLength);
+}
+
+function httpsUrl(value, fallback) {
+  const candidate = text(value, fallback, 500);
+  try {
+    const parsed = new URL(candidate);
+    return parsed.protocol === "https:" ? parsed.href : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+function normalizeContent(input) {
+  const fallback = cloneDefaults();
+  const analytics = input?.analytics || {};
+  const hero = input?.hero || {};
+  const promotion = input?.promotion || {};
+  const social = input?.social || {};
+  const ga = text(analytics.googleAnalyticsMeasurementId, "", 40).toUpperCase();
+  const gtm = text(analytics.googleTagManagerContainerId, "", 40).toUpperCase();
+
+  if (ga && !/^G-[A-Z0-9]+$/.test(ga)) throw new Error("Google Analytics ID must look like G-ABC123DEF4.");
+  if (gtm && !/^GTM-[A-Z0-9]+$/.test(gtm)) throw new Error("Google Tag Manager ID must look like GTM-ABC123.");
+
+  return {
+    updatedAt: new Date().toISOString(),
+    analytics: { googleAnalyticsMeasurementId: ga, googleTagManagerContainerId: gtm },
+    hero: {
+      eyebrow: text(hero.eyebrow, fallback.hero.eyebrow, 140),
+      lead: text(hero.lead, fallback.hero.lead, 360)
+    },
+    promotion: {
+      discountText: text(promotion.discountText, fallback.promotion.discountText, 80),
+      datesText: text(promotion.datesText, fallback.promotion.datesText, 80),
+      description: text(promotion.description, fallback.promotion.description, 420)
+    },
+    social: {
+      youtube: httpsUrl(social.youtube, fallback.social.youtube),
+      facebook: httpsUrl(social.facebook, fallback.social.facebook),
+      instagram: httpsUrl(social.instagram, fallback.social.instagram)
+    }
+  };
+}
+
+async function readContent() {
+  try {
+    return normalizeContent(JSON.parse(await fs.readFile(contentFile, "utf8")));
+  } catch (error) {
+    if (error.code === "ENOENT") return { ...cloneDefaults(), updatedAt: "" };
+    throw error;
+  }
+}
+
+async function writeContent(content) {
+  await fs.mkdir(path.dirname(contentFile), { recursive: true });
+  const temporaryFile = contentFile + ".tmp";
+  await fs.writeFile(temporaryFile, JSON.stringify(content, null, 2) + "\n", "utf8");
+  await fs.rename(temporaryFile, contentFile);
+}
+
+function sendJson(response, status, payload) {
+  response.writeHead(status, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
+  response.end(JSON.stringify(payload));
+}
+
+function readRequestBody(request) {
+  return new Promise((resolve, reject) => {
+    let body = "";
+    request.setEncoding("utf8");
+    request.on("data", (chunk) => {
+      body += chunk;
+      if (body.length > maxRequestBytes) {
+        reject(new Error("Request body is too large."));
+        request.destroy();
+      }
+    });
+    request.on("end", () => resolve(body));
+    request.on("error", reject);
+  });
+}
+
+async function serveFile(response, root, requestedPath) {
+  const pathname = requestedPath === "/" ? "/index.html" : requestedPath;
+  const relativePath = pathname.replace(/^\/+/, "");
+  const filePath = path.resolve(root, relativePath);
+  if (!filePath.startsWith(root + path.sep) && filePath !== path.join(root, "index.html")) {
+    sendJson(response, 403, { error: "Forbidden" });
+    return;
+  }
+
+  try {
+    const file = await fs.readFile(filePath);
+    response.writeHead(200, {
+      "Content-Type": mimeTypes[path.extname(filePath).toLowerCase()] || "application/octet-stream",
+      "Cache-Control": path.extname(filePath) === ".html" ? "no-cache" : "public, max-age=3600"
+    });
+    response.end(file);
+  } catch (error) {
+    if (error.code === "ENOENT") sendJson(response, 404, { error: "Not found" });
+    else throw error;
+  }
+}
+
+const server = http.createServer(async (request, response) => {
+  try {
+    const url = new URL(request.url, "http://" + host + ":" + port);
+    if (url.pathname === "/api/health" && request.method === "GET") {
+      sendJson(response, 200, { status: "ok", mode: "local-only" });
+      return;
+    }
+    if ((url.pathname === "/api/public-content" || url.pathname === "/api/admin/content") && request.method === "GET") {
+      sendJson(response, 200, await readContent());
+      return;
+    }
+    if (url.pathname === "/api/admin/content" && request.method === "PUT") {
+      const contentType = request.headers["content-type"] || "";
+      if (!contentType.includes("application/json")) {
+        sendJson(response, 415, { error: "Use application/json." });
+        return;
+      }
+      const content = normalizeContent(JSON.parse(await readRequestBody(request)));
+      await writeContent(content);
+      sendJson(response, 200, content);
+      return;
+    }
+    if (url.pathname === "/admin") {
+      response.writeHead(302, { Location: "/admin/" });
+      response.end();
+      return;
+    }
+    if (url.pathname.startsWith("/admin/")) {
+      await serveFile(response, adminRoot, url.pathname.slice("/admin".length));
+      return;
+    }
+    if (request.method !== "GET" && request.method !== "HEAD") {
+      sendJson(response, 405, { error: "Method not allowed" });
+      return;
+    }
+    await serveFile(response, publicRoot, url.pathname);
+  } catch (error) {
+    const status = error instanceof SyntaxError || /must look like|too large/.test(error.message) ? 400 : 500;
+    sendJson(response, status, { error: status === 500 ? "Local server error" : error.message });
+  }
+});
+
+server.listen(port, host, () => {
+  console.log("Jane.M local CMS running at http://" + host + ":" + port + "/");
+  console.log("Admin portal: http://" + host + ":" + port + "/admin/");
+});

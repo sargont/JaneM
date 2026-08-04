@@ -21,6 +21,16 @@ python3 -m http.server 8080
 
 Then visit `http://localhost:8080`.
 
+For the editable local website and Content Studio, use the server documented in [`../admin-portal/README.md`](../admin-portal/README.md). It serves the public website and `/admin/` together on `http://127.0.0.1:4173/`.
+
+## Routes
+- `/` — public homepage
+- `/catalogue.html` — responsive, on-site gallery of all 49 approved Graduation Collection 2026 pages, with a PDF download option
+- `/admin.html` — admin portal setup page; this static version intentionally has no login or customer-data controls
+
+## Google Analytics
+When a Google Analytics 4 Measurement ID is available, add it to `config.js` as `googleAnalyticsMeasurementId` (for example, `G-ABC123DEF4`). The optional loader is disabled until a valid ID is supplied. Never add private API secrets to this static file.
+
 ## Deployment
 Upload this folder to:
 - Netlify

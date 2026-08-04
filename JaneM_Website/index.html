@@ -9,7 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="styles.css?v=20260804b" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -22,6 +23,7 @@
       <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
       <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
         <a href="#collection">Collection</a>
+        <a href="catalogue.html">Catalogue</a>
         <a href="#promo">Promotion</a>
         <a href="#pricing">Price guide</a>
         <a href="#process">How to order</a>
@@ -34,16 +36,16 @@
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">Jane.M Lesotho • Graduation Collection 2026</p>
+          <p class="eyebrow" data-cms-text="hero.eyebrow">Jane.M Lesotho • Graduation Collection 2026</p>
           <h1>Made for<br><span>milestones.</span></h1>
-          <p class="hero-lead">Made-to-measure fashion for women who want their graduation look to feel personal, refined and unforgettable.</p>
+          <p class="hero-lead" data-cms-text="hero.lead">Made-to-measure fashion for women who want their graduation look to feel personal, refined and unforgettable.</p>
           <div class="hero-actions">
             <a class="btn btn-gold" href="https://wa.me/26662790946?text=Hello%20Jane.M%2C%20I%20saw%20the%2030%25%20graduation%20promotion.%20My%20graduation%20date%20is%20____." target="_blank" rel="noopener">Book your look</a>
             <a class="btn btn-ghost" href="assets/catalogue.pdf" target="_blank">View catalogue</a>
           </div>
           <div class="hero-meta">
-            <span>30% off design fees</span>
-            <span>1 Aug — 31 Oct 2026</span>
+            <span data-cms-text="promotion.discountText">30% off design fees</span>
+            <span data-cms-text="promotion.datesText">1 Aug — 31 Oct 2026</span>
             <span>60% deposit secures your slot</span>
           </div>
         </div>
@@ -108,8 +110,8 @@
       <div class="container promo-card">
         <div>
           <p class="eyebrow eyebrow--light">Graduation season promotion</p>
-          <h2>Enjoy <span>30% off</span><br>all Jane.M design fees.</h2>
-          <p>The promotion runs from 1 August to 31 October 2026. Material costs are charged separately after the design and fabric have been confirmed.</p>
+          <h2>Enjoy <span data-cms-text="promotion.discountText">30% off</span><br>all Jane.M design fees.</h2>
+          <p data-cms-text="promotion.description">The promotion runs from 1 August to 31 October 2026. Material costs are charged separately after the design and fabric have been confirmed.</p>
         </div>
         <div class="promo-side">
           <p class="promo-date">1 AUG<br>—<br>31 OCT</p>
@@ -184,7 +186,7 @@
   <footer>
     <div class="container footer-grid">
       <div class="footer-brand">
-        <img src="assets/logo.jpg" alt="Jane.M Lesotho" />
+        <a class="brand" href="#top" aria-label="Jane.M home"><img src="assets/logo.jpg" alt="Jane.M Lesotho logo" /></a>
         <p>Made-to-measure women's fashion for milestones and special occasions.</p>
       </div>
       <div>
@@ -198,6 +200,11 @@
         <p>Bookings confirmed after deposit.</p>
       </div>
     </div>
+    <div class="container social-row" aria-label="Jane.M social media">
+      <a class="social-link" data-cms-href="social.youtube" href="https://youtube.com/@janemtv" target="_blank" rel="noopener noreferrer" aria-label="Jane.M on YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
+      <a class="social-link" data-cms-href="social.facebook" href="https://www.facebook.com/share/1CvrANPy9Q/" target="_blank" rel="noopener noreferrer" aria-label="Jane.M on Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+      <a class="social-link" data-cms-href="social.instagram" href="https://www.instagram.com/___jane_m/" target="_blank" rel="noopener noreferrer" aria-label="Jane.M on Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+    </div>
     <div class="container footer-bottom">
       <span>© 2026 Jane.M Lesotho</span>
       <span>Elegantly you. Uniquely Jane.M.</span>
@@ -206,6 +213,8 @@
 
   <a class="floating-whatsapp" href="https://wa.me/26662790946?text=Hello%20Jane.M%2C%20I%20would%20like%20to%20book." target="_blank" rel="noopener" aria-label="Chat with Jane.M on WhatsApp">WhatsApp</a>
 
-  <script src="script.js"></script>
+  <script src="config.js?v=20260804c"></script>
+  <script src="analytics.js?v=20260804c"></script>
+  <script src="script.js?v=20260804"></script>
 </body>
 </html>
