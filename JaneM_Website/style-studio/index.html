@@ -22,7 +22,7 @@ h1,h2,h3{font-family:Georgia,serif}.hero h1{font-size:clamp(3rem,7vw,6rem);line-
 .step{display:none}.step.active{display:block}.step h2{font-size:2.3rem;margin:0 0 6px}.step>p{color:var(--muted);margin-top:0}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.wide{grid-column:1/-1}
 label{display:flex;flex-direction:column;gap:7px;font-size:.82rem;font-weight:700}
-label:has([required]){position:relative}.style-studio label:has([required])::after,.required-hint{content:'Required';color:#9f2828;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase}.style-studio label:has([required])::after{position:absolute;right:0;top:0}.chips label:has(input[type=radio][required])::after{display:none}.required-hint{display:block;margin:-3px 0 4px}.invalid-field{outline:2px solid #b3261e!important;outline-offset:3px;border-radius:10px}.invalid-field select,.invalid-field textarea,.invalid-field input{border-color:#b3261e!important;background:#fff6f5}.validation-notice{display:none;margin:0 0 16px;padding:12px 14px;border:1px solid #b3261e;border-radius:10px;background:#fff0ef;color:#7d1713;font-size:.85rem;font-weight:700}.validation-notice.active{display:block}
+label:has([required]){position:relative}.style-studio label:has([required])::after{content:'*';position:absolute;right:0;top:-2px;color:#9f2828;font-size:1rem;line-height:1}.chips label:has(input[type=radio][required])::after{display:none}.invalid-field{outline:2px solid #b3261e!important;outline-offset:3px;border-radius:10px}.invalid-field select,.invalid-field textarea,.invalid-field input{border-color:#b3261e!important;background:#fff6f5}.validation-notice{display:none;margin:0 0 16px;padding:12px 14px;border:1px solid #b3261e;border-radius:10px;background:#fff0ef;color:#7d1713;font-size:.85rem;font-weight:700}.validation-notice.active{display:block}
 select,textarea,input[type=file]{padding:13px;border:1px solid var(--line);border-radius:9px;background:#fff;font:inherit}
 .chips{display:flex;flex-wrap:wrap;gap:9px;margin:10px 0 22px}.chips label{display:block}.chips input{position:absolute;opacity:0}.chips span{display:block;padding:10px 14px;border:1px solid var(--line);border-radius:99px;cursor:pointer}.chips input:checked+span{background:var(--green);color:#fff;border-color:var(--green)}
 .actions{display:flex;justify-content:space-between;border-top:1px solid var(--line);margin-top:25px;padding-top:20px}
@@ -112,7 +112,7 @@ input[type=text],input[type=email],input[type=tel],input[type=date],input[type=n
 
       <div class="step">
         <h2>2. Personal style</h2><p>How should the client feel in the outfit?</p>
-        <label>Style personality</label><span class="required-hint">Required</span>
+        <label>Style personality <span aria-hidden="true" style="color:#9f2828">*</span></label>
         <div class="chips">
           <label><input type="radio" name="personality" value="Elegant" required><span>Elegant</span></label>
           <label><input type="radio" name="personality" value="Classic"><span>Classic</span></label>
