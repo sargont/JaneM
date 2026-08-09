@@ -266,7 +266,7 @@ input[type=text],input[type=email],input[type=tel],input[type=date],input[type=n
 
     <section class="brief">
       <div class="brief-head"><div><h3>Designer Brief</h3><p>The structured handover document for Jane.M.</p></div>
-        <div class="brief-actions"><button id="copy" class="btn">Copy</button><button id="download" class="btn primary">Download</button><a id="briefWhatsApp" class="btn" target="_blank" rel="noopener">WhatsApp</a></div>
+        <div class="brief-actions"><button id="copy" class="btn">Copy</button><button id="download" class="btn">Download</button><a id="briefWhatsApp" class="btn primary" target="_blank" rel="noopener">Send brief to Jane.M on WhatsApp</a></div>
       </div>
       <div id="briefDoc"></div>
     </section>
@@ -276,11 +276,9 @@ input[type=text],input[type=email],input[type=tel],input[type=date],input[type=n
           <span class="viz-badge">Your design direction</span>
           <h3>Visualize this brief</h3>
           <p>See an early visual direction inspired by your completed brief, then use it as a thoughtful starting point for your Jane.M consultation.</p>
+          <p class="support-note">Personalised live concept visuals are coming soon. This preview is an illustration to guide your consultation.</p>
         </div>
-        <div class="visualizer-actions">
-          <button id="visualizeBrief" class="btn primary">Visualize this brief</button>
-          <button id="downloadPrompt" class="btn">Download GPT prompt</button>
-        </div>
+        <div class="visualizer-actions"><button id="visualizeBrief" class="btn primary">Visualize this brief</button></div>
       </div>
 
       <div id="aiStatus" class="ai-status hidden" aria-live="polite">
@@ -300,22 +298,6 @@ input[type=text],input[type=email],input[type=tel],input[type=date],input[type=n
           <span>Concept only • Jane.M confirms the final design and quotation</span>
         </div>
       </div>
-
-      <details class="prompt-preview">
-        <summary>Preview the generated GPT prompt</summary>
-        <pre id="promptText"></pre>
-      </details>
-    </section>
-
-    <section class="handoff">
-      <h3>Send the brief and photo</h3>
-      <p>A normal WhatsApp link cannot pre-attach a local photo. On supported phones, use the native share sheet below and select WhatsApp. Otherwise, download the brief/photo and attach them manually.</p>
-      <div class="handoff-actions">
-        <button id="sharePack" class="btn primary">Share photo + brief</button>
-        <a id="handoffWhatsApp" class="btn" target="_blank" rel="noopener">Open WhatsApp with brief</a>
-        <button id="downloadPhoto" class="btn">Download selected photo</button>
-      </div>
-      <div id="shareSupport" class="support-note"></div>
     </section>
   </section>
 </div>
@@ -389,90 +371,18 @@ form.onsubmit=e=>{e.preventDefault();if(!valid())return alert('Please complete t
  direction.innerHTML=[['Silhouette',r.silhouette],['Neckline',r.neckline],['Sleeve',r.sleeve],['Length',d.length],['Fabric',r.fabric],['Details',r.details]].map(x=>`<div><dt>${x[0]}</dt><dd>${x[1]}</dd></div>`).join('');
  reasons.innerHTML=r.reasons.map(x=>`<li>${x}</li>`).join('');styling.innerHTML=[['Accessories',r.accessories],['Shoes',r.shoes],['Hair & makeup',r.beauty]].map(x=>`<div><dt>${x[0]}</dt><dd>${x[1]}</dd></div>`).join('');
  briefDoc.innerHTML=section('Client',b.client)+section('Event context',b.context)+section('Client preferences',b.preferences)+section('Creative direction',b.direction)+section('Constraints',b.constraints)+section('Measurements',b.measurements)+section('Complexity assessment',b.complexity)+`<div class="brief-section"><h4>Reference photo</h4><p>${b.referencePhoto}</p></div><div class="brief-section"><h4>Commercial guide</h4><p><b>${b.estimate}</b><br>${b.disclaimer}</p></div>`;
- currentBrief=b;window.B=b;promptText.textContent=buildVisualizationPrompt(b);downloadPhoto.classList.toggle('hidden',!selectedFile);shareSupport.textContent=selectedFile?(navigator.share?'Use Share photo + brief, then choose WhatsApp.':'File sharing is not supported here; download both files and attach them manually.'):'No photo selected; the brief can still be shared.';
- const handoff=`Hello Jane.M, I completed the Style Studio.\n\nOccasion: ${d.occasion}\nStyle: ${d.personality}\nColour: ${d.colour}\nLength: ${d.length}\nFit: ${d.fit}\nBudget: ${d.budget}\nDesign direction: ${r.silhouette}; ${r.neckline}; ${r.sleeve}\nComplexity: ${r.complexity}\nIndicative workmanship range: M${r.low.toLocaleString()}–M${r.high.toLocaleString()}`;
- const handoffUrl='https://wa.me/26662790946?text='+encodeURIComponent(handoff);briefWhatsApp.href=handoffUrl;handoffWhatsApp.href=handoffUrl;track('style_preferences_completed');track('brief_generated');track('style_studio_completed');window.scrollTo({top:0,behavior:'smooth'});
+ currentBrief=b;window.B=b;
+ const handoff=`Hello Jane.M, I completed the Style Studio. Please find my full designer brief below.\n\n${toText(b)}`;
+ briefWhatsApp.href='https://wa.me/26662790946?text='+encodeURIComponent(handoff);track('style_preferences_completed');track('brief_generated');track('style_studio_completed');window.scrollTo({top:0,behavior:'smooth'});
 };
 copy.onclick=async()=>{await navigator.clipboard.writeText(toText(window.B));alert('Brief copied.')};
 download.onclick=()=>{const blob=new Blob([toText(window.B)],{type:'text/plain'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='JaneM-Designer-Brief.txt';a.click()};
-downloadPhoto.onclick=()=>{if(!selectedFile)return;const a=document.createElement('a');a.href=URL.createObjectURL(selectedFile);a.download=selectedFile.name;a.click()};
-sharePack.onclick=async()=>{const text=toText(currentBrief),briefFile=new File([text],'JaneM-Designer-Brief.txt',{type:'text/plain'}),files=selectedFile?[selectedFile,briefFile]:[briefFile];if(navigator.canShare&&navigator.canShare({files})){try{await navigator.share({title:'Jane.M Designer Brief',text:'Jane.M Style Studio briefing pack',files})}catch(e){}}else if(navigator.share){try{await navigator.share({title:'Jane.M Designer Brief',text})}catch(e){}}else alert('Direct file sharing is not supported. Download the brief and photo, then attach them in WhatsApp.')};
-
-function buildVisualizationPrompt(b){
-  return `SYSTEM / DEVELOPER INSTRUCTION
-
-You are the Jane.M Atelier Fashion Concept Director, garment-construction analyst and customer-presentation art director.
-
-Your task is to transform the supplied client design brief and optional reference photo into ONE coherent, customer-facing bespoke fashion concept board.
-
-NON-NEGOTIABLE ACCURACY RULES
-1. Treat the structured brief as the source of truth.
-2. Do not merely recolour or lightly edit clothing visible in the reference photo.
-3. Design a genuinely new garment from the brief.
-4. The outfit worn by the model, front sketch, back sketch, detail crops, written features, fabric description and complexity assessment must all describe the exact same garment.
-5. Do not introduce sleeves, necklines, lengths, trains, slits, corsetry, embellishments or fabrics that contradict the brief.
-6. When measurements are implausible, incomplete or unverified, do not use them to distort the model. Clearly state that Jane.M must verify them.
-7. The model must appear realistic and editorial, with natural skin texture, believable anatomy, restrained retouching and no exaggerated AI gloss.
-8. Present the garment on an adult female fashion model. Preserve the uploaded person's general appearance only when a usable reference photo is supplied and consented to; otherwise use a non-identifiable model.
-9. Do not include operational buttons such as “download brief” or “share with designer” inside the artwork. This image is shown to the customer before submission.
-10. Do not promise that the concept is production-ready or that the estimate is final.
-
-DESIGN WORK
-- Resolve the client’s occasion, theme, venue, weather, time, coverage, comfort, movement, focal point, budget and requested features into one practical garment concept.
-- Balance visual impact with wearability and the stated level of modesty.
-- Create an exact front view and exact back view of the same garment.
-- Show useful close-ups of the actual neckline, construction/draping and focal feature.
-- Recommend fabric and styling that match the garment and event.
-
-COMPLEXITY AND PRICING
-- Independently assess construction complexity as Low, Moderate, High or Very High.
-- Base the assessment on pattern complexity, internal structure, corsetry/boning, draping, sleeve tailoring, slit engineering, closures, lining, embellishment, fabric handling, finishing and fitting risk.
-- Produce an indicative custom-workmanship range in Lesotho maloti.
-- Do not force the concept into a fixed price-book item.
-- Explain the main factors driving the range.
-- State that fabric, trims and embellishments may be separate and that Jane.M will confirm the final quotation after measurements and construction review.
-
-CUSTOMER-FACING ARTWORK
-Create a premium vertical fashion concept board with:
-- Jane.M Atelier branding;
-- “Your Design Concept” and the client’s first name;
-- hero model wearing the exact proposed garment;
-- concise concept overview;
-- exact front and back garment sketches matching the model;
-- key features;
-- three aligned design-detail close-ups;
-- fabric and colour;
-- styling suggestions;
-- design complexity assessment;
-- indicative custom-workmanship range;
-- why the concept works for the client;
-- short “What happens next?” section: consultation, measurements verification, fabric/details, final design approval and final quotation;
-- clear concept-only disclaimer.
-
-Keep typography readable, layout uncluttered and all content internally consistent.
-
-CLIENT DESIGN BRIEF
-
-${toText(b)}
-
-OUTPUT
-Generate one high-resolution portrait concept-board image.`;
-}
-function downloadText(filename,text){
-  const blob=new Blob([text],{type:'text/plain;charset=utf-8'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;a.click();URL.revokeObjectURL(a.href);
-}
-downloadPrompt.addEventListener('click',()=>{
-  if(!currentBrief)return alert('Create the briefing pack first.');
-  downloadText('JaneM-GPT-Visualization-Prompt.txt',buildVisualizationPrompt(currentBrief));track('gpt_prompt_downloaded');
-});
 // Future server integration: POST /api/style-studio/visualize. Keep provider keys off the client.
 async function generateDesignConcept(brief){ return runMockConcept(brief); }
 async function runMockConcept(){conceptOutput.classList.remove('hidden');track('concept_preview_displayed')}
 visualizeBrief.addEventListener('click',async()=>{
   if(!currentBrief)return alert('Create the briefing pack first.');
   track('visualize_brief_clicked');
-  promptText.textContent=buildVisualizationPrompt(currentBrief);
   conceptOutput.classList.add('hidden');
   aiStatus.classList.remove('hidden');
   [aiStep1,aiStep2,aiStep3,aiStep4].forEach(x=>x.classList.remove('done'));
