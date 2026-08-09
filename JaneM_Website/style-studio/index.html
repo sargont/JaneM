@@ -22,6 +22,7 @@ h1,h2,h3{font-family:Georgia,serif}.hero h1{font-size:clamp(3rem,7vw,6rem);line-
 .step{display:none}.step.active{display:block}.step h2{font-size:2.3rem;margin:0 0 6px}.step>p{color:var(--muted);margin-top:0}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.wide{grid-column:1/-1}
 label{display:flex;flex-direction:column;gap:7px;font-size:.82rem;font-weight:700}
+label:has([required]){position:relative}.style-studio label:has([required])::after,.required-hint{content:'Required';color:#9f2828;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase}.style-studio label:has([required])::after{position:absolute;right:0;top:0}.chips label:has(input[type=radio][required])::after{display:none}.required-hint{display:block;margin:-3px 0 4px}.invalid-field{outline:2px solid #b3261e!important;outline-offset:3px;border-radius:10px}.invalid-field select,.invalid-field textarea,.invalid-field input{border-color:#b3261e!important;background:#fff6f5}.validation-notice{display:none;margin:0 0 16px;padding:12px 14px;border:1px solid #b3261e;border-radius:10px;background:#fff0ef;color:#7d1713;font-size:.85rem;font-weight:700}.validation-notice.active{display:block}
 select,textarea,input[type=file]{padding:13px;border:1px solid var(--line);border-radius:9px;background:#fff;font:inherit}
 .chips{display:flex;flex-wrap:wrap;gap:9px;margin:10px 0 22px}.chips label{display:block}.chips input{position:absolute;opacity:0}.chips span{display:block;padding:10px 14px;border:1px solid var(--line);border-radius:99px;cursor:pointer}.chips input:checked+span{background:var(--green);color:#fff;border-color:var(--green)}
 .actions{display:flex;justify-content:space-between;border-top:1px solid var(--line);margin-top:25px;padding-top:20px}
@@ -114,7 +115,7 @@ input[type=text],input[type=email],input[type=tel],input[type=date],input[type=n
 
       <div class="step">
         <h2>2. Personal style</h2><p>How should the client feel in the outfit?</p>
-        <label>Style personality</label>
+        <label>Style personality</label><span class="required-hint">Required</span>
         <div class="chips">
           <label><input type="radio" name="personality" value="Elegant" required><span>Elegant</span></label>
           <label><input type="radio" name="personality" value="Classic"><span>Classic</span></label>
@@ -247,6 +248,7 @@ input[type=text],input[type=email],input[type=tel],input[type=date],input[type=n
         <label style="margin-top:20px;flex-direction:row"><input type="checkbox" required> I understand this is an indicative briefing tool and Jane.M must confirm the final design and quote.</label>
       </div>
 
+      <p id="validationNotice" class="validation-notice" role="alert">Please complete the highlighted required fields before continuing.</p>
       <div class="actions">
         <button type="button" id="back" class="btn" disabled>Back</button>
         <button type="button" id="next" class="btn primary">Continue</button>
@@ -316,9 +318,12 @@ function markStarted(){if(!started){started=true;track('style_studio_started')}}
 const back=document.getElementById('back'),next=document.getElementById('next'),finish=document.getElementById('finish'),form=document.getElementById('form');
 form.addEventListener('input',markStarted,{once:true});form.addEventListener('change',markStarted,{once:true});
 function show(){steps.forEach((s,i)=>s.classList.toggle('active',i===step));bar.style.width=((step+1)*20)+'%';back.disabled=step===0;next.classList.toggle('hidden',step===4);finish.classList.toggle('hidden',step!==4)}
-function valid(){const req=[...steps[step].querySelectorAll('[required]')].filter(el=>!el.closest('.hidden'));for(const el of req){if(el.type==='radio'){if(!steps[step].querySelector('[name="'+el.name+'"]:checked'))return false}else if(el.type==='checkbox'){if(!el.checked)return false}else if(!el.value)return false}return true}
+function clearInvalid(){steps[step].querySelectorAll('.invalid-field').forEach(el=>el.classList.remove('invalid-field'));steps[step].querySelectorAll('[aria-invalid="true"]').forEach(el=>el.removeAttribute('aria-invalid'));validationNotice.classList.remove('active')}
+function markInvalid(el){const target=el.type==='radio'?el.closest('.chips'):el.type==='checkbox'?el.closest('label'):(el.closest('label')||el);target?.classList.add('invalid-field');el.setAttribute('aria-invalid','true')}
+function showMissing(fields){fields.forEach(markInvalid);validationNotice.classList.add('active');fields[0]?.focus()}
+function valid(){clearInvalid();const req=[...steps[step].querySelectorAll('[required]')].filter(el=>!el.closest('.hidden'));const missing=[];for(const el of req){if(el.type==='radio'){if(!steps[step].querySelector('[name="'+el.name+'"]:checked'))missing.push(el)}else if(el.type==='checkbox'){if(!el.checked)missing.push(el)}else if(!el.value.trim())missing.push(el)}if(missing.length){showMissing(missing);return false}return true}
 function syncMeasureFlow(){const on=document.getElementById('captureToggle').checked;measurementFlow.classList.toggle('hidden',!on);measurementSkip.classList.toggle('hidden',on);track(on?'measurements_selected':'measurements_skipped')}
-next.onclick=()=>{if(!valid())return alert('Please complete the required fields.');if(step===3&&captureToggle.checked){for(const n of ['m_bust','m_waist','m_hip','m_shoulder','m_length']){if(!form.elements[n].value)return alert('Please complete bust, waist, hip, shoulder width and dress length.')}}step++;show()};back.onclick=()=>{step--;show()};
+next.onclick=()=>{if(!valid())return;if(step===3&&captureToggle.checked){const missingMeasurements=['m_bust','m_waist','m_hip','m_shoulder','m_length'].map(n=>form.elements[n]).filter(el=>!el.value);if(missingMeasurements.length){showMissing(missingMeasurements);return}}step++;show()};back.onclick=()=>{clearInvalid();step--;show()};
 captureToggle.onchange=syncMeasureFlow;
 const base={Mini:1450,'Above knee':1650,'Knee length':1650,Midi:2500,Maxi:3500,'No preference':2500};
 const adds={Corset:650,Slit:200,'Long sleeves':450,'Off shoulder':250,'Open back':300,'Big bow':450,Pockets:150,Train:700,Lace:600,Beading:900,'Exposed boning':250,'Tiered skirt':1500};
@@ -365,7 +370,7 @@ function brief(d,r){
 function esc(x){return String(x).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function section(title,obj){return `<div class="brief-section"><h4>${title}</h4><ul>${Object.entries(obj).map(([k,v])=>`<li><b>${esc(k)}:</b> ${esc(v)}</li>`).join('')}</ul></div>`}
 function toText(b){return `${b.title}\n\nCLIENT\n${Object.entries(b.client).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nEVENT CONTEXT\n${Object.entries(b.context).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCLIENT PREFERENCES\n${Object.entries(b.preferences).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCREATIVE DIRECTION\n${Object.entries(b.direction).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCONSTRAINTS\n${Object.entries(b.constraints).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nMEASUREMENTS\n${Object.entries(b.measurements).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nREFERENCE PHOTO\n${b.referencePhoto}\n\nCOMPLEXITY ASSESSMENT\n${Object.entries(b.complexity).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCOMMERCIAL GUIDE\n${b.estimate}\n\n${b.disclaimer}`}
-form.onsubmit=e=>{e.preventDefault();if(!valid())return alert('Please complete the required fields.');const d=data(),r=make(d),b=brief(d,r);
+form.onsubmit=e=>{e.preventDefault();if(!valid())return;const d=data(),r=make(d),b=brief(d,r);
  document.getElementById('wizard').style.display='none';document.querySelector('.progress').style.display='none';document.getElementById('result').classList.add('active');
  profile.textContent=r.profile;summaryText.textContent=r.summary;estimate.textContent=`M${r.low.toLocaleString()} – M${r.high.toLocaleString()}`;
  direction.innerHTML=[['Silhouette',r.silhouette],['Neckline',r.neckline],['Sleeve',r.sleeve],['Length',d.length],['Fabric',r.fabric],['Details',r.details]].map(x=>`<div><dt>${x[0]}</dt><dd>${x[1]}</dd></div>`).join('');
@@ -373,7 +378,7 @@ form.onsubmit=e=>{e.preventDefault();if(!valid())return alert('Please complete t
  briefDoc.innerHTML=section('Client',b.client)+section('Event context',b.context)+section('Client preferences',b.preferences)+section('Creative direction',b.direction)+section('Constraints',b.constraints)+section('Measurements',b.measurements)+section('Complexity assessment',b.complexity)+`<div class="brief-section"><h4>Reference photo</h4><p>${b.referencePhoto}</p></div><div class="brief-section"><h4>Commercial guide</h4><p><b>${b.estimate}</b><br>${b.disclaimer}</p></div>`;
  currentBrief=b;window.B=b;
  const handoff=`Hello Jane.M, I completed the Style Studio. Please find my full designer brief below.\n\n${toText(b)}`;
- briefWhatsApp.href='https://wa.me/26662790946?text='+encodeURIComponent(handoff);track('style_preferences_completed');track('brief_generated');track('style_studio_completed');window.scrollTo({top:0,behavior:'smooth'});
+ briefWhatsApp.href='https://wa.me/26662790946?text='+encodeURIComponent(handoff);track('style_preferences_completed');track('brief_generated');track('style_studio_completed');window.requestAnimationFrame(()=>document.getElementById('result').scrollIntoView({behavior:'smooth',block:'start'}));
 };
 copy.onclick=async()=>{await navigator.clipboard.writeText(toText(window.B));alert('Brief copied.')};
 download.onclick=()=>{const blob=new Blob([toText(window.B)],{type:'text/plain'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='JaneM-Designer-Brief.txt';a.click()};
