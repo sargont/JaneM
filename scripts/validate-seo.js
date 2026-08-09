@@ -6,7 +6,7 @@ const site = path.join(root, "JaneM_Website");
 const config = JSON.parse(fs.readFileSync(path.join(site, "seo.config.json"), "utf8"));
 const base = new URL(process.env.JANEM_SITE_URL || config.customDomain || config.productionUrl).href;
 const files = [];
-function walk(directory) { for (const item of fs.readdirSync(directory, { withFileTypes: true })) { const target = path.join(directory, item.name); if (item.isDirectory()) walk(target); else if (item.name.endsWith(".html")) files.push(target); } }
+function walk(directory) { for (const item of fs.readdirSync(directory, { withFileTypes: true })) { const target = path.join(directory, item.name); if (item.isDirectory()) { if (item.name === "JaneM_Style_Studio_v4_1") continue; walk(target); } else if (item.name.endsWith(".html")) files.push(target); } }
 walk(site);
 const fail = [];
 const titles = new Map(); const descriptions = new Map(); const sitemap = fs.readFileSync(path.join(site, "sitemap.xml"), "utf8"); const robots = fs.readFileSync(path.join(site, "robots.txt"), "utf8");

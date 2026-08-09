@@ -250,6 +250,11 @@ footer a, footer p { display: block; color: #bcb2a8; text-decoration: none; marg
 .janem-tv-card__youtube-link:hover, .janem-tv-card__youtube-link:focus-visible { color: var(--black); }
 .janem-tv-channel-cta { margin-top: 34px; }
 
+.style-studio-cta { background: #f0e6d8; }
+.style-studio-cta__inner { display: flex; align-items: center; justify-content: space-between; gap: 34px; padding: clamp(30px, 5vw, 58px); border: 1px solid var(--line); background: #fff; }
+.style-studio-cta h2 { margin: 0 0 12px; font-size: clamp(2.5rem, 4.5vw, 4.5rem); }
+.style-studio-cta p:not(.eyebrow) { max-width: 650px; margin: 0; color: var(--muted); }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
@@ -261,6 +266,7 @@ footer a, footer p { display: block; color: #bcb2a8; text-decoration: none; marg
     padding: 20px; background: var(--paper); border-bottom: 1px solid var(--line);
     flex-direction: column; align-items: stretch;
   }
+  .style-studio-cta__inner { align-items: flex-start; flex-direction: column; }
   .site-nav.open { display: flex; }
   .hero { padding-top: 42px; }
   .hero-grid, .section-heading, .promo-card, .footer-grid, .catalogue-gallery-heading { grid-template-columns: 1fr; }

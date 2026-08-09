@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jane.M Style Studio | Create Your Custom Look in Lesotho</title>
+<meta name="description" content="Create a designer-ready custom dress brief for your graduation, wedding or special occasion with Jane.M Style Studio in Lesotho." />
+<meta name="theme-color" content="#15120f" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<style>
+:root{--ink:#17130f;--paper:#f8f3eb;--gold:#b4863d;--green:#123d36;--muted:#74695f;--line:#ded3c4;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(#fbf8f2,#eadfce);font-family:Arial,sans-serif;color:var(--ink)}
+.wrap{width:min(1100px,calc(100% - 24px));margin:auto;padding:38px 0 70px}
+.hero{display:grid;grid-template-columns:1.3fr .7fr;gap:30px;align-items:end;margin-bottom:25px}
+h1,h2,h3{font-family:Georgia,serif}.hero h1{font-size:clamp(3rem,7vw,6rem);line-height:.92;margin:.2em 0}.hero p{color:var(--muted);max-width:720px}
+.note{background:var(--green);color:#fff;padding:20px;border-radius:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px;box-shadow:0 20px 70px #6f4f2618}
+.progress{height:5px;background:#ddd;border-radius:10px;overflow:hidden;margin:0 0 22px}.progress div{height:100%;width:20%;background:var(--gold);transition:.3s}
+.step{display:none}.step.active{display:block}.step h2{font-size:2.3rem;margin:0 0 6px}.step>p{color:var(--muted);margin-top:0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.wide{grid-column:1/-1}
+label{display:flex;flex-direction:column;gap:7px;font-size:.82rem;font-weight:700}
+select,textarea,input[type=file]{padding:13px;border:1px solid var(--line);border-radius:9px;background:#fff;font:inherit}
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin:10px 0 22px}.chips label{display:block}.chips input{position:absolute;opacity:0}.chips span{display:block;padding:10px 14px;border:1px solid var(--line);border-radius:99px;cursor:pointer}.chips input:checked+span{background:var(--green);color:#fff;border-color:var(--green)}
+.actions{display:flex;justify-content:space-between;border-top:1px solid var(--line);margin-top:25px;padding-top:20px}
+.btn{border:1px solid var(--ink);border-radius:99px;padding:12px 18px;font-weight:800;cursor:pointer;background:transparent;text-decoration:none;color:var(--ink)}.primary{background:var(--ink);color:#fff}.hidden{display:none!important}
+.result{display:none}.result.active{display:block}.summary{background:var(--green);color:#fff;border-radius:20px;padding:35px}.summary h2{font-size:3.4rem;margin:0 0 15px}.summary p{color:#dce7e2}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:25px}.panel h3{font-size:1.8rem;margin:0 0 16px}.panel dl{margin:0}.panel dl div{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line)}dt{color:var(--muted);font-size:.72rem;text-transform:uppercase}dd{margin:0;font-weight:700}
+.estimate{background:#17130f;color:#fff}.estimate strong{font-family:Georgia,serif;color:#d8b574;font-size:3rem}.estimate p{color:#d6ccc2}
+.brief{margin-top:16px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:25px}.brief-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}.brief h3{font-size:2rem;margin:0}.brief p{color:var(--muted)}.brief-actions{display:flex;gap:9px;flex-wrap:wrap}
+.brief-section{display:grid;grid-template-columns:200px 1fr;gap:18px;padding:16px 0;border-top:1px solid var(--line)}.brief-section h4{margin:0;color:var(--gold);font-size:.72rem;text-transform:uppercase;letter-spacing:.1em}.brief-section ul,.brief-section p{margin:0;line-height:1.6}
+footer{text-align:center;color:var(--muted);font-size:.75rem;padding:22px}
+@media(max-width:760px){.hero,.grid,.result-grid{grid-template-columns:1fr}.brief-head{flex-direction:column}.brief-section{grid-template-columns:1fr}.wide{grid-column:auto}}
+
+.toggle-card{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:16px;border:1px solid var(--line);border-radius:14px;background:#fbf8f2;margin-top:20px}
+.toggle-card p{margin:4px 0 0;color:var(--muted);font-size:.8rem;line-height:1.5}
+.measure-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:22px;margin-top:20px}
+.guide{background:#f3eadf;border:1px solid var(--line);border-radius:16px;padding:16px;height:max-content}
+.body-svg{width:100%;background:#fff;border:1px solid var(--line);border-radius:12px}
+.guide-slide{display:none}.guide-slide.active{display:block}
+.guide-nav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px}
+.guide-nav button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;font-weight:700;cursor:pointer}
+.guide-nav button:disabled{opacity:.35;cursor:not-allowed}
+.guide-count{font-size:.75rem;color:var(--muted);font-weight:700}
+.measurements{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.measure-card{border:1px solid var(--line);border-radius:12px;padding:13px;background:#fff}
+.measure-card small{display:block;color:var(--muted);margin-top:6px;line-height:1.4}
+.unit-row{display:grid;grid-template-columns:1fr 88px;gap:7px}
+.upload-zone{position:relative;border:1.5px dashed var(--gold);border-radius:16px;min-height:290px;display:grid;place-items:center;overflow:hidden;background:#fcf8f1;text-align:center}
+.upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;z-index:3}.upload-zone img{display:none;max-width:100%;max-height:420px;object-fit:contain}
+.handoff{margin-top:16px;background:#f7f1e8;border:1px solid var(--line);border-radius:18px;padding:23px}.handoff-actions{display:flex;gap:9px;flex-wrap:wrap}.support-note{font-size:.75rem;color:var(--muted);margin-top:10px}
+input[type=text],input[type=email],input[type=tel],input[type=date],input[type=number]{padding:13px;border:1px solid var(--line);border-radius:9px;background:#fff;font:inherit}
+@media(max-width:760px){.measure-wrap,.measurements{grid-template-columns:1fr}}
+
+
+.visualizer{margin-top:16px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:25px}
+.visualizer-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}
+.visualizer h3{font-size:2rem;margin:0 0 8px}
+.visualizer p{color:var(--muted);line-height:1.6;margin:0}
+.visualizer-actions{display:flex;gap:9px;flex-wrap:wrap}
+.ai-status{margin-top:20px;border:1px solid var(--line);border-radius:14px;padding:18px;background:#fbf8f2}
+.ai-status-row{display:flex;align-items:center;gap:12px}
+.spinner{width:22px;height:22px;border:3px solid #ddcfba;border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ai-steps{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:8px;color:var(--muted);font-size:.82rem}
+.ai-steps li.done{color:var(--green);font-weight:700}
+.concept-output{margin-top:20px}
+.concept-output img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:14px;background:#f3eee7}
+.concept-caption{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:13px 2px 0;font-size:.78rem;color:var(--muted)}
+.prompt-preview{margin-top:16px;background:#17130f;color:#eee5d8;border-radius:14px;padding:18px}
+.prompt-preview summary{cursor:pointer;font-weight:800;color:#d8b574}
+.prompt-preview pre{white-space:pre-wrap;word-break:break-word;font:12px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;max-height:360px;overflow:auto}
+.viz-badge{display:inline-block;padding:6px 10px;border-radius:99px;background:#efe1c8;color:#76501d;font-size:.72rem;font-weight:800}
+@media(max-width:760px){.visualizer-head{flex-direction:column}.concept-caption{align-items:flex-start;flex-direction:column}}
+
+</style>
+<!-- SEO:START --><link rel="canonical" href="https://sargont.github.io/JaneM/style-studio/" /><meta name="robots" content="index,follow,max-image-preview:large" /><meta property="og:type" content="website" /><meta property="og:site_name" content="Jane.M Lesotho" /><meta property="og:title" content="Jane.M Style Studio | Create Your Custom Look in Lesotho" /><meta property="og:description" content="Create a designer-ready custom dress brief for your graduation, wedding or special occasion with Jane.M Style Studio in Lesotho." /><meta property="og:url" content="https://sargont.github.io/JaneM/style-studio/" /><meta property="og:image" content="https://sargont.github.io/JaneM/assets/style-studio/mock-design-concept.png" /><meta property="og:image:alt" content="Jane.M atelier concept preview" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="Jane.M Style Studio | Create Your Custom Look in Lesotho" /><meta name="twitter:description" content="Create a designer-ready custom dress brief for your graduation, wedding or special occasion with Jane.M Style Studio in Lesotho." /><meta name="twitter:image" content="https://sargont.github.io/JaneM/assets/style-studio/mock-design-concept.png" /><script type="application/ld+json">{"@context":"https://schema.org","@type":"ClothingStore","name":"Jane.M Lesotho","url":"https://sargont.github.io/JaneM/","email":"officialjanem@gmail.com","telephone":"+26662790946","areaServed":[{"@type":"City","name":"Maseru"},{"@type":"City","name":"Lesotho"}],"sameAs":["https://youtube.com/@janemtv","https://www.facebook.com/share/1CvrANPy9Q/","https://www.instagram.com/___jane_m/"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://sargont.github.io/JaneM/"},{"@type":"ListItem","position":2,"name":"Style Studio","item":"https://sargont.github.io/JaneM/style-studio/"}]}</script><!-- SEO:END -->
+</head>
+<body class="style-studio-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header" id="top">
+  <div class="container nav-wrap">
+    <a class="brand" href="../index.html" aria-label="Jane.M home"><img src="../assets/logo-transparent.png" width="1055" height="1491" alt="Jane.M Lesotho logo" /></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+      <a href="../index.html#collection">Collection</a><a href="../catalogue.html">Catalogue</a><a href="../index.html#promo">Promotion</a><a href="../index.html#pricing">Price guide</a><a href="../index.html#process">How to order</a><a href="./" aria-current="page">Style Studio</a><a href="../janem-tv/" data-analytics-event="janem_tv_open">JaneM TV</a><a class="nav-cta" href="https://wa.me/26662790946?text=Hello%20Jane.M%2C%20I%20would%20like%20to%20book%20a%20graduation%20look." target="_blank" rel="noopener">Book on WhatsApp</a>
+    </nav>
+  </div>
+</header>
+<main id="main" class="style-studio">
+<div class="wrap">
+  <section class="hero">
+    <div><small>JANE.M STYLE STUDIO</small><h1>Brief the designer before the first consultation.</h1><p>This version does not pretend to generate a finished dress. It turns client preferences into a structured, commercially useful design brief that Jane.M can refine.</p></div>
+    <div class="note">Runs entirely in the browser. No API, server or AI subscription is required.</div>
+  </section>
+
+  <div class="progress"><div id="bar"></div></div>
+
+  <section id="wizard" class="card">
+    <form id="form">
+      <div class="step active">
+        <h2>1. Event context</h2><p>Where and when must the outfit work?</p>
+        <div class="grid">
+          <label>Occasion<select name="occasion" required><option value="">Choose</option><option>Graduation</option><option>Wedding</option><option>Corporate Dinner</option><option>Birthday</option><option>Gala</option><option>Date Night</option><option>Church</option><option>Photoshoot</option></select></label>
+          <label>Theme<select name="theme" required><option value="">Choose</option><option>Minimalist</option><option>Formal</option><option>Black Tie</option><option>Luxury</option><option>African Elegance</option><option>Garden Party</option><option>Modern Chic</option><option>Traditional</option></select></label>
+          <label>Setting<select name="setting" required><option value="">Choose</option><option>Indoor</option><option>Outdoor</option><option>Both</option></select></label>
+          <label>Weather<select name="weather" required><option value="">Choose</option><option>Hot</option><option>Warm</option><option>Cold</option></select></label>
+          <label>Time<select name="time" required><option value="">Choose</option><option>Morning</option><option>Afternoon</option><option>Evening</option><option>Night</option></select></label>
+          <label>Budget<select name="budget" required><option value="">Choose</option><option value="1500">Under M1,500</option><option value="2500">M1,500–M2,500</option><option value="4000">M2,500–M4,000</option><option value="6000">Premium (M4,000+)</option></select></label>
+        </div>
+      </div>
+
+      <div class="step">
+        <h2>2. Personal style</h2><p>How should the client feel in the outfit?</p>
+        <label>Style personality</label>
+        <div class="chips">
+          <label><input type="radio" name="personality" value="Elegant" required><span>Elegant</span></label>
+          <label><input type="radio" name="personality" value="Classic"><span>Classic</span></label>
+          <label><input type="radio" name="personality" value="Bold"><span>Bold</span></label>
+          <label><input type="radio" name="personality" value="Sexy"><span>Sexy</span></label>
+          <label><input type="radio" name="personality" value="Conservative"><span>Conservative</span></label>
+          <label><input type="radio" name="personality" value="Minimalist"><span>Minimalist</span></label>
+          <label><input type="radio" name="personality" value="Modern Chic"><span>Modern chic</span></label>
+          <label><input type="radio" name="personality" value="Glamorous"><span>Glamorous</span></label>
+        </div>
+        <div class="grid">
+          <label>Preferred fit<select name="fit" required><option value="">Choose</option><option>Relaxed</option><option>Slightly fitted</option><option>Fitted</option><option>Figure-hugging</option></select></label>
+          <label>Preferred length<select name="length" required><option value="">Choose</option><option>Mini</option><option>Above knee</option><option>Knee length</option><option>Midi</option><option>Maxi</option><option>No preference</option></select></label>
+          <label>Preferred colour<select name="colour" required><option value="">Choose</option><option>Emerald</option><option>Navy</option><option>Black</option><option>Champagne</option><option>Burgundy</option><option>White</option><option>Gold</option><option>Surprise me</option></select></label>
+          <label>Coverage<select name="coverage" required><option value="">Choose</option><option>Modest</option><option>Balanced</option><option>Confident</option><option>Daring</option></select></label>
+          <label>Desired feeling<select name="feeling" required><option value="">Choose</option><option>Powerful</option><option>Elegant</option><option>Confident</option><option>Romantic</option><option>Comfortable</option><option>Unforgettable</option><option>Understated</option><option>Playful</option></select></label>
+          <label>Priority<select name="priority" required><option value="">Choose</option><option>Comfort first</option><option>Balanced comfort and impact</option><option>Maximum visual impact</option><option>Easy re-wear after the event</option></select></label>
+        </div>
+      </div>
+
+      <div class="step">
+        <h2>3. Practical requirements</h2><p>Help the designer understand movement and construction.</p>
+        <div class="grid">
+          <label>Movement required<select name="movement" required><option value="">Choose</option><option>Mostly seated</option><option>Walking and mingling</option><option>Dancing</option><option>Stage or presentation</option><option>All-day wear</option></select></label>
+          <label>Preferred focal point<select name="focalPoint" required><option value="">Choose</option><option>Neckline and shoulders</option><option>Waist and corsetry</option><option>Legs and slit</option><option>Back detail</option><option>Sleeves</option><option>Skirt volume</option><option>No strong focal point</option></select></label>
+        </div>
+        <label style="margin-top:20px">Features wanted</label>
+        <div class="chips">
+          <label><input type="checkbox" name="features" value="Corset"><span>Corset</span></label>
+          <label><input type="checkbox" name="features" value="Slit"><span>Slit</span></label>
+          <label><input type="checkbox" name="features" value="Long sleeves"><span>Long sleeves</span></label>
+          <label><input type="checkbox" name="features" value="Off shoulder"><span>Off shoulder</span></label>
+          <label><input type="checkbox" name="features" value="Open back"><span>Open back</span></label>
+          <label><input type="checkbox" name="features" value="Big bow"><span>Big bow</span></label>
+          <label><input type="checkbox" name="features" value="Pockets"><span>Pockets</span></label>
+          <label><input type="checkbox" name="features" value="Train"><span>Train</span></label>
+          <label><input type="checkbox" name="features" value="Lace"><span>Lace</span></label>
+          <label><input type="checkbox" name="features" value="Beading"><span>Beading</span></label>
+          <label><input type="checkbox" name="features" value="Exposed boning"><span>Exposed boning</span></label>
+          <label><input type="checkbox" name="features" value="Tiered skirt"><span>Tiered skirt</span></label>
+        </div>
+        <div class="grid">
+          <label class="wide">What must be avoided?<textarea name="avoid" rows="3" placeholder="No deep neckline, no heavy fabric, no long train..."></textarea></label>
+          <label class="wide">Anything else the designer should know?<textarea name="notes" rows="4" placeholder="Must work under graduation regalia, hide bra straps, allow dancing, be reusable..."></textarea></label>
+        </div>
+        <label class="toggle-card"><input id="captureToggle" type="checkbox" name="captureMeasurements"><div><strong>Capture measurements now</strong><p>Opens a guided measurement flow. Leave unchecked to defer measurements to the consultation.</p></div></label>
+      </div>
+
+      <div class="step">
+        <h2>4. Measurements</h2><p>Only complete this flow when “Capture measurements now” was selected.</p>
+        <div id="measurementFlow" class="measure-wrap">
+          <aside class="guide">
+            <h3>How to measure</h3>
+            <p>Use a soft tape over fitted clothing. Keep it level and snug, not tight.</p>
+            <div class="guide-slide active" data-guide="0">
+              <svg class="body-svg" viewBox="0 0 300 500" role="img" aria-label="Body measurement guide for shoulder, bust, waist, hip and dress length">
+                <rect width="300" height="500" fill="#fff"/>
+                <circle cx="150" cy="55" r="27" fill="none" stroke="#17130f" stroke-width="4"/>
+                <path d="M130 86 Q150 104 170 86 L184 175 Q170 220 174 275 L194 445 M170 175 L230 255 M130 175 L70 255 M126 175 Q110 220 126 275 L106 445" fill="none" stroke="#17130f" stroke-width="5" stroke-linecap="round"/>
+                <line x1="92" y1="116" x2="208" y2="116" stroke="#b4863d" stroke-width="3"/>
+                <line x1="92" y1="155" x2="208" y2="155" stroke="#b4863d" stroke-width="3"/>
+                <line x1="94" y1="201" x2="206" y2="201" stroke="#b4863d" stroke-width="3"/>
+                <line x1="96" y1="248" x2="204" y2="248" stroke="#b4863d" stroke-width="3"/>
+                <line x1="150" y1="88" x2="150" y2="445" stroke="#b4863d" stroke-width="2" stroke-dasharray="6 5"/>
+                <text x="211" y="120" font-size="13">Shoulder</text>
+                <text x="211" y="159" font-size="13">Bust</text>
+                <text x="211" y="205" font-size="13">Waist</text>
+                <text x="211" y="252" font-size="13">Hip</text>
+                <text x="158" y="375" font-size="13">Dress length</text>
+              </svg>
+            </div>
+
+            <div class="guide-slide" data-guide="1">
+              <svg class="body-svg" viewBox="0 0 300 500" role="img" aria-label="Body measurement guide for upper arm, sleeve length, shoulder-to-waist, height and heel height">
+                <rect width="300" height="500" fill="#fff"/>
+                <circle cx="150" cy="55" r="27" fill="none" stroke="#17130f" stroke-width="4"/>
+                <path d="M130 86 Q150 104 170 86 L184 175 Q170 220 174 275 L194 445 M170 175 L230 255 M130 175 L70 255 M126 175 Q110 220 126 275 L106 445" fill="none" stroke="#17130f" stroke-width="5" stroke-linecap="round"/>
+
+                <ellipse cx="213" cy="198" rx="18" ry="10" fill="none" stroke="#b4863d" stroke-width="3"/>
+                <line x1="181" y1="110" x2="230" y2="255" stroke="#b4863d" stroke-width="3" stroke-dasharray="6 5"/>
+                <line x1="150" y1="88" x2="150" y2="201" stroke="#b4863d" stroke-width="3" stroke-dasharray="6 5"/>
+                <line x1="82" y1="445" x2="218" y2="445" stroke="#b4863d" stroke-width="3"/>
+                <line x1="150" y1="28" x2="150" y2="445" stroke="#b4863d" stroke-width="2" stroke-dasharray="6 5"/>
+                <line x1="194" y1="445" x2="220" y2="420" stroke="#b4863d" stroke-width="3"/>
+
+                <text x="205" y="180" font-size="13">Upper arm</text>
+                <text x="205" y="285" font-size="13">Sleeve length</text>
+                <text x="158" y="145" font-size="13">Shoulder-to-waist</text>
+                <text x="158" y="360" font-size="13">Height</text>
+                <text x="218" y="430" font-size="13">Heel height</text>
+              </svg>
+            </div>
+
+            <div class="guide-nav">
+              <button type="button" id="guidePrev" disabled>Previous</button>
+              <span id="guideCount" class="guide-count">1 of 2</span>
+              <button type="button" id="guideNext">Next</button>
+            </div>
+          </aside>
+          <div class="measurements">
+            <div class="measure-card"><label>Bust<div class="unit-row"><input type="number" step="0.1" name="m_bust"><select name="m_bust_unit"><option>cm</option><option>in</option></select></div></label><small>Fullest point, tape level.</small></div>
+            <div class="measure-card"><label>Waist<div class="unit-row"><input type="number" step="0.1" name="m_waist"><select name="m_waist_unit"><option>cm</option><option>in</option></select></div></label><small>Natural waist, not pulled tight.</small></div>
+            <div class="measure-card"><label>Hip<div class="unit-row"><input type="number" step="0.1" name="m_hip"><select name="m_hip_unit"><option>cm</option><option>in</option></select></div></label><small>Fullest part of hips and seat.</small></div>
+            <div class="measure-card"><label>Shoulder width<div class="unit-row"><input type="number" step="0.1" name="m_shoulder"><select name="m_shoulder_unit"><option>cm</option><option>in</option></select></div></label><small>Shoulder point to shoulder point.</small></div>
+            <div class="measure-card"><label>Upper arm<div class="unit-row"><input type="number" step="0.1" name="m_arm"><select name="m_arm_unit"><option>cm</option><option>in</option></select></div></label><small>Fullest part of upper arm.</small></div>
+            <div class="measure-card"><label>Sleeve length<div class="unit-row"><input type="number" step="0.1" name="m_sleeve"><select name="m_sleeve_unit"><option>cm</option><option>in</option></select></div></label><small>Shoulder to sleeve finish.</small></div>
+            <div class="measure-card"><label>Shoulder-to-waist<div class="unit-row"><input type="number" step="0.1" name="m_torso"><select name="m_torso_unit"><option>cm</option><option>in</option></select></div></label><small>Over bust to natural waist.</small></div>
+            <div class="measure-card"><label>Dress length<div class="unit-row"><input type="number" step="0.1" name="m_length"><select name="m_length_unit"><option>cm</option><option>in</option></select></div></label><small>Shoulder to desired hem.</small></div>
+            <div class="measure-card"><label>Height<div class="unit-row"><input type="number" step="0.1" name="m_height"><select name="m_height_unit"><option>cm</option><option>in</option></select></div></label><small>Useful for overall proportions.</small></div>
+            <div class="measure-card"><label>Heel height<div class="unit-row"><input type="number" step="0.1" name="m_heel"><select name="m_heel_unit"><option>cm</option><option>in</option></select></div></label><small>Important for long hems and trains.</small></div>
+          </div>
+        </div>
+        <div id="measurementSkip" class="toggle-card hidden"><div></div><div><strong>Measurements deferred</strong><p>Jane.M will take and verify measurements before production.</p></div></div>
+      </div>
+
+      <div class="step">
+        <h2>5. Reference and contact</h2><p>Add an optional image and contact details for the handoff.</p>
+        <div class="grid">
+          <label>Full name<input type="text" name="clientName" required></label>
+          <label>WhatsApp number<input type="tel" name="clientPhone" required placeholder="+266 ..."></label>
+          <label>Email, optional<input type="email" name="clientEmail"></label>
+          <label>Preferred contact<select name="contactMethod" required><option value="">Choose</option><option>WhatsApp</option><option>Phone call</option><option>Email</option></select></label>
+        </div>
+        <div class="upload-zone" style="margin-top:20px">
+          <input id="photo" type="file" name="photo" accept="image/*">
+          <div id="uploadPrompt"><strong>Choose a reference photo</strong><span>Full-body or inspiration image • stays on this device</span></div>
+          <img id="preview" width="800" height="600" alt="Selected reference photo">
+        </div>
+        <div id="fileStatus" style="margin-top:8px;color:var(--muted);font-size:.78rem">No photo selected.</div>
+        <label style="margin-top:20px;flex-direction:row"><input type="checkbox" required> I understand this is an indicative briefing tool and Jane.M must confirm the final design and quote.</label>
+      </div>
+
+      <div class="actions">
+        <button type="button" id="back" class="btn" disabled>Back</button>
+        <button type="button" id="next" class="btn primary">Continue</button>
+        <button type="submit" id="finish" class="btn primary hidden">Create designer brief</button>
+      </div>
+    </form>
+  </section>
+
+  <section id="result" class="result">
+    <div class="summary"><small>YOUR JANE.M STYLE DIRECTION</small><h2 id="profile"></h2><p id="summaryText"></p></div>
+    <div class="result-grid">
+      <div class="panel"><h3>Recommended direction</h3><dl id="direction"></dl></div>
+      <div class="panel estimate"><h3>Indicative workmanship</h3><strong id="estimate"></strong><p>Fabric, trims and embellishments quoted separately.</p></div>
+      <div class="panel"><h3>Why this direction works</h3><ul id="reasons"></ul></div>
+      <div class="panel"><h3>Styling notes</h3><dl id="styling"></dl></div>
+    </div>
+
+    <section class="brief">
+      <div class="brief-head"><div><h3>Designer Brief</h3><p>The structured handover document for Jane.M.</p></div>
+        <div class="brief-actions"><button id="copy" class="btn">Copy</button><button id="download" class="btn primary">Download</button><a id="briefWhatsApp" class="btn" target="_blank" rel="noopener">WhatsApp</a></div>
+      </div>
+      <div id="briefDoc"></div>
+    </section>
+    <section class="visualizer">
+      <div class="visualizer-head">
+        <div>
+          <span class="viz-badge">Mock AI integration</span>
+          <h3>Visualize this brief</h3>
+          <p>Preview a customer-facing design concept before the brief is submitted to Jane.M. In this prototype, the analysis is simulated and a static approved concept is displayed.</p>
+        </div>
+        <div class="visualizer-actions">
+          <button id="visualizeBrief" class="btn primary">Visualize this brief</button>
+          <button id="downloadPrompt" class="btn">Download GPT prompt</button>
+        </div>
+      </div>
+
+      <div id="aiStatus" class="ai-status hidden" aria-live="polite">
+        <div class="ai-status-row"><div class="spinner"></div><strong id="aiStatusText">Analysing the brief…</strong></div>
+        <ul class="ai-steps">
+          <li id="aiStep1">Checking event, comfort and design constraints</li>
+          <li id="aiStep2">Assessing construction complexity and pricing</li>
+          <li id="aiStep3">Creating one coherent garment concept</li>
+          <li id="aiStep4">Validating that model, sketches and details match</li>
+        </ul>
+      </div>
+
+      <div id="conceptOutput" class="concept-output hidden">
+        <img src="../assets/style-studio/mock-design-concept.png" width="1983" height="793" alt="Jane.M atelier concept preview">
+        <div class="concept-caption">
+          <span>Mock result — the live integration will generate this from the completed brief and optional reference photo.</span>
+          <span>Concept only • Jane.M confirms the final design and quotation</span>
+        </div>
+      </div>
+
+      <details class="prompt-preview">
+        <summary>Preview the generated GPT prompt</summary>
+        <pre id="promptText"></pre>
+      </details>
+    </section>
+
+    <section class="handoff">
+      <h3>Send the brief and photo</h3>
+      <p>A normal WhatsApp link cannot pre-attach a local photo. On supported phones, use the native share sheet below and select WhatsApp. Otherwise, download the brief/photo and attach them manually.</p>
+      <div class="handoff-actions">
+        <button id="sharePack" class="btn primary">Share photo + brief</button>
+        <a id="handoffWhatsApp" class="btn" target="_blank" rel="noopener">Open WhatsApp with brief</a>
+        <button id="downloadPhoto" class="btn">Download selected photo</button>
+      </div>
+      <div id="shareSupport" class="support-note"></div>
+    </section>
+  </section>
+</div>
+</main>
+<footer class="studio-note">Jane.M Style Studio • Your reference image stays on this device until you choose to share it.</footer>
+
+<script src="../config.js"></script>
+<script src="../analytics.js"></script>
+<script src="../seo-analytics.js"></script>
+<script src="../script.js"></script>
+<script>
+let step=0,selectedFile=null,currentBrief=null,started=false;const steps=[...document.querySelectorAll('.step')],bar=document.getElementById('bar');
+const track=(event, detail={})=>window.JaneMAnalytics?.track(event,detail);
+track('style_studio_opened');
+function markStarted(){if(!started){started=true;track('style_studio_started')}}
+const back=document.getElementById('back'),next=document.getElementById('next'),finish=document.getElementById('finish'),form=document.getElementById('form');
+form.addEventListener('input',markStarted,{once:true});form.addEventListener('change',markStarted,{once:true});
+function show(){steps.forEach((s,i)=>s.classList.toggle('active',i===step));bar.style.width=((step+1)*20)+'%';back.disabled=step===0;next.classList.toggle('hidden',step===4);finish.classList.toggle('hidden',step!==4)}
+function valid(){const req=[...steps[step].querySelectorAll('[required]')].filter(el=>!el.closest('.hidden'));for(const el of req){if(el.type==='radio'){if(!steps[step].querySelector('[name="'+el.name+'"]:checked'))return false}else if(el.type==='checkbox'){if(!el.checked)return false}else if(!el.value)return false}return true}
+function syncMeasureFlow(){const on=document.getElementById('captureToggle').checked;measurementFlow.classList.toggle('hidden',!on);measurementSkip.classList.toggle('hidden',on);track(on?'measurements_selected':'measurements_skipped')}
+next.onclick=()=>{if(!valid())return alert('Please complete the required fields.');if(step===3&&captureToggle.checked){for(const n of ['m_bust','m_waist','m_hip','m_shoulder','m_length']){if(!form.elements[n].value)return alert('Please complete bust, waist, hip, shoulder width and dress length.')}}step++;show()};back.onclick=()=>{step--;show()};
+captureToggle.onchange=syncMeasureFlow;
+const base={Mini:1450,'Above knee':1650,'Knee length':1650,Midi:2500,Maxi:3500,'No preference':2500};
+const adds={Corset:650,Slit:200,'Long sleeves':450,'Off shoulder':250,'Open back':300,'Big bow':450,Pockets:150,Train:700,Lace:600,Beading:900,'Exposed boning':250,'Tiered skirt':1500};
+function data(){const f=new FormData(form),d={};for(const [k,v] of f.entries()){if(k==='features'){(d.features??=[]).push(v)}else if(k!=='photo')d[k]=v}d.features=d.features||[];d.captureMeasurements=captureToggle.checked;return d}
+photo.onchange=()=>{selectedFile=photo.files[0]||null;if(!selectedFile)return;preview.src=URL.createObjectURL(selectedFile);preview.style.display='block';uploadPrompt.style.display='none';fileStatus.textContent='Reference photo selected and kept only on this device.';track('reference_photo_selected')}
+function make(d){
+ const hot=d.weather==='Hot',formal=['Corporate Dinner','Gala','Wedding'].includes(d.occasion);
+ let silhouette=d.fit==='Relaxed'?'softly draped A-line':d.fit==='Figure-hugging'?'sculpted column':'structured fit-and-flare';
+ if(d.length==='Mini'&&formal)silhouette='polished structured mini with controlled draping';
+ let neckline=d.coverage==='Modest'?'high boat neckline':d.coverage==='Daring'?'asymmetric plunge neckline':d.personality==='Sexy'?'soft sweetheart neckline':'clean asymmetric neckline';
+ if(d.features.includes('Off shoulder'))neckline='off-shoulder sculpted neckline';
+ let sleeve=hot?'sleeveless or detachable lightweight sleeve':'structured long sleeve';
+ if(d.features.includes('Long sleeves'))sleeve=hot?'sheer lightweight long sleeve':'structured long sleeve';
+ let fabric=d.theme==='Minimalist'?(hot?'fluid silk crepe or matte satin':'structured crepe or matte satin'):(hot?'lightweight satin, silk crepe or organza accents':'mikrando, crepe or lined satin');
+ const details=d.features.length?d.features.join(', '):'clean construction with one signature focal detail';
+ const constructionScore =
+   1 +
+   (d.features.includes('Corset')?2:0) +
+   (d.features.includes('Long sleeves')?1:0) +
+   (d.features.includes('Train')?2:0) +
+   (d.features.includes('Tiered skirt')?2:0) +
+   (d.features.includes('Beading')?2:0) +
+   (d.features.includes('Lace')?1:0) +
+   (d.features.includes('Exposed boning')?1:0) +
+   (d.features.includes('Slit')?1:0) +
+   (d.fit==='Figure-hugging'?1:0) +
+   (d.theme==='Luxury'||d.personality==='Glamorous'?1:0);
+ const complexity=constructionScore>=8?'Very High':constructionScore>=5?'High':constructionScore>=3?'Moderate':'Low';
+ const complexityPremium={Low:0,Moderate:250,High:600,'Very High':1100}[complexity];
+ let estimate=(base[d.length]||2500)+d.features.reduce((s,x)=>s+(adds[x]||0),0)+complexityPremium;
+ const low=Math.round(estimate*.90/50)*50,high=Math.round(estimate*1.20/50)*50;
+ const profile=(d.colour==='Surprise me'?'Signature':d.colour)+' '+d.personality;
+ const summary=`A ${d.personality.toLowerCase()}, ${d.theme.toLowerCase()} direction for a ${d.occasion.toLowerCase()}, designed for ${d.weather.toLowerCase()} conditions and a ${d.time.toLowerCase()} setting. The brief prioritises ${d.priority.toLowerCase()} and focuses attention on ${d.focalPoint.toLowerCase()}.`;
+ const reasons=[hot?'Lightweight construction supports comfort in hot conditions.':'Layer-friendly construction supports cooler conditions.',d.setting==='Both'?'The look must transition between indoor and outdoor spaces.':'The construction can be optimised for the '+d.setting.toLowerCase()+' setting.','The focal point supports the desired feeling of '+d.feeling.toLowerCase()+'.','The preferred fit and length are balanced against the event formality.','Movement requirements are considered for '+d.movement.toLowerCase()+'.'];
+ return {silhouette,neckline,sleeve,fabric,details,low,high,complexity,constructionScore,profile,summary,reasons,
+ accessories:d.theme==='Minimalist'?'one sculptural earring, compact clutch and fine bracelet':'statement earrings, elegant clutch and restrained jewellery',
+ shoes:d.length==='Maxi'?'sleek pointed heel or minimal sandal':'clean strappy heel or pointed pump',
+ beauty:d.time==='Night'?'polished low bun, luminous skin and deeper lip':'soft waves or low bun, fresh skin and neutral lip'};
+}
+function brief(d,r){
+ const measurements=d.captureMeasurements?Object.fromEntries([['Bust',d.m_bust+' '+d.m_bust_unit],['Waist',d.m_waist+' '+d.m_waist_unit],['Hip',d.m_hip+' '+d.m_hip_unit],['Shoulder width',d.m_shoulder+' '+d.m_shoulder_unit],['Upper arm',d.m_arm?d.m_arm+' '+d.m_arm_unit:'Not provided'],['Sleeve length',d.m_sleeve?d.m_sleeve+' '+d.m_sleeve_unit:'Not provided'],['Shoulder-to-waist',d.m_torso?d.m_torso+' '+d.m_torso_unit:'Not provided'],['Dress length',d.m_length+' '+d.m_length_unit],['Height',d.m_height?d.m_height+' '+d.m_height_unit:'Not provided'],['Heel height',d.m_heel?d.m_heel+' '+d.m_heel_unit:'Not provided']]):{status:'Deferred — Jane.M must measure and verify before production'};
+ return {title:'Jane.M Client Design Brief — '+r.profile,client:{name:d.clientName,phone:d.clientPhone,email:d.clientEmail||'Not provided',preferredContact:d.contactMethod},context:{occasion:d.occasion,theme:d.theme,setting:d.setting,weather:d.weather,time:d.time,budget:d.budget},preferences:{personality:d.personality,fit:d.fit,length:d.length,colour:d.colour,coverage:d.coverage,feeling:d.feeling,priority:d.priority,movement:d.movement,focalPoint:d.focalPoint},direction:{silhouette:r.silhouette,neckline:r.neckline,sleeve:r.sleeve,fabric:r.fabric,features:r.details},constraints:{avoid:d.avoid||'None stated',notes:d.notes||'None stated'},measurements,referencePhoto:selectedFile?selectedFile.name:'Not provided',complexity:{rating:r.complexity,score:r.constructionScore+'/12',basis:'Assessed from structure, fit, sleeves, draping, embellishment and finishing requirements'},estimate:`M${r.low.toLocaleString()}–M${r.high.toLocaleString()} indicative custom-workmanship range`,disclaimer:'Starting brief only. Jane.M must confirm measurements, construction, fabric, final design and quotation.'}
+}
+function esc(x){return String(x).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function section(title,obj){return `<div class="brief-section"><h4>${title}</h4><ul>${Object.entries(obj).map(([k,v])=>`<li><b>${esc(k)}:</b> ${esc(v)}</li>`).join('')}</ul></div>`}
+function toText(b){return `${b.title}\n\nCLIENT\n${Object.entries(b.client).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nEVENT CONTEXT\n${Object.entries(b.context).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCLIENT PREFERENCES\n${Object.entries(b.preferences).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCREATIVE DIRECTION\n${Object.entries(b.direction).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCONSTRAINTS\n${Object.entries(b.constraints).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nMEASUREMENTS\n${Object.entries(b.measurements).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nREFERENCE PHOTO\n${b.referencePhoto}\n\nCOMPLEXITY ASSESSMENT\n${Object.entries(b.complexity).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCOMMERCIAL GUIDE\n${b.estimate}\n\n${b.disclaimer}`}
+form.onsubmit=e=>{e.preventDefault();if(!valid())return alert('Please complete the required fields.');const d=data(),r=make(d),b=brief(d,r);
+ document.getElementById('wizard').style.display='none';document.querySelector('.progress').style.display='none';document.getElementById('result').classList.add('active');
+ profile.textContent=r.profile;summaryText.textContent=r.summary;estimate.textContent=`M${r.low.toLocaleString()} – M${r.high.toLocaleString()}`;
+ direction.innerHTML=[['Silhouette',r.silhouette],['Neckline',r.neckline],['Sleeve',r.sleeve],['Length',d.length],['Fabric',r.fabric],['Details',r.details]].map(x=>`<div><dt>${x[0]}</dt><dd>${x[1]}</dd></div>`).join('');
+ reasons.innerHTML=r.reasons.map(x=>`<li>${x}</li>`).join('');styling.innerHTML=[['Accessories',r.accessories],['Shoes',r.shoes],['Hair & makeup',r.beauty]].map(x=>`<div><dt>${x[0]}</dt><dd>${x[1]}</dd></div>`).join('');
+ briefDoc.innerHTML=section('Client',b.client)+section('Event context',b.context)+section('Client preferences',b.preferences)+section('Creative direction',b.direction)+section('Constraints',b.constraints)+section('Measurements',b.measurements)+section('Complexity assessment',b.complexity)+`<div class="brief-section"><h4>Reference photo</h4><p>${b.referencePhoto}</p></div><div class="brief-section"><h4>Commercial guide</h4><p><b>${b.estimate}</b><br>${b.disclaimer}</p></div>`;
+ currentBrief=b;window.B=b;promptText.textContent=buildVisualizationPrompt(b);downloadPhoto.classList.toggle('hidden',!selectedFile);shareSupport.textContent=selectedFile?(navigator.share?'Use Share photo + brief, then choose WhatsApp.':'File sharing is not supported here; download both files and attach them manually.'):'No photo selected; the brief can still be shared.';
+ const handoff=`Hello Jane.M, I completed the Style Studio.\n\nOccasion: ${d.occasion}\nStyle: ${d.personality}\nColour: ${d.colour}\nLength: ${d.length}\nFit: ${d.fit}\nBudget: ${d.budget}\nDesign direction: ${r.silhouette}; ${r.neckline}; ${r.sleeve}\nComplexity: ${r.complexity}\nIndicative workmanship range: M${r.low.toLocaleString()}–M${r.high.toLocaleString()}`;
+ const handoffUrl='https://wa.me/26662790946?text='+encodeURIComponent(handoff);briefWhatsApp.href=handoffUrl;handoffWhatsApp.href=handoffUrl;track('style_preferences_completed');track('brief_generated');track('style_studio_completed');window.scrollTo({top:0,behavior:'smooth'});
+};
+copy.onclick=async()=>{await navigator.clipboard.writeText(toText(window.B));alert('Brief copied.')};
+download.onclick=()=>{const blob=new Blob([toText(window.B)],{type:'text/plain'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='JaneM-Designer-Brief.txt';a.click()};
+downloadPhoto.onclick=()=>{if(!selectedFile)return;const a=document.createElement('a');a.href=URL.createObjectURL(selectedFile);a.download=selectedFile.name;a.click()};
+sharePack.onclick=async()=>{const text=toText(currentBrief),briefFile=new File([text],'JaneM-Designer-Brief.txt',{type:'text/plain'}),files=selectedFile?[selectedFile,briefFile]:[briefFile];if(navigator.canShare&&navigator.canShare({files})){try{await navigator.share({title:'Jane.M Designer Brief',text:'Jane.M Style Studio briefing pack',files})}catch(e){}}else if(navigator.share){try{await navigator.share({title:'Jane.M Designer Brief',text})}catch(e){}}else alert('Direct file sharing is not supported. Download the brief and photo, then attach them in WhatsApp.')};
+
+function buildVisualizationPrompt(b){
+  return `SYSTEM / DEVELOPER INSTRUCTION
+
+You are the Jane.M Atelier Fashion Concept Director, garment-construction analyst and customer-presentation art director.
+
+Your task is to transform the supplied client design brief and optional reference photo into ONE coherent, customer-facing bespoke fashion concept board.
+
+NON-NEGOTIABLE ACCURACY RULES
+1. Treat the structured brief as the source of truth.
+2. Do not merely recolour or lightly edit clothing visible in the reference photo.
+3. Design a genuinely new garment from the brief.
+4. The outfit worn by the model, front sketch, back sketch, detail crops, written features, fabric description and complexity assessment must all describe the exact same garment.
+5. Do not introduce sleeves, necklines, lengths, trains, slits, corsetry, embellishments or fabrics that contradict the brief.
+6. When measurements are implausible, incomplete or unverified, do not use them to distort the model. Clearly state that Jane.M must verify them.
+7. The model must appear realistic and editorial, with natural skin texture, believable anatomy, restrained retouching and no exaggerated AI gloss.
+8. Present the garment on an adult female fashion model. Preserve the uploaded person's general appearance only when a usable reference photo is supplied and consented to; otherwise use a non-identifiable model.
+9. Do not include operational buttons such as “download brief” or “share with designer” inside the artwork. This image is shown to the customer before submission.
+10. Do not promise that the concept is production-ready or that the estimate is final.
+
+DESIGN WORK
+- Resolve the client’s occasion, theme, venue, weather, time, coverage, comfort, movement, focal point, budget and requested features into one practical garment concept.
+- Balance visual impact with wearability and the stated level of modesty.
+- Create an exact front view and exact back view of the same garment.
+- Show useful close-ups of the actual neckline, construction/draping and focal feature.
+- Recommend fabric and styling that match the garment and event.
+
+COMPLEXITY AND PRICING
+- Independently assess construction complexity as Low, Moderate, High or Very High.
+- Base the assessment on pattern complexity, internal structure, corsetry/boning, draping, sleeve tailoring, slit engineering, closures, lining, embellishment, fabric handling, finishing and fitting risk.
+- Produce an indicative custom-workmanship range in Lesotho maloti.
+- Do not force the concept into a fixed price-book item.
+- Explain the main factors driving the range.
+- State that fabric, trims and embellishments may be separate and that Jane.M will confirm the final quotation after measurements and construction review.
+
+CUSTOMER-FACING ARTWORK
+Create a premium vertical fashion concept board with:
+- Jane.M Atelier branding;
+- “Your Design Concept” and the client’s first name;
+- hero model wearing the exact proposed garment;
+- concise concept overview;
+- exact front and back garment sketches matching the model;
+- key features;
+- three aligned design-detail close-ups;
+- fabric and colour;
+- styling suggestions;
+- design complexity assessment;
+- indicative custom-workmanship range;
+- why the concept works for the client;
+- short “What happens next?” section: consultation, measurements verification, fabric/details, final design approval and final quotation;
+- clear concept-only disclaimer.
+
+Keep typography readable, layout uncluttered and all content internally consistent.
+
+CLIENT DESIGN BRIEF
+
+${toText(b)}
+
+OUTPUT
+Generate one high-resolution portrait concept-board image.`;
+}
+function downloadText(filename,text){
+  const blob=new Blob([text],{type:'text/plain;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;a.click();URL.revokeObjectURL(a.href);
+}
+downloadPrompt.addEventListener('click',()=>{
+  if(!currentBrief)return alert('Create the briefing pack first.');
+  downloadText('JaneM-GPT-Visualization-Prompt.txt',buildVisualizationPrompt(currentBrief));track('gpt_prompt_downloaded');
+});
+// Future server integration: POST /api/style-studio/visualize. Keep provider keys off the client.
+async function generateDesignConcept(brief){ return runMockConcept(brief); }
+async function runMockConcept(){conceptOutput.classList.remove('hidden');track('concept_preview_displayed')}
+visualizeBrief.addEventListener('click',async()=>{
+  if(!currentBrief)return alert('Create the briefing pack first.');
+  track('visualize_brief_clicked');
+  promptText.textContent=buildVisualizationPrompt(currentBrief);
+  conceptOutput.classList.add('hidden');
+  aiStatus.classList.remove('hidden');
+  [aiStep1,aiStep2,aiStep3,aiStep4].forEach(x=>x.classList.remove('done'));
+  const stages=[
+    [aiStep1,'Analysing event, client preferences and constraints…'],
+    [aiStep2,'Assessing construction complexity and indicative pricing…'],
+    [aiStep3,'Designing one coherent garment concept…'],
+    [aiStep4,'Checking that the model, sketches and details align…']
+  ];
+  for(const [el,label] of stages){
+    aiStatusText.textContent=label;
+    await new Promise(r=>setTimeout(r,650));
+    el.classList.add('done');
+  }
+  await new Promise(r=>setTimeout(r,350));
+  aiStatus.classList.add('hidden');
+  await generateDesignConcept(currentBrief);
+  conceptOutput.scrollIntoView({behavior:'smooth',block:'start'});
+});
+
+
+let guideIndex=0;
+const guideSlides=[...document.querySelectorAll('.guide-slide')];
+function showGuide(index){
+  guideIndex=Math.max(0,Math.min(index,guideSlides.length-1));
+  guideSlides.forEach((slide,i)=>slide.classList.toggle('active',i===guideIndex));
+  guidePrev.disabled=guideIndex===0;
+  guideNext.disabled=guideIndex===guideSlides.length-1;
+  guideCount.textContent=`${guideIndex+1} of ${guideSlides.length}`;
+}
+guidePrev.addEventListener('click',()=>showGuide(guideIndex-1));
+guideNext.addEventListener('click',()=>showGuide(guideIndex+1));
+showGuide(0);
+
+show();
+</script>
+</body>
+</html>
