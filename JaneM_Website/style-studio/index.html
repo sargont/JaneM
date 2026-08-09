@@ -49,8 +49,6 @@ footer{text-align:center;color:var(--muted);font-size:.75rem;padding:22px}
 .measure-card{border:1px solid var(--line);border-radius:12px;padding:13px;background:#fff}
 .measure-card small{display:block;color:var(--muted);margin-top:6px;line-height:1.4}
 .unit-row{display:grid;grid-template-columns:1fr 88px;gap:7px}
-.upload-zone{position:relative;border:1.5px dashed var(--gold);border-radius:16px;min-height:290px;display:grid;place-items:center;overflow:hidden;background:#fcf8f1;text-align:center}
-.upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;z-index:3}.upload-zone img{display:none;max-width:100%;max-height:420px;object-fit:contain}
 .handoff{margin-top:16px;background:#f7f1e8;border:1px solid var(--line);border-radius:18px;padding:23px}.handoff-actions{display:flex;gap:9px;flex-wrap:wrap}.support-note{font-size:.75rem;color:var(--muted);margin-top:10px}
 input[type=text],input[type=email],input[type=tel],input[type=date],input[type=number]{padding:13px;border:1px solid var(--line);border-radius:9px;background:#fff;font:inherit}
 @media(max-width:760px){.measure-wrap,.measurements{grid-template-columns:1fr}}
@@ -60,7 +58,6 @@ input[type=text],input[type=email],input[type=tel],input[type=date],input[type=n
 .visualizer-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}
 .visualizer h3{font-size:2rem;margin:0 0 8px}
 .visualizer p{color:var(--muted);line-height:1.6;margin:0}
-.visualizer-actions{display:flex;gap:9px;flex-wrap:wrap}
 .ai-status{margin-top:20px;border:1px solid var(--line);border-radius:14px;padding:18px;background:#fbf8f2}
 .ai-status-row{display:flex;align-items:center;gap:12px}
 .spinner{width:22px;height:22px;border:3px solid #ddcfba;border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
@@ -232,19 +229,14 @@ input[type=text],input[type=email],input[type=tel],input[type=date],input[type=n
       </div>
 
       <div class="step">
-        <h2>5. Reference and contact</h2><p>Add an optional image and contact details for the handoff.</p>
+        <h2>5. Contact and inspiration</h2><p>Add your contact details. You can attach any inspiration image directly in WhatsApp after sending your brief.</p>
         <div class="grid">
           <label>Full name<input type="text" name="clientName" required></label>
           <label>WhatsApp number<input type="tel" name="clientPhone" required placeholder="+266 ..."></label>
           <label>Email, optional<input type="email" name="clientEmail"></label>
           <label>Preferred contact<select name="contactMethod" required><option value="">Choose</option><option>WhatsApp</option><option>Phone call</option><option>Email</option></select></label>
         </div>
-        <div class="upload-zone" style="margin-top:20px">
-          <input id="photo" type="file" name="photo" accept="image/*">
-          <div id="uploadPrompt"><strong>Choose a reference photo</strong><span>Full-body or inspiration image • stays on this device</span></div>
-          <img id="preview" width="800" height="600" alt="Selected reference photo">
-        </div>
-        <div id="fileStatus" style="margin-top:8px;color:var(--muted);font-size:.78rem">No photo selected.</div>
+        <div class="toggle-card" style="margin-top:20px"><div></div><div><strong>Have an inspiration image?</strong><p>After you send your brief, attach it directly in WhatsApp so Jane.M can view it alongside your message.</p></div></div>
         <label style="margin-top:20px;flex-direction:row"><input type="checkbox" required> I understand this is an indicative briefing tool and Jane.M must confirm the final design and quote.</label>
       </div>
 
@@ -259,11 +251,6 @@ input[type=text],input[type=email],input[type=tel],input[type=date],input[type=n
 
   <section id="result" class="result">
     <div class="summary"><small>YOUR JANE.M STYLE DIRECTION</small><h2 id="profile"></h2><p id="summaryText"></p></div>
-    <section id="nextStep" class="handoff">
-      <h3>Your brief is ready.</h3>
-      <p>Send it to Jane.M on WhatsApp to begin the consultation. Your full design direction, preferences, notes and measurements will be included.</p>
-      <div class="handoff-actions"><a id="briefWhatsApp" class="btn primary" target="_blank" rel="noopener">Send brief to Jane.M on WhatsApp</a></div>
-    </section>
     <div class="result-grid">
       <div class="panel"><h3>Recommended direction</h3><dl id="direction"></dl></div>
       <div class="panel estimate"><h3>Indicative workmanship</h3><strong id="estimate"></strong><p>Fabric, trims and embellishments quoted separately.</p></div>
@@ -271,11 +258,12 @@ input[type=text],input[type=email],input[type=tel],input[type=date],input[type=n
       <div class="panel"><h3>Styling notes</h3><dl id="styling"></dl></div>
     </div>
 
-    <section class="brief">
+    <section id="designerBrief" class="brief">
       <div class="brief-head"><div><h3>Designer Brief</h3><p>The structured handover document for Jane.M.</p></div>
         <div class="brief-actions"><button id="copy" class="btn">Copy</button><button id="download" class="btn">Download</button></div>
       </div>
       <div id="briefDoc"></div>
+      <div id="briefActions" class="handoff"><h3>What would you like to do next?</h3><p>Visualize your direction or send this complete brief to Jane.M. Attach an inspiration image in WhatsApp if you have one.</p><div class="brief-actions"><button id="visualizeBrief" class="btn">Visualize this brief</button><a id="briefWhatsApp" class="btn primary" target="_blank" rel="noopener">Send brief to Jane.M on WhatsApp</a></div></div>
     </section>
     <section class="visualizer">
       <div class="visualizer-head">
@@ -285,7 +273,6 @@ input[type=text],input[type=email],input[type=tel],input[type=date],input[type=n
           <p>See an early visual direction inspired by your completed brief, then use it as a thoughtful starting point for your Jane.M consultation.</p>
           <p class="support-note">Personalised live concept visuals are coming soon. This preview is an illustration to guide your consultation.</p>
         </div>
-        <div class="visualizer-actions"><button id="visualizeBrief" class="btn primary">Visualize this brief</button></div>
       </div>
 
       <div id="aiStatus" class="ai-status hidden" aria-live="polite">
@@ -316,7 +303,7 @@ input[type=text],input[type=email],input[type=tel],input[type=date],input[type=n
 <script src="../seo-analytics.js"></script>
 <script src="../script.js"></script>
 <script>
-let step=0,selectedFile=null,currentBrief=null,started=false;const steps=[...document.querySelectorAll('.step')],bar=document.getElementById('bar');
+let step=0,currentBrief=null,started=false;const steps=[...document.querySelectorAll('.step')],bar=document.getElementById('bar');
 const track=(event, detail={})=>window.JaneMAnalytics?.track(event,detail);
 track('style_studio_opened');
 function markStarted(){if(!started){started=true;track('style_studio_started')}}
@@ -332,8 +319,7 @@ next.onclick=()=>{if(!valid())return;if(step===3&&captureToggle.checked){const m
 captureToggle.onchange=syncMeasureFlow;
 const base={Mini:1450,'Above knee':1650,'Knee length':1650,Midi:2500,Maxi:3500,'No preference':2500};
 const adds={Corset:650,Slit:200,'Long sleeves':450,'Off shoulder':250,'Open back':300,'Big bow':450,Pockets:150,Train:700,Lace:600,Beading:900,'Exposed boning':250,'Tiered skirt':1500};
-function data(){const f=new FormData(form),d={};for(const [k,v] of f.entries()){if(k==='features'){(d.features??=[]).push(v)}else if(k!=='photo')d[k]=v}d.features=d.features||[];d.captureMeasurements=captureToggle.checked;return d}
-photo.onchange=()=>{selectedFile=photo.files[0]||null;if(!selectedFile)return;preview.src=URL.createObjectURL(selectedFile);preview.style.display='block';uploadPrompt.style.display='none';fileStatus.textContent='Reference photo selected and kept only on this device.';track('reference_photo_selected')}
+function data(){const f=new FormData(form),d={};for(const [k,v] of f.entries()){if(k==='features'){(d.features??=[]).push(v)}else d[k]=v}d.features=d.features||[];d.captureMeasurements=captureToggle.checked;return d}
 function make(d){
  const hot=d.weather==='Hot',formal=['Corporate Dinner','Gala','Wedding'].includes(d.occasion);
  let silhouette=d.fit==='Relaxed'?'softly draped A-line':d.fit==='Figure-hugging'?'sculpted column':'structured fit-and-flare';
@@ -370,20 +356,20 @@ function make(d){
 }
 function brief(d,r){
  const measurements=d.captureMeasurements?Object.fromEntries([['Bust',d.m_bust+' '+d.m_bust_unit],['Waist',d.m_waist+' '+d.m_waist_unit],['Hip',d.m_hip+' '+d.m_hip_unit],['Shoulder width',d.m_shoulder+' '+d.m_shoulder_unit],['Upper arm',d.m_arm?d.m_arm+' '+d.m_arm_unit:'Not provided'],['Sleeve length',d.m_sleeve?d.m_sleeve+' '+d.m_sleeve_unit:'Not provided'],['Shoulder-to-waist',d.m_torso?d.m_torso+' '+d.m_torso_unit:'Not provided'],['Dress length',d.m_length+' '+d.m_length_unit],['Height',d.m_height?d.m_height+' '+d.m_height_unit:'Not provided'],['Heel height',d.m_heel?d.m_heel+' '+d.m_heel_unit:'Not provided']]):{status:'Deferred — Jane.M must measure and verify before production'};
- return {title:'Jane.M Client Design Brief — '+r.profile,client:{name:d.clientName,phone:d.clientPhone,email:d.clientEmail||'Not provided',preferredContact:d.contactMethod},context:{occasion:d.occasion,theme:d.theme,setting:d.setting,weather:d.weather,time:d.time,budget:d.budget},preferences:{personality:d.personality,fit:d.fit,length:d.length,colour:d.colour,coverage:d.coverage,feeling:d.feeling,priority:d.priority,movement:d.movement,focalPoint:d.focalPoint},direction:{silhouette:r.silhouette,neckline:r.neckline,sleeve:r.sleeve,fabric:r.fabric,features:r.details},constraints:{avoid:d.avoid||'None stated',notes:d.notes||'None stated'},measurements,referencePhoto:selectedFile?selectedFile.name:'Not provided',complexity:{rating:r.complexity,score:r.constructionScore+'/12',basis:'Assessed from structure, fit, sleeves, draping, embellishment and finishing requirements'},estimate:`M${r.low.toLocaleString()}–M${r.high.toLocaleString()} indicative custom-workmanship range`,disclaimer:'Starting brief only. Jane.M must confirm measurements, construction, fabric, final design and quotation.'}
+ return {title:'Jane.M Client Design Brief — '+r.profile,client:{name:d.clientName,phone:d.clientPhone,email:d.clientEmail||'Not provided',preferredContact:d.contactMethod},context:{occasion:d.occasion,theme:d.theme,setting:d.setting,weather:d.weather,time:d.time,budget:d.budget},preferences:{personality:d.personality,fit:d.fit,length:d.length,colour:d.colour,coverage:d.coverage,feeling:d.feeling,priority:d.priority,movement:d.movement,focalPoint:d.focalPoint},direction:{silhouette:r.silhouette,neckline:r.neckline,sleeve:r.sleeve,fabric:r.fabric,features:r.details},constraints:{avoid:d.avoid||'None stated',notes:d.notes||'None stated'},measurements,inspiration:'Attach an inspiration image in WhatsApp if helpful.',complexity:{rating:r.complexity,score:r.constructionScore+'/12',basis:'Assessed from structure, fit, sleeves, draping, embellishment and finishing requirements'},estimate:`M${r.low.toLocaleString()}–M${r.high.toLocaleString()} indicative custom-workmanship range`,disclaimer:'Starting brief only. Jane.M must confirm measurements, construction, fabric, final design and quotation.'}
 }
 function esc(x){return String(x).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function section(title,obj){return `<div class="brief-section"><h4>${title}</h4><ul>${Object.entries(obj).map(([k,v])=>`<li><b>${esc(k)}:</b> ${esc(v)}</li>`).join('')}</ul></div>`}
-function toText(b){return `${b.title}\n\nCLIENT\n${Object.entries(b.client).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nEVENT CONTEXT\n${Object.entries(b.context).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCLIENT PREFERENCES\n${Object.entries(b.preferences).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCREATIVE DIRECTION\n${Object.entries(b.direction).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCONSTRAINTS\n${Object.entries(b.constraints).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nMEASUREMENTS\n${Object.entries(b.measurements).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nREFERENCE PHOTO\n${b.referencePhoto}\n\nCOMPLEXITY ASSESSMENT\n${Object.entries(b.complexity).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCOMMERCIAL GUIDE\n${b.estimate}\n\n${b.disclaimer}`}
+function toText(b){return `${b.title}\n\nCLIENT\n${Object.entries(b.client).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nEVENT CONTEXT\n${Object.entries(b.context).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCLIENT PREFERENCES\n${Object.entries(b.preferences).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCREATIVE DIRECTION\n${Object.entries(b.direction).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCONSTRAINTS\n${Object.entries(b.constraints).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nMEASUREMENTS\n${Object.entries(b.measurements).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nINSPIRATION\n${b.inspiration}\n\nCOMPLEXITY ASSESSMENT\n${Object.entries(b.complexity).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCOMMERCIAL GUIDE\n${b.estimate}\n\n${b.disclaimer}`}
 form.onsubmit=e=>{e.preventDefault();if(!valid())return;const d=data(),r=make(d),b=brief(d,r);
  document.getElementById('wizard').style.display='none';document.querySelector('.progress').style.display='none';document.getElementById('result').classList.add('active');
  profile.textContent=r.profile;summaryText.textContent=r.summary;estimate.textContent=`M${r.low.toLocaleString()} – M${r.high.toLocaleString()}`;
  direction.innerHTML=[['Silhouette',r.silhouette],['Neckline',r.neckline],['Sleeve',r.sleeve],['Length',d.length],['Fabric',r.fabric],['Details',r.details]].map(x=>`<div><dt>${x[0]}</dt><dd>${x[1]}</dd></div>`).join('');
  reasons.innerHTML=r.reasons.map(x=>`<li>${x}</li>`).join('');styling.innerHTML=[['Accessories',r.accessories],['Shoes',r.shoes],['Hair & makeup',r.beauty]].map(x=>`<div><dt>${x[0]}</dt><dd>${x[1]}</dd></div>`).join('');
- briefDoc.innerHTML=section('Client',b.client)+section('Event context',b.context)+section('Client preferences',b.preferences)+section('Creative direction',b.direction)+section('Constraints',b.constraints)+section('Measurements',b.measurements)+section('Complexity assessment',b.complexity)+`<div class="brief-section"><h4>Reference photo</h4><p>${b.referencePhoto}</p></div><div class="brief-section"><h4>Commercial guide</h4><p><b>${b.estimate}</b><br>${b.disclaimer}</p></div>`;
+ briefDoc.innerHTML=section('Client',b.client)+section('Event context',b.context)+section('Client preferences',b.preferences)+section('Creative direction',b.direction)+section('Constraints',b.constraints)+section('Measurements',b.measurements)+`<div class="brief-section"><h4>Inspiration</h4><p>${b.inspiration}</p></div>`+section('Complexity assessment',b.complexity)+`<div class="brief-section"><h4>Commercial guide</h4><p><b>${b.estimate}</b><br>${b.disclaimer}</p></div>`;
  currentBrief=b;window.B=b;
  const handoff=`Hello Jane.M, I completed the Style Studio. Please find my full designer brief below.\n\n${toText(b)}`;
- briefWhatsApp.href='https://wa.me/26662790946?text='+encodeURIComponent(handoff);track('style_preferences_completed');track('brief_generated');track('style_studio_completed');window.requestAnimationFrame(()=>document.getElementById('nextStep').scrollIntoView({behavior:'smooth',block:'center'}));
+ briefWhatsApp.href='https://wa.me/26662790946?text='+encodeURIComponent(handoff);track('style_preferences_completed');track('brief_generated');track('style_studio_completed');window.requestAnimationFrame(()=>document.getElementById('briefActions').scrollIntoView({behavior:'smooth',block:'center'}));
 };
 copy.onclick=async()=>{await navigator.clipboard.writeText(toText(window.B));alert('Brief copied.')};
 download.onclick=()=>{const blob=new Blob([toText(window.B)],{type:'text/plain'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='JaneM-Designer-Brief.txt';a.click()};
