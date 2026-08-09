@@ -249,18 +249,24 @@ footer a, footer p { display: block; color: #bcb2a8; text-decoration: none; marg
 .seo-form .btn { justify-self: start; }
 
 /* JaneM TV — a dedicated editorial video destination. */
-.janem-tv-hero { padding: 100px 0 78px; background: radial-gradient(circle at 78% 8%, rgba(179,138,69,.25), transparent 28%), linear-gradient(135deg, #15120f 0%, #211b16 56%, #5b4225 100%); color: #fff; }
-.janem-tv-hero__inner { max-width: 880px; }
-.janem-tv-hero h1 { font-size: clamp(4rem, 8vw, 7.8rem); line-height: .86; margin: 18px 0 28px; }
+.janem-tv-hero { padding: 24px 0 22px; background: radial-gradient(circle at 78% 8%, rgba(179,138,69,.25), transparent 28%), linear-gradient(135deg, #15120f 0%, #211b16 56%, #5b4225 100%); color: #fff; }
+.janem-tv-hero__inner { display: grid; grid-template-columns: minmax(300px,.7fr) minmax(0,1.3fr); gap: clamp(36px,8vw,120px); align-items: end; max-width: none; }
+.janem-tv-hero h1 { font-size: clamp(3.5rem, 5vw, 5.2rem); line-height: .86; margin: 8px 0 0; }
 .janem-tv-hero h1 span { color: var(--gold); font-style: italic; }
-.janem-tv-hero p:not(.eyebrow) { max-width: 660px; color: #ded5cc; font-size: 1.08rem; margin-bottom: 32px; }
-.janem-tv-feature { background: var(--paper); }
+.janem-tv-hero p:not(.eyebrow) { max-width: 660px; color: #ded5cc; font-size: 1.02rem; line-height: 1.7; margin: 0 0 5px; }
+.janem-tv-feature { padding: 22px 0 76px; background: var(--paper); }
 .janem-tv-gallery { background: var(--cream); }
-.janem-tv-intro { display: grid; grid-template-columns: .65fr 1.35fr; gap: 36px; align-items: start; margin-bottom: 34px; }
-.janem-tv-intro h2 { font-size: clamp(3rem, 5vw, 5.6rem); line-height: .92; margin: 0 0 12px; }
+.janem-tv-intro { display: grid; grid-template-columns: .45fr 1.55fr; gap: 36px; align-items: end; margin-bottom: 16px; }
+.janem-tv-intro h2 { font-size: clamp(2.35rem, 3.3vw, 3.5rem); line-height: .92; margin: 0 0 6px; }
 .janem-tv-intro p:not(.eyebrow) { max-width: 640px; color: var(--muted); }
 .janem-tv-player { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: linear-gradient(135deg, #201914, #090807); box-shadow: 0 22px 55px rgba(34,23,13,.22); }
 .janem-tv-player iframe { width: 100%; height: 100%; border: 0; }
+.janem-tv-player__footer { display: flex; justify-content: space-between; gap: 28px; align-items: center; padding: 22px 0 0; border-bottom: 1px solid var(--line); }
+.janem-tv-player__footer p { display: grid; gap: 4px; margin: 0 0 22px; }
+.janem-tv-player__footer strong { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; }
+.janem-tv-player__footer span { color: var(--muted); font-size: .82rem; }
+.janem-tv-channel-link { margin-bottom: 22px; color: var(--gold-dark); font-size: .78rem; font-weight: 800; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; white-space: nowrap; }
+.janem-tv-channel-link:hover,.janem-tv-channel-link:focus-visible { color: var(--black); }
 .janem-tv-player__preview { position: relative; width: 100%; height: 100%; color: #fff; }
 .janem-tv-player__preview::after { position: absolute; inset: 0; content: ""; background: linear-gradient(90deg, rgba(11,8,6,.84), rgba(11,8,6,.28) 58%, rgba(11,8,6,.1)); }
 .janem-tv-player__preview img { width: 100%; height: 100%; object-fit: cover; }
@@ -344,8 +350,13 @@ footer a, footer p { display: block; color: #bcb2a8; text-decoration: none; marg
   .catalogue-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
   .seo-link-grid { grid-template-columns: 1fr; }
   .seo-link-grid a { min-height: 165px; }
-  .janem-tv-intro { grid-template-columns: 1fr; gap: 14px; }
+  .janem-tv-hero { padding: 27px 0 25px; }
+  .janem-tv-hero__inner,.janem-tv-intro { grid-template-columns: 1fr; gap: 14px; }
+  .janem-tv-hero h1 { font-size: clamp(3.5rem,16vw,5rem); }
+  .janem-tv-feature { padding-top: 22px; }
   .janem-tv-cards { grid-template-columns: 1fr; }
+  .janem-tv-player__footer { align-items: flex-start; flex-direction: column; gap: 0; }
+  .janem-tv-channel-link { margin-top: 0; }
 }
 
 @media (max-width: 700px) {
