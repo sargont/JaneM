@@ -259,6 +259,11 @@ input[type=text],input[type=email],input[type=tel],input[type=date],input[type=n
 
   <section id="result" class="result">
     <div class="summary"><small>YOUR JANE.M STYLE DIRECTION</small><h2 id="profile"></h2><p id="summaryText"></p></div>
+    <section id="nextStep" class="handoff">
+      <h3>Your brief is ready.</h3>
+      <p>Send it to Jane.M on WhatsApp to begin the consultation. Your full design direction, preferences, notes and measurements will be included.</p>
+      <div class="handoff-actions"><a id="briefWhatsApp" class="btn primary" target="_blank" rel="noopener">Send brief to Jane.M on WhatsApp</a></div>
+    </section>
     <div class="result-grid">
       <div class="panel"><h3>Recommended direction</h3><dl id="direction"></dl></div>
       <div class="panel estimate"><h3>Indicative workmanship</h3><strong id="estimate"></strong><p>Fabric, trims and embellishments quoted separately.</p></div>
@@ -268,7 +273,7 @@ input[type=text],input[type=email],input[type=tel],input[type=date],input[type=n
 
     <section class="brief">
       <div class="brief-head"><div><h3>Designer Brief</h3><p>The structured handover document for Jane.M.</p></div>
-        <div class="brief-actions"><button id="copy" class="btn">Copy</button><button id="download" class="btn">Download</button><a id="briefWhatsApp" class="btn primary" target="_blank" rel="noopener">Send brief to Jane.M on WhatsApp</a></div>
+        <div class="brief-actions"><button id="copy" class="btn">Copy</button><button id="download" class="btn">Download</button></div>
       </div>
       <div id="briefDoc"></div>
     </section>
@@ -378,7 +383,7 @@ form.onsubmit=e=>{e.preventDefault();if(!valid())return;const d=data(),r=make(d)
  briefDoc.innerHTML=section('Client',b.client)+section('Event context',b.context)+section('Client preferences',b.preferences)+section('Creative direction',b.direction)+section('Constraints',b.constraints)+section('Measurements',b.measurements)+section('Complexity assessment',b.complexity)+`<div class="brief-section"><h4>Reference photo</h4><p>${b.referencePhoto}</p></div><div class="brief-section"><h4>Commercial guide</h4><p><b>${b.estimate}</b><br>${b.disclaimer}</p></div>`;
  currentBrief=b;window.B=b;
  const handoff=`Hello Jane.M, I completed the Style Studio. Please find my full designer brief below.\n\n${toText(b)}`;
- briefWhatsApp.href='https://wa.me/26662790946?text='+encodeURIComponent(handoff);track('style_preferences_completed');track('brief_generated');track('style_studio_completed');window.requestAnimationFrame(()=>document.getElementById('result').scrollIntoView({behavior:'smooth',block:'start'}));
+ briefWhatsApp.href='https://wa.me/26662790946?text='+encodeURIComponent(handoff);track('style_preferences_completed');track('brief_generated');track('style_studio_completed');window.requestAnimationFrame(()=>document.getElementById('nextStep').scrollIntoView({behavior:'smooth',block:'center'}));
 };
 copy.onclick=async()=>{await navigator.clipboard.writeText(toText(window.B));alert('Brief copied.')};
 download.onclick=()=>{const blob=new Blob([toText(window.B)],{type:'text/plain'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='JaneM-Designer-Brief.txt';a.click()};
