@@ -109,6 +109,12 @@ body.style-studio-page{background:linear-gradient(180deg,#fbf8f3 0%,#efe4d4 100%
 .style-studio .step>p{max-width:650px;margin:0 0 30px;color:var(--muted)}
 .style-studio label{gap:9px;color:#3f3730;font-size:.75rem;letter-spacing:.045em;text-transform:uppercase}
 .style-studio label:has(input[type=checkbox]){letter-spacing:0;text-transform:none}
+.style-studio .step .grid{gap:14px}.style-studio .step:first-child .grid{margin-top:34px}
+.style-studio .field-card{position:relative;min-height:112px;padding:18px 18px 10px;border:1px solid rgba(21,18,15,.14);background:linear-gradient(145deg,#fff 0%,#f9f4ec 100%);box-shadow:0 8px 22px rgba(34,23,13,.035);transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease}
+.style-studio .field-card:hover,.style-studio .field-card:focus-within{border-color:var(--gold-dark);box-shadow:0 14px 30px rgba(34,23,13,.09);transform:translateY(-1px)}
+.style-studio .field-card select,.style-studio .field-card input{min-height:42px;padding:9px 0 3px;border-bottom:0;background:transparent;font-family:var(--serif);font-size:1.45rem;font-weight:600;letter-spacing:-.01em}
+.style-studio .field-card::before{content:'✦';position:absolute;right:17px;top:17px;color:var(--gold-dark);font-size:.7rem}.style-studio .field-card:has([required])::after{content:'required';right:32px;top:18px;color:#8b6a3c;font-size:.55rem;font-weight:800;letter-spacing:.11em}
+.style-studio .field-card--budget{min-height:96px;display:grid;grid-template-columns:minmax(170px,.42fr) 1fr;align-items:center;gap:20px}.style-studio .field-card--budget select{min-width:0}.style-studio .field-card--notes{min-height:0}.style-studio .field-card--notes textarea{min-height:84px;padding:8px 0 0;border-bottom:0}
 .style-studio select,.style-studio textarea,.style-studio input[type=text],.style-studio input[type=email],.style-studio input[type=tel],.style-studio input[type=date],.style-studio input[type=number]{padding:14px 2px;border:0;border-bottom:1px solid #cfc2b2;border-radius:0;background:transparent;color:var(--black);font-family:var(--sans);text-transform:none;transition:border-color .2s ease,background .2s ease}
 .style-studio select:focus,.style-studio textarea:focus,.style-studio input:focus{outline:0;border-color:var(--gold-dark);box-shadow:0 2px 0 var(--gold-dark)}
 .style-studio .chips{gap:10px;margin:13px 0 28px}
@@ -186,6 +192,7 @@ body.style-studio-page{background:linear-gradient(180deg,#fbf8f3 0%,#efe4d4 100%
 .studio-faq summary{display:flex;justify-content:space-between;gap:20px;padding:20px 0;cursor:pointer;font-weight:700;list-style:none}.studio-faq summary::-webkit-details-marker{display:none}.studio-faq summary span{color:var(--gold);font-family:var(--serif);font-size:1.3rem}
 .studio-faq details p{max-width:820px;margin:-4px 0 22px;color:var(--muted);line-height:1.7}
 @media(max-width:760px){.style-studio .wrap{width:min(100% - 24px,1180px);padding-bottom:64px}.style-studio .hero{grid-template-columns:1fr;gap:22px;padding:30px 22px}.style-studio .hero h1{font-size:clamp(2.8rem,12vw,3.7rem)}.style-studio .hero p{font-size:.92rem}.style-studio .note{padding:18px 0 0;border-left:0;border-top:1px solid rgba(217,184,123,.42);font-size:1.05rem}.style-studio .card{padding:28px 20px}.style-studio .brief-section{grid-template-columns:1fr}.style-studio .actions{gap:12px}.style-studio .actions .btn{flex:1}.style-studio .brief-actions{width:100%}.style-studio .brief-actions .btn{width:100%}.style-studio .summary{padding:36px 24px}.style-studio .result-grid,.style-studio .studio-offer,.style-studio .style-passport{grid-template-columns:1fr}.style-studio .colour-panel,.style-studio .result-grid:has(.estimate.hidden) .colour-panel,.style-studio .panel--full{grid-column:auto}.style-studio .colour-story-layout{grid-template-columns:1fr}.style-studio .colour-palette{grid-template-columns:repeat(2,1fr)}.style-studio #styling{grid-template-columns:1fr}.style-studio #styling div{min-height:0}.style-studio .panel--full dl div{grid-template-columns:1fr}.style-studio .studio-offer .btn{width:100%}.style-studio .journey-steps li{font-size:0}.style-studio .journey-steps li::before{flex:0 0 auto}.style-studio .journey-status{margin-bottom:22px}.style-studio .scorecard{grid-template-columns:repeat(2,1fr)}.style-studio .scorecard-actions{display:grid;grid-template-columns:1fr 1fr}.style-studio .scorecard-actions .btn{width:100%}.style-studio .scorecard-actions .btn.primary{grid-column:1/-1}.style-studio .scorecard-actions .btn:last-child{margin-left:0}.style-studio .passport-actions{justify-content:flex-start}.style-studio .passport-actions .btn{width:100%}}
+@media(max-width:760px){.style-studio .field-card--budget{grid-template-columns:1fr;gap:0}.style-studio .field-card{min-height:102px}}
 @media(max-width:760px){.studio-seo{width:min(100% - 24px,1180px);margin-bottom:52px;padding:30px 22px}.studio-seo__intro,.studio-seo__benefits{grid-template-columns:1fr}.studio-seo__benefits{margin-top:30px}}
 
 /* Style Studio dark treatment keeps the atelier warmth and editorial contrast. */
@@ -193,6 +200,9 @@ html[data-theme="dark"] body.style-studio-page{background:linear-gradient(180deg
 html[data-theme="dark"] .style-studio .card{border-color:rgba(239,226,211,.15);background:rgba(24,20,17,.96);box-shadow:0 30px 90px rgba(0,0,0,.42)}
 html[data-theme="dark"] .style-studio .step>p,html[data-theme="dark"] .style-studio .support-note{color:#b6aaa0}
 html[data-theme="dark"] .style-studio label{color:#ddd2c7}
+html[data-theme="dark"] .style-studio .field-card{border-color:#40362f;background:linear-gradient(145deg,#211b17 0%,#181411 100%);box-shadow:none}
+html[data-theme="dark"] .style-studio .field-card:hover,html[data-theme="dark"] .style-studio .field-card:focus-within{border-color:#d0a55e;box-shadow:0 14px 30px rgba(0,0,0,.24)}
+html[data-theme="dark"] .style-studio .field-card:has([required])::after{color:#d0a55e}
 html[data-theme="dark"] .style-studio select,html[data-theme="dark"] .style-studio textarea,html[data-theme="dark"] .style-studio input[type=text],html[data-theme="dark"] .style-studio input[type=email],html[data-theme="dark"] .style-studio input[type=tel],html[data-theme="dark"] .style-studio input[type=date],html[data-theme="dark"] .style-studio input[type=number]{border-color:#5b4d41;color:#f3ece4}
 html[data-theme="dark"] .style-studio select option{background:#1a1613;color:#f3ece4}
 html[data-theme="dark"] .style-studio .chips span{border-color:#55483d;background:#1d1814;color:#e8ddd2}
@@ -200,7 +210,15 @@ html[data-theme="dark"] .style-studio .chips input:checked+span{border-color:#d0
 html[data-theme="dark"] .style-studio .btn{border-color:#d5c8bc;color:#f3ece4}
 html[data-theme="dark"] .style-studio .btn.primary{border-color:#b38a45;background:#b38a45;color:#15120f}
 html[data-theme="dark"] .style-studio .toggle-card,html[data-theme="dark"] .style-studio .guide,html[data-theme="dark"] .style-studio .ai-status{border-color:rgba(239,226,211,.14);background:#211a15}
-html[data-theme="dark"] .style-studio .measure-card,html[data-theme="dark"] .style-studio .body-svg{border-color:rgba(239,226,211,.14);background:#f1ece5;color:#15120f}
+html[data-theme="dark"] .style-studio .guide{background:linear-gradient(145deg,#211a15 0%,#17120f 100%);color:#f3ece4}
+html[data-theme="dark"] .style-studio .guide p,html[data-theme="dark"] .style-studio .guide-count,html[data-theme="dark"] .style-studio .measure-card small{color:#b6aaa0}
+html[data-theme="dark"] .style-studio .guide-nav button{border-color:#5b4d41;background:#2a211b;color:#f3ece4}
+html[data-theme="dark"] .style-studio .guide-nav button:not(:disabled):hover,html[data-theme="dark"] .style-studio .guide-nav button:not(:disabled):focus-visible{border-color:#d0a55e;background:#d0a55e;color:#15120f}
+html[data-theme="dark"] .style-studio .measure-card{border-color:#40362f;background:linear-gradient(145deg,#211b17 0%,#181411 100%);color:#f3ece4}
+html[data-theme="dark"] .style-studio .measure-card label{color:#e8ddd2}
+html[data-theme="dark"] .style-studio .measure-card input[type=number],html[data-theme="dark"] .style-studio .measure-card select{border:1px solid #5b4d41;background:#17130f;color:#f3ece4;box-shadow:none}
+html[data-theme="dark"] .style-studio .measure-card select option{background:#17130f;color:#f3ece4}
+html[data-theme="dark"] .style-studio .body-svg{border-color:#d8cdbf;background:#f7f2ea;color:#15120f;box-shadow:0 16px 36px rgba(0,0,0,.2)}
 html[data-theme="dark"] .style-studio .result-grid{background:rgba(239,226,211,.16);border-color:rgba(239,226,211,.16)}
 html[data-theme="dark"] .style-studio .panel{background:linear-gradient(145deg,#1c1815 0%,#15120f 100%)}
 html[data-theme="dark"] .style-studio .panel dt{color:#b6aaa0}
@@ -258,15 +276,15 @@ html[data-theme="dark"] .style-studio .style-passport{border-color:rgba(239,226,
       <div class="step active">
         <h2>1. Your styling brief</h2><p>Tell us what you are dressing for and whether we are working with your wardrobe or starting fresh.</p>
         <div class="grid">
-          <label class="wide">What would you like help with?<select name="journey" required><option value="">Choose</option><option>Style clothes I already own</option><option>Build a look around one item</option><option>Explore a new custom look</option></select></label>
-          <label>Occasion<select name="occasion" required><option value="">Choose</option><option>Graduation</option><option>Wedding</option><option>Corporate Dinner</option><option>Birthday</option><option>Gala</option><option>Date Night</option><option>Church</option><option>Photoshoot</option></select></label>
-          <label>Garment or starting point<select name="garment" required><option value="">Choose</option><option>Dress</option><option>Skirt</option><option>Trousers</option><option>Jumpsuit</option><option>Suit or co-ord</option><option>Top or blouse</option><option>Mixed wardrobe outfit</option><option>Not sure yet</option></select></label>
-          <label>Theme<select name="theme" required><option value="">Choose</option><option>Minimalist</option><option>Formal</option><option>Black Tie</option><option>Luxury</option><option>African Elegance</option><option>Garden Party</option><option>Modern Chic</option><option>Traditional</option></select></label>
-          <label>Setting<select name="setting" required><option value="">Choose</option><option>Indoor</option><option>Outdoor</option><option>Both</option></select></label>
-          <label>Weather<select name="weather" required><option value="">Choose</option><option>Hot</option><option>Warm</option><option>Cold</option></select></label>
-          <label>Time<select name="time" required><option value="">Choose</option><option>Morning</option><option>Afternoon</option><option>Evening</option><option>Night</option></select></label>
-          <label>Styling budget<select name="budget" required><option value="">Choose</option><option value="0">Use only what I own</option><option value="500">Up to M500 for finishing pieces</option><option value="1500">Under M1,500</option><option value="2500">M1,500–M2,500</option><option value="4000">M2,500–M4,000</option><option value="6000">Premium (M4,000+)</option></select></label>
-          <label class="wide">What item or clothes are you starting with? <span style="font-weight:400;text-transform:none">(optional)</span><textarea name="existingPiece" rows="3" placeholder="For example: black wide-leg trousers, an emerald midi dress, a cream blazer, gold heels..."></textarea></label>
+          <label class="wide field-card field-card--journey">What would you like help with?<select name="journey" required><option value="">Choose your starting point</option><option>Style clothes I already own</option><option>Build a look around one item</option><option>Explore a new custom look</option></select></label>
+          <label class="field-card">The occasion<select name="occasion" required><option value="">Choose</option><option>Graduation</option><option>Wedding</option><option>Corporate Dinner</option><option>Birthday</option><option>Gala</option><option>Date Night</option><option>Church</option><option>Photoshoot</option></select></label>
+          <label class="field-card">Your starting piece<select name="garment" required><option value="">Choose</option><option>Dress</option><option>Skirt</option><option>Trousers</option><option>Jumpsuit</option><option>Suit or co-ord</option><option>Top or blouse</option><option>Mixed wardrobe outfit</option><option>Not sure yet</option></select></label>
+          <label class="field-card">The mood<select name="theme" required><option value="">Choose</option><option>Minimalist</option><option>Formal</option><option>Black Tie</option><option>Luxury</option><option>African Elegance</option><option>Garden Party</option><option>Modern Chic</option><option>Traditional</option></select></label>
+          <label class="field-card">The setting<select name="setting" required><option value="">Choose</option><option>Indoor</option><option>Outdoor</option><option>Both</option></select></label>
+          <label class="field-card">The weather<select name="weather" required><option value="">Choose</option><option>Hot</option><option>Warm</option><option>Cold</option></select></label>
+          <label class="field-card">The time<select name="time" required><option value="">Choose</option><option>Morning</option><option>Afternoon</option><option>Evening</option><option>Night</option></select></label>
+          <label class="wide field-card field-card--budget">Finishing-piece budget<select name="budget" required><option value="">Choose your comfort zone</option><option value="0">Use only what I own</option><option value="500">Up to M500 for finishing pieces</option><option value="1500">Under M1,500</option><option value="2500">M1,500–M2,500</option><option value="4000">M2,500–M4,000</option><option value="6000">Premium (M4,000+)</option></select></label>
+          <label class="wide field-card field-card--notes">What item or clothes are you starting with? <span style="font-weight:400;text-transform:none">(optional)</span><textarea name="existingPiece" rows="3" placeholder="For example: black wide-leg trousers, an emerald midi dress, a cream blazer, gold heels..."></textarea></label>
         </div>
       </div>
 
@@ -284,20 +302,20 @@ html[data-theme="dark"] .style-studio .style-passport{border-color:rgba(239,226,
           <label><input type="radio" name="personality" value="Glamorous"><span>Glamorous</span></label>
         </div>
         <div class="grid">
-          <label>Preferred fit<select name="fit" required><option value="">Choose</option><option>Relaxed</option><option>Slightly fitted</option><option>Fitted</option><option>Figure-hugging</option></select></label>
-          <label>Preferred length<select name="length" required><option value="">Choose</option><option>Mini</option><option>Above knee</option><option>Knee length</option><option>Midi</option><option>Maxi</option><option>No preference</option></select></label>
-          <label>Preferred colour<select name="colour" required><option value="">Choose</option><option>Emerald</option><option>Navy</option><option>Black</option><option>Champagne</option><option>Burgundy</option><option>White</option><option>Gold</option><option>Surprise me</option></select></label>
-          <label>Coverage<select name="coverage" required><option value="">Choose</option><option>Modest</option><option>Balanced</option><option>Confident</option><option>Daring</option></select></label>
-          <label>Desired feeling<select name="feeling" required><option value="">Choose</option><option>Powerful</option><option>Elegant</option><option>Confident</option><option>Romantic</option><option>Comfortable</option><option>Unforgettable</option><option>Understated</option><option>Playful</option></select></label>
-          <label>Priority<select name="priority" required><option value="">Choose</option><option>Comfort first</option><option>Balanced comfort and impact</option><option>Maximum visual impact</option><option>Easy re-wear after the event</option></select></label>
+          <label class="field-card">Your preferred fit<select name="fit" required><option value="">Choose</option><option>Relaxed</option><option>Slightly fitted</option><option>Fitted</option><option>Figure-hugging</option></select></label>
+          <label class="field-card">Your preferred length<select name="length" required><option value="">Choose</option><option>Mini</option><option>Above knee</option><option>Knee length</option><option>Midi</option><option>Maxi</option><option>No preference</option></select></label>
+          <label class="field-card">Your colour direction<select name="colour" required><option value="">Choose</option><option>Emerald</option><option>Navy</option><option>Black</option><option>Champagne</option><option>Burgundy</option><option>White</option><option>Gold</option><option>Surprise me</option></select></label>
+          <label class="field-card">Your coverage comfort<select name="coverage" required><option value="">Choose</option><option>Modest</option><option>Balanced</option><option>Confident</option><option>Daring</option></select></label>
+          <label class="field-card">How you want to feel<select name="feeling" required><option value="">Choose</option><option>Powerful</option><option>Elegant</option><option>Confident</option><option>Romantic</option><option>Comfortable</option><option>Unforgettable</option><option>Understated</option><option>Playful</option></select></label>
+          <label class="field-card">What matters most<select name="priority" required><option value="">Choose</option><option>Comfort first</option><option>Balanced comfort and impact</option><option>Maximum visual impact</option><option>Easy re-wear after the event</option></select></label>
         </div>
       </div>
 
       <div class="step">
         <h2>3. The stylist’s edit</h2><p>Tell us what the look must do—and where you want the eye to land.</p>
         <div class="grid">
-          <label>Movement required<select name="movement" required><option value="">Choose</option><option>Mostly seated</option><option>Walking and mingling</option><option>Dancing</option><option>Stage or presentation</option><option>All-day wear</option></select></label>
-          <label>Preferred focal point<select name="focalPoint" required><option value="">Choose</option><option>Neckline and shoulders</option><option>Waist and corsetry</option><option>Legs and slit</option><option>Back detail</option><option>Sleeves</option><option>Skirt volume</option><option>No strong focal point</option></select></label>
+          <label class="field-card">How you’ll move<select name="movement" required><option value="">Choose</option><option>Mostly seated</option><option>Walking and mingling</option><option>Dancing</option><option>Stage or presentation</option><option>All-day wear</option></select></label>
+          <label class="field-card">Where the eye should land<select name="focalPoint" required><option value="">Choose</option><option>Neckline and shoulders</option><option>Waist and corsetry</option><option>Legs and slit</option><option>Back detail</option><option>Sleeves</option><option>Skirt volume</option><option>No strong focal point</option></select></label>
         </div>
         <label style="margin-top:20px">Details you enjoy <span style="font-weight:400;text-transform:none">(choose any that apply)</span></label>
         <div class="chips">
@@ -315,8 +333,8 @@ html[data-theme="dark"] .style-studio .style-passport{border-color:rgba(239,226,
           <label><input type="checkbox" name="features" value="Tiered skirt"><span>Tiered skirt</span></label>
         </div>
         <div class="grid">
-          <label class="wide">What must be avoided?<textarea name="avoid" rows="3" placeholder="No deep neckline, no heavy fabric, no long train..."></textarea></label>
-          <label class="wide">Anything else that should shape the plan?<textarea name="notes" rows="4" placeholder="Must work under graduation regalia, hide bra straps, allow dancing, be reusable..."></textarea></label>
+          <label class="wide field-card field-card--notes">What should we avoid?<textarea name="avoid" rows="3" placeholder="No deep neckline, no heavy fabric, no long train..."></textarea></label>
+          <label class="wide field-card field-card--notes">Anything else that should shape the plan?<textarea name="notes" rows="4" placeholder="Must work under graduation regalia, hide bra straps, allow dancing, be reusable..."></textarea></label>
         </div>
         <label class="toggle-card"><input id="captureToggle" type="checkbox" name="captureMeasurements"><div><strong>Capture measurements now</strong><p>Useful only when exploring a custom garment. Leave unchecked for a wardrobe styling plan.</p></div></label>
       </div>
@@ -391,10 +409,10 @@ html[data-theme="dark"] .style-studio .style-passport{border-color:rgba(239,226,
       <div class="step">
         <h2>5. Make it yours</h2><p>Your style plan is free and does not require contact details. Add them only if you may want to share the finished plan with Jane.M.</p>
         <div class="grid">
-          <label>Full name, optional<input type="text" name="clientName"></label>
-          <label>WhatsApp number, optional<input type="tel" name="clientPhone" placeholder="+266 ..."></label>
-          <label>Email, optional<input type="email" name="clientEmail"></label>
-          <label>Preferred contact, optional<select name="contactMethod"><option value="">Choose</option><option>WhatsApp</option><option>Phone call</option><option>Email</option></select></label>
+          <label class="field-card">Your name <span style="font-weight:400;text-transform:none">(optional)</span><input type="text" name="clientName"></label>
+          <label class="field-card">Your WhatsApp <span style="font-weight:400;text-transform:none">(optional)</span><input type="tel" name="clientPhone" placeholder="+266 ..."></label>
+          <label class="field-card">Your email <span style="font-weight:400;text-transform:none">(optional)</span><input type="email" name="clientEmail"></label>
+          <label class="field-card">How Jane.M should reply <span style="font-weight:400;text-transform:none">(optional)</span><select name="contactMethod"><option value="">Choose</option><option>WhatsApp</option><option>Phone call</option><option>Email</option></select></label>
         </div>
         <div class="toggle-card" style="margin-top:20px"><div></div><div><strong>Have an inspiration image?</strong><p>Keep it nearby while reviewing your plan. If you later contact Jane.M, attach it directly in WhatsApp alongside the plan.</p></div></div>
         <p class="support-note">This is an inspirational styling guide. Any custom garment, measurements and quotation must be confirmed with Jane.M.</p>
