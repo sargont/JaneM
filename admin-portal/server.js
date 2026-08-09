@@ -200,6 +200,7 @@ function visualPrompt(brief) {
     context: brief?.context || {},
     preferences: brief?.preferences || {},
     direction: brief?.direction || {},
+    styling: brief?.styling || {},
     constraints: brief?.constraints || {},
     complexity: brief?.complexity || {}
   };

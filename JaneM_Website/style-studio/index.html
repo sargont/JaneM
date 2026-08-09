@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Jane.M Style Studio | Create Your Custom Look in Lesotho</title>
-<meta name="description" content="Create a designer-ready custom dress brief for a graduation, wedding, corporate event or special occasion with Jane.M Style Studio in Lesotho." />
+<title>Free Personal Styling Tool | Jane.M Style Studio Lesotho</title>
+<meta name="description" content="Use the free Jane.M Style Studio for a personalised outfit, colour, jewellery, shoe, beauty and re-wear plan—whether you are styling clothes you own or exploring a custom look." />
 <meta name="theme-color" content="#15120f" />
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -86,6 +86,8 @@ body.style-studio-page{background:linear-gradient(180deg,#fbf8f3 0%,#efe4d4 100%
 .style-studio .note{align-self:stretch;display:flex;align-items:center;padding:18px 0 18px 28px;border-left:1px solid rgba(217,184,123,.42);border-radius:0;background:transparent;color:#e8dfd5;font-family:var(--serif);font-size:1.2rem;line-height:1.2}
 .style-studio .studio-start{display:inline-flex;align-items:center;gap:10px;margin-top:10px;color:#d9b87b;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-decoration:none;text-transform:uppercase;white-space:nowrap}
 .style-studio .studio-start span{font-family:var(--serif);font-size:1.2rem}
+.style-studio .free-pill{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:16px;color:#d9cdbf;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.style-studio .free-pill span::before{content:'✓';margin-right:7px;color:#d9b87b}
 .style-studio .progress{height:3px;margin:0;background:rgba(21,18,15,.12);border-radius:0}
 .style-studio .progress div{background:linear-gradient(90deg,var(--gold-dark),#d9b87b)}
 .style-studio .card{position:relative;scroll-margin-top:94px;padding:clamp(28px,5vw,58px);border:1px solid rgba(21,18,15,.12);border-top:3px solid var(--gold);border-radius:0;background:rgba(255,255,255,.92);box-shadow:0 28px 80px rgba(34,23,13,.12)}
@@ -116,8 +118,30 @@ body.style-studio-page{background:linear-gradient(180deg,#fbf8f3 0%,#efe4d4 100%
 .style-studio .summary h2{max-width:820px;font-family:var(--serif);font-size:clamp(3rem,6vw,5.5rem);font-weight:600;line-height:.88}
 .style-studio .summary p{max-width:780px;color:#d7cec5}
 .style-studio .result-grid{gap:1px;margin-top:1px;background:rgba(21,18,15,.16);border:1px solid rgba(21,18,15,.16)}
-.style-studio .panel{padding:clamp(24px,4vw,38px);border:0;border-radius:0;background:#fff}
-.style-studio .panel h3{font-family:var(--serif);font-size:2rem;font-weight:600}
+.style-studio .panel{position:relative;padding:clamp(26px,4vw,42px);border:0;border-radius:0;background:linear-gradient(145deg,#fff 0%,#fcfaf6 100%)}
+.style-studio .panel::before{content:'';position:absolute;top:0;left:clamp(26px,4vw,42px);width:42px;height:2px;background:var(--gold)}
+.style-studio .panel h3{margin-bottom:22px;font-family:var(--serif);font-size:clamp(2rem,3.2vw,2.65rem);font-weight:600;letter-spacing:-.025em;line-height:1}
+.style-studio .panel p,.style-studio .panel li{line-height:1.65}
+.style-studio .formula-panel dl div{grid-template-columns:minmax(116px,.38fr) 1fr;padding:14px 0}
+.style-studio .formula-panel dd{font-size:.95rem;line-height:1.4}
+.style-studio .why-panel ul{display:grid;gap:13px;margin:0;padding:0;list-style:none;counter-reset:reason}
+.style-studio .why-panel li{position:relative;padding-left:38px;counter-increment:reason}
+.style-studio .why-panel li::before{content:counter(reason,decimal-leading-zero);position:absolute;left:0;top:.18em;color:var(--gold-dark);font-family:var(--serif);font-size:.83rem;font-weight:700;letter-spacing:.05em}
+.style-studio .colour-panel{overflow:hidden;background:radial-gradient(circle at 88% 12%,rgba(180,134,61,.12),transparent 32%),#f7f1e8}
+.style-studio .result-grid:has(.estimate.hidden) .colour-panel{grid-column:1/-1}
+.style-studio .colour-story-layout{display:grid;grid-template-columns:minmax(220px,.72fr) minmax(0,1.28fr);gap:clamp(28px,5vw,68px);align-items:end}
+.style-studio .colour-copy p{max-width:520px;margin:0;color:#50463d;font-size:1rem}
+.style-studio .colour-kicker{display:block;margin-bottom:10px;color:var(--gold-dark);font-size:.66rem;font-weight:800;letter-spacing:.17em;text-transform:uppercase}
+.style-studio .colour-palette{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.style-studio .swatch{min-width:0;background:rgba(255,255,255,.72);border:1px solid rgba(21,18,15,.1)}
+.style-studio .swatch-colour{display:block;aspect-ratio:1.3/1;background:var(--swatch);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+.style-studio .swatch-label{display:block;overflow:hidden;padding:10px 9px;color:#4a4037;font-size:.64rem;font-weight:800;letter-spacing:.08em;text-overflow:ellipsis;text-transform:uppercase;white-space:nowrap}
+.style-studio .panel--full{grid-column:1/-1}
+.style-studio .panel--full dl div{grid-template-columns:minmax(140px,.34fr) 1fr}
+.style-studio #styling{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin:0;background:rgba(21,18,15,.14);border:1px solid rgba(21,18,15,.14)}
+.style-studio #styling div{display:block;min-height:180px;padding:24px;border:0;background:#fff}
+.style-studio #styling dt{margin-bottom:16px;color:var(--gold-dark);font-size:.65rem;font-weight:800;letter-spacing:.14em}
+.style-studio #styling dd{font-size:.86rem;font-weight:500;line-height:1.65}
 .style-studio .estimate{background:#1d1915;color:#fff}
 .style-studio .estimate strong{font-family:var(--serif);color:#d9b87b;font-size:clamp(2.3rem,5vw,4rem);font-weight:600}
 .style-studio .brief{margin-top:28px;padding:clamp(28px,5vw,52px);border:1px solid rgba(21,18,15,.14);border-top:3px solid var(--gold);border-radius:0;background:#fff;box-shadow:0 24px 70px rgba(34,23,13,.1)}
@@ -126,15 +150,18 @@ body.style-studio-page{background:linear-gradient(180deg,#fbf8f3 0%,#efe4d4 100%
 .style-studio .brief-section h4{letter-spacing:.16em}
 .style-studio .handoff{margin-top:28px;padding:clamp(24px,4vw,38px);border:0;border-radius:0;background:linear-gradient(135deg,#f4eadb,#fbf8f3)}
 .style-studio .handoff h3{font-size:clamp(2rem,4vw,3rem)}
+.style-studio .studio-offer{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center;margin-top:28px;padding:clamp(26px,4vw,42px);background:radial-gradient(circle at 85% 15%,rgba(179,138,69,.28),transparent 28%),var(--black);color:#fff}
+.style-studio .studio-offer h3{margin:.1em 0;font-family:var(--serif);font-size:clamp(2.2rem,4vw,3.5rem);font-weight:600;line-height:.95}
+.style-studio .studio-offer p:not(.eyebrow){max-width:680px;margin:8px 0 0;color:#d6cdc4}
 .style-studio .visualizer{margin-top:28px;padding:clamp(28px,5vw,52px);border:1px solid rgba(21,18,15,.14);border-radius:0;background:#fff}
 .style-studio .visualizer h3{font-family:var(--serif);font-size:clamp(2.3rem,4vw,3.5rem);font-weight:600}
 .style-studio .viz-badge{border-radius:0;background:transparent;color:var(--gold-dark);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase}
 .style-studio .ai-status,.style-studio .concept-output img{border-radius:0}
 .studio-note{border-top:1px solid rgba(255,255,255,.1);background:#0d0c0b;color:#a99f95}
-@media(max-width:760px){.style-studio .wrap{width:min(100% - 24px,1180px);padding-bottom:64px}.style-studio .hero{grid-template-columns:1fr;gap:22px;padding:30px 22px}.style-studio .hero h1{font-size:clamp(2.8rem,12vw,3.7rem)}.style-studio .hero p{font-size:.92rem}.style-studio .note{padding:18px 0 0;border-left:0;border-top:1px solid rgba(217,184,123,.42);font-size:1.05rem}.style-studio .card{padding:28px 20px}.style-studio .brief-section{grid-template-columns:1fr}.style-studio .actions{gap:12px}.style-studio .actions .btn{flex:1}.style-studio .brief-actions{width:100%}.style-studio .brief-actions .btn{width:100%}.style-studio .summary{padding:36px 24px}.style-studio .result-grid{grid-template-columns:1fr}}
+@media(max-width:760px){.style-studio .wrap{width:min(100% - 24px,1180px);padding-bottom:64px}.style-studio .hero{grid-template-columns:1fr;gap:22px;padding:30px 22px}.style-studio .hero h1{font-size:clamp(2.8rem,12vw,3.7rem)}.style-studio .hero p{font-size:.92rem}.style-studio .note{padding:18px 0 0;border-left:0;border-top:1px solid rgba(217,184,123,.42);font-size:1.05rem}.style-studio .card{padding:28px 20px}.style-studio .brief-section{grid-template-columns:1fr}.style-studio .actions{gap:12px}.style-studio .actions .btn{flex:1}.style-studio .brief-actions{width:100%}.style-studio .brief-actions .btn{width:100%}.style-studio .summary{padding:36px 24px}.style-studio .result-grid,.style-studio .studio-offer{grid-template-columns:1fr}.style-studio .colour-panel,.style-studio .result-grid:has(.estimate.hidden) .colour-panel,.style-studio .panel--full{grid-column:auto}.style-studio .colour-story-layout{grid-template-columns:1fr}.style-studio .colour-palette{grid-template-columns:repeat(2,1fr)}.style-studio #styling{grid-template-columns:1fr}.style-studio #styling div{min-height:0}.style-studio .panel--full dl div{grid-template-columns:1fr}.style-studio .studio-offer .btn{width:100%}}
 
 </style>
-<!-- SEO:START --><link rel="canonical" href="https://sargont.github.io/JaneM/style-studio/" /><meta name="robots" content="index,follow,max-image-preview:large" /><meta property="og:type" content="website" /><meta property="og:site_name" content="Jane.M Atelier" /><meta property="og:title" content="Jane.M Style Studio | Create Your Custom Look in Lesotho" /><meta property="og:description" content="Create a designer-ready custom dress brief for a graduation, wedding, corporate event or special occasion with Jane.M Style Studio in Lesotho." /><meta property="og:url" content="https://sargont.github.io/JaneM/style-studio/" /><meta property="og:image" content="https://sargont.github.io/JaneM/assets/style-studio/mock-design-concept.png" /><meta property="og:image:alt" content="Jane.M atelier concept preview" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="Jane.M Style Studio | Create Your Custom Look in Lesotho" /><meta name="twitter:description" content="Create a designer-ready custom dress brief for a graduation, wedding, corporate event or special occasion with Jane.M Style Studio in Lesotho." /><meta name="twitter:image" content="https://sargont.github.io/JaneM/assets/style-studio/mock-design-concept.png" /><script type="application/ld+json">{"@context":"https://schema.org","@type":"ClothingStore","name":"Jane.M Atelier","alternateName":"Jane.M Lesotho","url":"https://sargont.github.io/JaneM/","logo":"https://sargont.github.io/JaneM/assets/logo-transparent.png","image":"https://sargont.github.io/JaneM/assets/look-gold.jpg","email":"officialjanem@gmail.com","telephone":"+26662790946","areaServed":[{"@type":"City","name":"Maseru"},{"@type":"Country","name":"Lesotho"}],"brand":{"@type":"Brand","name":"Jane.M Atelier"},"sameAs":["https://youtube.com/@janemtv","https://www.facebook.com/share/1CvrANPy9Q/","https://www.instagram.com/___jane_m/"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://sargont.github.io/JaneM/"},{"@type":"ListItem","position":2,"name":"Style Studio","item":"https://sargont.github.io/JaneM/style-studio/"}]}</script><!-- SEO:END -->
+<!-- SEO:START --><link rel="canonical" href="https://sargont.github.io/JaneM/style-studio/" /><meta name="robots" content="index,follow,max-image-preview:large" /><meta property="og:type" content="website" /><meta property="og:site_name" content="Jane.M Atelier" /><meta property="og:title" content="Free Personal Styling Tool | Jane.M Style Studio Lesotho" /><meta property="og:description" content="Use the free Jane.M Style Studio for a personalised outfit, colour, jewellery, shoe, beauty and re-wear plan—whether you are styling clothes you own or exploring a custom look." /><meta property="og:url" content="https://sargont.github.io/JaneM/style-studio/" /><meta property="og:image" content="https://sargont.github.io/JaneM/assets/style-studio/mock-design-concept.png" /><meta property="og:image:alt" content="Jane.M atelier concept preview" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="Free Personal Styling Tool | Jane.M Style Studio Lesotho" /><meta name="twitter:description" content="Use the free Jane.M Style Studio for a personalised outfit, colour, jewellery, shoe, beauty and re-wear plan—whether you are styling clothes you own or exploring a custom look." /><meta name="twitter:image" content="https://sargont.github.io/JaneM/assets/style-studio/mock-design-concept.png" /><script type="application/ld+json">{"@context":"https://schema.org","@type":"ClothingStore","name":"Jane.M Atelier","alternateName":"Jane.M Lesotho","url":"https://sargont.github.io/JaneM/","logo":"https://sargont.github.io/JaneM/assets/logo-transparent.png","image":"https://sargont.github.io/JaneM/assets/look-gold.jpg","email":"officialjanem@gmail.com","telephone":"+26662790946","areaServed":[{"@type":"City","name":"Maseru"},{"@type":"Country","name":"Lesotho"}],"brand":{"@type":"Brand","name":"Jane.M Atelier"},"sameAs":["https://youtube.com/@janemtv","https://www.facebook.com/share/1CvrANPy9Q/","https://www.instagram.com/___jane_m/"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://sargont.github.io/JaneM/"},{"@type":"ListItem","position":2,"name":"Style Studio","item":"https://sargont.github.io/JaneM/style-studio/"}]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Jane.M Style Studio","url":"https://sargont.github.io/JaneM/style-studio/","applicationCategory":"LifestyleApplication","operatingSystem":"Any","isAccessibleForFree":true,"description":"A free personal styling tool for creating outfit, colour, jewellery, shoe, beauty and re-wear plans from clothes you own or a new custom direction.","offers":{"@type":"Offer","price":"0","priceCurrency":"LSL"}}</script><!-- SEO:END -->
 </head>
 <body class="style-studio-page">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -150,8 +177,8 @@ body.style-studio-page{background:linear-gradient(180deg,#fbf8f3 0%,#efe4d4 100%
 <main id="main" class="style-studio">
 <div class="wrap">
   <section class="hero">
-    <div><small>JANE.M STYLE STUDIO</small><h1>Create your designer-ready brief.</h1><p>Planning a graduation, wedding, corporate event or special occasion? Share your style, comfort preferences and budget, then receive a clear design direction to begin your Jane.M consultation with confidence.</p><a class="studio-start" href="#wizard">Begin with your occasion <span aria-hidden="true">↓</span></a></div>
-    <div class="note">Take your time. Your selections stay on this device until you choose to share your finished brief.</div>
+    <div><small>FREE JANE.M STYLE STUDIO</small><h1>Your personal stylist, whenever you need one.</h1><p>Turn an occasion—or clothes you already own—into a complete outfit plan with considered advice on colour, jewellery, shoes, beauty, proportion and re-wear.</p><div class="free-pill"><span>Free to use</span><span>No sign-up</span><span>Works with your wardrobe</span></div><a class="studio-start" href="#wizard">Style my look <span aria-hidden="true">↓</span></a></div>
+    <div class="note">Come for inspiration, even when you are not buying anything. Your choices stay on this device unless you decide to share them.</div>
   </section>
 
   <div class="progress"><div id="bar"></div></div>
@@ -159,19 +186,22 @@ body.style-studio-page{background:linear-gradient(180deg,#fbf8f3 0%,#efe4d4 100%
   <section id="wizard" class="card">
     <form id="form">
       <div class="step active">
-        <h2>1. Event context</h2><p>Where and when must the outfit work?</p>
+        <h2>1. Your styling brief</h2><p>Tell us what you are dressing for and whether we are working with your wardrobe or starting fresh.</p>
         <div class="grid">
+          <label class="wide">What would you like help with?<select name="journey" required><option value="">Choose</option><option>Style clothes I already own</option><option>Build a look around one item</option><option>Explore a new custom look</option></select></label>
           <label>Occasion<select name="occasion" required><option value="">Choose</option><option>Graduation</option><option>Wedding</option><option>Corporate Dinner</option><option>Birthday</option><option>Gala</option><option>Date Night</option><option>Church</option><option>Photoshoot</option></select></label>
+          <label>Garment or starting point<select name="garment" required><option value="">Choose</option><option>Dress</option><option>Skirt</option><option>Trousers</option><option>Jumpsuit</option><option>Suit or co-ord</option><option>Top or blouse</option><option>Mixed wardrobe outfit</option><option>Not sure yet</option></select></label>
           <label>Theme<select name="theme" required><option value="">Choose</option><option>Minimalist</option><option>Formal</option><option>Black Tie</option><option>Luxury</option><option>African Elegance</option><option>Garden Party</option><option>Modern Chic</option><option>Traditional</option></select></label>
           <label>Setting<select name="setting" required><option value="">Choose</option><option>Indoor</option><option>Outdoor</option><option>Both</option></select></label>
           <label>Weather<select name="weather" required><option value="">Choose</option><option>Hot</option><option>Warm</option><option>Cold</option></select></label>
           <label>Time<select name="time" required><option value="">Choose</option><option>Morning</option><option>Afternoon</option><option>Evening</option><option>Night</option></select></label>
-          <label>Budget<select name="budget" required><option value="">Choose</option><option value="1500">Under M1,500</option><option value="2500">M1,500–M2,500</option><option value="4000">M2,500–M4,000</option><option value="6000">Premium (M4,000+)</option></select></label>
+          <label>Styling budget<select name="budget" required><option value="">Choose</option><option value="0">Use only what I own</option><option value="500">Up to M500 for finishing pieces</option><option value="1500">Under M1,500</option><option value="2500">M1,500–M2,500</option><option value="4000">M2,500–M4,000</option><option value="6000">Premium (M4,000+)</option></select></label>
+          <label class="wide">What item or clothes are you starting with? <span style="font-weight:400;text-transform:none">(optional)</span><textarea name="existingPiece" rows="3" placeholder="For example: black wide-leg trousers, an emerald midi dress, a cream blazer, gold heels..."></textarea></label>
         </div>
       </div>
 
       <div class="step">
-        <h2>2. Personal style</h2><p>How should the client feel in the outfit?</p>
+        <h2>2. Personal style</h2><p>How do you want to feel in the outfit?</p>
         <label>Style personality <span aria-hidden="true" style="color:#9f2828">*</span></label>
         <div class="chips">
           <label><input type="radio" name="personality" value="Elegant" required><span>Elegant</span></label>
@@ -194,12 +224,12 @@ body.style-studio-page{background:linear-gradient(180deg,#fbf8f3 0%,#efe4d4 100%
       </div>
 
       <div class="step">
-        <h2>3. Practical requirements</h2><p>Help the designer understand movement and construction.</p>
+        <h2>3. The stylist’s edit</h2><p>Tell us what the look must do—and where you want the eye to land.</p>
         <div class="grid">
           <label>Movement required<select name="movement" required><option value="">Choose</option><option>Mostly seated</option><option>Walking and mingling</option><option>Dancing</option><option>Stage or presentation</option><option>All-day wear</option></select></label>
           <label>Preferred focal point<select name="focalPoint" required><option value="">Choose</option><option>Neckline and shoulders</option><option>Waist and corsetry</option><option>Legs and slit</option><option>Back detail</option><option>Sleeves</option><option>Skirt volume</option><option>No strong focal point</option></select></label>
         </div>
-        <label style="margin-top:20px">Features wanted</label>
+        <label style="margin-top:20px">Details you enjoy <span style="font-weight:400;text-transform:none">(choose any that apply)</span></label>
         <div class="chips">
           <label><input type="checkbox" name="features" value="Corset"><span>Corset</span></label>
           <label><input type="checkbox" name="features" value="Slit"><span>Slit</span></label>
@@ -216,9 +246,9 @@ body.style-studio-page{background:linear-gradient(180deg,#fbf8f3 0%,#efe4d4 100%
         </div>
         <div class="grid">
           <label class="wide">What must be avoided?<textarea name="avoid" rows="3" placeholder="No deep neckline, no heavy fabric, no long train..."></textarea></label>
-          <label class="wide">Anything else the designer should know?<textarea name="notes" rows="4" placeholder="Must work under graduation regalia, hide bra straps, allow dancing, be reusable..."></textarea></label>
+          <label class="wide">Anything else that should shape the plan?<textarea name="notes" rows="4" placeholder="Must work under graduation regalia, hide bra straps, allow dancing, be reusable..."></textarea></label>
         </div>
-        <label class="toggle-card"><input id="captureToggle" type="checkbox" name="captureMeasurements"><div><strong>Capture measurements now</strong><p>Opens a guided measurement flow. Leave unchecked to defer measurements to the consultation.</p></div></label>
+        <label class="toggle-card"><input id="captureToggle" type="checkbox" name="captureMeasurements"><div><strong>Capture measurements now</strong><p>Useful only when exploring a custom garment. Leave unchecked for a wardrobe styling plan.</p></div></label>
       </div>
 
       <div class="step">
@@ -289,48 +319,51 @@ body.style-studio-page{background:linear-gradient(180deg,#fbf8f3 0%,#efe4d4 100%
       </div>
 
       <div class="step">
-        <h2>5. Contact and inspiration</h2><p>Add your contact details. You can attach any inspiration image directly in WhatsApp after sending your brief.</p>
+        <h2>5. Make it yours</h2><p>Your style plan is free and does not require contact details. Add them only if you may want to share the finished plan with Jane.M.</p>
         <div class="grid">
-          <label>Full name<input type="text" name="clientName" required></label>
-          <label>WhatsApp number<input type="tel" name="clientPhone" required placeholder="+266 ..."></label>
+          <label>Full name, optional<input type="text" name="clientName"></label>
+          <label>WhatsApp number, optional<input type="tel" name="clientPhone" placeholder="+266 ..."></label>
           <label>Email, optional<input type="email" name="clientEmail"></label>
-          <label>Preferred contact<select name="contactMethod" required><option value="">Choose</option><option>WhatsApp</option><option>Phone call</option><option>Email</option></select></label>
+          <label>Preferred contact, optional<select name="contactMethod"><option value="">Choose</option><option>WhatsApp</option><option>Phone call</option><option>Email</option></select></label>
         </div>
-        <div class="toggle-card" style="margin-top:20px"><div></div><div><strong>Have an inspiration image?</strong><p>After you send your brief, attach it directly in WhatsApp so Jane.M can view it alongside your message.</p></div></div>
-        <label style="margin-top:20px;flex-direction:row"><input type="checkbox" required> I understand this is an indicative briefing tool and Jane.M must confirm the final design and quote.</label>
+        <div class="toggle-card" style="margin-top:20px"><div></div><div><strong>Have an inspiration image?</strong><p>Keep it nearby while reviewing your plan. If you later contact Jane.M, attach it directly in WhatsApp alongside the plan.</p></div></div>
+        <p class="support-note">This is an inspirational styling guide. Any custom garment, measurements and quotation must be confirmed with Jane.M.</p>
       </div>
 
       <p id="validationNotice" class="validation-notice" role="alert">Please complete the highlighted required fields before continuing.</p>
       <div class="actions">
         <button type="button" id="back" class="btn" disabled>Back</button>
         <button type="button" id="next" class="btn primary">Continue</button>
-        <button type="submit" id="finish" class="btn primary hidden">Create designer brief</button>
+        <button type="submit" id="finish" class="btn primary hidden">Reveal my style plan</button>
       </div>
     </form>
   </section>
 
   <section id="result" class="result">
-    <div class="summary"><small>YOUR JANE.M STYLE DIRECTION</small><h2 id="profile"></h2><p id="summaryText"></p></div>
+    <div class="summary"><small>YOUR FREE JANE.M STYLE PLAN</small><h2 id="profile"></h2><p id="summaryText"></p></div>
     <div class="result-grid">
-      <div class="panel"><h3>Recommended direction</h3><dl id="direction"></dl></div>
-      <div class="panel estimate"><h3>Indicative workmanship</h3><strong id="estimate"></strong><p>Fabric is selected separately to suit your design &amp; budget.</p></div>
-      <div class="panel"><h3>Why this direction works</h3><ul id="reasons"></ul></div>
-      <div class="panel"><h3>Styling notes</h3><dl id="styling"></dl></div>
+      <div class="panel formula-panel"><h3>Your outfit formula</h3><dl id="direction"></dl></div>
+      <div id="estimatePanel" class="panel estimate"><h3>Indicative workmanship</h3><strong id="estimate"></strong><p>Fabric is selected separately to suit your design &amp; budget.</p></div>
+      <div class="panel why-panel"><h3>Why this direction works</h3><ul id="reasons"></ul></div>
+      <div class="panel colour-panel"><div class="colour-story-layout"><div class="colour-copy"><span class="colour-kicker">Your curated palette</span><h3>Your colour story</h3><p id="colourStory"></p></div><div id="colourPalette" class="colour-palette" aria-label="Recommended colour palette"></div></div></div>
+      <div class="panel panel--full"><h3>The stylist’s complete edit</h3><dl id="styling"></dl></div>
     </div>
 
+    <aside class="studio-offer"><div><p class="eyebrow eyebrow--light">Love this direction?</p><h3>Make it unmistakably yours.</h3><p><span data-cms-text="promotion.discountText">30% OFF</span> workmanship on all custom designs during the current Jane.M promotion. Fabric is selected separately to suit your design &amp; budget.</p></div><a class="btn btn-gold" href="../index.html#promo">View the promotion</a></aside>
+
     <section id="designerBrief" class="brief">
-      <div class="brief-head"><div><h3>Designer Brief</h3><p>The structured handover document for Jane.M.</p></div>
+      <div class="brief-head"><div><h3>Your Personal Style Plan</h3><p>Keep it for inspiration, use it with your own wardrobe, or share it with Jane.M.</p></div>
         <div class="brief-actions"><button id="copy" class="btn">Copy</button><button id="download" class="btn">Download</button></div>
       </div>
       <div id="briefDoc"></div>
-      <div id="briefActions" class="handoff"><h3>What would you like to do next?</h3><p>Visualize your direction or send this complete brief to Jane.M. Attach an inspiration image in WhatsApp if you have one.</p><div class="brief-actions"><button id="visualizeBrief" class="btn">Visualize this brief</button><a id="briefWhatsApp" class="btn primary" target="_blank" rel="noopener">Send brief to Jane.M on WhatsApp</a></div></div>
+      <div id="briefActions" class="handoff"><h3>Use your plan your way.</h3><p>Visualize the direction for inspiration, or invite Jane.M to turn it into a custom look. Attach an inspiration image in WhatsApp if you have one.</p><div class="brief-actions"><button id="visualizeBrief" class="btn">Visualize my style plan</button><a id="briefWhatsApp" class="btn primary" target="_blank" rel="noopener">Explore it with Jane.M</a></div></div>
     </section>
     <section class="visualizer">
       <div class="visualizer-head">
         <div>
           <span class="viz-badge">Your design direction</span>
-          <h3>Visualize this brief</h3>
-          <p>See an early visual direction inspired by your completed brief, then use it as a thoughtful starting point for your Jane.M consultation.</p>
+          <h3>Visualize your style plan</h3>
+          <p>See an early visual interpretation of your plan. Use it as wardrobe inspiration, a shopping filter, or a starting point for a Jane.M consultation.</p>
           <p id="visualizerSupport" class="support-note">A personalised concept is created when live generation is available; otherwise, you’ll see the approved atelier preview.</p>
         </div>
       </div>
@@ -338,10 +371,10 @@ body.style-studio-page{background:linear-gradient(180deg,#fbf8f3 0%,#efe4d4 100%
       <div id="aiStatus" class="ai-status hidden" aria-live="polite">
         <div class="ai-status-row"><div class="spinner"></div><strong id="aiStatusText">Analysing the brief…</strong></div>
         <ul class="ai-steps">
-          <li id="aiStep1">Checking event, comfort and design constraints</li>
-          <li id="aiStep2">Assessing construction complexity and pricing</li>
-          <li id="aiStep3">Creating one coherent garment concept</li>
-          <li id="aiStep4">Validating that model, sketches and details match</li>
+          <li id="aiStep1">Reading the occasion, wardrobe and comfort needs</li>
+          <li id="aiStep2">Balancing colour, proportion and focal details</li>
+          <li id="aiStep3">Creating one coherent outfit direction</li>
+          <li id="aiStep4">Checking that the full styling edit aligns</li>
         </ul>
       </div>
 
@@ -349,14 +382,14 @@ body.style-studio-page{background:linear-gradient(180deg,#fbf8f3 0%,#efe4d4 100%
         <img id="conceptImage" src="../assets/style-studio/mock-design-concept.png" width="1983" height="793" alt="Jane.M atelier concept preview">
         <div class="concept-caption">
           <span id="conceptSource">Concept direction for your consultation.</span>
-          <span>Concept only • Jane.M confirms the final design and quotation</span>
+          <span>Inspiration only • use what you own or explore it with Jane.M</span>
         </div>
       </div>
     </section>
   </section>
 </div>
 </main>
-<footer class="studio-note">Jane.M Style Studio • Your brief stays on this device until you choose to share it.</footer>
+<footer class="studio-note">Jane.M Style Studio • Free inspiration. No sign-up. Your plan stays on this device until you choose to share it.</footer>
 
 <script src="../config.js"></script>
 <script src="../analytics.js"></script>
@@ -375,11 +408,42 @@ function markInvalid(el){const target=el.type==='radio'?el.closest('.chips'):el.
 function showMissing(fields){fields.forEach(markInvalid);validationNotice.classList.add('active');fields[0]?.focus()}
 function valid(){clearInvalid();const req=[...steps[step].querySelectorAll('[required]')].filter(el=>!el.closest('.hidden'));const missing=[];for(const el of req){if(el.type==='radio'){if(!steps[step].querySelector('[name="'+el.name+'"]:checked'))missing.push(el)}else if(el.type==='checkbox'){if(!el.checked)missing.push(el)}else if(!el.value.trim())missing.push(el)}if(missing.length){showMissing(missing);return false}return true}
 function syncMeasureFlow(){const on=document.getElementById('captureToggle').checked;measurementFlow.classList.toggle('hidden',!on);measurementSkip.classList.toggle('hidden',on);track(on?'measurements_selected':'measurements_skipped')}
-next.onclick=()=>{if(!valid())return;if(step===3&&captureToggle.checked){const missingMeasurements=['m_bust','m_waist','m_hip','m_shoulder','m_length'].map(n=>form.elements[n]).filter(el=>!el.value);if(missingMeasurements.length){showMissing(missingMeasurements);return}}step++;show()};back.onclick=()=>{clearInvalid();step--;show()};
+next.onclick=()=>{if(!valid())return;if(step===2&&!captureToggle.checked){step=4;show();return}if(step===3&&captureToggle.checked){const missingMeasurements=['m_bust','m_waist','m_hip','m_shoulder','m_length'].map(n=>form.elements[n]).filter(el=>!el.value);if(missingMeasurements.length){showMissing(missingMeasurements);return}}step++;show()};back.onclick=()=>{clearInvalid();if(step===4&&!captureToggle.checked){step=2;show();return}step--;show()};
 captureToggle.onchange=syncMeasureFlow;
 const base={Mini:1450,'Above knee':1650,'Knee length':1650,Midi:2500,Maxi:3500,'No preference':2500};
 const adds={Corset:650,Slit:200,'Long sleeves':450,'Off shoulder':250,'Open back':300,'Big bow':450,Pockets:150,Train:700,Lace:600,Beading:900,'Exposed boning':250,'Tiered skirt':1500};
 function data(){const f=new FormData(form),d={};for(const [k,v] of f.entries()){if(k==='features'){(d.features??=[]).push(v)}else d[k]=v}d.features=d.features||[];d.captureMeasurements=captureToggle.checked;return d}
+function colourAdvice(d){
+ const metal=['Emerald','Champagne','Burgundy','Gold'].includes(d.colour)?'warm gold':d.colour==='Navy'||d.colour==='White'?'silver, white gold or pearl':'either brushed gold or polished silver';
+ const accent={Emerald:'champagne, warm ivory or deep chocolate',Navy:'silver, soft blue or crisp ivory',Black:'ivory, metallic gold or one saturated jewel tone',Champagne:'espresso, antique gold or soft blush',Burgundy:'old gold, chocolate or muted rose',White:'pearl, silver or a deliberate colour accent',Gold:'black, cream or deep brown','Surprise me':'one neutral base with a single rich accent'}[d.colour]||'a calm neutral with one considered accent';
+ const palettes={
+  Emerald:[['Emerald','#0f5a48'],['Champagne','#d8bd88'],['Warm ivory','#f1eadc'],['Chocolate','#4a2c22']],
+  Navy:[['Midnight navy','#17233d'],['Silver','#b7bbc2'],['Soft blue','#aebed0'],['Crisp ivory','#f4f0e7']],
+  Black:[['Ink black','#171411'],['Warm ivory','#efe7d8'],['Antique gold','#b28a4b'],['Jewel accent','#7a1947']],
+  Champagne:[['Champagne','#d6bd8d'],['Espresso','#3b2922'],['Antique gold','#a77d3d'],['Soft blush','#d7aaa2']],
+  Burgundy:[['Burgundy','#681f32'],['Old gold','#aa8448'],['Chocolate','#493028'],['Muted rose','#b7797e']],
+  White:[['Soft white','#f5f3ed'],['Pearl','#ddd7ca'],['Silver','#aaaeb5'],['Deep accent','#25493e']],
+  Gold:[['Atelier gold','#b68b43'],['Ink black','#171411'],['Cream','#eee3cf'],['Deep brown','#4a3227']],
+  'Surprise me':[['Deep teal','#174d47'],['Oxblood','#682b35'],['Warm sand','#c7a97a'],['Ink','#181512']]
+ };
+ return {metal,palette:palettes[d.colour]||palettes['Surprise me'],story:`Let ${d.colour==='Surprise me'?'one confident hero colour':d.colour.toLowerCase()} lead. Support it with ${accent}; repeat the accent only twice so the outfit feels intentional rather than matched.`};
+}
+function stylistEdit(d,neckline){
+ const colour=colourAdvice(d),outdoor=d.setting!=='Indoor',active=['Dancing','All-day wear','Walking and mingling'].includes(d.movement);
+ let jewellery=`Choose ${colour.metal}. `;
+ if(d.focalPoint==='Neckline and shoulders')jewellery+='Use sculptural earrings and skip the necklace so the neckline remains the focus.';
+ else if(d.focalPoint==='Back detail')jewellery+='Choose a clean drop earring and keep the neck bare so the back detail reads clearly.';
+ else if(d.focalPoint==='Sleeves')jewellery+='Use close-to-the-ear earrings and avoid bracelets that compete with the sleeves.';
+ else jewellery+=d.theme==='Minimalist'?'Wear one sculptural earring or refined stud with a fine bracelet.':'Use a statement earring, then keep the necklace and wrist restrained.';
+ const shoes=active?(outdoor?'A stable block heel, polished flat or secure slingback keeps movement easy on varied ground.':'A secure slingback, low heel or polished flat supports movement without losing refinement.'):(d.length==='Maxi'?'A sleek pointed heel or minimal sandal lengthens the line; confirm the hem while wearing it.':'A pointed pump or clean strappy heel continues the leg line.');
+ const bag=d.time==='Night'?'A compact structured clutch in one supporting neutral; it should hold essentials without becoming another focal point.':'A small structured shoulder bag or top-handle bag in a supporting neutral, with minimal visible hardware.';
+ const hair=d.focalPoint==='Back detail'||d.focalPoint==='Neckline and shoulders'||d.focalPoint==='Sleeves'?'An up-style, polished low bun or tucked-back shape keeps the design detail visible.':d.feeling==='Romantic'?'Soft controlled waves balance the silhouette without feeling rigid.':'A polished low bun or smooth soft wave keeps the finish intentional.';
+ const makeup=d.time==='Night'?'Luminous skin, defined eyes and one deeper lip or cheek tone—choose one area to intensify, not all three.':'Fresh skin, softly defined eyes and a lip tone that echoes the outfit’s warm or cool undertone.';
+ const foundation=d.coverage==='Daring'||neckline.includes('plunge')||d.features.includes('Open back')?'Test the exact bra, support or fashion-tape solution before the event; it must disappear from every angle.':'Keep undergarments smooth, tonal and invisible under the fabric; test the outfit in daylight and while seated.';
+ const layer=d.weather==='Cold'?'Add a clean tailored coat, cape or tonal wrap that is long enough to respect the outfit proportions.':d.weather==='Warm'?'Keep one light tailored layer nearby for temperature changes, preferably in a colour already used in the look.':'Avoid a heavy layer; if needed, choose a sheer wrap or sharply cut lightweight blazer.';
+ const rewear=d.journey==='Explore a new custom look'?'For re-wear, change the mood—not the garment: swap statement earrings for studs, heels for a refined flat, and evening makeup for fresh skin.':`Start with ${d.existingPiece||'the strongest piece you already own'} and buy only the single missing item that improves fit, proportion or polish.`;
+ return {Jewellery:jewellery,Shoes:shoes,Bag:bag,'Hair direction':hair,'Make-up direction':makeup,'Foundation & fit':foundation,'Outer layer':layer,'Re-wear strategy':rewear,"Stylist's rule":`Keep one hero area: ${d.focalPoint.toLowerCase()}. Everything else should support it through quieter scale, colour and shine.`};
+}
 function make(d){
  const hot=d.weather==='Hot',formal=['Corporate Dinner','Gala','Wedding'].includes(d.occasion);
  let silhouette=d.fit==='Relaxed'?'softly draped A-line':d.fit==='Figure-hugging'?'sculpted column':'structured fit-and-flare';
@@ -406,33 +470,37 @@ function make(d){
  const complexityPremium={Low:0,Moderate:250,High:600,'Very High':1100}[complexity];
  let estimate=(base[d.length]||2500)+d.features.reduce((s,x)=>s+(adds[x]||0),0)+complexityPremium;
  const low=Math.round(estimate*.90/50)*50,high=Math.round(estimate*1.20/50)*50;
- const profile=(d.colour==='Surprise me'?'Signature':d.colour)+' '+d.personality;
- const summary=`A ${d.personality.toLowerCase()}, ${d.theme.toLowerCase()} direction for a ${d.occasion.toLowerCase()}, designed for ${d.weather.toLowerCase()} conditions and a ${d.time.toLowerCase()} setting. The brief prioritises ${d.priority.toLowerCase()} and focuses attention on ${d.focalPoint.toLowerCase()}.`;
- const reasons=[hot?'Lightweight construction supports comfort in hot conditions.':'Layer-friendly construction supports cooler conditions.',d.setting==='Both'?'The look must transition between indoor and outdoor spaces.':'The construction can be optimised for the '+d.setting.toLowerCase()+' setting.','The focal point supports the desired feeling of '+d.feeling.toLowerCase()+'.','The preferred fit and length are balanced against the event formality.','Movement requirements are considered for '+d.movement.toLowerCase()+'.'];
- return {silhouette,neckline,sleeve,fabric,details,low,high,complexity,constructionScore,profile,summary,reasons,
- accessories:d.theme==='Minimalist'?'one sculptural earring, compact clutch and fine bracelet':'statement earrings, elegant clutch and restrained jewellery',
- shoes:d.length==='Maxi'?'sleek pointed heel or minimal sandal':'clean strappy heel or pointed pump',
- beauty:d.time==='Night'?'polished low bun, luminous skin and deeper lip':'soft waves or low bun, fresh skin and neutral lip'};
+ const anchor=d.existingPiece||({Dress:'a refined dress','Skirt':'a proportioned skirt-and-top combination','Trousers':'tailored trousers balanced with a defined top','Jumpsuit':'a clean, elongated jumpsuit','Suit or co-ord':'a coordinated tailored set','Top or blouse':'a considered blouse-and-bottom combination','Mixed wardrobe outfit':'the strongest pieces already in your wardrobe','Not sure yet':'one confident hero piece'}[d.garment]||'one confident hero piece');
+ const outfitFormula=d.garment==='Dress'?silhouette:d.garment==='Skirt'?`${d.length.toLowerCase()} skirt with a ${d.fit.toLowerCase()} waist and a quieter ${neckline}`:d.garment==='Trousers'?`${d.fit==='Relaxed'?'fluid wide-leg':'clean tailored'} trousers with a defined waist and ${neckline}`:d.garment==='Jumpsuit'?`${d.fit==='Relaxed'?'fluid':'structured'} elongated jumpsuit with ${neckline}`:d.garment==='Suit or co-ord'?`${d.fit==='Relaxed'?'softly tailored':'sharply tailored'} co-ord with one clean base layer`:d.garment==='Top or blouse'?`${neckline} top balanced by a ${d.length==='Maxi'?'long column':'clean tailored'} bottom`:`Build around ${anchor}; keep one defined line at the waist or shoulder and repeat one colour elsewhere.`;
+ const profile=(d.colour==='Surprise me'?'Signature':d.colour)+' '+d.personality+' Edit';
+ const own=d.journey!=='Explore a new custom look';
+ const styleVoice=d.personality.toLowerCase()===d.theme.toLowerCase()?d.personality.toLowerCase():`${d.personality.toLowerCase()}, ${d.theme.toLowerCase()}`;
+ const summary=own?`A ${styleVoice} styling plan built around ${anchor}. It is designed for ${d.weather.toLowerCase()} conditions, prioritises ${d.priority.toLowerCase()} and keeps attention on ${d.focalPoint.toLowerCase()}.`:`A ${styleVoice} custom direction for a ${d.occasion.toLowerCase()}, designed for ${d.weather.toLowerCase()} conditions and a ${d.time.toLowerCase()} setting. It prioritises ${d.priority.toLowerCase()} and focuses attention on ${d.focalPoint.toLowerCase()}.`;
+ const reasons=[hot?'Lightweight layers and controlled shine keep the look polished without adding heat.':'Intentional layering keeps the silhouette refined in cooler conditions.',d.setting==='Both'?'The outfit can transition between indoor and outdoor spaces without a complete change.':'Every layer is selected for the '+d.setting.toLowerCase()+' setting.',`The ${d.focalPoint.toLowerCase()} becomes the single hero area, which gives the outfit a clear visual hierarchy.`,`The ${d.fit.toLowerCase()} fit and ${d.length.toLowerCase()} length balance comfort, proportion and event formality.`,`The shoe and bag recommendations account for ${d.movement.toLowerCase()}.`,own?'The plan starts with what you own and limits shopping to a genuine styling gap.':'The direction can be adjusted during consultation without losing its central styling idea.'];
+ const styling=stylistEdit(d,neckline),colour=colourAdvice(d);
+ return {silhouette,outfitFormula,anchor,neckline,sleeve,fabric,details,low,high,complexity,constructionScore,profile,summary,reasons,styling,colourStory:colour.story,colourPalette:colour.palette};
 }
 function brief(d,r){
  const measurements=d.captureMeasurements?Object.fromEntries([['Bust',d.m_bust+' '+d.m_bust_unit],['Waist',d.m_waist+' '+d.m_waist_unit],['Hip',d.m_hip+' '+d.m_hip_unit],['Shoulder width',d.m_shoulder+' '+d.m_shoulder_unit],['Upper arm',d.m_arm?d.m_arm+' '+d.m_arm_unit:'Not provided'],['Sleeve length',d.m_sleeve?d.m_sleeve+' '+d.m_sleeve_unit:'Not provided'],['Shoulder-to-waist',d.m_torso?d.m_torso+' '+d.m_torso_unit:'Not provided'],['Dress length',d.m_length+' '+d.m_length_unit],['Height',d.m_height?d.m_height+' '+d.m_height_unit:'Not provided'],['Heel height',d.m_heel?d.m_heel+' '+d.m_heel_unit:'Not provided']]):{status:'Deferred — Jane.M must measure and verify before production'};
- return {title:'Jane.M Client Design Brief — '+r.profile,client:{name:d.clientName,phone:d.clientPhone,email:d.clientEmail||'Not provided',preferredContact:d.contactMethod},context:{occasion:d.occasion,theme:d.theme,setting:d.setting,weather:d.weather,time:d.time,budget:d.budget},preferences:{personality:d.personality,fit:d.fit,length:d.length,colour:d.colour,coverage:d.coverage,feeling:d.feeling,priority:d.priority,movement:d.movement,focalPoint:d.focalPoint},direction:{silhouette:r.silhouette,neckline:r.neckline,sleeve:r.sleeve,fabric:r.fabric,features:r.details},constraints:{avoid:d.avoid||'None stated',notes:d.notes||'None stated'},measurements,inspiration:'Attach an inspiration image in WhatsApp if helpful.',complexity:{rating:r.complexity,score:r.constructionScore+'/12',basis:'Assessed from structure, fit, sleeves, draping, embellishment and finishing requirements'},estimate:`M${r.low.toLocaleString()}–M${r.high.toLocaleString()} indicative custom-workmanship range`,disclaimer:'Starting brief only. Jane.M must confirm measurements, construction, fabric, final design and quotation.'}
+ const custom=d.journey==='Explore a new custom look';
+ return {title:'Jane.M Personal Style Plan — '+r.profile,client:{name:d.clientName||'Not provided',phone:d.clientPhone||'Not provided',email:d.clientEmail||'Not provided',preferredContact:d.contactMethod||'Not provided'},context:{stylingGoal:d.journey,occasion:d.occasion,garment:d.garment,startingPieces:d.existingPiece||'Starting fresh',theme:d.theme,setting:d.setting,weather:d.weather,time:d.time,stylingBudget:d.budget==='0'?'Use only what I own':`Up to M${Number(d.budget).toLocaleString()}`},preferences:{personality:d.personality,fit:d.fit,length:d.length,colour:d.colour,coverage:d.coverage,feeling:d.feeling,priority:d.priority,movement:d.movement,focalPoint:d.focalPoint},direction:{outfitFormula:r.outfitFormula,silhouette:r.silhouette,neckline:r.neckline,sleeve:r.sleeve,fabric:r.fabric,features:r.details,colourStory:r.colourStory},styling:r.styling,constraints:{avoid:d.avoid||'None stated',notes:d.notes||'None stated'},measurements,inspiration:'Attach an inspiration image in WhatsApp if helpful.',complexity:{rating:r.complexity,score:r.constructionScore+'/12',basis:'Assessed from structure, fit, sleeves, draping, embellishment and finishing requirements'},estimate:custom?`M${r.low.toLocaleString()}–M${r.high.toLocaleString()} indicative custom-workmanship range`:'Use the wardrobe first; add only the one piece that meaningfully improves fit, proportion or polish.',disclaimer:custom?'Starting brief only. Jane.M must confirm measurements, construction, fabric, final design and quotation.':'Inspirational personal styling guidance; adapt it to the fit, comfort and pieces available to you.'}
 }
 function esc(x){return String(x).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function section(title,obj){return `<div class="brief-section"><h4>${title}</h4><ul>${Object.entries(obj).map(([k,v])=>`<li><b>${esc(k)}:</b> ${esc(v)}</li>`).join('')}</ul></div>`}
-function toText(b){return `${b.title}\n\nCLIENT\n${Object.entries(b.client).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nEVENT CONTEXT\n${Object.entries(b.context).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCLIENT PREFERENCES\n${Object.entries(b.preferences).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCREATIVE DIRECTION\n${Object.entries(b.direction).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCONSTRAINTS\n${Object.entries(b.constraints).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nMEASUREMENTS\n${Object.entries(b.measurements).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nINSPIRATION\n${b.inspiration}\n\nCOMPLEXITY ASSESSMENT\n${Object.entries(b.complexity).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCOMMERCIAL GUIDE\n${b.estimate}\n\n${b.disclaimer}`}
+function toText(b){return `${b.title}\n\nCLIENT (OPTIONAL)\n${Object.entries(b.client).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nSTYLE CONTEXT\n${Object.entries(b.context).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nPERSONAL PREFERENCES\n${Object.entries(b.preferences).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nOUTFIT DIRECTION\n${Object.entries(b.direction).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nSTYLIST'S COMPLETE EDIT\n${Object.entries(b.styling).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCONSTRAINTS\n${Object.entries(b.constraints).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nMEASUREMENTS\n${Object.entries(b.measurements).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nINSPIRATION\n${b.inspiration}\n\nCOMPLEXITY ASSESSMENT\n${Object.entries(b.complexity).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nWARDROBE / COMMERCIAL GUIDE\n${b.estimate}\n\n${b.disclaimer}`}
 form.onsubmit=e=>{e.preventDefault();if(!valid())return;const d=data(),r=make(d),b=brief(d,r);
  document.getElementById('wizard').style.display='none';document.querySelector('.progress').style.display='none';document.getElementById('result').classList.add('active');
  profile.textContent=r.profile;summaryText.textContent=r.summary;estimate.textContent=`M${r.low.toLocaleString()} – M${r.high.toLocaleString()}`;
- direction.innerHTML=[['Silhouette',r.silhouette],['Neckline',r.neckline],['Sleeve',r.sleeve],['Length',d.length],['Fabric',r.fabric],['Details',r.details]].map(x=>`<div><dt>${x[0]}</dt><dd>${x[1]}</dd></div>`).join('');
- reasons.innerHTML=r.reasons.map(x=>`<li>${x}</li>`).join('');styling.innerHTML=[['Accessories',r.accessories],['Shoes',r.shoes],['Hair & makeup',r.beauty]].map(x=>`<div><dt>${x[0]}</dt><dd>${x[1]}</dd></div>`).join('');
- briefDoc.innerHTML=section('Client',b.client)+section('Event context',b.context)+section('Client preferences',b.preferences)+section('Creative direction',b.direction)+section('Constraints',b.constraints)+section('Measurements',b.measurements)+`<div class="brief-section"><h4>Inspiration</h4><p>${b.inspiration}</p></div>`+section('Complexity assessment',b.complexity)+`<div class="brief-section"><h4>Commercial guide</h4><p><b>${b.estimate}</b><br>${b.disclaimer}</p></div>`;
+ estimatePanel.classList.toggle('hidden',d.journey!=='Explore a new custom look');
+ direction.innerHTML=[['Starting point',r.anchor],['Outfit formula',r.outfitFormula],['Shape',r.silhouette],['Top line',r.neckline],['Sleeve',r.sleeve],['Length',d.length],['Finish',r.details]].map(x=>`<div><dt>${x[0]}</dt><dd>${esc(x[1])}</dd></div>`).join('');
+ reasons.innerHTML=r.reasons.map(x=>`<li>${x}</li>`).join('');colourStory.textContent=r.colourStory;colourPalette.innerHTML=r.colourPalette.map(([name,hex])=>`<div class="swatch"><span class="swatch-colour" style="--swatch:${hex}"></span><span class="swatch-label">${esc(name)}</span></div>`).join('');styling.innerHTML=Object.entries(r.styling).map(x=>`<div><dt>${x[0]}</dt><dd>${x[1]}</dd></div>`).join('');
+ briefDoc.innerHTML=section('Optional contact',b.client)+section('Style context',b.context)+section('Personal preferences',b.preferences)+section('Outfit direction',b.direction)+section("Stylist's complete edit",b.styling)+section('Constraints',b.constraints)+section('Measurements',b.measurements)+`<div class="brief-section"><h4>Inspiration</h4><p>${b.inspiration}</p></div>`+section('Complexity assessment',b.complexity)+`<div class="brief-section"><h4>Wardrobe / commercial guide</h4><p><b>${b.estimate}</b><br>${b.disclaimer}</p></div>`;
  currentBrief=b;window.B=b;
- const handoff=`Hello Jane.M, I completed the Style Studio. Please find my full designer brief below.\n\n${toText(b)}`;
- briefWhatsApp.href='https://wa.me/26662790946?text='+encodeURIComponent(handoff);track('style_preferences_completed');track('brief_generated');track('style_studio_completed');window.requestAnimationFrame(()=>document.getElementById('briefActions').scrollIntoView({behavior:'smooth',block:'center'}));
+ const handoff=`Hello Jane.M, I created a personal style plan in the Jane.M Style Studio and would like to explore it with you.\n\n${toText(b)}`;
+ briefWhatsApp.href='https://wa.me/26662790946?text='+encodeURIComponent(handoff);track('style_preferences_completed');track('style_plan_generated',{journey:d.journey});track('style_studio_completed');window.requestAnimationFrame(()=>document.getElementById('result').scrollIntoView({behavior:'smooth',block:'start'}));
 };
 copy.onclick=async()=>{await navigator.clipboard.writeText(toText(window.B));alert('Brief copied.')};
-download.onclick=()=>{const blob=new Blob([toText(window.B)],{type:'text/plain'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='JaneM-Designer-Brief.txt';a.click()};
+download.onclick=()=>{const blob=new Blob([toText(window.B)],{type:'text/plain'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='JaneM-Personal-Style-Plan.txt';a.click()};
 const mockConceptSrc='../assets/style-studio/mock-design-concept.png';
 async function generateDesignConcept(brief){
   const controller=new AbortController();
@@ -472,10 +540,10 @@ visualizeBrief.addEventListener('click',async()=>{
   [aiStep1,aiStep2,aiStep3,aiStep4].forEach(x=>x.classList.remove('done'));
   const conceptPromise=generateDesignConcept(currentBrief);
   const stages=[
-    [aiStep1,'Analysing event, client preferences and constraints…'],
-    [aiStep2,'Assessing construction complexity and indicative pricing…'],
-    [aiStep3,'Designing one coherent garment concept…'],
-    [aiStep4,'Checking that the model, sketches and details align…']
+    [aiStep1,'Reading the occasion, wardrobe and comfort needs…'],
+    [aiStep2,'Balancing colour, proportion and focal details…'],
+    [aiStep3,'Creating one coherent outfit direction…'],
+    [aiStep4,'Checking that the complete styling edit aligns…']
   ];
   for(const [el,label] of stages){
     aiStatusText.textContent=label;
