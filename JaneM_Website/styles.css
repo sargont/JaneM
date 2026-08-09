@@ -187,13 +187,13 @@ footer a, footer p { display: block; color: #bcb2a8; text-decoration: none; marg
 .catalogue-card:hover, .catalogue-card:focus-visible { transform: translateY(-4px); box-shadow: var(--shadow); }
 .catalogue-card img { display: block; width: 100%; height: auto; aspect-ratio: auto; object-fit: contain; background: var(--paper); }
 .catalogue-card > span { display: block; padding: 12px 15px; font-size: .75rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
-.catalogue-dialog { width: min(920px, calc(100% - 30px)); max-height: calc(100vh - 30px); padding: 18px; border: 0; background: var(--paper); box-shadow: 0 24px 80px rgba(0,0,0,.42); }
+.catalogue-dialog { position: relative; width: min(920px, calc(100% - 30px)); max-height: calc(100vh - 30px); padding: 18px; border: 0; background: var(--paper); box-shadow: 0 24px 80px rgba(0,0,0,.42); }
 .catalogue-dialog::backdrop { background: rgba(0,0,0,.74); }
 .catalogue-dialog figure { margin: 0; }
 .catalogue-dialog__media { position: relative; }
 .catalogue-dialog__image { width: 100%; max-height: calc(100vh - 120px); object-fit: contain; background: #fff; }
 .catalogue-dialog__caption { padding: 12px 4px 0; font-weight: 700; }
-.catalogue-dialog__close { float: right; margin: 0 0 10px; border: 0; background: var(--black); color: #fff; padding: 10px 14px; border-radius: 999px; font: inherit; font-weight: 800; cursor: pointer; }
+.catalogue-dialog__close { position: fixed; z-index: 5; top: max(20px, env(safe-area-inset-top)); right: max(20px, env(safe-area-inset-right)); margin: 0; border: 0; background: var(--black); color: #fff; padding: 10px 14px; border-radius: 999px; font: inherit; font-weight: 800; cursor: pointer; touch-action: manipulation; }
 .catalogue-access-dialog { width: min(620px, calc(100% - 30px)); padding: clamp(28px, 5vw, 52px); border: 0; background: var(--paper); box-shadow: 0 24px 80px rgba(0,0,0,.42); }
 .catalogue-access-dialog::backdrop { background: rgba(0,0,0,.74); }
 .catalogue-access-dialog__close { float: right; margin: 0 0 10px; border: 0; background: var(--black); color: #fff; padding: 10px 14px; border-radius: 999px; font: inherit; font-weight: 800; cursor: pointer; }
@@ -348,6 +348,9 @@ footer a, footer p { display: block; color: #bcb2a8; text-decoration: none; marg
   .brand { width: 166px; height: 54px; }
   .catalogue-section { padding-top: 45px; }
   .catalogue-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .catalogue-dialog { width: calc(100% - 18px); max-height: calc(100vh - 18px); padding: 10px; }
+  .catalogue-dialog__close { top: max(14px, env(safe-area-inset-top)); right: max(14px, env(safe-area-inset-right)); min-width: 46px; min-height: 46px; padding: 10px 13px; box-shadow: 0 8px 22px rgba(0,0,0,.3); }
+  .catalogue-dialog__image { max-height: calc(100vh - 96px); }
   .seo-link-grid { grid-template-columns: 1fr; }
   .seo-link-grid a { min-height: 165px; }
   .janem-tv-hero { padding: 27px 0 25px; }

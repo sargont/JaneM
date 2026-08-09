@@ -43,8 +43,17 @@
     dialog.showModal();
   });
 
-  closeButton.addEventListener("click", () => dialog.close());
-  dialog.addEventListener("click", (event) => {
-    if (event.target === dialog) dialog.close();
+  const closeDialog = (event) => {
+    event?.preventDefault();
+    if (dialog.open) dialog.close();
+  };
+
+  closeButton.addEventListener("click", closeDialog);
+  closeButton.addEventListener("pointerup", (event) => {
+    if (event.pointerType === "touch") closeDialog(event);
   });
+  dialog.addEventListener("click", (event) => {
+    if (event.target === dialog) closeDialog(event);
+  });
+  dialog.addEventListener("cancel", closeDialog);
 }());
