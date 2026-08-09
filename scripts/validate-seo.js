@@ -9,7 +9,7 @@ const files = [];
 function walk(directory) { for (const item of fs.readdirSync(directory, { withFileTypes: true })) { const target = path.join(directory, item.name); if (item.isDirectory()) { if (item.name === "JaneM_Style_Studio_v4_1") continue; walk(target); } else if (item.name.endsWith(".html")) files.push(target); } }
 walk(site);
 const fail = [];
-const titles = new Map(); const descriptions = new Map(); const sitemap = fs.readFileSync(path.join(site, "sitemap.xml"), "utf8"); const robots = fs.readFileSync(path.join(site, "robots.txt"), "utf8");
+const titles = new Map(); const descriptions = new Map(); let indexablePages = 0; const sitemap = fs.readFileSync(path.join(site, "sitemap.xml"), "utf8"); const robots = fs.readFileSync(path.join(site, "robots.txt"), "utf8");
 if (!robots.includes("Disallow: /admin/") || !robots.includes("Sitemap:")) fail.push("robots.txt is missing admin exclusion or sitemap declaration");
 if (/<loc>[^<]*(?:\/admin\/|catalogue\.pdf)/.test(sitemap)) fail.push("sitemap contains an excluded URL");
 for (const file of files) {
@@ -20,7 +20,12 @@ for (const file of files) {
   if (!description) fail.push(`${relative}: missing description`); else { if (descriptions.has(description)) fail.push(`${relative}: duplicate description with ${descriptions.get(description)}`); descriptions.set(description, relative); }
   if (!canonical || !canonical.startsWith(base)) fail.push(`${relative}: invalid canonical`);
   if ((html.match(/rel="canonical"/g) || []).length !== 1) fail.push(`${relative}: expected one canonical`);
-  if (!html.includes('meta name="robots" content="index,follow')) fail.push(`${relative}: missing index,follow robots directive`);
+  const shouldBeNoindex = relative === "journal/index.html";
+  if (!shouldBeNoindex) indexablePages += 1;
+  if (shouldBeNoindex ? !html.includes('meta name="robots" content="noindex,follow') : !html.includes('meta name="robots" content="index,follow')) fail.push(`${relative}: incorrect robots directive`);
+  const canonicalPath = canonical ? new URL(canonical).pathname : "";
+  if (shouldBeNoindex && sitemap.includes(`<loc>${canonical}</loc>`)) fail.push(`${relative}: noindex page appears in sitemap`);
+  if (!shouldBeNoindex && !sitemap.includes(`<loc>${canonical}</loc>`)) fail.push(`${relative}: indexable page is missing from sitemap`);
   if (!html.includes('property="og:title"') || !html.includes('name="twitter:card"')) fail.push(`${relative}: incomplete social metadata`);
   const schemas = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
   if (!schemas.length) fail.push(`${relative}: missing structured data`); for (const schema of schemas) { try { JSON.parse(schema[1]); } catch { fail.push(`${relative}: invalid JSON-LD`); } }
@@ -29,4 +34,4 @@ for (const file of files) {
 }
 if (!sitemap.includes(base) || (sitemap.match(/<loc>/g) || []).length < 18) fail.push("sitemap is missing expected public URLs");
 if (fail.length) { console.error(fail.join("\n")); process.exit(1); }
-console.log(`SEO validation passed: ${files.length} HTML files, ${titles.size} indexable pages, sitemap and structured data checked.`);
+console.log(`SEO validation passed: ${files.length} HTML files, ${indexablePages} indexable pages, sitemap and structured data checked.`);

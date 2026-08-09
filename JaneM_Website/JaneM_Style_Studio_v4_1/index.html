@@ -3,14 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Jane.M Style Studio | Create Your Custom Look in Lesotho</title>
-<meta name="description" content="Create a designer-ready custom dress brief for a graduation, wedding, corporate event or special occasion with Jane.M Style Studio in Lesotho." />
-<meta name="theme-color" content="#15120f" />
-<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../styles.css?v=20260809ux">
+<title>Jane.M Style Studio v4 — AI Visualization Mock</title>
 <style>
 :root{--ink:#17130f;--paper:#f8f3eb;--gold:#b4863d;--green:#123d36;--muted:#74695f;--line:#ded3c4;--white:#fff}
 *{box-sizing:border-box}body{margin:0;background:linear-gradient(#fbf8f2,#eadfce);font-family:Arial,sans-serif;color:var(--ink)}
@@ -23,7 +16,6 @@ h1,h2,h3{font-family:Georgia,serif}.hero h1{font-size:clamp(3rem,7vw,6rem);line-
 .step{display:none}.step.active{display:block}.step h2{font-size:2.3rem;margin:0 0 6px}.step>p{color:var(--muted);margin-top:0}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.wide{grid-column:1/-1}
 label{display:flex;flex-direction:column;gap:7px;font-size:.82rem;font-weight:700}
-label:has([required]){position:relative}.style-studio label:has([required])::after{content:'*';position:absolute;right:0;top:-2px;color:#9f2828;font-size:1rem;line-height:1}.chips label:has(input[type=radio][required])::after{display:none}.invalid-field{outline:2px solid #b3261e!important;outline-offset:3px;border-radius:10px}.invalid-field select,.invalid-field textarea,.invalid-field input{border-color:#b3261e!important;background:#fff6f5}.validation-notice{display:none;margin:0 0 16px;padding:12px 14px;border:1px solid #b3261e;border-radius:10px;background:#fff0ef;color:#7d1713;font-size:.85rem;font-weight:700}.validation-notice.active{display:block}
 select,textarea,input[type=file]{padding:13px;border:1px solid var(--line);border-radius:9px;background:#fff;font:inherit}
 .chips{display:flex;flex-wrap:wrap;gap:9px;margin:10px 0 22px}.chips label{display:block}.chips input{position:absolute;opacity:0}.chips span{display:block;padding:10px 14px;border:1px solid var(--line);border-radius:99px;cursor:pointer}.chips input:checked+span{background:var(--green);color:#fff;border-color:var(--green)}
 .actions{display:flex;justify-content:space-between;border-top:1px solid var(--line);margin-top:25px;padding-top:20px}
@@ -50,6 +42,8 @@ footer{text-align:center;color:var(--muted);font-size:.75rem;padding:22px}
 .measure-card{border:1px solid var(--line);border-radius:12px;padding:13px;background:#fff}
 .measure-card small{display:block;color:var(--muted);margin-top:6px;line-height:1.4}
 .unit-row{display:grid;grid-template-columns:1fr 88px;gap:7px}
+.upload-zone{position:relative;border:1.5px dashed var(--gold);border-radius:16px;min-height:290px;display:grid;place-items:center;overflow:hidden;background:#fcf8f1;text-align:center}
+.upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;z-index:3}.upload-zone img{display:none;max-width:100%;max-height:420px;object-fit:contain}
 .handoff{margin-top:16px;background:#f7f1e8;border:1px solid var(--line);border-radius:18px;padding:23px}.handoff-actions{display:flex;gap:9px;flex-wrap:wrap}.support-note{font-size:.75rem;color:var(--muted);margin-top:10px}
 input[type=text],input[type=email],input[type=tel],input[type=date],input[type=number]{padding:13px;border:1px solid var(--line);border-radius:9px;background:#fff;font:inherit}
 @media(max-width:760px){.measure-wrap,.measurements{grid-template-columns:1fr}}
@@ -59,6 +53,7 @@ input[type=text],input[type=email],input[type=tel],input[type=date],input[type=n
 .visualizer-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}
 .visualizer h3{font-size:2rem;margin:0 0 8px}
 .visualizer p{color:var(--muted);line-height:1.6;margin:0}
+.visualizer-actions{display:flex;gap:9px;flex-wrap:wrap}
 .ai-status{margin-top:20px;border:1px solid var(--line);border-radius:14px;padding:18px;background:#fbf8f2}
 .ai-status-row{display:flex;align-items:center;gap:12px}
 .spinner{width:22px;height:22px;border:3px solid #ddcfba;border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
@@ -74,84 +69,13 @@ input[type=text],input[type=email],input[type=tel],input[type=date],input[type=n
 .viz-badge{display:inline-block;padding:6px 10px;border-radius:99px;background:#efe1c8;color:#76501d;font-size:.72rem;font-weight:800}
 @media(max-width:760px){.visualizer-head{flex-direction:column}.concept-caption{align-items:flex-start;flex-direction:column}}
 
-/* Premium Style Studio treatment aligned with the Jane.M atelier. */
-body.style-studio-page{background:linear-gradient(180deg,#fbf8f3 0%,#efe4d4 100%);font-family:var(--sans);color:var(--black)}
-.style-studio .wrap{width:min(1180px,calc(100% - 40px));padding:0 0 96px}
-.style-studio .hero{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(240px,.6fr);gap:clamp(32px,6vw,76px);align-items:center;margin:0;padding:clamp(34px,4.5vw,58px);background:radial-gradient(circle at 86% 14%,rgba(179,138,69,.3),transparent 26%),var(--black);color:#fff}
-.style-studio .hero::after{content:'JM';position:absolute;right:3%;bottom:-27%;color:rgba(217,184,123,.08);font-family:var(--serif);font-size:clamp(11rem,22vw,20rem);font-style:italic;line-height:1;pointer-events:none}
-.style-studio .hero>div{position:relative;z-index:1}
-.style-studio .hero small{color:#d9b87b;font-size:.7rem;font-weight:800;letter-spacing:.2em}
-.style-studio .hero h1{max-width:670px;margin:.22em 0;font-family:var(--serif);font-size:clamp(3.2rem,5.4vw,5.2rem);font-weight:600;letter-spacing:-.04em;line-height:.88}
-.style-studio .hero p{max-width:720px;color:#d6cdc4;font-size:1.02rem}
-.style-studio .note{align-self:stretch;display:flex;align-items:center;padding:18px 0 18px 28px;border-left:1px solid rgba(217,184,123,.42);border-radius:0;background:transparent;color:#e8dfd5;font-family:var(--serif);font-size:1.2rem;line-height:1.2}
-.style-studio .studio-start{display:inline-flex;align-items:center;gap:10px;margin-top:10px;color:#d9b87b;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-decoration:none;text-transform:uppercase;white-space:nowrap}
-.style-studio .studio-start span{font-family:var(--serif);font-size:1.2rem}
-.style-studio .progress{height:3px;margin:0;background:rgba(21,18,15,.12);border-radius:0}
-.style-studio .progress div{background:linear-gradient(90deg,var(--gold-dark),#d9b87b)}
-.style-studio .card{position:relative;scroll-margin-top:94px;padding:clamp(28px,5vw,58px);border:1px solid rgba(21,18,15,.12);border-top:3px solid var(--gold);border-radius:0;background:rgba(255,255,255,.92);box-shadow:0 28px 80px rgba(34,23,13,.12)}
-.style-studio .step h2{font-family:var(--serif);font-size:clamp(2.6rem,5vw,4rem);font-weight:600;letter-spacing:-.025em;line-height:.95;margin:0 0 10px}
-.style-studio .step>p{max-width:650px;margin:0 0 30px;color:var(--muted)}
-.style-studio label{gap:9px;color:#3f3730;font-size:.75rem;letter-spacing:.045em;text-transform:uppercase}
-.style-studio label:has(input[type=checkbox]){letter-spacing:0;text-transform:none}
-.style-studio select,.style-studio textarea,.style-studio input[type=text],.style-studio input[type=email],.style-studio input[type=tel],.style-studio input[type=date],.style-studio input[type=number]{padding:14px 2px;border:0;border-bottom:1px solid #cfc2b2;border-radius:0;background:transparent;color:var(--black);font-family:var(--sans);text-transform:none;transition:border-color .2s ease,background .2s ease}
-.style-studio select:focus,.style-studio textarea:focus,.style-studio input:focus{outline:0;border-color:var(--gold-dark);box-shadow:0 2px 0 var(--gold-dark)}
-.style-studio .chips{gap:10px;margin:13px 0 28px}
-.style-studio .chips span{padding:11px 16px;border-color:#cabdab;border-radius:999px;background:#fbf8f3;color:#40372f;font-size:.76rem;letter-spacing:0;text-transform:none;transition:background .2s ease,color .2s ease,border-color .2s ease,transform .2s ease}
-.style-studio .chips span:hover{border-color:var(--gold-dark);transform:translateY(-1px)}
-.style-studio .chips input:checked+span{border-color:var(--black);background:var(--black);color:#fff}
-.style-studio .actions{align-items:center;margin-top:38px;padding-top:24px}
-.style-studio .btn{min-height:48px;padding:0 22px;border:1px solid var(--black);border-radius:999px;background:transparent;color:var(--black);font-family:var(--sans);font-size:.82rem;text-transform:none;white-space:nowrap}
-.style-studio .btn.primary{border-color:var(--gold);background:var(--gold);color:var(--black)}
-.style-studio .btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(34,23,13,.14)}
-.style-studio .toggle-card{padding:20px;border:1px solid rgba(21,18,15,.12);border-radius:0;background:#f6efe5;text-transform:none}
-.style-studio .toggle-card strong{font-family:var(--serif);font-size:1.3rem;font-weight:600}
-.style-studio .toggle-card p{font-size:.78rem}
-.style-studio .guide{padding:18px;border:1px solid rgba(21,18,15,.12);border-radius:0;background:#f3eadf}
-.style-studio .body-svg{border-radius:0}
-.style-studio .guide-nav button{border-radius:999px;font-family:var(--sans)}
-.style-studio .measure-card{padding:16px;border:1px solid rgba(21,18,15,.12);border-radius:0;background:#fff}
-.style-studio .validation-notice{border-radius:0;border-left:4px solid #b3261e}
-.style-studio .summary{position:relative;overflow:hidden;margin-top:34px;padding:clamp(34px,6vw,66px);border-radius:0;background:radial-gradient(circle at 90% 10%,rgba(179,138,69,.28),transparent 28%),var(--black);color:#fff}
-.style-studio .summary small{color:#d9b87b;font-weight:800;letter-spacing:.18em}
-.style-studio .summary h2{max-width:820px;font-family:var(--serif);font-size:clamp(3rem,6vw,5.5rem);font-weight:600;line-height:.88}
-.style-studio .summary p{max-width:780px;color:#d7cec5}
-.style-studio .result-grid{gap:1px;margin-top:1px;background:rgba(21,18,15,.16);border:1px solid rgba(21,18,15,.16)}
-.style-studio .panel{padding:clamp(24px,4vw,38px);border:0;border-radius:0;background:#fff}
-.style-studio .panel h3{font-family:var(--serif);font-size:2rem;font-weight:600}
-.style-studio .estimate{background:#1d1915;color:#fff}
-.style-studio .estimate strong{font-family:var(--serif);color:#d9b87b;font-size:clamp(2.3rem,5vw,4rem);font-weight:600}
-.style-studio .brief{margin-top:28px;padding:clamp(28px,5vw,52px);border:1px solid rgba(21,18,15,.14);border-top:3px solid var(--gold);border-radius:0;background:#fff;box-shadow:0 24px 70px rgba(34,23,13,.1)}
-.style-studio .brief h3{font-family:var(--serif);font-size:clamp(2.3rem,4vw,3.5rem);font-weight:600}
-.style-studio .brief-section{grid-template-columns:minmax(150px,.34fr) 1fr;padding:22px 0}
-.style-studio .brief-section h4{letter-spacing:.16em}
-.style-studio .handoff{margin-top:28px;padding:clamp(24px,4vw,38px);border:0;border-radius:0;background:linear-gradient(135deg,#f4eadb,#fbf8f3)}
-.style-studio .handoff h3{font-size:clamp(2rem,4vw,3rem)}
-.style-studio .visualizer{margin-top:28px;padding:clamp(28px,5vw,52px);border:1px solid rgba(21,18,15,.14);border-radius:0;background:#fff}
-.style-studio .visualizer h3{font-family:var(--serif);font-size:clamp(2.3rem,4vw,3.5rem);font-weight:600}
-.style-studio .viz-badge{border-radius:0;background:transparent;color:var(--gold-dark);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase}
-.style-studio .ai-status,.style-studio .concept-output img{border-radius:0}
-.studio-note{border-top:1px solid rgba(255,255,255,.1);background:#0d0c0b;color:#a99f95}
-@media(max-width:760px){.style-studio .wrap{width:min(100% - 24px,1180px);padding-bottom:64px}.style-studio .hero{grid-template-columns:1fr;gap:22px;padding:30px 22px}.style-studio .hero h1{font-size:clamp(2.8rem,12vw,3.7rem)}.style-studio .hero p{font-size:.92rem}.style-studio .note{padding:18px 0 0;border-left:0;border-top:1px solid rgba(217,184,123,.42);font-size:1.05rem}.style-studio .card{padding:28px 20px}.style-studio .brief-section{grid-template-columns:1fr}.style-studio .actions{gap:12px}.style-studio .actions .btn{flex:1}.style-studio .brief-actions{width:100%}.style-studio .brief-actions .btn{width:100%}.style-studio .summary{padding:36px 24px}.style-studio .result-grid{grid-template-columns:1fr}}
-
 </style>
-<!-- SEO:START --><link rel="canonical" href="https://sargont.github.io/JaneM/style-studio/" /><meta name="robots" content="index,follow,max-image-preview:large" /><meta property="og:type" content="website" /><meta property="og:site_name" content="Jane.M Atelier" /><meta property="og:title" content="Jane.M Style Studio | Create Your Custom Look in Lesotho" /><meta property="og:description" content="Create a designer-ready custom dress brief for a graduation, wedding, corporate event or special occasion with Jane.M Style Studio in Lesotho." /><meta property="og:url" content="https://sargont.github.io/JaneM/style-studio/" /><meta property="og:image" content="https://sargont.github.io/JaneM/assets/style-studio/mock-design-concept.png" /><meta property="og:image:alt" content="Jane.M atelier concept preview" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="Jane.M Style Studio | Create Your Custom Look in Lesotho" /><meta name="twitter:description" content="Create a designer-ready custom dress brief for a graduation, wedding, corporate event or special occasion with Jane.M Style Studio in Lesotho." /><meta name="twitter:image" content="https://sargont.github.io/JaneM/assets/style-studio/mock-design-concept.png" /><script type="application/ld+json">{"@context":"https://schema.org","@type":"ClothingStore","name":"Jane.M Atelier","alternateName":"Jane.M Lesotho","url":"https://sargont.github.io/JaneM/","logo":"https://sargont.github.io/JaneM/assets/logo-transparent.png","image":"https://sargont.github.io/JaneM/assets/look-gold.jpg","email":"officialjanem@gmail.com","telephone":"+26662790946","areaServed":[{"@type":"City","name":"Maseru"},{"@type":"Country","name":"Lesotho"}],"brand":{"@type":"Brand","name":"Jane.M Atelier"},"sameAs":["https://youtube.com/@janemtv","https://www.facebook.com/share/1CvrANPy9Q/","https://www.instagram.com/___jane_m/"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://sargont.github.io/JaneM/"},{"@type":"ListItem","position":2,"name":"Style Studio","item":"https://sargont.github.io/JaneM/style-studio/"}]}</script><!-- SEO:END -->
 </head>
-<body class="style-studio-page">
-<a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header" id="top">
-  <div class="container nav-wrap">
-    <a class="brand" href="../index.html" aria-label="Jane.M home"><img src="../assets/logo-transparent.png" width="1055" height="1491" alt="Jane.M Lesotho logo" /></a>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
-    <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
-      <a href="../index.html#collection">Collection</a><a href="../catalogue.html">Catalogue</a><a href="../index.html#promo">Promotion</a><a href="../index.html#pricing">Price guide</a><a href="../index.html#process">How to order</a><a href="./" aria-current="page">Style Studio</a><a href="../janem-tv/" data-analytics-event="janem_tv_open">JaneM TV</a><a class="nav-cta" href="https://wa.me/26662790946?text=Hello%20Jane.M%2C%20I%20would%20like%20to%20book%20a%20graduation%20look." target="_blank" rel="noopener">Book on WhatsApp</a>
-    </nav>
-  </div>
-</header>
-<main id="main" class="style-studio">
+<body>
 <div class="wrap">
   <section class="hero">
-    <div><small>JANE.M STYLE STUDIO</small><h1>Create your designer-ready brief.</h1><p>Planning a graduation, wedding, corporate event or special occasion? Share your style, comfort preferences and budget, then receive a clear design direction to begin your Jane.M consultation with confidence.</p><a class="studio-start" href="#wizard">Begin with your occasion <span aria-hidden="true">↓</span></a></div>
-    <div class="note">Take your time. Your selections stay on this device until you choose to share your finished brief.</div>
+    <div><small>JANE.M STYLE STUDIO</small><h1>Brief the designer before the first consultation.</h1><p>This version does not pretend to generate a finished dress. It turns client preferences into a structured, commercially useful design brief that Jane.M can refine.</p></div>
+    <div class="note">Runs entirely in the browser. No API, server or AI subscription is required.</div>
   </section>
 
   <div class="progress"><div id="bar"></div></div>
@@ -172,7 +96,7 @@ body.style-studio-page{background:linear-gradient(180deg,#fbf8f3 0%,#efe4d4 100%
 
       <div class="step">
         <h2>2. Personal style</h2><p>How should the client feel in the outfit?</p>
-        <label>Style personality <span aria-hidden="true" style="color:#9f2828">*</span></label>
+        <label>Style personality</label>
         <div class="chips">
           <label><input type="radio" name="personality" value="Elegant" required><span>Elegant</span></label>
           <label><input type="radio" name="personality" value="Classic"><span>Classic</span></label>
@@ -289,18 +213,22 @@ body.style-studio-page{background:linear-gradient(180deg,#fbf8f3 0%,#efe4d4 100%
       </div>
 
       <div class="step">
-        <h2>5. Contact and inspiration</h2><p>Add your contact details. You can attach any inspiration image directly in WhatsApp after sending your brief.</p>
+        <h2>5. Reference and contact</h2><p>Add an optional image and contact details for the handoff.</p>
         <div class="grid">
           <label>Full name<input type="text" name="clientName" required></label>
           <label>WhatsApp number<input type="tel" name="clientPhone" required placeholder="+266 ..."></label>
           <label>Email, optional<input type="email" name="clientEmail"></label>
           <label>Preferred contact<select name="contactMethod" required><option value="">Choose</option><option>WhatsApp</option><option>Phone call</option><option>Email</option></select></label>
         </div>
-        <div class="toggle-card" style="margin-top:20px"><div></div><div><strong>Have an inspiration image?</strong><p>After you send your brief, attach it directly in WhatsApp so Jane.M can view it alongside your message.</p></div></div>
+        <div class="upload-zone" style="margin-top:20px">
+          <input id="photo" type="file" name="photo" accept="image/*">
+          <div id="uploadPrompt"><strong>Choose a reference photo</strong><span>Full-body or inspiration image • stays on this device</span></div>
+          <img id="preview" alt="Selected reference photo">
+        </div>
+        <div id="fileStatus" style="margin-top:8px;color:var(--muted);font-size:.78rem">No photo selected.</div>
         <label style="margin-top:20px;flex-direction:row"><input type="checkbox" required> I understand this is an indicative briefing tool and Jane.M must confirm the final design and quote.</label>
       </div>
 
-      <p id="validationNotice" class="validation-notice" role="alert">Please complete the highlighted required fields before continuing.</p>
       <div class="actions">
         <button type="button" id="back" class="btn" disabled>Back</button>
         <button type="button" id="next" class="btn primary">Continue</button>
@@ -313,25 +241,27 @@ body.style-studio-page{background:linear-gradient(180deg,#fbf8f3 0%,#efe4d4 100%
     <div class="summary"><small>YOUR JANE.M STYLE DIRECTION</small><h2 id="profile"></h2><p id="summaryText"></p></div>
     <div class="result-grid">
       <div class="panel"><h3>Recommended direction</h3><dl id="direction"></dl></div>
-      <div class="panel estimate"><h3>Indicative workmanship</h3><strong id="estimate"></strong><p>Fabric is selected separately to suit your design &amp; budget.</p></div>
+      <div class="panel estimate"><h3>Indicative workmanship</h3><strong id="estimate"></strong><p>Fabric, trims and embellishments quoted separately.</p></div>
       <div class="panel"><h3>Why this direction works</h3><ul id="reasons"></ul></div>
       <div class="panel"><h3>Styling notes</h3><dl id="styling"></dl></div>
     </div>
 
-    <section id="designerBrief" class="brief">
+    <section class="brief">
       <div class="brief-head"><div><h3>Designer Brief</h3><p>The structured handover document for Jane.M.</p></div>
-        <div class="brief-actions"><button id="copy" class="btn">Copy</button><button id="download" class="btn">Download</button></div>
+        <div class="brief-actions"><button id="copy" class="btn">Copy</button><button id="download" class="btn primary">Download</button><a id="wa" class="btn" target="_blank">WhatsApp</a></div>
       </div>
       <div id="briefDoc"></div>
-      <div id="briefActions" class="handoff"><h3>What would you like to do next?</h3><p>Visualize your direction or send this complete brief to Jane.M. Attach an inspiration image in WhatsApp if you have one.</p><div class="brief-actions"><button id="visualizeBrief" class="btn">Visualize this brief</button><a id="briefWhatsApp" class="btn primary" target="_blank" rel="noopener">Send brief to Jane.M on WhatsApp</a></div></div>
     </section>
     <section class="visualizer">
       <div class="visualizer-head">
         <div>
-          <span class="viz-badge">Your design direction</span>
+          <span class="viz-badge">Mock AI integration</span>
           <h3>Visualize this brief</h3>
-          <p>See an early visual direction inspired by your completed brief, then use it as a thoughtful starting point for your Jane.M consultation.</p>
-          <p id="visualizerSupport" class="support-note">A personalised concept is created when live generation is available; otherwise, you’ll see the approved atelier preview.</p>
+          <p>Preview a customer-facing design concept before the brief is submitted to Jane.M. In this prototype, the analysis is simulated and a static approved concept is displayed.</p>
+        </div>
+        <div class="visualizer-actions">
+          <button id="visualizeBrief" class="btn primary">Visualize this brief</button>
+          <button id="downloadPrompt" class="btn">Download GPT prompt</button>
         </div>
       </div>
 
@@ -346,40 +276,45 @@ body.style-studio-page{background:linear-gradient(180deg,#fbf8f3 0%,#efe4d4 100%
       </div>
 
       <div id="conceptOutput" class="concept-output hidden">
-        <img id="conceptImage" src="../assets/style-studio/mock-design-concept.png" width="1983" height="793" alt="Jane.M atelier concept preview">
+        <img src="assets/mock-design-concept.png" alt="Mock Jane.M customer-facing fashion design concept">
         <div class="concept-caption">
-          <span id="conceptSource">Concept direction for your consultation.</span>
+          <span>Mock result — the live integration will generate this from the completed brief and optional reference photo.</span>
           <span>Concept only • Jane.M confirms the final design and quotation</span>
         </div>
       </div>
+
+      <details class="prompt-preview">
+        <summary>Preview the generated GPT prompt</summary>
+        <pre id="promptText"></pre>
+      </details>
+    </section>
+
+    <section class="handoff">
+      <h3>Send the brief and photo</h3>
+      <p>A normal WhatsApp link cannot pre-attach a local photo. On supported phones, use the native share sheet below and select WhatsApp. Otherwise, download the brief/photo and attach them manually.</p>
+      <div class="handoff-actions">
+        <button id="sharePack" class="btn primary">Share photo + brief</button>
+        <a id="wa" class="btn" target="_blank">Open WhatsApp with brief</a>
+        <button id="downloadPhoto" class="btn">Download selected photo</button>
+      </div>
+      <div id="shareSupport" class="support-note"></div>
     </section>
   </section>
 </div>
-</main>
-<footer class="studio-note">Jane.M Style Studio • Your brief stays on this device until you choose to share it.</footer>
+<footer>Jane.M Style Studio v4 • AI visualization mock • No data leaves this browser</footer>
 
-<script src="../config.js"></script>
-<script src="../analytics.js"></script>
-<script src="../seo-analytics.js"></script>
-<script src="../script.js"></script>
 <script>
-let step=0,currentBrief=null,started=false;const steps=[...document.querySelectorAll('.step')],bar=document.getElementById('bar');
-const track=(event, detail={})=>window.JaneMAnalytics?.track(event,detail);
-track('style_studio_opened');
-function markStarted(){if(!started){started=true;track('style_studio_started')}}
+let step=0,selectedFile=null,currentBrief=null;const steps=[...document.querySelectorAll('.step')],bar=document.getElementById('bar');
 const back=document.getElementById('back'),next=document.getElementById('next'),finish=document.getElementById('finish'),form=document.getElementById('form');
-form.addEventListener('input',markStarted,{once:true});form.addEventListener('change',markStarted,{once:true});
 function show(){steps.forEach((s,i)=>s.classList.toggle('active',i===step));bar.style.width=((step+1)*20)+'%';back.disabled=step===0;next.classList.toggle('hidden',step===4);finish.classList.toggle('hidden',step!==4)}
-function clearInvalid(){steps[step].querySelectorAll('.invalid-field').forEach(el=>el.classList.remove('invalid-field'));steps[step].querySelectorAll('[aria-invalid="true"]').forEach(el=>el.removeAttribute('aria-invalid'));validationNotice.classList.remove('active')}
-function markInvalid(el){const target=el.type==='radio'?el.closest('.chips'):el.type==='checkbox'?el.closest('label'):(el.closest('label')||el);target?.classList.add('invalid-field');el.setAttribute('aria-invalid','true')}
-function showMissing(fields){fields.forEach(markInvalid);validationNotice.classList.add('active');fields[0]?.focus()}
-function valid(){clearInvalid();const req=[...steps[step].querySelectorAll('[required]')].filter(el=>!el.closest('.hidden'));const missing=[];for(const el of req){if(el.type==='radio'){if(!steps[step].querySelector('[name="'+el.name+'"]:checked'))missing.push(el)}else if(el.type==='checkbox'){if(!el.checked)missing.push(el)}else if(!el.value.trim())missing.push(el)}if(missing.length){showMissing(missing);return false}return true}
-function syncMeasureFlow(){const on=document.getElementById('captureToggle').checked;measurementFlow.classList.toggle('hidden',!on);measurementSkip.classList.toggle('hidden',on);track(on?'measurements_selected':'measurements_skipped')}
-next.onclick=()=>{if(!valid())return;if(step===3&&captureToggle.checked){const missingMeasurements=['m_bust','m_waist','m_hip','m_shoulder','m_length'].map(n=>form.elements[n]).filter(el=>!el.value);if(missingMeasurements.length){showMissing(missingMeasurements);return}}step++;show()};back.onclick=()=>{clearInvalid();step--;show()};
+function valid(){const req=[...steps[step].querySelectorAll('[required]')].filter(el=>!el.closest('.hidden'));for(const el of req){if(el.type==='radio'){if(!steps[step].querySelector('[name="'+el.name+'"]:checked'))return false}else if(el.type==='checkbox'){if(!el.checked)return false}else if(!el.value)return false}return true}
+function syncMeasureFlow(){const on=document.getElementById('captureToggle').checked;measurementFlow.classList.toggle('hidden',!on);measurementSkip.classList.toggle('hidden',on)}
+next.onclick=()=>{if(!valid())return alert('Please complete the required fields.');if(step===3&&captureToggle.checked){for(const n of ['m_bust','m_waist','m_hip','m_shoulder','m_length']){if(!form.elements[n].value)return alert('Please complete bust, waist, hip, shoulder width and dress length.')}}step++;show()};back.onclick=()=>{step--;show()};
 captureToggle.onchange=syncMeasureFlow;
 const base={Mini:1450,'Above knee':1650,'Knee length':1650,Midi:2500,Maxi:3500,'No preference':2500};
 const adds={Corset:650,Slit:200,'Long sleeves':450,'Off shoulder':250,'Open back':300,'Big bow':450,Pockets:150,Train:700,Lace:600,Beading:900,'Exposed boning':250,'Tiered skirt':1500};
-function data(){const f=new FormData(form),d={};for(const [k,v] of f.entries()){if(k==='features'){(d.features??=[]).push(v)}else d[k]=v}d.features=d.features||[];d.captureMeasurements=captureToggle.checked;return d}
+function data(){const f=new FormData(form),d={};for(const [k,v] of f.entries()){if(k==='features'){(d.features??=[]).push(v)}else if(k!=='photo')d[k]=v}d.features=d.features||[];d.captureMeasurements=captureToggle.checked;return d}
+photo.onchange=()=>{selectedFile=photo.files[0]||null;if(!selectedFile)return;preview.src=URL.createObjectURL(selectedFile);preview.style.display='block';uploadPrompt.style.display='none';fileStatus.textContent='Selected: '+selectedFile.name}
 function make(d){
  const hot=d.weather==='Hot',formal=['Corporate Dinner','Gala','Wedding'].includes(d.occasion);
  let silhouette=d.fit==='Relaxed'?'softly draped A-line':d.fit==='Figure-hugging'?'sculpted column':'structured fit-and-flare';
@@ -416,61 +351,98 @@ function make(d){
 }
 function brief(d,r){
  const measurements=d.captureMeasurements?Object.fromEntries([['Bust',d.m_bust+' '+d.m_bust_unit],['Waist',d.m_waist+' '+d.m_waist_unit],['Hip',d.m_hip+' '+d.m_hip_unit],['Shoulder width',d.m_shoulder+' '+d.m_shoulder_unit],['Upper arm',d.m_arm?d.m_arm+' '+d.m_arm_unit:'Not provided'],['Sleeve length',d.m_sleeve?d.m_sleeve+' '+d.m_sleeve_unit:'Not provided'],['Shoulder-to-waist',d.m_torso?d.m_torso+' '+d.m_torso_unit:'Not provided'],['Dress length',d.m_length+' '+d.m_length_unit],['Height',d.m_height?d.m_height+' '+d.m_height_unit:'Not provided'],['Heel height',d.m_heel?d.m_heel+' '+d.m_heel_unit:'Not provided']]):{status:'Deferred — Jane.M must measure and verify before production'};
- return {title:'Jane.M Client Design Brief — '+r.profile,client:{name:d.clientName,phone:d.clientPhone,email:d.clientEmail||'Not provided',preferredContact:d.contactMethod},context:{occasion:d.occasion,theme:d.theme,setting:d.setting,weather:d.weather,time:d.time,budget:d.budget},preferences:{personality:d.personality,fit:d.fit,length:d.length,colour:d.colour,coverage:d.coverage,feeling:d.feeling,priority:d.priority,movement:d.movement,focalPoint:d.focalPoint},direction:{silhouette:r.silhouette,neckline:r.neckline,sleeve:r.sleeve,fabric:r.fabric,features:r.details},constraints:{avoid:d.avoid||'None stated',notes:d.notes||'None stated'},measurements,inspiration:'Attach an inspiration image in WhatsApp if helpful.',complexity:{rating:r.complexity,score:r.constructionScore+'/12',basis:'Assessed from structure, fit, sleeves, draping, embellishment and finishing requirements'},estimate:`M${r.low.toLocaleString()}–M${r.high.toLocaleString()} indicative custom-workmanship range`,disclaimer:'Starting brief only. Jane.M must confirm measurements, construction, fabric, final design and quotation.'}
+ return {title:'Jane.M Client Design Brief — '+r.profile,client:{name:d.clientName,phone:d.clientPhone,email:d.clientEmail||'Not provided',preferredContact:d.contactMethod},context:{occasion:d.occasion,theme:d.theme,setting:d.setting,weather:d.weather,time:d.time,budget:d.budget},preferences:{personality:d.personality,fit:d.fit,length:d.length,colour:d.colour,coverage:d.coverage,feeling:d.feeling,priority:d.priority,movement:d.movement,focalPoint:d.focalPoint},direction:{silhouette:r.silhouette,neckline:r.neckline,sleeve:r.sleeve,fabric:r.fabric,features:r.details},constraints:{avoid:d.avoid||'None stated',notes:d.notes||'None stated'},measurements,referencePhoto:selectedFile?selectedFile.name:'Not provided',complexity:{rating:r.complexity,score:r.constructionScore+'/12',basis:'Assessed from structure, fit, sleeves, draping, embellishment and finishing requirements'},estimate:`M${r.low.toLocaleString()}–M${r.high.toLocaleString()} indicative custom-workmanship range`,disclaimer:'Starting brief only. Jane.M must confirm measurements, construction, fabric, final design and quotation.'}
 }
 function esc(x){return String(x).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function section(title,obj){return `<div class="brief-section"><h4>${title}</h4><ul>${Object.entries(obj).map(([k,v])=>`<li><b>${esc(k)}:</b> ${esc(v)}</li>`).join('')}</ul></div>`}
-function toText(b){return `${b.title}\n\nCLIENT\n${Object.entries(b.client).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nEVENT CONTEXT\n${Object.entries(b.context).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCLIENT PREFERENCES\n${Object.entries(b.preferences).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCREATIVE DIRECTION\n${Object.entries(b.direction).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCONSTRAINTS\n${Object.entries(b.constraints).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nMEASUREMENTS\n${Object.entries(b.measurements).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nINSPIRATION\n${b.inspiration}\n\nCOMPLEXITY ASSESSMENT\n${Object.entries(b.complexity).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCOMMERCIAL GUIDE\n${b.estimate}\n\n${b.disclaimer}`}
-form.onsubmit=e=>{e.preventDefault();if(!valid())return;const d=data(),r=make(d),b=brief(d,r);
+function toText(b){return `${b.title}\n\nCLIENT\n${Object.entries(b.client).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nEVENT CONTEXT\n${Object.entries(b.context).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCLIENT PREFERENCES\n${Object.entries(b.preferences).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCREATIVE DIRECTION\n${Object.entries(b.direction).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCONSTRAINTS\n${Object.entries(b.constraints).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nMEASUREMENTS\n${Object.entries(b.measurements).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nREFERENCE PHOTO\n${b.referencePhoto}\n\nCOMPLEXITY ASSESSMENT\n${Object.entries(b.complexity).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCOMMERCIAL GUIDE\n${b.estimate}\n\n${b.disclaimer}`}
+form.onsubmit=e=>{e.preventDefault();if(!valid())return alert('Please complete the required fields.');const d=data(),r=make(d),b=brief(d,r);
  document.getElementById('wizard').style.display='none';document.querySelector('.progress').style.display='none';document.getElementById('result').classList.add('active');
  profile.textContent=r.profile;summaryText.textContent=r.summary;estimate.textContent=`M${r.low.toLocaleString()} – M${r.high.toLocaleString()}`;
  direction.innerHTML=[['Silhouette',r.silhouette],['Neckline',r.neckline],['Sleeve',r.sleeve],['Length',d.length],['Fabric',r.fabric],['Details',r.details]].map(x=>`<div><dt>${x[0]}</dt><dd>${x[1]}</dd></div>`).join('');
  reasons.innerHTML=r.reasons.map(x=>`<li>${x}</li>`).join('');styling.innerHTML=[['Accessories',r.accessories],['Shoes',r.shoes],['Hair & makeup',r.beauty]].map(x=>`<div><dt>${x[0]}</dt><dd>${x[1]}</dd></div>`).join('');
- briefDoc.innerHTML=section('Client',b.client)+section('Event context',b.context)+section('Client preferences',b.preferences)+section('Creative direction',b.direction)+section('Constraints',b.constraints)+section('Measurements',b.measurements)+`<div class="brief-section"><h4>Inspiration</h4><p>${b.inspiration}</p></div>`+section('Complexity assessment',b.complexity)+`<div class="brief-section"><h4>Commercial guide</h4><p><b>${b.estimate}</b><br>${b.disclaimer}</p></div>`;
- currentBrief=b;window.B=b;
- const handoff=`Hello Jane.M, I completed the Style Studio. Please find my full designer brief below.\n\n${toText(b)}`;
- briefWhatsApp.href='https://wa.me/26662790946?text='+encodeURIComponent(handoff);track('style_preferences_completed');track('brief_generated');track('style_studio_completed');window.requestAnimationFrame(()=>document.getElementById('briefActions').scrollIntoView({behavior:'smooth',block:'center'}));
+ briefDoc.innerHTML=section('Client',b.client)+section('Event context',b.context)+section('Client preferences',b.preferences)+section('Creative direction',b.direction)+section('Constraints',b.constraints)+section('Measurements',b.measurements)+section('Complexity assessment',b.complexity)+`<div class="brief-section"><h4>Reference photo</h4><p>${b.referencePhoto}</p></div><div class="brief-section"><h4>Commercial guide</h4><p><b>${b.estimate}</b><br>${b.disclaimer}</p></div>`;
+ currentBrief=b;window.B=b;promptText.textContent=buildVisualizationPrompt(b);downloadPhoto.classList.toggle('hidden',!selectedFile);shareSupport.textContent=selectedFile?(navigator.share?'Use Share photo + brief, then choose WhatsApp.':'File sharing is not supported here; download both files and attach manually.'):'No photo selected; the brief can still be shared.';wa.href='https://wa.me/26662790946?text='+encodeURIComponent('Hello Jane.M, I completed the Style Studio.\n\n'+toText(b));window.scrollTo({top:0,behavior:'smooth'});
 };
 copy.onclick=async()=>{await navigator.clipboard.writeText(toText(window.B));alert('Brief copied.')};
 download.onclick=()=>{const blob=new Blob([toText(window.B)],{type:'text/plain'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='JaneM-Designer-Brief.txt';a.click()};
-const mockConceptSrc='../assets/style-studio/mock-design-concept.png';
-async function generateDesignConcept(brief){
-  const controller=new AbortController();
-  const timeout=setTimeout(()=>controller.abort(),90000);
-  try{
-    const response=await fetch('/api/style-studio/visualize',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({brief}),signal:controller.signal});
-    if(!response.ok)throw new Error('Live visualization unavailable');
-    const result=await response.json();
-    if(result.mode!=='live'||typeof result.imageDataUrl!=='string'||!result.imageDataUrl.startsWith('data:image/'))throw new Error('Invalid live visualization');
-    conceptImage.src=result.imageDataUrl;
-    conceptImage.alt='Personalised Jane.M fashion concept generated from the client brief';
-    conceptSource.textContent='Personalised concept generated from your brief.';
-    visualizerSupport.textContent='This personalised concept interprets your brief as an early consultation direction.';
-    conceptOutput.classList.remove('hidden');
-    track('concept_live_generated');
-    return 'live';
-  }catch(error){
-    return runMockConcept();
-  }finally{
-    clearTimeout(timeout);
-  }
+downloadPhoto.onclick=()=>{if(!selectedFile)return;const a=document.createElement('a');a.href=URL.createObjectURL(selectedFile);a.download=selectedFile.name;a.click()};
+sharePack.onclick=async()=>{const text=toText(currentBrief),briefFile=new File([text],'JaneM-Designer-Brief.txt',{type:'text/plain'}),files=selectedFile?[selectedFile,briefFile]:[briefFile];if(navigator.canShare&&navigator.canShare({files})){try{await navigator.share({title:'Jane.M Designer Brief',text:'Jane.M Style Studio briefing pack',files})}catch(e){}}else if(navigator.share){try{await navigator.share({title:'Jane.M Designer Brief',text})}catch(e){}}else alert('Direct file sharing is not supported. Download the brief and photo, then attach them in WhatsApp.')};
+
+function buildVisualizationPrompt(b){
+  return `SYSTEM / DEVELOPER INSTRUCTION
+
+You are the Jane.M Atelier Fashion Concept Director, garment-construction analyst and customer-presentation art director.
+
+Your task is to transform the supplied client design brief and optional reference photo into ONE coherent, customer-facing bespoke fashion concept board.
+
+NON-NEGOTIABLE ACCURACY RULES
+1. Treat the structured brief as the source of truth.
+2. Do not merely recolour or lightly edit clothing visible in the reference photo.
+3. Design a genuinely new garment from the brief.
+4. The outfit worn by the model, front sketch, back sketch, detail crops, written features, fabric description and complexity assessment must all describe the exact same garment.
+5. Do not introduce sleeves, necklines, lengths, trains, slits, corsetry, embellishments or fabrics that contradict the brief.
+6. When measurements are implausible, incomplete or unverified, do not use them to distort the model. Clearly state that Jane.M must verify them.
+7. The model must appear realistic and editorial, with natural skin texture, believable anatomy, restrained retouching and no exaggerated AI gloss.
+8. Present the garment on an adult female fashion model. Preserve the uploaded person's general appearance only when a usable reference photo is supplied and consented to; otherwise use a non-identifiable model.
+9. Do not include operational buttons such as “download brief” or “share with designer” inside the artwork. This image is shown to the customer before submission.
+10. Do not promise that the concept is production-ready or that the estimate is final.
+
+DESIGN WORK
+- Resolve the client’s occasion, theme, venue, weather, time, coverage, comfort, movement, focal point, budget and requested features into one practical garment concept.
+- Balance visual impact with wearability and the stated level of modesty.
+- Create an exact front view and exact back view of the same garment.
+- Show useful close-ups of the actual neckline, construction/draping and focal feature.
+- Recommend fabric and styling that match the garment and event.
+
+COMPLEXITY AND PRICING
+- Independently assess construction complexity as Low, Moderate, High or Very High.
+- Base the assessment on pattern complexity, internal structure, corsetry/boning, draping, sleeve tailoring, slit engineering, closures, lining, embellishment, fabric handling, finishing and fitting risk.
+- Produce an indicative custom-workmanship range in Lesotho maloti.
+- Do not force the concept into a fixed price-book item.
+- Explain the main factors driving the range.
+- State that fabric, trims and embellishments may be separate and that Jane.M will confirm the final quotation after measurements and construction review.
+
+CUSTOMER-FACING ARTWORK
+Create a premium vertical fashion concept board with:
+- Jane.M Atelier branding;
+- “Your Design Concept” and the client’s first name;
+- hero model wearing the exact proposed garment;
+- concise concept overview;
+- exact front and back garment sketches matching the model;
+- key features;
+- three aligned design-detail close-ups;
+- fabric and colour;
+- styling suggestions;
+- design complexity assessment;
+- indicative custom-workmanship range;
+- why the concept works for the client;
+- short “What happens next?” section: consultation, measurements verification, fabric/details, final design approval and final quotation;
+- clear concept-only disclaimer.
+
+Keep typography readable, layout uncluttered and all content internally consistent.
+
+CLIENT DESIGN BRIEF
+
+${toText(b)}
+
+OUTPUT
+Generate one high-resolution portrait concept-board image.`;
 }
-async function runMockConcept(){
-  conceptImage.src=mockConceptSrc;
-  conceptImage.alt='Jane.M atelier concept preview';
-  conceptSource.textContent='Illustrative atelier preview for your consultation.';
-  visualizerSupport.textContent='Live generation is not currently available, so this approved preview is shown as a consultation guide.';
-  conceptOutput.classList.remove('hidden');
-  track('concept_preview_displayed');
-  return 'mock';
+function downloadText(filename,text){
+  const blob=new Blob([text],{type:'text/plain;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;a.click();URL.revokeObjectURL(a.href);
 }
+downloadPrompt.addEventListener('click',()=>{
+  if(!currentBrief)return alert('Create the briefing pack first.');
+  downloadText('JaneM-GPT-Visualization-Prompt.txt',buildVisualizationPrompt(currentBrief));
+});
 visualizeBrief.addEventListener('click',async()=>{
   if(!currentBrief)return alert('Create the briefing pack first.');
-  track('visualize_brief_clicked');
+  promptText.textContent=buildVisualizationPrompt(currentBrief);
   conceptOutput.classList.add('hidden');
   aiStatus.classList.remove('hidden');
   [aiStep1,aiStep2,aiStep3,aiStep4].forEach(x=>x.classList.remove('done'));
-  const conceptPromise=generateDesignConcept(currentBrief);
   const stages=[
     [aiStep1,'Analysing event, client preferences and constraints…'],
     [aiStep2,'Assessing construction complexity and indicative pricing…'],
@@ -482,9 +454,9 @@ visualizeBrief.addEventListener('click',async()=>{
     await new Promise(r=>setTimeout(r,650));
     el.classList.add('done');
   }
-  aiStatusText.textContent='Rendering your atelier concept…';
-  await conceptPromise;
+  await new Promise(r=>setTimeout(r,350));
   aiStatus.classList.add('hidden');
+  conceptOutput.classList.remove('hidden');
   conceptOutput.scrollIntoView({behavior:'smooth',block:'start'});
 });
 
