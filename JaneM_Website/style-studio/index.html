@@ -1,710 +1,228 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Free Outfit Planner &amp; Personal Stylist | Jane.M Lesotho</title>
-<meta name="description" content="Plan outfits with clothes you own using Jane.M’s free online personal stylist. Get colour, jewellery, shoe, beauty and re-wear advice—no purchase required." />
-<meta name="theme-color" content="#15120f" />
-<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../styles.css?v=20260809theme6">
-<style>
-:root{--ink:#17130f;--paper:#f8f3eb;--gold:#b4863d;--green:#123d36;--muted:#74695f;--line:#ded3c4;--white:#fff}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(#fbf8f2,#eadfce);font-family:Arial,sans-serif;color:var(--ink)}
-.wrap{width:min(1100px,calc(100% - 24px));margin:auto;padding:38px 0 70px}
-.hero{display:grid;grid-template-columns:1.3fr .7fr;gap:30px;align-items:end;margin-bottom:25px}
-h1,h2,h3{font-family:Georgia,serif}.hero h1{font-size:clamp(3rem,7vw,6rem);line-height:.92;margin:.2em 0}.hero p{color:var(--muted);max-width:720px}
-.note{background:var(--green);color:#fff;padding:20px;border-radius:16px}
-.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px;box-shadow:0 20px 70px #6f4f2618}
-.progress{height:5px;background:#ddd;border-radius:10px;overflow:hidden;margin:0 0 22px}.progress div{height:100%;width:20%;background:var(--gold);transition:.3s}
-.step{display:none}.step.active{display:block}.step h2{font-size:2.3rem;margin:0 0 6px}.step>p{color:var(--muted);margin-top:0}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.wide{grid-column:1/-1}
-label{display:flex;flex-direction:column;gap:7px;font-size:.82rem;font-weight:700}
-label:has([required]){position:relative}.style-studio label:has([required])::after{content:'*';position:absolute;right:0;top:-2px;color:#9f2828;font-size:1rem;line-height:1}.chips label:has(input[type=radio][required])::after{display:none}.invalid-field{outline:2px solid #b3261e!important;outline-offset:3px;border-radius:10px}.invalid-field select,.invalid-field textarea,.invalid-field input{border-color:#b3261e!important;background:#fff6f5}.validation-notice{display:none;margin:0 0 16px;padding:12px 14px;border:1px solid #b3261e;border-radius:10px;background:#fff0ef;color:#7d1713;font-size:.85rem;font-weight:700}.validation-notice.active{display:block}
-select,textarea,input[type=file]{padding:13px;border:1px solid var(--line);border-radius:9px;background:#fff;font:inherit}
-.chips{display:flex;flex-wrap:wrap;gap:9px;margin:10px 0 22px}.chips label{display:block}.chips input{position:absolute;opacity:0}.chips span{display:block;padding:10px 14px;border:1px solid var(--line);border-radius:99px;cursor:pointer}.chips input:checked+span{background:var(--green);color:#fff;border-color:var(--green)}
-.actions{display:flex;justify-content:space-between;border-top:1px solid var(--line);margin-top:25px;padding-top:20px}
-.btn{border:1px solid var(--ink);border-radius:99px;padding:12px 18px;font-weight:800;cursor:pointer;background:transparent;text-decoration:none;color:var(--ink)}.primary{background:var(--ink);color:#fff}.hidden{display:none!important}
-.result{display:none}.result.active{display:block}.summary{background:var(--green);color:#fff;border-radius:20px;padding:35px}.summary h2{font-size:3.4rem;margin:0 0 15px}.summary p{color:#dce7e2}
-.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:25px}.panel h3{font-size:1.8rem;margin:0 0 16px}.panel dl{margin:0}.panel dl div{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line)}dt{color:var(--muted);font-size:.72rem;text-transform:uppercase}dd{margin:0;font-weight:700}
-.estimate{background:#17130f;color:#fff}.estimate strong{font-family:Georgia,serif;color:#d8b574;font-size:3rem}.estimate p{color:#d6ccc2}
-.brief{margin-top:16px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:25px}.brief-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}.brief h3{font-size:2rem;margin:0}.brief p{color:var(--muted)}.brief-actions{display:flex;gap:9px;flex-wrap:wrap}
-.brief-section{display:grid;grid-template-columns:200px 1fr;gap:18px;padding:16px 0;border-top:1px solid var(--line)}.brief-section h4{margin:0;color:var(--gold);font-size:.72rem;text-transform:uppercase;letter-spacing:.1em}.brief-section ul,.brief-section p{margin:0;line-height:1.6}
-footer{text-align:center;color:var(--muted);font-size:.75rem;padding:22px}
-@media(max-width:760px){.hero,.grid,.result-grid{grid-template-columns:1fr}.brief-head{flex-direction:column}.brief-section{grid-template-columns:1fr}.wide{grid-column:auto}}
-
-.toggle-card{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:16px;border:1px solid var(--line);border-radius:14px;background:#fbf8f2;margin-top:20px}
-.toggle-card p{margin:4px 0 0;color:var(--muted);font-size:.8rem;line-height:1.5}
-.measure-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:22px;margin-top:20px}
-.guide{background:#f3eadf;border:1px solid var(--line);border-radius:16px;padding:16px;height:max-content}
-.body-svg{width:100%;background:#fff;border:1px solid var(--line);border-radius:12px}
-.guide-slide{display:none}.guide-slide.active{display:block}
-.guide-nav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px}
-.guide-nav button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;font-weight:700;cursor:pointer}
-.guide-nav button:disabled{opacity:.35;cursor:not-allowed}
-.guide-count{font-size:.75rem;color:var(--muted);font-weight:700}
-.measurements{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.measure-card{border:1px solid var(--line);border-radius:12px;padding:13px;background:#fff}
-.measure-card small{display:block;color:var(--muted);margin-top:6px;line-height:1.4}
-.unit-row{display:grid;grid-template-columns:1fr 88px;gap:7px}
-.handoff{margin-top:16px;background:#f7f1e8;border:1px solid var(--line);border-radius:18px;padding:23px}.handoff-actions{display:flex;gap:9px;flex-wrap:wrap}.support-note{font-size:.75rem;color:var(--muted);margin-top:10px}
-input[type=text],input[type=email],input[type=tel],input[type=date],input[type=number]{padding:13px;border:1px solid var(--line);border-radius:9px;background:#fff;font:inherit}
-@media(max-width:760px){.measure-wrap,.measurements{grid-template-columns:1fr}}
-
-
-.visualizer{margin-top:16px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:25px}
-.visualizer-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}
-.visualizer h3{font-size:2rem;margin:0 0 8px}
-.visualizer p{color:var(--muted);line-height:1.6;margin:0}
-.ai-status{margin-top:20px;border:1px solid var(--line);border-radius:14px;padding:18px;background:#fbf8f2}
-.ai-status-row{display:flex;align-items:center;gap:12px}
-.spinner{width:22px;height:22px;border:3px solid #ddcfba;border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.ai-steps{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:8px;color:var(--muted);font-size:.82rem}
-.ai-steps li.done{color:var(--green);font-weight:700}
-.concept-output{margin-top:20px}
-.concept-output img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:14px;background:#f3eee7}
-.concept-caption{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:13px 2px 0;font-size:.78rem;color:var(--muted)}
-.prompt-preview{margin-top:16px;background:#17130f;color:#eee5d8;border-radius:14px;padding:18px}
-.prompt-preview summary{cursor:pointer;font-weight:800;color:#d8b574}
-.prompt-preview pre{white-space:pre-wrap;word-break:break-word;font:12px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;max-height:360px;overflow:auto}
-.viz-badge{display:inline-block;padding:6px 10px;border-radius:99px;background:#efe1c8;color:#76501d;font-size:.72rem;font-weight:800}
-@media(max-width:760px){.visualizer-head{flex-direction:column}.concept-caption{align-items:flex-start;flex-direction:column}}
-
-/* Premium Style Studio treatment aligned with the Jane.M atelier. */
-body.style-studio-page{background:linear-gradient(180deg,#fbf8f3 0%,#efe4d4 100%);font-family:var(--sans);color:var(--black)}
-.style-studio .wrap{width:min(1180px,calc(100% - 40px));padding:0 0 96px}
-.style-studio .hero{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(240px,.6fr);gap:clamp(32px,6vw,76px);align-items:center;margin:0;padding:clamp(34px,4.5vw,58px);background:radial-gradient(circle at 86% 14%,rgba(179,138,69,.3),transparent 26%),var(--black);color:#fff}
-.style-studio .hero::after{content:'JM';position:absolute;right:3%;bottom:-27%;color:rgba(217,184,123,.08);font-family:var(--serif);font-size:clamp(11rem,22vw,20rem);font-style:italic;line-height:1;pointer-events:none}
-.style-studio .hero>div{position:relative;z-index:1}
-.style-studio .hero small{color:#d9b87b;font-size:.7rem;font-weight:800;letter-spacing:.2em}
-.style-studio .hero h1{max-width:670px;margin:.22em 0;font-family:var(--serif);font-size:clamp(3.2rem,5.4vw,5.2rem);font-weight:600;letter-spacing:-.04em;line-height:.88}
-.style-studio .hero p{max-width:720px;color:#d6cdc4;font-size:1.02rem}
-.style-studio .note{align-self:stretch;display:flex;align-items:center;padding:18px 0 18px 28px;border-left:1px solid rgba(217,184,123,.42);border-radius:0;background:transparent;color:#e8dfd5;font-family:var(--serif);font-size:1.2rem;line-height:1.2}
-.style-studio .studio-start{display:inline-flex;align-items:center;gap:10px;margin-top:10px;color:#d9b87b;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-decoration:none;text-transform:uppercase;white-space:nowrap}
-.style-studio .studio-start span{font-family:var(--serif);font-size:1.2rem}
-.style-studio .free-pill{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:16px;color:#d9cdbf;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
-.style-studio .free-pill span::before{content:'✓';margin-right:7px;color:#d9b87b}
-.style-studio .progress{height:3px;margin:0;background:rgba(21,18,15,.12);border-radius:0}
-.style-studio .progress div{background:linear-gradient(90deg,var(--gold-dark),#d9b87b)}
-.style-studio .journey-status{display:flex;justify-content:space-between;gap:20px;margin:14px 0 28px;color:#6f6256;font-size:.7rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase}
-.style-studio .journey-status strong{color:var(--gold-dark);font-weight:800}
-.style-studio .journey-steps{display:flex;justify-content:space-between;gap:7px;margin:0 0 10px;padding:0;list-style:none}
-.style-studio .journey-steps li{display:flex;align-items:center;gap:8px;min-width:0;color:#887b6e;font-size:.64rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
-.style-studio .journey-steps li::before{content:counter(step);display:grid;place-items:center;width:22px;height:22px;border:1px solid #cfc2b2;border-radius:50%;counter-increment:step;font-family:var(--serif);font-size:.82rem}
-.style-studio .journey-steps{counter-reset:step}.style-studio .journey-steps li.is-current,.style-studio .journey-steps li.is-complete{color:var(--black)}.style-studio .journey-steps li.is-current::before,.style-studio .journey-steps li.is-complete::before{border-color:var(--gold);background:var(--gold);color:var(--black)}
-.style-studio .style-reveal{display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:center;max-width:760px;margin-top:25px;padding-top:22px;border-top:1px solid rgba(217,184,123,.34)}
-.style-studio .style-reveal__mark{display:grid;place-items:center;width:48px;height:48px;border:1px solid rgba(217,184,123,.6);border-radius:50%;color:#d9b87b;font-family:var(--serif);font-size:1.55rem}.style-studio .style-reveal p{margin:0;color:#e2d7cd;font-size:.9rem}
-.style-studio .scorecard{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin:0;background:rgba(21,18,15,.14);border:1px solid rgba(21,18,15,.14)}
-.style-studio .scorecard__item{padding:22px;background:#fff}.style-studio .scorecard__item span{display:block;margin-bottom:8px;color:var(--gold-dark);font-size:.64rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase}.style-studio .scorecard__item strong{display:block;font-family:var(--serif);font-size:1.8rem;font-weight:600;line-height:1}.style-studio .scorecard__item small{display:block;margin-top:7px;color:var(--muted);font-size:.73rem;line-height:1.35}
-.style-studio .scorecard-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
-.style-studio .scorecard-actions .btn.primary{order:-1}.style-studio .scorecard-actions .btn:last-child{margin-left:auto}
-.style-studio .style-passport{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:center;margin-top:28px;padding:clamp(25px,4vw,38px);border:1px solid rgba(21,18,15,.14);background:linear-gradient(135deg,#f7efe4,#fff)}
-.style-studio .style-passport h3{margin:.08em 0;font-family:var(--serif);font-size:clamp(2rem,3.8vw,3.1rem);font-weight:600;line-height:.96}.style-studio .style-passport p{max-width:680px;margin:9px 0 0;color:#5f5348}.style-studio .passport-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}.style-studio .passport-status{margin-top:14px!important;color:var(--gold-dark)!important;font-size:.78rem;font-weight:800}
-.style-studio .card{position:relative;scroll-margin-top:94px;padding:clamp(28px,5vw,58px);border:1px solid rgba(21,18,15,.12);border-top:3px solid var(--gold);border-radius:0;background:rgba(255,255,255,.92);box-shadow:0 28px 80px rgba(34,23,13,.12)}
-.style-studio .step h2{font-family:var(--serif);font-size:clamp(2.6rem,5vw,4rem);font-weight:600;letter-spacing:-.025em;line-height:.95;margin:0 0 10px}
-.style-studio .step>p{max-width:650px;margin:0 0 30px;color:var(--muted)}
-.style-studio label{gap:9px;color:#3f3730;font-size:.75rem;letter-spacing:.045em;text-transform:uppercase}
-.style-studio label:has(input[type=checkbox]){letter-spacing:0;text-transform:none}
-.style-studio .step .grid{gap:14px}.style-studio .step:first-child .grid{margin-top:34px}
-.style-studio .field-card{position:relative;min-height:112px;padding:18px 18px 10px;border:1px solid rgba(21,18,15,.14);background:linear-gradient(145deg,#fff 0%,#f9f4ec 100%);box-shadow:0 8px 22px rgba(34,23,13,.035);transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease}
-.style-studio .field-card:hover,.style-studio .field-card:focus-within{border-color:var(--gold-dark);box-shadow:0 14px 30px rgba(34,23,13,.09);transform:translateY(-1px)}
-.style-studio .field-card select,.style-studio .field-card input{min-height:42px;padding:9px 0 3px;border-bottom:0;background:transparent;font-family:var(--serif);font-size:1.45rem;font-weight:600;letter-spacing:-.01em}
-.style-studio .field-card::before{content:'✦';position:absolute;right:17px;top:17px;color:var(--gold-dark);font-size:.7rem}.style-studio .field-card:has([required])::after{content:'required';right:32px;top:18px;color:#8b6a3c;font-size:.55rem;font-weight:800;letter-spacing:.11em}
-.style-studio .field-card--budget{min-height:96px;display:grid;grid-template-columns:minmax(170px,.42fr) 1fr;align-items:center;gap:20px}.style-studio .field-card--budget select{min-width:0}.style-studio .field-card--notes{min-height:0}.style-studio .field-card--notes textarea{min-height:84px;padding:8px 0 0;border-bottom:0}
-.style-studio select,.style-studio textarea,.style-studio input[type=text],.style-studio input[type=email],.style-studio input[type=tel],.style-studio input[type=date],.style-studio input[type=number]{padding:14px 2px;border:0;border-bottom:1px solid #cfc2b2;border-radius:0;background:transparent;color:var(--black);font-family:var(--sans);text-transform:none;transition:border-color .2s ease,background .2s ease}
-.style-studio select:focus,.style-studio textarea:focus,.style-studio input:focus{outline:0;border-color:var(--gold-dark);box-shadow:0 2px 0 var(--gold-dark)}
-.style-studio .chips{gap:10px;margin:13px 0 28px}
-.style-studio .chips span{padding:11px 16px;border-color:#cabdab;border-radius:999px;background:#fbf8f3;color:#40372f;font-size:.76rem;letter-spacing:0;text-transform:none;transition:background .2s ease,color .2s ease,border-color .2s ease,transform .2s ease}
-.style-studio .chips span:hover{border-color:var(--gold-dark);transform:translateY(-1px)}
-.style-studio .chips input:checked+span{border-color:var(--black);background:var(--black);color:#fff}
-.style-studio .actions{align-items:center;margin-top:38px;padding-top:24px}
-.style-studio .btn{min-height:48px;padding:0 22px;border:1px solid var(--black);border-radius:999px;background:transparent;color:var(--black);font-family:var(--sans);font-size:.82rem;text-transform:none;white-space:nowrap}
-.style-studio .btn.primary{border-color:var(--gold);background:var(--gold);color:var(--black)}
-.style-studio .btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(34,23,13,.14)}
-.style-studio .toggle-card{padding:20px;border:1px solid rgba(21,18,15,.12);border-radius:0;background:#f6efe5;text-transform:none}
-.style-studio .toggle-card strong{font-family:var(--serif);font-size:1.3rem;font-weight:600}
-.style-studio .toggle-card p{font-size:.78rem}
-.style-studio .guide{padding:18px;border:1px solid rgba(21,18,15,.12);border-radius:0;background:#f3eadf}
-.style-studio .body-svg{border-radius:0}
-.style-studio .guide-nav button{border-radius:999px;font-family:var(--sans)}
-.style-studio .measure-card{padding:16px;border:1px solid rgba(21,18,15,.12);border-radius:0;background:#fff}
-.style-studio .validation-notice{border-radius:0;border-left:4px solid #b3261e}
-.style-studio .summary{position:relative;overflow:hidden;margin-top:34px;padding:clamp(34px,6vw,66px);border-radius:0;background:radial-gradient(circle at 90% 10%,rgba(179,138,69,.28),transparent 28%),var(--black);color:#fff}
-.style-studio .summary small{color:#d9b87b;font-weight:800;letter-spacing:.18em}
-.style-studio .summary h2{max-width:820px;font-family:var(--serif);font-size:clamp(3rem,6vw,5.5rem);font-weight:600;line-height:.88}
-.style-studio .summary p{max-width:780px;color:#d7cec5}
-.style-studio .result-grid{gap:1px;margin-top:1px;background:rgba(21,18,15,.16);border:1px solid rgba(21,18,15,.16)}
-.style-studio .panel{position:relative;padding:clamp(26px,4vw,42px);border:0;border-radius:0;background:linear-gradient(145deg,#fff 0%,#fcfaf6 100%)}
-.style-studio .panel::before{content:'';position:absolute;top:0;left:clamp(26px,4vw,42px);width:42px;height:2px;background:var(--gold)}
-.style-studio .panel h3{margin-bottom:22px;font-family:var(--serif);font-size:clamp(2rem,3.2vw,2.65rem);font-weight:600;letter-spacing:-.025em;line-height:1}
-.style-studio .panel p,.style-studio .panel li{line-height:1.65}
-.style-studio .formula-panel dl div{grid-template-columns:minmax(116px,.38fr) 1fr;padding:14px 0}
-.style-studio .formula-panel dd{font-size:.95rem;line-height:1.4}
-.style-studio .why-panel ul{display:grid;gap:13px;margin:0;padding:0;list-style:none;counter-reset:reason}
-.style-studio .why-panel li{position:relative;padding-left:38px;counter-increment:reason}
-.style-studio .why-panel li::before{content:counter(reason,decimal-leading-zero);position:absolute;left:0;top:.18em;color:var(--gold-dark);font-family:var(--serif);font-size:.83rem;font-weight:700;letter-spacing:.05em}
-.style-studio .colour-panel{overflow:hidden;background:radial-gradient(circle at 88% 12%,rgba(180,134,61,.12),transparent 32%),#f7f1e8}
-.style-studio .result-grid:has(.estimate.hidden) .colour-panel{grid-column:1/-1}
-.style-studio .colour-story-layout{display:grid;grid-template-columns:minmax(220px,.72fr) minmax(0,1.28fr);gap:clamp(28px,5vw,68px);align-items:end}
-.style-studio .colour-copy p{max-width:520px;margin:0;color:#50463d;font-size:1rem}
-.style-studio .colour-kicker{display:block;margin-bottom:10px;color:var(--gold-dark);font-size:.66rem;font-weight:800;letter-spacing:.17em;text-transform:uppercase}
-.style-studio .colour-palette{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.style-studio .swatch{min-width:0;background:rgba(255,255,255,.72);border:1px solid rgba(21,18,15,.1)}
-.style-studio .swatch-colour{display:block;aspect-ratio:1.3/1;background:var(--swatch);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
-.style-studio .swatch-label{display:block;overflow:hidden;padding:10px 9px;color:#4a4037;font-size:.64rem;font-weight:800;letter-spacing:.08em;text-overflow:ellipsis;text-transform:uppercase;white-space:nowrap}
-.style-studio .panel--full{grid-column:1/-1}
-.style-studio .panel--full dl div{grid-template-columns:minmax(140px,.34fr) 1fr}
-.style-studio #styling{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin:0;background:rgba(21,18,15,.14);border:1px solid rgba(21,18,15,.14)}
-.style-studio #styling div{display:block;min-height:180px;padding:24px;border:0;background:#fff}
-.style-studio #styling dt{margin-bottom:16px;color:var(--gold-dark);font-size:.65rem;font-weight:800;letter-spacing:.14em}
-.style-studio #styling dd{font-size:.86rem;font-weight:500;line-height:1.65}
-.style-studio .estimate{background:#1d1915;color:#fff}
-.style-studio .estimate strong{font-family:var(--serif);color:#d9b87b;font-size:clamp(2.3rem,5vw,4rem);font-weight:600}
-.style-studio .brief{margin-top:28px;padding:clamp(28px,5vw,52px);border:1px solid rgba(21,18,15,.14);border-top:3px solid var(--gold);border-radius:0;background:#fff;box-shadow:0 24px 70px rgba(34,23,13,.1)}
-.style-studio .brief h3{font-family:var(--serif);font-size:clamp(2.3rem,4vw,3.5rem);font-weight:600}
-.style-studio .brief-section{grid-template-columns:minmax(150px,.34fr) 1fr;padding:22px 0}
-.style-studio .brief-section h4{letter-spacing:.16em}
-.style-studio .handoff{margin-top:28px;padding:clamp(24px,4vw,38px);border:0;border-radius:0;background:linear-gradient(135deg,#f4eadb,#fbf8f3)}
-.style-studio .handoff h3{font-size:clamp(2rem,4vw,3rem)}
-.style-studio .studio-offer{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center;margin-top:28px;padding:clamp(26px,4vw,42px);background:radial-gradient(circle at 85% 15%,rgba(179,138,69,.28),transparent 28%),var(--black);color:#fff}
-.style-studio .studio-offer h3{margin:.1em 0;font-family:var(--serif);font-size:clamp(2.2rem,4vw,3.5rem);font-weight:600;line-height:.95}
-.style-studio .studio-offer p:not(.eyebrow){max-width:680px;margin:8px 0 0;color:#d6cdc4}
-.style-studio .visualizer{margin-top:28px;padding:clamp(28px,5vw,52px);border:1px solid rgba(21,18,15,.14);border-radius:0;background:#fff}
-.style-studio .visualizer h3{font-family:var(--serif);font-size:clamp(2.3rem,4vw,3.5rem);font-weight:600}
-.style-studio .viz-badge{border-radius:0;background:transparent;color:var(--gold-dark);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase}
-.style-studio .ai-status,.style-studio .concept-output img{border-radius:0}
-.studio-note{border-top:1px solid rgba(255,255,255,.1);background:#0d0c0b;color:#a99f95}
-.studio-seo{width:min(1180px,calc(100% - 40px));margin:0 auto 76px;padding:clamp(34px,5vw,58px);border-top:3px solid var(--gold);background:#fff;box-shadow:0 24px 70px rgba(34,23,13,.08)}
-.studio-seo__intro{display:grid;grid-template-columns:minmax(0,.85fr) minmax(320px,1.15fr);gap:clamp(28px,6vw,80px);align-items:end}
-.studio-seo h2{max-width:640px;margin:.15em 0;font-family:var(--serif);font-size:clamp(2.6rem,5vw,4.5rem);font-weight:600;letter-spacing:-.035em;line-height:.92}
-.studio-seo__lead{margin:0;color:var(--muted);font-size:1rem;line-height:1.75}
-.studio-seo__benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:42px;background:rgba(21,18,15,.14);border:1px solid rgba(21,18,15,.14)}
-.studio-seo__benefits article{padding:26px;background:#fbf8f3}
-.studio-seo__benefits span{color:var(--gold-dark);font-family:var(--serif);font-size:1rem}
-.studio-seo__benefits h3{margin:12px 0 8px;font-size:1.45rem;font-weight:600}
-.studio-seo__benefits p{margin:0;color:var(--muted);font-size:.82rem;line-height:1.65}
-.studio-faq{margin-top:46px}.studio-faq h2{font-size:clamp(2.2rem,4vw,3.4rem)}
-.studio-faq details{border-top:1px solid var(--line)}.studio-faq details:last-child{border-bottom:1px solid var(--line)}
-.studio-faq summary{display:flex;justify-content:space-between;gap:20px;padding:20px 0;cursor:pointer;font-weight:700;list-style:none}.studio-faq summary::-webkit-details-marker{display:none}.studio-faq summary span{color:var(--gold);font-family:var(--serif);font-size:1.3rem}
-.studio-faq details p{max-width:820px;margin:-4px 0 22px;color:var(--muted);line-height:1.7}
-@media(max-width:760px){.style-studio .wrap{width:min(100% - 24px,1180px);padding-bottom:64px}.style-studio .hero{grid-template-columns:1fr;gap:22px;padding:30px 22px}.style-studio .hero h1{font-size:clamp(2.8rem,12vw,3.7rem)}.style-studio .hero p{font-size:.92rem}.style-studio .note{padding:18px 0 0;border-left:0;border-top:1px solid rgba(217,184,123,.42);font-size:1.05rem}.style-studio .card{padding:28px 20px}.style-studio .brief-section{grid-template-columns:1fr}.style-studio .actions{gap:12px}.style-studio .actions .btn{flex:1}.style-studio .brief-actions{width:100%}.style-studio .brief-actions .btn{width:100%}.style-studio .summary{padding:36px 24px}.style-studio .result-grid,.style-studio .studio-offer,.style-studio .style-passport{grid-template-columns:1fr}.style-studio .colour-panel,.style-studio .result-grid:has(.estimate.hidden) .colour-panel,.style-studio .panel--full{grid-column:auto}.style-studio .colour-story-layout{grid-template-columns:1fr}.style-studio .colour-palette{grid-template-columns:repeat(2,1fr)}.style-studio #styling{grid-template-columns:1fr}.style-studio #styling div{min-height:0}.style-studio .panel--full dl div{grid-template-columns:1fr}.style-studio .studio-offer .btn{width:100%}.style-studio .journey-steps li{font-size:0}.style-studio .journey-steps li::before{flex:0 0 auto}.style-studio .journey-status{margin-bottom:22px}.style-studio .scorecard{grid-template-columns:repeat(2,1fr)}.style-studio .scorecard-actions{display:grid;grid-template-columns:1fr 1fr}.style-studio .scorecard-actions .btn{width:100%}.style-studio .scorecard-actions .btn.primary{grid-column:1/-1}.style-studio .scorecard-actions .btn:last-child{margin-left:0}.style-studio .passport-actions{justify-content:flex-start}.style-studio .passport-actions .btn{width:100%}}
-@media(max-width:760px){.style-studio .field-card--budget{grid-template-columns:1fr;gap:0}.style-studio .field-card{min-height:102px}}
-@media(max-width:760px){.studio-seo{width:min(100% - 24px,1180px);margin-bottom:52px;padding:30px 22px}.studio-seo__intro,.studio-seo__benefits{grid-template-columns:1fr}.studio-seo__benefits{margin-top:30px}}
-
-/* Style Studio dark treatment keeps the atelier warmth and editorial contrast. */
-html[data-theme="dark"] body.style-studio-page{background:linear-gradient(180deg,#0f0d0b 0%,#19130f 100%);color:#f3ece4}
-html[data-theme="dark"] .style-studio .card{border-color:rgba(239,226,211,.15);background:rgba(24,20,17,.96);box-shadow:0 30px 90px rgba(0,0,0,.42)}
-html[data-theme="dark"] .style-studio .step>p,html[data-theme="dark"] .style-studio .support-note{color:#b6aaa0}
-html[data-theme="dark"] .style-studio label{color:#ddd2c7}
-html[data-theme="dark"] .style-studio .field-card{border-color:#40362f;background:linear-gradient(145deg,#211b17 0%,#181411 100%);box-shadow:none}
-html[data-theme="dark"] .style-studio .field-card:hover,html[data-theme="dark"] .style-studio .field-card:focus-within{border-color:#d0a55e;box-shadow:0 14px 30px rgba(0,0,0,.24)}
-html[data-theme="dark"] .style-studio .field-card:has([required])::after{color:#d0a55e}
-html[data-theme="dark"] .style-studio select,html[data-theme="dark"] .style-studio textarea,html[data-theme="dark"] .style-studio input[type=text],html[data-theme="dark"] .style-studio input[type=email],html[data-theme="dark"] .style-studio input[type=tel],html[data-theme="dark"] .style-studio input[type=date],html[data-theme="dark"] .style-studio input[type=number]{border-color:#5b4d41;color:#f3ece4}
-html[data-theme="dark"] .style-studio select option{background:#1a1613;color:#f3ece4}
-html[data-theme="dark"] .style-studio .chips span{border-color:#55483d;background:#1d1814;color:#e8ddd2}
-html[data-theme="dark"] .style-studio .chips input:checked+span{border-color:#d0a55e;background:#d0a55e;color:#15120f}
-html[data-theme="dark"] .style-studio .btn{border-color:#d5c8bc;color:#f3ece4}
-html[data-theme="dark"] .style-studio .btn.primary{border-color:#b38a45;background:#b38a45;color:#15120f}
-html[data-theme="dark"] .style-studio .toggle-card,html[data-theme="dark"] .style-studio .guide,html[data-theme="dark"] .style-studio .ai-status{border-color:rgba(239,226,211,.14);background:#211a15}
-html[data-theme="dark"] .style-studio .guide{background:linear-gradient(145deg,#211a15 0%,#17120f 100%);color:#f3ece4}
-html[data-theme="dark"] .style-studio .guide p,html[data-theme="dark"] .style-studio .guide-count,html[data-theme="dark"] .style-studio .measure-card small{color:#b6aaa0}
-html[data-theme="dark"] .style-studio .guide-nav button{border-color:#5b4d41;background:#2a211b;color:#f3ece4}
-html[data-theme="dark"] .style-studio .guide-nav button:not(:disabled):hover,html[data-theme="dark"] .style-studio .guide-nav button:not(:disabled):focus-visible{border-color:#d0a55e;background:#d0a55e;color:#15120f}
-html[data-theme="dark"] .style-studio .measure-card{border-color:#40362f;background:linear-gradient(145deg,#211b17 0%,#181411 100%);color:#f3ece4}
-html[data-theme="dark"] .style-studio .measure-card label{color:#e8ddd2}
-html[data-theme="dark"] .style-studio .measure-card input[type=number],html[data-theme="dark"] .style-studio .measure-card select{border:1px solid #5b4d41;background:#17130f;color:#f3ece4;box-shadow:none}
-html[data-theme="dark"] .style-studio .measure-card select option{background:#17130f;color:#f3ece4}
-html[data-theme="dark"] .style-studio .body-svg{border-color:#d8cdbf;background:#f7f2ea;color:#15120f;box-shadow:0 16px 36px rgba(0,0,0,.2)}
-html[data-theme="dark"] .style-studio .result-grid{background:rgba(239,226,211,.16);border-color:rgba(239,226,211,.16)}
-html[data-theme="dark"] .style-studio .panel{background:linear-gradient(145deg,#1c1815 0%,#15120f 100%)}
-html[data-theme="dark"] .style-studio .panel dt{color:#b6aaa0}
-html[data-theme="dark"] .style-studio .colour-panel{background:radial-gradient(circle at 88% 12%,rgba(180,134,61,.15),transparent 32%),#211a15}
-html[data-theme="dark"] .style-studio .colour-copy p{color:#c8bbb0}
-html[data-theme="dark"] .style-studio .swatch{border-color:rgba(239,226,211,.14);background:#15120f}
-html[data-theme="dark"] .style-studio .swatch-label{color:#ddd2c7}
-html[data-theme="dark"] .style-studio #styling{background:rgba(239,226,211,.15);border-color:rgba(239,226,211,.15)}
-html[data-theme="dark"] .style-studio #styling div{background:#191512}
-html[data-theme="dark"] .style-studio .brief,html[data-theme="dark"] .style-studio .visualizer,html[data-theme="dark"] .studio-seo{border-color:rgba(239,226,211,.14);background:#191512;color:#f3ece4;box-shadow:0 28px 80px rgba(0,0,0,.35)}
-html[data-theme="dark"] .style-studio .brief p,html[data-theme="dark"] .style-studio .visualizer p,html[data-theme="dark"] .studio-seo__lead,html[data-theme="dark"] .studio-faq details p{color:#b6aaa0}
-html[data-theme="dark"] .style-studio .handoff{background:linear-gradient(135deg,#251c15,#181411)}
-html[data-theme="dark"] .studio-seo__benefits{background:rgba(239,226,211,.15);border-color:rgba(239,226,211,.15)}
-html[data-theme="dark"] .studio-seo__benefits article{background:#1d1814}
-html[data-theme="dark"] .studio-seo__benefits p{color:#b6aaa0}
-html[data-theme="dark"] .studio-faq details{border-color:rgba(239,226,211,.15)}
-html[data-theme="dark"] .style-studio .journey-status,html[data-theme="dark"] .style-studio .journey-steps li{color:#a99c91}
-html[data-theme="dark"] .style-studio .journey-steps li.is-current,html[data-theme="dark"] .style-studio .journey-steps li.is-complete{color:#f3ece4}
-html[data-theme="dark"] .style-studio .journey-steps li::before{border-color:#5b4d41}
-html[data-theme="dark"] .style-studio .scorecard{background:rgba(239,226,211,.15);border-color:rgba(239,226,211,.15)}
-html[data-theme="dark"] .style-studio .scorecard__item{background:#1b1714}
-html[data-theme="dark"] .style-studio .scorecard__item small,html[data-theme="dark"] .style-studio .style-passport p{color:#b6aaa0}
-html[data-theme="dark"] .style-studio .style-passport{border-color:rgba(239,226,211,.14);background:linear-gradient(135deg,#211a15,#15120f)}
-
-</style>
-<script src="../theme.js"></script>
-<!-- SEO:START --><link rel="canonical" href="https://sargont.github.io/JaneM/style-studio/" /><meta name="robots" content="index,follow,max-image-preview:large" /><meta property="og:type" content="website" /><meta property="og:site_name" content="Jane.M Atelier" /><meta property="og:title" content="Free Outfit Planner &amp; Personal Stylist | Jane.M Lesotho" /><meta property="og:description" content="Plan outfits with clothes you own using Jane.M’s free online personal stylist. Get colour, jewellery, shoe, beauty and re-wear advice—no purchase required." /><meta property="og:url" content="https://sargont.github.io/JaneM/style-studio/" /><meta property="og:image" content="https://sargont.github.io/JaneM/assets/style-studio/mock-design-concept.png" /><meta property="og:image:alt" content="Jane.M free personal styling and outfit-planning tool" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="Free Outfit Planner &amp; Personal Stylist | Jane.M Lesotho" /><meta name="twitter:description" content="Plan outfits with clothes you own using Jane.M’s free online personal stylist. Get colour, jewellery, shoe, beauty and re-wear advice—no purchase required." /><meta name="twitter:image" content="https://sargont.github.io/JaneM/assets/style-studio/mock-design-concept.png" /><script type="application/ld+json">{"@context":"https://schema.org","@type":"ClothingStore","name":"Jane.M Atelier","alternateName":"Jane.M Lesotho","url":"https://sargont.github.io/JaneM/","logo":"https://sargont.github.io/JaneM/assets/logo-transparent.png","image":"https://sargont.github.io/JaneM/assets/look-gold.jpg","email":"officialjanem@gmail.com","telephone":"+26662790946","areaServed":[{"@type":"City","name":"Maseru"},{"@type":"Country","name":"Lesotho"}],"brand":{"@type":"Brand","name":"Jane.M Atelier"},"sameAs":["https://youtube.com/@janemtv","https://www.facebook.com/share/1CvrANPy9Q/","https://www.instagram.com/___jane_m/"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://sargont.github.io/JaneM/"},{"@type":"ListItem","position":2,"name":"Free Style Studio","item":"https://sargont.github.io/JaneM/style-studio/"}]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Jane.M Style Studio","alternateName":"Jane.M Free Outfit Planner","url":"https://sargont.github.io/JaneM/style-studio/","applicationCategory":"LifestyleApplication","applicationSubCategory":"Personal styling and outfit planning","operatingSystem":"Any","browserRequirements":"Requires a modern web browser; no account or installation required.","inLanguage":"en","isAccessibleForFree":true,"audience":{"@type":"Audience","audienceType":"Anyone planning an outfit or restyling clothes they already own"},"featureList":["Plan outfits with clothes you already own","Create a personalised colour palette","Receive jewellery, shoe, bag, hair and make-up guidance","Build a re-wear strategy","Explore an optional custom fashion direction"],"description":"A free online personal stylist and outfit planner for creating colour, jewellery, shoe, beauty and re-wear plans from clothes you already own. No purchase or booking is required.","offers":{"@type":"Offer","price":"0","priceCurrency":"LSL","availability":"https://schema.org/InStock"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the Jane.M Style Studio free?","acceptedAnswer":{"@type":"Answer","text":"Yes. The Jane.M Style Studio is free to use and does not require an account, booking or purchase."}},{"@type":"Question","name":"Do I have to order a new design from Jane.M?","acceptedAnswer":{"@type":"Answer","text":"No. You can use the Style Studio only for inspiration or to plan an outfit using clothes you already own."}},{"@type":"Question","name":"Can the Style Studio help me wear clothes I already have?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose the wardrobe option and describe the pieces you want to use. The tool will suggest an outfit formula, colour palette, accessories, beauty direction and re-wear strategy."}},{"@type":"Question","name":"What styling advice does the tool provide?","acceptedAnswer":{"@type":"Answer","text":"It provides a personalised outfit formula, colour story, jewellery, shoes, bag, hair, make-up, outer-layer, fit and re-wear guidance."}}]}</script><!-- SEO:END -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Discover your ideal dress silhouette, colour palette and occasion-wear direction with the free JaneM Style Studio in Maseru, Lesotho.">
+  <meta name="theme-color" content="#15120f">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <title>Free Personal Style Finder for Women in Lesotho | JaneM Style Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css?v=20260809theme6">
+  <link rel="stylesheet" href="studio.css?v=20260810theme5">
+  <script src="../theme.js"></script>
+<!-- SEO:START --><link rel="canonical" href="https://sargont.github.io/JaneM/style-studio/" /><meta name="robots" content="index,follow,max-image-preview:large" /><meta property="og:type" content="website" /><meta property="og:site_name" content="Jane.M Atelier" /><meta property="og:title" content="Free Personal Style Finder for Women in Lesotho | JaneM Style Studio" /><meta property="og:description" content="Discover your ideal dress silhouette, colour palette and occasion-wear direction with the free JaneM Style Studio in Maseru, Lesotho." /><meta property="og:url" content="https://sargont.github.io/JaneM/style-studio/" /><meta property="og:image" content="https://sargont.github.io/JaneM/assets/look-gold.jpg" /><meta property="og:image:alt" content="Jane.M gold and ivory occasion dress" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="Free Personal Style Finder for Women in Lesotho | JaneM Style Studio" /><meta name="twitter:description" content="Discover your ideal dress silhouette, colour palette and occasion-wear direction with the free JaneM Style Studio in Maseru, Lesotho." /><meta name="twitter:image" content="https://sargont.github.io/JaneM/assets/look-gold.jpg" /><script type="application/ld+json">{"@context":"https://schema.org","@type":"ClothingStore","name":"Jane.M Atelier","alternateName":"Jane.M Lesotho","url":"https://sargont.github.io/JaneM/","logo":"https://sargont.github.io/JaneM/assets/logo-transparent.png","image":"https://sargont.github.io/JaneM/assets/look-gold.jpg","email":"officialjanem@gmail.com","telephone":"+26662790946","areaServed":[{"@type":"City","name":"Maseru"},{"@type":"Country","name":"Lesotho"}],"brand":{"@type":"Brand","name":"Jane.M Atelier"},"sameAs":["https://youtube.com/@janemtv","https://www.facebook.com/share/1CvrANPy9Q/","https://www.instagram.com/___jane_m/"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://sargont.github.io/JaneM/"},{"@type":"ListItem","position":2,"name":"Free Style Studio","item":"https://sargont.github.io/JaneM/style-studio/"}]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Jane.M Style Studio","alternateName":"Jane.M Free Personal Style Finder","url":"https://sargont.github.io/JaneM/style-studio/","applicationCategory":"LifestyleApplication","applicationSubCategory":"Occasion-wear style direction","operatingSystem":"Any","browserRequirements":"Requires a modern web browser; no account or installation required.","inLanguage":"en","isAccessibleForFree":true,"audience":{"@type":"Audience","audienceType":"Women planning a graduation, wedding guest or special-occasion look in Lesotho"},"featureList":["Quick personalised style direction","Occasion-wear silhouette recommendation","Curated colour palette","Indicative workmanship range","Optional detailed designer brief"],"description":"A free personal style finder from Jane.M Atelier in Maseru for women planning a graduation, wedding guest, birthday, corporate-event or special-occasion dress direction.","offers":{"@type":"Offer","price":"0","priceCurrency":"LSL","availability":"https://schema.org/InStock"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the Jane.M Style Studio free?","acceptedAnswer":{"@type":"Answer","text":"Yes. The Jane.M Style Studio is free to use and does not require an account, booking or purchase."}},{"@type":"Question","name":"Do I need to provide my contact details?","acceptedAnswer":{"@type":"Answer","text":"No. You can receive a Quick Style Match without entering a name, phone number, email address, measurements or photograph."}},{"@type":"Question","name":"Is my Style Studio result a final dress design?","acceptedAnswer":{"@type":"Answer","text":"No. Your result is a personalised style direction. Jane.M refines the design, measurements, availability and final quotation with you."}},{"@type":"Question","name":"What does the Style Studio recommend?","acceptedAnswer":{"@type":"Answer","text":"It recommends a silhouette, neckline, sleeve direction, length, colour palette, fabric direction, design-detail level and indicative workmanship range for your occasion."}}]}</script><!-- SEO:END -->
 </head>
-<body class="style-studio-page">
-<a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header" id="top">
-  <div class="container nav-wrap">
-    <a class="brand" href="../index.html" aria-label="Jane.M home"><img src="../assets/logo-transparent.png" width="1055" height="1491" alt="Jane.M Lesotho logo" /></a>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
-    <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
-      <a href="../index.html#collection">Collection</a><a href="../catalogue.html">Catalogue</a><a href="../index.html#promo">Promotion</a><a href="../index.html#pricing">Price guide</a><a href="../index.html#process">How to order</a><a href="./" aria-current="page">Style Studio</a><a href="../janem-tv/" data-analytics-event="janem_tv_open">JaneM TV</a><a class="nav-cta" href="https://wa.me/26662790946?text=Hello%20Jane.M%2C%20I%20would%20like%20to%20book%20a%20graduation%20look." target="_blank" rel="noopener">Book on WhatsApp</a>
-    </nav>
-  </div>
-</header>
-<main id="main" class="style-studio">
-<div class="wrap">
-  <section class="hero">
-    <div><small>FREE JANE.M STYLE STUDIO</small><h1>Your personal stylist, whenever you need one.</h1><p>Turn an occasion—or clothes you already own—into a complete outfit plan with considered advice on colour, jewellery, shoes, beauty, proportion and re-wear.</p><div class="free-pill"><span>Free to use</span><span>No sign-up</span><span>Works with your wardrobe</span></div><a class="studio-start" href="#wizard">Style my look <span aria-hidden="true">↓</span></a></div>
-    <div class="note">Come for inspiration, even when you are not buying anything. Your choices stay on this device unless you decide to share them.</div>
-  </section>
+<body class="studio-page">
+  <a class="skip-link" href="#main">Skip to Style Studio</a>
 
-  <ol class="journey-steps" aria-label="Style journey progress">
-    <li class="is-current">Brief</li><li>Personality</li><li>Edit</li><li>Details</li><li>Reveal</li>
-  </ol>
-  <div class="progress" aria-hidden="true"><div id="bar"></div></div>
-  <div class="journey-status" aria-live="polite"><span id="journeyLabel">Chapter 1 of 5 · Set your direction</span><strong id="journeyReward">First insight unlocked</strong></div>
-
-  <section id="wizard" class="card">
-    <form id="form">
-      <div class="step active">
-        <h2>1. Your styling brief</h2><p>Tell us what you are dressing for and whether we are working with your wardrobe or starting fresh.</p>
-        <div class="grid">
-          <label class="wide field-card field-card--journey">What would you like help with?<select name="journey" required><option value="">Choose your starting point</option><option>Style clothes I already own</option><option>Build a look around one item</option><option>Explore a new custom look</option></select></label>
-          <label class="field-card">The occasion<select name="occasion" required><option value="">Choose</option><option>Graduation</option><option>Wedding</option><option>Corporate Dinner</option><option>Birthday</option><option>Gala</option><option>Date Night</option><option>Church</option><option>Photoshoot</option></select></label>
-          <label class="field-card">Your starting piece<select name="garment" required><option value="">Choose</option><option>Dress</option><option>Skirt</option><option>Trousers</option><option>Jumpsuit</option><option>Suit or co-ord</option><option>Top or blouse</option><option>Mixed wardrobe outfit</option><option>Not sure yet</option></select></label>
-          <label class="field-card">The mood<select name="theme" required><option value="">Choose</option><option>Minimalist</option><option>Formal</option><option>Black Tie</option><option>Luxury</option><option>African Elegance</option><option>Garden Party</option><option>Modern Chic</option><option>Traditional</option></select></label>
-          <label class="field-card">The setting<select name="setting" required><option value="">Choose</option><option>Indoor</option><option>Outdoor</option><option>Both</option></select></label>
-          <label class="field-card">The weather<select name="weather" required><option value="">Choose</option><option>Hot</option><option>Warm</option><option>Cold</option></select></label>
-          <label class="field-card">The time<select name="time" required><option value="">Choose</option><option>Morning</option><option>Afternoon</option><option>Evening</option><option>Night</option></select></label>
-          <label class="wide field-card field-card--budget">Finishing-piece budget<select name="budget" required><option value="">Choose your comfort zone</option><option value="0">Use only what I own</option><option value="500">Up to M500 for finishing pieces</option><option value="1500">Under M1,500</option><option value="2500">M1,500–M2,500</option><option value="4000">M2,500–M4,000</option><option value="6000">Premium (M4,000+)</option></select></label>
-          <label class="wide field-card field-card--notes">What item or clothes are you starting with? <span style="font-weight:400;text-transform:none">(optional)</span><textarea name="existingPiece" rows="3" placeholder="For example: black wide-leg trousers, an emerald midi dress, a cream blazer, gold heels..."></textarea></label>
-        </div>
-      </div>
-
-      <div class="step">
-        <h2>2. Personal style</h2><p>How do you want to feel in the outfit?</p>
-        <label>Style personality <span aria-hidden="true" style="color:#9f2828">*</span></label>
-        <div class="chips">
-          <label><input type="radio" name="personality" value="Elegant" required><span>Elegant</span></label>
-          <label><input type="radio" name="personality" value="Classic"><span>Classic</span></label>
-          <label><input type="radio" name="personality" value="Bold"><span>Bold</span></label>
-          <label><input type="radio" name="personality" value="Sexy"><span>Sexy</span></label>
-          <label><input type="radio" name="personality" value="Conservative"><span>Conservative</span></label>
-          <label><input type="radio" name="personality" value="Minimalist"><span>Minimalist</span></label>
-          <label><input type="radio" name="personality" value="Modern Chic"><span>Modern chic</span></label>
-          <label><input type="radio" name="personality" value="Glamorous"><span>Glamorous</span></label>
-        </div>
-        <div class="grid">
-          <label class="field-card">Your preferred fit<select name="fit" required><option value="">Choose</option><option>Relaxed</option><option>Slightly fitted</option><option>Fitted</option><option>Figure-hugging</option></select></label>
-          <label class="field-card">Your preferred length<select name="length" required><option value="">Choose</option><option>Mini</option><option>Above knee</option><option>Knee length</option><option>Midi</option><option>Maxi</option><option>No preference</option></select></label>
-          <label class="field-card">Your colour direction<select name="colour" required><option value="">Choose</option><option>Emerald</option><option>Navy</option><option>Black</option><option>Champagne</option><option>Burgundy</option><option>White</option><option>Gold</option><option>Surprise me</option></select></label>
-          <label class="field-card">Your coverage comfort<select name="coverage" required><option value="">Choose</option><option>Modest</option><option>Balanced</option><option>Confident</option><option>Daring</option></select></label>
-          <label class="field-card">How you want to feel<select name="feeling" required><option value="">Choose</option><option>Powerful</option><option>Elegant</option><option>Confident</option><option>Romantic</option><option>Comfortable</option><option>Unforgettable</option><option>Understated</option><option>Playful</option></select></label>
-          <label class="field-card">What matters most<select name="priority" required><option value="">Choose</option><option>Comfort first</option><option>Balanced comfort and impact</option><option>Maximum visual impact</option><option>Easy re-wear after the event</option></select></label>
-        </div>
-      </div>
-
-      <div class="step">
-        <h2>3. The stylist’s edit</h2><p>Tell us what the look must do—and where you want the eye to land.</p>
-        <div class="grid">
-          <label class="field-card">How you’ll move<select name="movement" required><option value="">Choose</option><option>Mostly seated</option><option>Walking and mingling</option><option>Dancing</option><option>Stage or presentation</option><option>All-day wear</option></select></label>
-          <label class="field-card">Where the eye should land<select name="focalPoint" required><option value="">Choose</option><option>Neckline and shoulders</option><option>Waist and corsetry</option><option>Legs and slit</option><option>Back detail</option><option>Sleeves</option><option>Skirt volume</option><option>No strong focal point</option></select></label>
-        </div>
-        <label style="margin-top:20px">Details you enjoy <span style="font-weight:400;text-transform:none">(choose any that apply)</span></label>
-        <div class="chips">
-          <label><input type="checkbox" name="features" value="Corset"><span>Corset</span></label>
-          <label><input type="checkbox" name="features" value="Slit"><span>Slit</span></label>
-          <label><input type="checkbox" name="features" value="Long sleeves"><span>Long sleeves</span></label>
-          <label><input type="checkbox" name="features" value="Off shoulder"><span>Off shoulder</span></label>
-          <label><input type="checkbox" name="features" value="Open back"><span>Open back</span></label>
-          <label><input type="checkbox" name="features" value="Big bow"><span>Big bow</span></label>
-          <label><input type="checkbox" name="features" value="Pockets"><span>Pockets</span></label>
-          <label><input type="checkbox" name="features" value="Train"><span>Train</span></label>
-          <label><input type="checkbox" name="features" value="Lace"><span>Lace</span></label>
-          <label><input type="checkbox" name="features" value="Beading"><span>Beading</span></label>
-          <label><input type="checkbox" name="features" value="Exposed boning"><span>Exposed boning</span></label>
-          <label><input type="checkbox" name="features" value="Tiered skirt"><span>Tiered skirt</span></label>
-        </div>
-        <div class="grid">
-          <label class="wide field-card field-card--notes">What should we avoid?<textarea name="avoid" rows="3" placeholder="No deep neckline, no heavy fabric, no long train..."></textarea></label>
-          <label class="wide field-card field-card--notes">Anything else that should shape the plan?<textarea name="notes" rows="4" placeholder="Must work under graduation regalia, hide bra straps, allow dancing, be reusable..."></textarea></label>
-        </div>
-        <label class="toggle-card"><input id="captureToggle" type="checkbox" name="captureMeasurements"><div><strong>Capture measurements now</strong><p>Useful only when exploring a custom garment. Leave unchecked for a wardrobe styling plan.</p></div></label>
-      </div>
-
-      <div class="step">
-        <h2>4. Measurements</h2><p>Only complete this flow when “Capture measurements now” was selected.</p>
-        <div id="measurementFlow" class="measure-wrap">
-          <aside class="guide">
-            <h3>How to measure</h3>
-            <p>Use a soft tape over fitted clothing. Keep it level and snug, not tight.</p>
-            <div class="guide-slide active" data-guide="0">
-              <svg class="body-svg" viewBox="0 0 300 500" role="img" aria-label="Body measurement guide for shoulder, bust, waist, hip and dress length">
-                <rect width="300" height="500" fill="#fff"/>
-                <circle cx="150" cy="55" r="27" fill="none" stroke="#17130f" stroke-width="4"/>
-                <path d="M130 86 Q150 104 170 86 L184 175 Q170 220 174 275 L194 445 M170 175 L230 255 M130 175 L70 255 M126 175 Q110 220 126 275 L106 445" fill="none" stroke="#17130f" stroke-width="5" stroke-linecap="round"/>
-                <line x1="92" y1="116" x2="208" y2="116" stroke="#b4863d" stroke-width="3"/>
-                <line x1="92" y1="155" x2="208" y2="155" stroke="#b4863d" stroke-width="3"/>
-                <line x1="94" y1="201" x2="206" y2="201" stroke="#b4863d" stroke-width="3"/>
-                <line x1="96" y1="248" x2="204" y2="248" stroke="#b4863d" stroke-width="3"/>
-                <line x1="150" y1="88" x2="150" y2="445" stroke="#b4863d" stroke-width="2" stroke-dasharray="6 5"/>
-                <text x="211" y="120" font-size="13">Shoulder</text>
-                <text x="211" y="159" font-size="13">Bust</text>
-                <text x="211" y="205" font-size="13">Waist</text>
-                <text x="211" y="252" font-size="13">Hip</text>
-                <text x="158" y="375" font-size="13">Dress length</text>
-              </svg>
-            </div>
-
-            <div class="guide-slide" data-guide="1">
-              <svg class="body-svg" viewBox="0 0 300 500" role="img" aria-label="Body measurement guide for upper arm, sleeve length, shoulder-to-waist, height and heel height">
-                <rect width="300" height="500" fill="#fff"/>
-                <circle cx="150" cy="55" r="27" fill="none" stroke="#17130f" stroke-width="4"/>
-                <path d="M130 86 Q150 104 170 86 L184 175 Q170 220 174 275 L194 445 M170 175 L230 255 M130 175 L70 255 M126 175 Q110 220 126 275 L106 445" fill="none" stroke="#17130f" stroke-width="5" stroke-linecap="round"/>
-
-                <ellipse cx="213" cy="198" rx="18" ry="10" fill="none" stroke="#b4863d" stroke-width="3"/>
-                <line x1="181" y1="110" x2="230" y2="255" stroke="#b4863d" stroke-width="3" stroke-dasharray="6 5"/>
-                <line x1="150" y1="88" x2="150" y2="201" stroke="#b4863d" stroke-width="3" stroke-dasharray="6 5"/>
-                <line x1="82" y1="445" x2="218" y2="445" stroke="#b4863d" stroke-width="3"/>
-                <line x1="150" y1="28" x2="150" y2="445" stroke="#b4863d" stroke-width="2" stroke-dasharray="6 5"/>
-                <line x1="194" y1="445" x2="220" y2="420" stroke="#b4863d" stroke-width="3"/>
-
-                <text x="205" y="180" font-size="13">Upper arm</text>
-                <text x="205" y="285" font-size="13">Sleeve length</text>
-                <text x="158" y="145" font-size="13">Shoulder-to-waist</text>
-                <text x="158" y="360" font-size="13">Height</text>
-                <text x="218" y="430" font-size="13">Heel height</text>
-              </svg>
-            </div>
-
-            <div class="guide-nav">
-              <button type="button" id="guidePrev" disabled>Previous</button>
-              <span id="guideCount" class="guide-count">1 of 2</span>
-              <button type="button" id="guideNext">Next</button>
-            </div>
-          </aside>
-          <div class="measurements">
-            <div class="measure-card"><label>Bust<div class="unit-row"><input type="number" step="0.1" name="m_bust"><select name="m_bust_unit"><option>cm</option><option>in</option></select></div></label><small>Fullest point, tape level.</small></div>
-            <div class="measure-card"><label>Waist<div class="unit-row"><input type="number" step="0.1" name="m_waist"><select name="m_waist_unit"><option>cm</option><option>in</option></select></div></label><small>Natural waist, not pulled tight.</small></div>
-            <div class="measure-card"><label>Hip<div class="unit-row"><input type="number" step="0.1" name="m_hip"><select name="m_hip_unit"><option>cm</option><option>in</option></select></div></label><small>Fullest part of hips and seat.</small></div>
-            <div class="measure-card"><label>Shoulder width<div class="unit-row"><input type="number" step="0.1" name="m_shoulder"><select name="m_shoulder_unit"><option>cm</option><option>in</option></select></div></label><small>Shoulder point to shoulder point.</small></div>
-            <div class="measure-card"><label>Upper arm<div class="unit-row"><input type="number" step="0.1" name="m_arm"><select name="m_arm_unit"><option>cm</option><option>in</option></select></div></label><small>Fullest part of upper arm.</small></div>
-            <div class="measure-card"><label>Sleeve length<div class="unit-row"><input type="number" step="0.1" name="m_sleeve"><select name="m_sleeve_unit"><option>cm</option><option>in</option></select></div></label><small>Shoulder to sleeve finish.</small></div>
-            <div class="measure-card"><label>Shoulder-to-waist<div class="unit-row"><input type="number" step="0.1" name="m_torso"><select name="m_torso_unit"><option>cm</option><option>in</option></select></div></label><small>Over bust to natural waist.</small></div>
-            <div class="measure-card"><label>Dress length<div class="unit-row"><input type="number" step="0.1" name="m_length"><select name="m_length_unit"><option>cm</option><option>in</option></select></div></label><small>Shoulder to desired hem.</small></div>
-            <div class="measure-card"><label>Height<div class="unit-row"><input type="number" step="0.1" name="m_height"><select name="m_height_unit"><option>cm</option><option>in</option></select></div></label><small>Useful for overall proportions.</small></div>
-            <div class="measure-card"><label>Heel height<div class="unit-row"><input type="number" step="0.1" name="m_heel"><select name="m_heel_unit"><option>cm</option><option>in</option></select></div></label><small>Important for long hems and trains.</small></div>
-          </div>
-        </div>
-        <div id="measurementSkip" class="toggle-card hidden"><div></div><div><strong>Measurements deferred</strong><p>Jane.M will take and verify measurements before production.</p></div></div>
-      </div>
-
-      <div class="step">
-        <h2>5. Make it yours</h2><p>Your style plan is free and does not require contact details. Add them only if you may want to share the finished plan with Jane.M.</p>
-        <div class="grid">
-          <label class="field-card">Your name <span style="font-weight:400;text-transform:none">(optional)</span><input type="text" name="clientName"></label>
-          <label class="field-card">Your WhatsApp <span style="font-weight:400;text-transform:none">(optional)</span><input type="tel" name="clientPhone" placeholder="+266 ..."></label>
-          <label class="field-card">Your email <span style="font-weight:400;text-transform:none">(optional)</span><input type="email" name="clientEmail"></label>
-          <label class="field-card">How Jane.M should reply <span style="font-weight:400;text-transform:none">(optional)</span><select name="contactMethod"><option value="">Choose</option><option>WhatsApp</option><option>Phone call</option><option>Email</option></select></label>
-        </div>
-        <div class="toggle-card" style="margin-top:20px"><div></div><div><strong>Have an inspiration image?</strong><p>Keep it nearby while reviewing your plan. If you later contact Jane.M, attach it directly in WhatsApp alongside the plan.</p></div></div>
-        <p class="support-note">This is an inspirational styling guide. Any custom garment, measurements and quotation must be confirmed with Jane.M.</p>
-      </div>
-
-      <p id="validationNotice" class="validation-notice" role="alert">Please complete the highlighted required fields before continuing.</p>
-      <div class="actions">
-        <button type="button" id="back" class="btn" disabled>Back</button>
-        <button type="button" id="next" class="btn primary">Continue</button>
-        <button type="submit" id="finish" class="btn primary hidden">Reveal my style plan</button>
-      </div>
-    </form>
-  </section>
-
-  <section id="result" class="result">
-    <div class="summary"><small>YOUR FREE JANE.M STYLE PLAN</small><h2 id="profile"></h2><p id="summaryText"></p><div class="style-reveal"><span class="style-reveal__mark" aria-hidden="true">JM</span><p id="archetypeNote"></p></div></div>
-    <div class="result-grid">
-      <div class="panel panel--full"><h3>Your stylist’s scorecard</h3><div id="styleScorecard" class="scorecard" aria-label="Style direction scorecard"></div><div class="scorecard-actions"><a id="scorecardWhatsApp" class="btn primary" target="_blank" rel="noopener">Explore with Jane.M</a><button id="scorecardVisualize" type="button" class="btn">Visualize this look</button><button id="downloadScorecard" type="button" class="btn">Download scorecard</button></div></div>
-      <div class="panel formula-panel"><h3>Your outfit formula</h3><dl id="direction"></dl></div>
-      <div id="estimatePanel" class="panel estimate"><h3>Indicative workmanship</h3><strong id="estimate"></strong><p>Fabric is selected separately to suit your design &amp; budget.</p></div>
-      <div class="panel why-panel"><h3>Why this direction works</h3><ul id="reasons"></ul></div>
-      <div class="panel colour-panel"><div class="colour-story-layout"><div class="colour-copy"><span class="colour-kicker">Your curated palette</span><h3>Your colour story</h3><p id="colourStory"></p></div><div id="colourPalette" class="colour-palette" aria-label="Recommended colour palette"></div></div></div>
-      <div class="panel panel--full"><h3>The stylist’s complete edit</h3><dl id="styling"></dl></div>
+  <header class="site-header" id="top">
+    <div class="container nav-wrap">
+      <a class="brand" href="../index.html" aria-label="JaneM home"><img src="../assets/logo-transparent.png" width="1055" height="1491" alt="JaneM Lesotho logo"></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+        <a href="../index.html#collection">Collection</a>
+        <a href="../catalogue.html">Catalogue</a>
+        <a href="./" aria-current="page">Style Studio</a>
+        <a href="../janem-tv/">JaneM TV</a>
+        <a class="nav-cta" href="https://wa.me/26662790946?text=Hello%20Jane.M%2C%20I%20would%20like%20to%20book%20a%20graduation%20look." target="_blank" rel="noopener">Book on WhatsApp</a>
+      </nav>
     </div>
+  </header>
 
-    <section class="style-passport" aria-labelledby="passport-title"><div><p class="eyebrow">Your personal edit</p><h3 id="passport-title">Keep this direction close.</h3><p>Save a compact record of this look on this device, then return to build a new direction for another occasion.</p><p id="passportStatus" class="passport-status" aria-live="polite"></p></div><div class="passport-actions"><button id="saveEdit" type="button" class="btn">Save to My Edit</button><button id="restartStudio" type="button" class="btn primary">Style another look</button></div></section>
-
-    <aside class="studio-offer"><div><p class="eyebrow eyebrow--light">Love this direction?</p><h3>Make it unmistakably yours.</h3><p><span data-cms-text="promotion.discountText">30% OFF</span> workmanship on all custom designs during the current Jane.M promotion. Fabric is selected separately to suit your design &amp; budget.</p></div><a class="btn btn-gold" href="../index.html#promo">View the promotion</a></aside>
-
-    <section id="designerBrief" class="brief">
-      <div class="brief-head"><div><h3>Your Personal Style Plan</h3><p>Keep it for inspiration, use it with your own wardrobe, or share it with Jane.M.</p></div>
-        <div class="brief-actions"><button id="copy" class="btn">Copy</button><button id="download" class="btn">Download</button></div>
-      </div>
-      <div id="briefDoc"></div>
-      <div id="briefActions" class="handoff"><h3>Use your plan your way.</h3><p>Visualize the direction for inspiration, or invite Jane.M to turn it into a custom look. Attach an inspiration image in WhatsApp if you have one.</p><div class="brief-actions"><button id="visualizeBrief" class="btn">Visualize my style plan</button><a id="briefWhatsApp" class="btn primary" target="_blank" rel="noopener">Explore it with Jane.M</a></div></div>
-    </section>
-    <section class="visualizer">
-      <div class="visualizer-head">
+  <main id="main">
+    <section class="studio-hero" aria-labelledby="studio-heading">
+      <div class="studio-shell studio-hero__inner">
         <div>
-          <span class="viz-badge">Your design direction</span>
-          <h3>Visualize your style plan</h3>
-          <p>See an early visual interpretation of your plan. Use it as wardrobe inspiration, a shopping filter, or a starting point for a Jane.M consultation.</p>
-          <p id="visualizerSupport" class="support-note">A personalised concept is created when live generation is available; otherwise, you’ll see the approved atelier preview.</p>
+          <p class="eyebrow eyebrow--light">Free Jane.M Style Tool</p>
+          <h1 id="studio-heading">Discover the look<br><em>made for your moment.</em></h1>
+          <p>Answer a few quick questions and receive your personalised JaneM style direction, colour palette and estimated workmanship range—free.</p>
+          <a class="studio-text-link" href="#quick-match">Find My Style <span aria-hidden="true">↓</span></a>
         </div>
-      </div>
-
-      <div id="aiStatus" class="ai-status hidden" aria-live="polite">
-        <div class="ai-status-row"><div class="spinner"></div><strong id="aiStatusText">Analysing the brief…</strong></div>
-        <ul class="ai-steps">
-          <li id="aiStep1">Reading the occasion, wardrobe and comfort needs</li>
-          <li id="aiStep2">Balancing colour, proportion and focal details</li>
-          <li id="aiStep3">Creating one coherent outfit direction</li>
-          <li id="aiStep4">Checking that the full styling edit aligns</li>
-        </ul>
-      </div>
-
-      <div id="conceptOutput" class="concept-output hidden">
-        <img id="conceptImage" src="../assets/style-studio/mock-design-concept.png" width="1983" height="793" alt="Jane.M atelier concept preview">
-        <div class="concept-caption">
-          <span id="conceptSource">Concept direction for your consultation.</span>
-          <span>Inspiration only • use what you own or explore it with Jane.M</span>
-        </div>
+        <aside class="studio-hero__note" aria-label="Privacy reassurance">
+          <span class="studio-hero__note-mark" aria-hidden="true">JM</span>
+          <p>Your answers stay on your device unless you choose to share them with JaneM.</p>
+        </aside>
       </div>
     </section>
-  </section>
-</div>
-<section class="studio-seo" aria-labelledby="free-stylist-title">
-  <div class="studio-seo__intro">
-    <div><p class="eyebrow">Free outfit inspiration</p><h2 id="free-stylist-title">A personal stylist for the wardrobe you already have.</h2></div>
-    <p class="studio-seo__lead">Jane.M Style Studio is a free online outfit planner for anyone who wants a clearer way to dress. Use it to style clothes you already own, build a look around one favourite piece, or explore a new direction. You do not need to order a garment, book a consultation or create an account.</p>
-  </div>
-  <div class="studio-seo__benefits">
-    <article><span>01</span><h3>Start with your wardrobe</h3><p>Describe a dress, blazer, trousers or other pieces you already own and receive a considered outfit formula.</p></article>
-    <article><span>02</span><h3>Finish the complete look</h3><p>Get personalised colour, jewellery, shoe, bag, hair, make-up, layering and proportion guidance.</p></article>
-    <article><span>03</span><h3>Use the plan your way</h3><p>Keep it for inspiration, use it as a shopping filter, or share it with Jane.M only if you choose to.</p></article>
-  </div>
-  <div class="studio-faq">
-    <p class="eyebrow">Style Studio questions</p><h2>Free means free.</h2>
-    <details><summary>Is the Jane.M Style Studio free?<span aria-hidden="true">+</span></summary><p>Yes. The Style Studio is free to use and does not require an account, booking or purchase.</p></details>
-    <details><summary>Do I have to order a new design from Jane.M?<span aria-hidden="true">+</span></summary><p>No. Use it only for inspiration or to plan an outfit with clothes you already own. Contacting Jane.M is entirely optional.</p></details>
-    <details><summary>Can it help me wear clothes I already have?<span aria-hidden="true">+</span></summary><p>Yes. Choose the wardrobe option and describe your starting pieces. Your plan will suggest how to combine, accessorise and re-wear them.</p></details>
-    <details><summary>What styling advice will I receive?<span aria-hidden="true">+</span></summary><p>Your plan includes an outfit formula, colour palette, jewellery, shoes, bag, hair, make-up, outer layer, fit and re-wear guidance.</p></details>
-  </div>
-</section>
-</main>
-<footer class="studio-note">Jane.M Style Studio • Free inspiration. No sign-up. Your plan stays on this device until you choose to share it.</footer>
 
-<script src="../config.js"></script>
-<script src="../analytics.js"></script>
-<script src="../seo-analytics.js"></script>
-<script src="../script.js"></script>
-<script>
-let step=0,currentBrief=null,currentResult=null,started=false;const steps=[...document.querySelectorAll('.step')],bar=document.getElementById('bar'),journeyLabel=document.getElementById('journeyLabel'),journeyReward=document.getElementById('journeyReward'),journeySteps=[...document.querySelectorAll('.journey-steps li')],archetypeNote=document.getElementById('archetypeNote'),styleScorecard=document.getElementById('styleScorecard'),passportStatus=document.getElementById('passportStatus'),saveEdit=document.getElementById('saveEdit'),restartStudio=document.getElementById('restartStudio'),scorecardWhatsApp=document.getElementById('scorecardWhatsApp'),scorecardVisualize=document.getElementById('scorecardVisualize'),downloadScorecard=document.getElementById('downloadScorecard');
-const track=(event, detail={})=>window.JaneMAnalytics?.track(event,detail);
-track('style_studio_opened');
-function markStarted(){if(!started){started=true;track('style_studio_started')}}
-const back=document.getElementById('back'),next=document.getElementById('next'),finish=document.getElementById('finish'),form=document.getElementById('form');
-form.addEventListener('input',markStarted,{once:true});form.addEventListener('change',markStarted,{once:true});
-const journeyCopy=[['Chapter 1 of 5 · Set your direction','First insight unlocked'],['Chapter 2 of 5 · Name your style energy','Style signature unlocked'],['Chapter 3 of 5 · Curate the details','Stylist’s edit unlocked'],['Chapter 4 of 5 · Confirm the fit','Fit confidence unlocked'],['Chapter 5 of 5 · Make it personal','Your reveal is ready']];
-function show(){steps.forEach((s,i)=>s.classList.toggle('active',i===step));journeySteps.forEach((item,i)=>{item.classList.toggle('is-current',i===step);item.classList.toggle('is-complete',i<step)});bar.style.width=((step+1)*20)+'%';journeyLabel.textContent=journeyCopy[step][0];journeyReward.textContent=journeyCopy[step][1];back.disabled=step===0;next.classList.toggle('hidden',step===4);finish.classList.toggle('hidden',step!==4)}
-function clearInvalid(){steps[step].querySelectorAll('.invalid-field').forEach(el=>el.classList.remove('invalid-field'));steps[step].querySelectorAll('[aria-invalid="true"]').forEach(el=>el.removeAttribute('aria-invalid'));validationNotice.classList.remove('active')}
-function markInvalid(el){const target=el.type==='radio'?el.closest('.chips'):el.type==='checkbox'?el.closest('label'):(el.closest('label')||el);target?.classList.add('invalid-field');el.setAttribute('aria-invalid','true')}
-function showMissing(fields){fields.forEach(markInvalid);validationNotice.classList.add('active');fields[0]?.focus()}
-function valid(){clearInvalid();const req=[...steps[step].querySelectorAll('[required]')].filter(el=>!el.closest('.hidden'));const missing=[];for(const el of req){if(el.type==='radio'){if(!steps[step].querySelector('[name="'+el.name+'"]:checked'))missing.push(el)}else if(el.type==='checkbox'){if(!el.checked)missing.push(el)}else if(!el.value.trim())missing.push(el)}if(missing.length){showMissing(missing);return false}return true}
-function syncMeasureFlow(){const on=document.getElementById('captureToggle').checked;measurementFlow.classList.toggle('hidden',!on);measurementSkip.classList.toggle('hidden',on);track(on?'measurements_selected':'measurements_skipped')}
-next.onclick=()=>{if(!valid())return;if(step===2&&!captureToggle.checked){step=4;show();return}if(step===3&&captureToggle.checked){const missingMeasurements=['m_bust','m_waist','m_hip','m_shoulder','m_length'].map(n=>form.elements[n]).filter(el=>!el.value);if(missingMeasurements.length){showMissing(missingMeasurements);return}}step++;show()};back.onclick=()=>{clearInvalid();if(step===4&&!captureToggle.checked){step=2;show();return}step--;show()};
-captureToggle.onchange=syncMeasureFlow;
-const base={Mini:1450,'Above knee':1650,'Knee length':1650,Midi:2500,Maxi:3500,'No preference':2500};
-const adds={Corset:650,Slit:200,'Long sleeves':450,'Off shoulder':250,'Open back':300,'Big bow':450,Pockets:150,Train:700,Lace:600,Beading:900,'Exposed boning':250,'Tiered skirt':1500};
-function data(){const f=new FormData(form),d={};for(const [k,v] of f.entries()){if(k==='features'){(d.features??=[]).push(v)}else d[k]=v}d.features=d.features||[];d.captureMeasurements=captureToggle.checked;return d}
-function colourAdvice(d){
- const metal=['Emerald','Champagne','Burgundy','Gold'].includes(d.colour)?'warm gold':d.colour==='Navy'||d.colour==='White'?'silver, white gold or pearl':'either brushed gold or polished silver';
- const accent={Emerald:'champagne, warm ivory or deep chocolate',Navy:'silver, soft blue or crisp ivory',Black:'ivory, metallic gold or one saturated jewel tone',Champagne:'espresso, antique gold or soft blush',Burgundy:'old gold, chocolate or muted rose',White:'pearl, silver or a deliberate colour accent',Gold:'black, cream or deep brown','Surprise me':'one neutral base with a single rich accent'}[d.colour]||'a calm neutral with one considered accent';
- const palettes={
-  Emerald:[['Emerald','#0f5a48'],['Champagne','#d8bd88'],['Warm ivory','#f1eadc'],['Chocolate','#4a2c22']],
-  Navy:[['Midnight navy','#17233d'],['Silver','#b7bbc2'],['Soft blue','#aebed0'],['Crisp ivory','#f4f0e7']],
-  Black:[['Ink black','#171411'],['Warm ivory','#efe7d8'],['Antique gold','#b28a4b'],['Jewel accent','#7a1947']],
-  Champagne:[['Champagne','#d6bd8d'],['Espresso','#3b2922'],['Antique gold','#a77d3d'],['Soft blush','#d7aaa2']],
-  Burgundy:[['Burgundy','#681f32'],['Old gold','#aa8448'],['Chocolate','#493028'],['Muted rose','#b7797e']],
-  White:[['Soft white','#f5f3ed'],['Pearl','#ddd7ca'],['Silver','#aaaeb5'],['Deep accent','#25493e']],
-  Gold:[['Atelier gold','#b68b43'],['Ink black','#171411'],['Cream','#eee3cf'],['Deep brown','#4a3227']],
-  'Surprise me':[['Deep teal','#174d47'],['Oxblood','#682b35'],['Warm sand','#c7a97a'],['Ink','#181512']]
- };
- return {metal,palette:palettes[d.colour]||palettes['Surprise me'],story:`Let ${d.colour==='Surprise me'?'one confident hero colour':d.colour.toLowerCase()} lead. Support it with ${accent}; repeat the accent only twice so the outfit feels intentional rather than matched.`};
-}
-function stylistEdit(d,neckline){
- const colour=colourAdvice(d),outdoor=d.setting!=='Indoor',active=['Dancing','All-day wear','Walking and mingling'].includes(d.movement);
- let jewellery=`Choose ${colour.metal}. `;
- if(d.focalPoint==='Neckline and shoulders')jewellery+='Use sculptural earrings and skip the necklace so the neckline remains the focus.';
- else if(d.focalPoint==='Back detail')jewellery+='Choose a clean drop earring and keep the neck bare so the back detail reads clearly.';
- else if(d.focalPoint==='Sleeves')jewellery+='Use close-to-the-ear earrings and avoid bracelets that compete with the sleeves.';
- else jewellery+=d.theme==='Minimalist'?'Wear one sculptural earring or refined stud with a fine bracelet.':'Use a statement earring, then keep the necklace and wrist restrained.';
- const shoes=active?(outdoor?'A stable block heel, polished flat or secure slingback keeps movement easy on varied ground.':'A secure slingback, low heel or polished flat supports movement without losing refinement.'):(d.length==='Maxi'?'A sleek pointed heel or minimal sandal lengthens the line; confirm the hem while wearing it.':'A pointed pump or clean strappy heel continues the leg line.');
- const bag=d.time==='Night'?'A compact structured clutch in one supporting neutral; it should hold essentials without becoming another focal point.':'A small structured shoulder bag or top-handle bag in a supporting neutral, with minimal visible hardware.';
- const hair=d.focalPoint==='Back detail'||d.focalPoint==='Neckline and shoulders'||d.focalPoint==='Sleeves'?'An up-style, polished low bun or tucked-back shape keeps the design detail visible.':d.feeling==='Romantic'?'Soft controlled waves balance the silhouette without feeling rigid.':'A polished low bun or smooth soft wave keeps the finish intentional.';
- const makeup=d.time==='Night'?'Luminous skin, defined eyes and one deeper lip or cheek tone—choose one area to intensify, not all three.':'Fresh skin, softly defined eyes and a lip tone that echoes the outfit’s warm or cool undertone.';
- const foundation=d.coverage==='Daring'||neckline.includes('plunge')||d.features.includes('Open back')?'Test the exact bra, support or fashion-tape solution before the event; it must disappear from every angle.':'Keep undergarments smooth, tonal and invisible under the fabric; test the outfit in daylight and while seated.';
- const layer=d.weather==='Cold'?'Add a clean tailored coat, cape or tonal wrap that is long enough to respect the outfit proportions.':d.weather==='Warm'?'Keep one light tailored layer nearby for temperature changes, preferably in a colour already used in the look.':'Avoid a heavy layer; if needed, choose a sheer wrap or sharply cut lightweight blazer.';
- const rewear=d.journey==='Explore a new custom look'?'For re-wear, change the mood—not the garment: swap statement earrings for studs, heels for a refined flat, and evening makeup for fresh skin.':`Start with ${d.existingPiece||'the strongest piece you already own'} and buy only the single missing item that improves fit, proportion or polish.`;
- return {Jewellery:jewellery,Shoes:shoes,Bag:bag,'Hair direction':hair,'Make-up direction':makeup,'Foundation & fit':foundation,'Outer layer':layer,'Re-wear strategy':rewear,"Stylist's rule":`Keep one hero area: ${d.focalPoint.toLowerCase()}. Everything else should support it through quieter scale, colour and shine.`};
-}
-function styleArchetype(d){
- if(d.personality==='Glamorous'||d.theme==='Luxury')return 'The After-Dark Icon';
- if(d.personality==='Bold'||d.coverage==='Daring')return 'The Modern Statement';
- if(d.personality==='Romantic'||d.feeling==='Romantic'||d.theme==='Garden Party')return 'The Golden-Hour Romantic';
- if(d.personality==='Minimalist'||d.theme==='Minimalist')return 'The Quiet Luxury Edit';
- if(d.theme==='African Elegance'||d.theme==='Traditional')return 'The Heritage Modernist';
- return 'The Polished Original';
-}
-function styleScores(d){
- const eventFit=Math.min(98,84+(['Gala','Wedding','Graduation','Corporate Dinner'].includes(d.occasion)?9:5));
- const comfort=Math.min(96,72+(d.priority==='Comfort first'?20:d.priority==='Balanced comfort and impact'?15:d.fit==='Relaxed'?11:6));
- const impact=Math.min(98,68+(d.personality==='Bold'||d.personality==='Glamorous'?21:12)+(d.features.length?5:0));
- const rewear=Math.min(97,70+(d.priority==='Easy re-wear after the event'?22:d.journey!=='Explore a new custom look'?17:8));
- return [['Event fit',eventFit,'Feels right for the occasion'],['Comfort',comfort,'Movement and ease considered'],['Presence',impact,'One clear visual hero'],['Re-wear',rewear,'Value beyond one event']];
-}
-function make(d){
- const hot=d.weather==='Hot',formal=['Corporate Dinner','Gala','Wedding'].includes(d.occasion);
- let silhouette=d.fit==='Relaxed'?'softly draped A-line':d.fit==='Figure-hugging'?'sculpted column':'structured fit-and-flare';
- if(d.length==='Mini'&&formal)silhouette='polished structured mini with controlled draping';
- let neckline=d.coverage==='Modest'?'high boat neckline':d.coverage==='Daring'?'asymmetric plunge neckline':d.personality==='Sexy'?'soft sweetheart neckline':'clean asymmetric neckline';
- if(d.features.includes('Off shoulder'))neckline='off-shoulder sculpted neckline';
- let sleeve=hot?'sleeveless or detachable lightweight sleeve':'structured long sleeve';
- if(d.features.includes('Long sleeves'))sleeve=hot?'sheer lightweight long sleeve':'structured long sleeve';
- let fabric=d.theme==='Minimalist'?(hot?'fluid silk crepe or matte satin':'structured crepe or matte satin'):(hot?'lightweight satin, silk crepe or organza accents':'mikrando, crepe or lined satin');
- const details=d.features.length?d.features.join(', '):'clean construction with one signature focal detail';
- const constructionScore =
-   1 +
-   (d.features.includes('Corset')?2:0) +
-   (d.features.includes('Long sleeves')?1:0) +
-   (d.features.includes('Train')?2:0) +
-   (d.features.includes('Tiered skirt')?2:0) +
-   (d.features.includes('Beading')?2:0) +
-   (d.features.includes('Lace')?1:0) +
-   (d.features.includes('Exposed boning')?1:0) +
-   (d.features.includes('Slit')?1:0) +
-   (d.fit==='Figure-hugging'?1:0) +
-   (d.theme==='Luxury'||d.personality==='Glamorous'?1:0);
- const complexity=constructionScore>=8?'Very High':constructionScore>=5?'High':constructionScore>=3?'Moderate':'Low';
- const complexityPremium={Low:0,Moderate:250,High:600,'Very High':1100}[complexity];
- let estimate=(base[d.length]||2500)+d.features.reduce((s,x)=>s+(adds[x]||0),0)+complexityPremium;
- const low=Math.round(estimate*.90/50)*50,high=Math.round(estimate*1.20/50)*50;
- const anchor=d.existingPiece||({Dress:'a refined dress','Skirt':'a proportioned skirt-and-top combination','Trousers':'tailored trousers balanced with a defined top','Jumpsuit':'a clean, elongated jumpsuit','Suit or co-ord':'a coordinated tailored set','Top or blouse':'a considered blouse-and-bottom combination','Mixed wardrobe outfit':'the strongest pieces already in your wardrobe','Not sure yet':'one confident hero piece'}[d.garment]||'one confident hero piece');
- const outfitFormula=d.garment==='Dress'?silhouette:d.garment==='Skirt'?`${d.length.toLowerCase()} skirt with a ${d.fit.toLowerCase()} waist and a quieter ${neckline}`:d.garment==='Trousers'?`${d.fit==='Relaxed'?'fluid wide-leg':'clean tailored'} trousers with a defined waist and ${neckline}`:d.garment==='Jumpsuit'?`${d.fit==='Relaxed'?'fluid':'structured'} elongated jumpsuit with ${neckline}`:d.garment==='Suit or co-ord'?`${d.fit==='Relaxed'?'softly tailored':'sharply tailored'} co-ord with one clean base layer`:d.garment==='Top or blouse'?`${neckline} top balanced by a ${d.length==='Maxi'?'long column':'clean tailored'} bottom`:`Build around ${anchor}; keep one defined line at the waist or shoulder and repeat one colour elsewhere.`;
- const archetype=styleArchetype(d);
- const profile=archetype;
- const own=d.journey!=='Explore a new custom look';
- const styleVoice=d.personality.toLowerCase()===d.theme.toLowerCase()?d.personality.toLowerCase():`${d.personality.toLowerCase()}, ${d.theme.toLowerCase()}`;
- const article=/^[aeiou]/i.test(styleVoice)?'An':'A';
- const summary=own?`${article} ${styleVoice} styling plan built around ${anchor}. It is designed for ${d.weather.toLowerCase()} conditions, prioritises ${d.priority.toLowerCase()} and keeps attention on ${d.focalPoint.toLowerCase()}.`:`${article} ${styleVoice} custom direction for a ${d.occasion.toLowerCase()}, designed for ${d.weather.toLowerCase()} conditions and a ${d.time.toLowerCase()} setting. It prioritises ${d.priority.toLowerCase()} and focuses attention on ${d.focalPoint.toLowerCase()}.`;
- const reasons=[hot?'Lightweight layers and controlled shine keep the look polished without adding heat.':'Intentional layering keeps the silhouette refined in cooler conditions.',d.setting==='Both'?'The outfit can transition between indoor and outdoor spaces without a complete change.':'Every layer is selected for the '+d.setting.toLowerCase()+' setting.',`Your selected focal point—${d.focalPoint.toLowerCase()}—becomes the hero area, which gives the outfit a clear visual hierarchy.`,`The ${d.fit.toLowerCase()} fit and ${d.length.toLowerCase()} length balance comfort, proportion and event formality.`,`The shoe and bag recommendations account for ${d.movement.toLowerCase()}.`,own?'The plan starts with what you own and limits shopping to a genuine styling gap.':'The direction can be adjusted during consultation without losing its central styling idea.'];
- const styling=stylistEdit(d,neckline),colour=colourAdvice(d);
- return {silhouette,outfitFormula,anchor,neckline,sleeve,fabric,details,low,high,complexity,constructionScore,profile,archetype,summary,reasons,styling,colourStory:colour.story,colourPalette:colour.palette,scores:styleScores(d)};
-}
-function brief(d,r){
- const measurements=d.captureMeasurements?Object.fromEntries([['Bust',d.m_bust+' '+d.m_bust_unit],['Waist',d.m_waist+' '+d.m_waist_unit],['Hip',d.m_hip+' '+d.m_hip_unit],['Shoulder width',d.m_shoulder+' '+d.m_shoulder_unit],['Upper arm',d.m_arm?d.m_arm+' '+d.m_arm_unit:'Not provided'],['Sleeve length',d.m_sleeve?d.m_sleeve+' '+d.m_sleeve_unit:'Not provided'],['Shoulder-to-waist',d.m_torso?d.m_torso+' '+d.m_torso_unit:'Not provided'],['Dress length',d.m_length+' '+d.m_length_unit],['Height',d.m_height?d.m_height+' '+d.m_height_unit:'Not provided'],['Heel height',d.m_heel?d.m_heel+' '+d.m_heel_unit:'Not provided']]):{status:'Deferred — Jane.M must measure and verify before production'};
- const custom=d.journey==='Explore a new custom look';
- return {title:'Jane.M Personal Style Plan — '+r.profile,client:{name:d.clientName||'Not provided',phone:d.clientPhone||'Not provided',email:d.clientEmail||'Not provided',preferredContact:d.contactMethod||'Not provided'},context:{stylingGoal:d.journey,occasion:d.occasion,garment:d.garment,startingPieces:d.existingPiece||'Starting fresh',theme:d.theme,setting:d.setting,weather:d.weather,time:d.time,stylingBudget:d.budget==='0'?'Use only what I own':`Up to M${Number(d.budget).toLocaleString()}`},preferences:{personality:d.personality,fit:d.fit,length:d.length,colour:d.colour,coverage:d.coverage,feeling:d.feeling,priority:d.priority,movement:d.movement,focalPoint:d.focalPoint},direction:{outfitFormula:r.outfitFormula,silhouette:r.silhouette,neckline:r.neckline,sleeve:r.sleeve,fabric:r.fabric,features:r.details,colourStory:r.colourStory},styling:r.styling,constraints:{avoid:d.avoid||'None stated',notes:d.notes||'None stated'},measurements,inspiration:'Attach an inspiration image in WhatsApp if helpful.',complexity:{rating:r.complexity,score:r.constructionScore+'/12',basis:'Assessed from structure, fit, sleeves, draping, embellishment and finishing requirements'},estimate:custom?`M${r.low.toLocaleString()}–M${r.high.toLocaleString()} indicative custom-workmanship range`:'Use the wardrobe first; add only the one piece that meaningfully improves fit, proportion or polish.',disclaimer:custom?'Starting brief only. Jane.M must confirm measurements, construction, fabric, final design and quotation.':'Inspirational personal styling guidance; adapt it to the fit, comfort and pieces available to you.'}
-}
-function esc(x){return String(x).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-function section(title,obj){return `<div class="brief-section"><h4>${title}</h4><ul>${Object.entries(obj).map(([k,v])=>`<li><b>${esc(k)}:</b> ${esc(v)}</li>`).join('')}</ul></div>`}
-function toText(b){return `${b.title}\n\nCLIENT (OPTIONAL)\n${Object.entries(b.client).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nSTYLE CONTEXT\n${Object.entries(b.context).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nPERSONAL PREFERENCES\n${Object.entries(b.preferences).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nOUTFIT DIRECTION\n${Object.entries(b.direction).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nSTYLIST'S COMPLETE EDIT\n${Object.entries(b.styling).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nCONSTRAINTS\n${Object.entries(b.constraints).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nMEASUREMENTS\n${Object.entries(b.measurements).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nINSPIRATION\n${b.inspiration}\n\nCOMPLEXITY ASSESSMENT\n${Object.entries(b.complexity).map(([k,v])=>`${k}: ${v}`).join('\n')}\n\nWARDROBE / COMMERCIAL GUIDE\n${b.estimate}\n\n${b.disclaimer}`}
-form.onsubmit=e=>{e.preventDefault();if(!valid())return;const d=data(),r=make(d),b=brief(d,r);
- document.getElementById('wizard').style.display='none';document.querySelector('.progress').style.display='none';document.querySelector('.journey-steps').style.display='none';document.querySelector('.journey-status').style.display='none';document.getElementById('result').classList.add('active');
- profile.textContent=r.profile;summaryText.textContent=r.summary;archetypeNote.textContent=`Your choices point to ${r.archetype.toLowerCase()}: a direction that balances ${d.priority.toLowerCase()} with a clear focus on ${d.focalPoint.toLowerCase()}.`;styleScorecard.innerHTML=r.scores.map(([label,score,note])=>`<div class="scorecard__item"><span>${esc(label)}</span><strong>${score}%</strong><small>${esc(note)}</small></div>`).join('');estimate.textContent=`M${r.low.toLocaleString()} – M${r.high.toLocaleString()}`;
- estimatePanel.classList.toggle('hidden',d.journey!=='Explore a new custom look');
- direction.innerHTML=[['Starting point',r.anchor],['Outfit formula',r.outfitFormula],['Shape',r.silhouette],['Top line',r.neckline],['Sleeve',r.sleeve],['Length',d.length],['Finish',r.details]].map(x=>`<div><dt>${x[0]}</dt><dd>${esc(x[1])}</dd></div>`).join('');
- reasons.innerHTML=r.reasons.map(x=>`<li>${x}</li>`).join('');colourStory.textContent=r.colourStory;colourPalette.innerHTML=r.colourPalette.map(([name,hex])=>`<div class="swatch"><span class="swatch-colour" style="--swatch:${hex}"></span><span class="swatch-label">${esc(name)}</span></div>`).join('');styling.innerHTML=Object.entries(r.styling).map(x=>`<div><dt>${x[0]}</dt><dd>${x[1]}</dd></div>`).join('');
- briefDoc.innerHTML=section('Optional contact',b.client)+section('Style context',b.context)+section('Personal preferences',b.preferences)+section('Outfit direction',b.direction)+section("Stylist's complete edit",b.styling)+section('Constraints',b.constraints)+section('Measurements',b.measurements)+`<div class="brief-section"><h4>Inspiration</h4><p>${b.inspiration}</p></div>`+section('Complexity assessment',b.complexity)+`<div class="brief-section"><h4>Wardrobe / commercial guide</h4><p><b>${b.estimate}</b><br>${b.disclaimer}</p></div>`;
- currentBrief=b;currentResult={profile:r.profile,occasion:d.occasion,colour:d.colour,summary:r.summary,scores:r.scores,createdAt:new Date().toISOString()};passportStatus.textContent='Not saved yet — save only this look’s summary to this device.';saveEdit.textContent='Save to My Edit';window.B=b;
- const handoff=`Hello Jane.M, I created a personal style plan in the Jane.M Style Studio and would like to explore it with you.\n\n${toText(b)}`;
- briefWhatsApp.href='https://wa.me/26662790946?text='+encodeURIComponent(handoff);scorecardWhatsApp.href=briefWhatsApp.href;track('style_preferences_completed');track('style_plan_generated',{journey:d.journey});track('style_studio_completed');window.requestAnimationFrame(()=>document.getElementById('result').scrollIntoView({behavior:'smooth',block:'start'}));
-};
-function svgTextLines(text,max=52){const words=String(text).split(/\s+/),lines=[];let line='';for(const word of words){const candidate=(line+' '+word).trim();if(candidate.length>max&&line){lines.push(line);line=word}else line=candidate}if(line)lines.push(line);return lines.slice(0,3)}
-function scorecardImage(edit){const summary=svgTextLines(edit.summary),summarySvg=summary.map((line,index)=>`<text x="110" y="${318+index*34}" class="summary">${esc(line)}</text>`).join('');const scores=edit.scores.map(([label,score,note],index)=>{const x=110+(index%2)*690,y=465+Math.floor(index/2)*180;return `<g transform="translate(${x} ${y})"><rect width="620" height="145" fill="#f8f3eb"/><text x="34" y="38" class="label">${esc(label)}</text><text x="34" y="94" class="score">${esc(score)}%</text><text x="190" y="88" class="note">${esc(note)}</text><rect x="34" y="112" width="540" height="5" fill="#dfd2c2"/><rect x="34" y="112" width="${Math.round(5.4*score)}" height="5" fill="#b4863d"/></g>`}).join('');return `<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="930" viewBox="0 0 1600 930"><style>.serif{font-family:Georgia,'Times New Roman',serif}.sans{font-family:Arial,sans-serif}.eyebrow{fill:#d9b87b;font:700 20px Arial,sans-serif;letter-spacing:5px}.title{fill:#fff;font:600 76px Georgia,'Times New Roman',serif}.summary{fill:#d8cec4;font:400 24px Arial,sans-serif}.label{fill:#80633a;font:700 16px Arial,sans-serif;letter-spacing:3px}.score{fill:#17130f;font:600 55px Georgia,'Times New Roman',serif}.note{fill:#665d54;font:400 18px Arial,sans-serif}</style><rect width="1600" height="930" fill="#17130f"/><circle cx="1430" cy="120" r="250" fill="#b4863d" opacity=".13"/><text x="110" y="105" class="eyebrow">JANE.M STYLE STUDIO · YOUR PERSONAL EDIT</text><text x="110" y="215" class="title">${esc(edit.profile)}</text><text x="110" y="265" class="eyebrow">${esc(edit.occasion.toUpperCase())} · ${esc(edit.colour.toUpperCase())} DIRECTION</text>${summarySvg}<text x="110" y="430" class="eyebrow">STYLIST'S SCORECARD</text>${scores}<text x="110" y="875" fill="#a99a8b" class="sans" font-size="18">Jane.M Atelier · Elegantly you. Uniquely Jane.M.</text></svg>`}
-function downloadScorecardImage(){if(!currentResult)return;const file=new Blob([scorecardImage(currentResult)],{type:'image/svg+xml;charset=utf-8'}),url=URL.createObjectURL(file),link=document.createElement('a');link.href=url;link.download=`JaneM-${currentResult.profile.replace(/[^a-z0-9]+/gi,'-').replace(/^-|-$/g,'')}-scorecard.svg`;link.click();setTimeout(()=>URL.revokeObjectURL(url),500);track('style_scorecard_downloaded');}
-scorecardVisualize.addEventListener('click',()=>document.getElementById('visualizeBrief').click());
-downloadScorecard.addEventListener('click',downloadScorecardImage);
-saveEdit.addEventListener('click',()=>{if(!currentResult)return;try{const key='janem-style-edits';const saved=JSON.parse(localStorage.getItem(key)||'[]');const next=[currentResult,...saved.filter(edit=>edit.profile!==currentResult.profile||edit.occasion!==currentResult.occasion)].slice(0,6);localStorage.setItem(key,JSON.stringify(next));passportStatus.textContent=`Saved to My Edit · ${next.length} ${next.length===1?'direction':'directions'} kept on this device.`;saveEdit.textContent='Saved to My Edit';track('style_edit_saved');}catch(error){passportStatus.textContent='Your browser could not save this edit, but your current plan is still ready to copy or share.';}});
-restartStudio.addEventListener('click',()=>{form.reset();step=0;currentBrief=null;currentResult=null;document.getElementById('result').classList.remove('active');document.getElementById('wizard').style.display='block';document.querySelector('.progress').style.display='block';document.querySelector('.journey-steps').style.display='flex';document.querySelector('.journey-status').style.display='flex';syncMeasureFlow();show();document.getElementById('wizard').scrollIntoView({behavior:'smooth',block:'start'});track('style_studio_restarted');});
-copy.onclick=async()=>{await navigator.clipboard.writeText(toText(window.B));alert('Brief copied.')};
-download.onclick=()=>{const blob=new Blob([toText(window.B)],{type:'text/plain'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='JaneM-Personal-Style-Plan.txt';a.click()};
-const mockConceptSrc='../assets/style-studio/mock-design-concept.png';
-async function generateDesignConcept(brief){
-  const controller=new AbortController();
-  const timeout=setTimeout(()=>controller.abort(),90000);
-  try{
-    const response=await fetch('/api/style-studio/visualize',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({brief}),signal:controller.signal});
-    if(!response.ok)throw new Error('Live visualization unavailable');
-    const result=await response.json();
-    if(result.mode!=='live'||typeof result.imageDataUrl!=='string'||!result.imageDataUrl.startsWith('data:image/'))throw new Error('Invalid live visualization');
-    conceptImage.src=result.imageDataUrl;
-    conceptImage.alt='Personalised Jane.M fashion concept generated from the client brief';
-    conceptSource.textContent='Personalised concept generated from your brief.';
-    visualizerSupport.textContent='This personalised concept interprets your brief as an early consultation direction.';
-    conceptOutput.classList.remove('hidden');
-    track('concept_live_generated');
-    return 'live';
-  }catch(error){
-    return runMockConcept();
-  }finally{
-    clearTimeout(timeout);
-  }
-}
-async function runMockConcept(){
-  conceptImage.src=mockConceptSrc;
-  conceptImage.alt='Jane.M atelier concept preview';
-  conceptSource.textContent='Illustrative atelier preview for your consultation.';
-  visualizerSupport.textContent='Live generation is not currently available, so this approved preview is shown as a consultation guide.';
-  conceptOutput.classList.remove('hidden');
-  track('concept_preview_displayed');
-  return 'mock';
-}
-visualizeBrief.addEventListener('click',async()=>{
-  if(!currentBrief)return alert('Create the briefing pack first.');
-  track('visualize_brief_clicked');
-  conceptOutput.classList.add('hidden');
-  aiStatus.classList.remove('hidden');
-  [aiStep1,aiStep2,aiStep3,aiStep4].forEach(x=>x.classList.remove('done'));
-  const conceptPromise=generateDesignConcept(currentBrief);
-  const stages=[
-    [aiStep1,'Reading the occasion, wardrobe and comfort needs…'],
-    [aiStep2,'Balancing colour, proportion and focal details…'],
-    [aiStep3,'Creating one coherent outfit direction…'],
-    [aiStep4,'Checking that the complete styling edit aligns…']
-  ];
-  for(const [el,label] of stages){
-    aiStatusText.textContent=label;
-    await new Promise(r=>setTimeout(r,650));
-    el.classList.add('done');
-  }
-  aiStatusText.textContent='Rendering your atelier concept…';
-  await conceptPromise;
-  aiStatus.classList.add('hidden');
-  conceptOutput.scrollIntoView({behavior:'smooth',block:'start'});
-});
+    <section id="quick-match" class="studio-shell studio-journey" aria-labelledby="quick-match-heading">
+      <div class="studio-intro">
+        <div><p class="eyebrow">Quick Style Match</p><h2 id="quick-match-heading">A clear direction, in a few thoughtful steps.</h2></div>
+        <p>Choose what feels most like you. There are no right answers—and no contact details are needed for your result.</p>
+      </div>
 
+      <div id="studioApp" class="studio-app">
+        <form id="quickForm" novalidate>
+          <div class="studio-progress-wrap">
+            <div class="studio-progress-copy"><span id="stepLabel">Step 1 of 4</span><span id="stepPrompt">Your occasion</span></div>
+            <div class="studio-progress" aria-hidden="true"><span id="progressBar"></span></div>
+            <p id="progressStatus" class="sr-only" aria-live="polite">Step 1 of 4: Your occasion</p>
+          </div>
 
-let guideIndex=0;
-const guideSlides=[...document.querySelectorAll('.guide-slide')];
-function showGuide(index){
-  guideIndex=Math.max(0,Math.min(index,guideSlides.length-1));
-  guideSlides.forEach((slide,i)=>slide.classList.toggle('active',i===guideIndex));
-  guidePrev.disabled=guideIndex===0;
-  guideNext.disabled=guideIndex===guideSlides.length-1;
-  guideCount.textContent=`${guideIndex+1} of ${guideSlides.length}`;
-}
-guidePrev.addEventListener('click',()=>showGuide(guideIndex-1));
-guideNext.addEventListener('click',()=>showGuide(guideIndex+1));
-showGuide(0);
+          <p id="validationMessage" class="studio-validation" role="alert" hidden>Please choose an answer before continuing.</p>
 
-show();
-</script>
+          <section class="studio-step is-active" data-step="0" aria-labelledby="occasion-step-title">
+            <p class="studio-step__kicker">01 / The moment</p>
+            <h3 id="occasion-step-title">What are you dressing for?</h3>
+            <p class="studio-step__lead">Start with the occasion and how soon you need your look.</p>
+            <fieldset class="choice-grid" data-required="occasion"><legend>Occasion</legend>
+              <label class="choice-card"><input type="radio" name="occasion" value="Graduation"><span>Graduation</span><small>A look for the walk, photographs and celebration.</small></label>
+              <label class="choice-card"><input type="radio" name="occasion" value="Wedding guest"><span>Wedding guest</span><small>Celebratory, polished and personal.</small></label>
+              <label class="choice-card"><input type="radio" name="occasion" value="Birthday or celebration"><span>Birthday or celebration</span><small>Make the moment feel unmistakably yours.</small></label>
+              <label class="choice-card"><input type="radio" name="occasion" value="Corporate event"><span>Corporate event</span><small>Confident presence with considered polish.</small></label>
+              <label class="choice-card"><input type="radio" name="occasion" value="Evening gala"><span>Evening gala</span><small>Elegant drama for an after-dark entrance.</small></label>
+              <label class="choice-card"><input type="radio" name="occasion" value="Special occasion"><span>Special occasion</span><small>A milestone worth dressing beautifully for.</small></label>
+            </fieldset>
+            <fieldset class="chip-set" data-required="urgency"><legend>When is your event?</legend>
+              <label><input type="radio" name="urgency" value="Within two weeks"><span>Within two weeks</span></label>
+              <label><input type="radio" name="urgency" value="This month"><span>This month</span></label>
+              <label><input type="radio" name="urgency" value="1–3 months away"><span>1–3 months away</span></label>
+              <label><input type="radio" name="urgency" value="More than 3 months away"><span>More than 3 months away</span></label>
+              <label><input type="radio" name="urgency" value="I am still planning"><span>I am still planning</span></label>
+            </fieldset>
+          </section>
+
+          <section class="studio-step" data-step="1" aria-labelledby="personality-step-title" hidden>
+            <p class="studio-step__kicker">02 / Your energy</p>
+            <h3 id="personality-step-title">How do you want to feel?</h3>
+            <p class="studio-step__lead">Choose the feeling you want to carry into the room.</p>
+            <fieldset class="choice-grid choice-grid--personality" data-required="personality"><legend>Style personality</legend>
+              <label class="choice-card"><input type="radio" name="personality" value="Classic"><span>Classic</span><small>Timeless, composed and quietly memorable.</small></label>
+              <label class="choice-card"><input type="radio" name="personality" value="Elegant"><span>Elegant</span><small>Refined lines with a graceful finish.</small></label>
+              <label class="choice-card"><input type="radio" name="personality" value="Modern"><span>Modern</span><small>Clean, fresh and subtly unexpected.</small></label>
+              <label class="choice-card"><input type="radio" name="personality" value="Glamorous"><span>Glamorous</span><small>Confident detail with a little drama.</small></label>
+              <label class="choice-card"><input type="radio" name="personality" value="Romantic"><span>Romantic</span><small>Soft movement and thoughtful femininity.</small></label>
+              <label class="choice-card"><input type="radio" name="personality" value="Bold"><span>Bold</span><small>A memorable point of view and strong presence.</small></label>
+            </fieldset>
+            <fieldset class="chip-set" data-required="fit"><legend>Preferred silhouette or fit</legend>
+              <label><input type="radio" name="fit" value="Softly flowing"><span>Softly flowing</span></label>
+              <label><input type="radio" name="fit" value="Defined waist"><span>Defined waist</span></label>
+              <label><input type="radio" name="fit" value="Sleek and fitted"><span>Sleek and fitted</span></label>
+              <label><input type="radio" name="fit" value="Statement volume"><span>Statement volume</span></label>
+              <label><input type="radio" name="fit" value="Not sure yet"><span>Not sure yet</span></label>
+            </fieldset>
+            <fieldset class="chip-set" data-required="garmentLength"><legend>Preferred garment length</legend>
+              <label><input type="radio" name="garmentLength" value="Mini"><span>Mini</span></label>
+              <label><input type="radio" name="garmentLength" value="Above knee"><span>Above knee</span></label>
+              <label><input type="radio" name="garmentLength" value="Knee length"><span>Knee length</span></label>
+              <label><input type="radio" name="garmentLength" value="Midi"><span>Midi</span></label>
+              <label><input type="radio" name="garmentLength" value="Ankle"><span>Ankle</span></label>
+              <label><input type="radio" name="garmentLength" value="Floor length"><span>Floor length</span></label>
+              <label><input type="radio" name="garmentLength" value="No preference / advise me"><span>No preference / advise me</span></label>
+            </fieldset>
+          </section>
+
+          <section class="studio-step" data-step="2" aria-labelledby="colour-step-title" hidden>
+            <p class="studio-step__kicker">03 / The finish</p>
+            <h3 id="colour-step-title">What feels comfortably like you?</h3>
+            <p class="studio-step__lead">Your answer helps us balance confidence, coverage and colour.</p>
+            <fieldset class="chip-set chip-set--large" data-required="coverage"><legend>Coverage preference</legend>
+              <label><input type="radio" name="coverage" value="More coverage"><span>More coverage</span></label>
+              <label><input type="radio" name="coverage" value="Balanced"><span>Balanced</span></label>
+              <label><input type="radio" name="coverage" value="Open to a little drama"><span>Open to a little drama</span></label>
+            </fieldset>
+            <fieldset class="colour-choices" data-required="colour"><legend>Colour direction</legend>
+              <label><input type="radio" name="colour" value="Jewel tones"><span class="swatch swatch--jewel"></span><b>Jewel tones</b><small>Emerald, sapphire, burgundy</small></label>
+              <label><input type="radio" name="colour" value="Classic darks"><span class="swatch swatch--dark"></span><b>Classic darks</b><small>Black, navy, deep chocolate</small></label>
+              <label><input type="radio" name="colour" value="Soft lights"><span class="swatch swatch--light"></span><b>Soft lights</b><small>Champagne, blush, ivory</small></label>
+              <label><input type="radio" name="colour" value="Warm earths"><span class="swatch swatch--earth"></span><b>Warm earths</b><small>Terracotta, bronze, olive</small></label>
+              <label><input type="radio" name="colour" value="Surprise me"><span class="swatch swatch--surprise"></span><b>Surprise me</b><small>A considered JaneM edit</small></label>
+            </fieldset>
+          </section>
+
+          <section class="studio-step" data-step="3" aria-labelledby="budget-step-title" hidden>
+            <p class="studio-step__kicker">04 / Your starting point</p>
+            <h3 id="budget-step-title">What workmanship range feels right?</h3>
+            <p class="studio-step__lead">This helps us keep the direction realistic. Fabric, trims and embellishment are discussed separately.</p>
+            <fieldset class="budget-choices" data-required="budget"><legend>Budget range</legend>
+              <label><input type="radio" name="budget" value="Under M1,800"><span><b>Under M1,800</b><small>A clean, considered starting point</small></span></label>
+              <label><input type="radio" name="budget" value="M1,800–M3,000"><span><b>M1,800–M3,000</b><small>Refined structure and finishing</small></span></label>
+              <label><input type="radio" name="budget" value="M3,000–M4,800"><span><b>M3,000–M4,800</b><small>More detail and construction scope</small></span></label>
+              <label><input type="radio" name="budget" value="M4,800+"><span><b>M4,800+</b><small>Statement workmanship and detail</small></span></label>
+              <label><input type="radio" name="budget" value="I would like guidance"><span><b>I would like guidance</b><small>JaneM can help shape the best starting point</small></span></label>
+            </fieldset>
+            <aside class="privacy-note"><strong>Your privacy, simply.</strong><span>We do not ask for your name, contact details, measurements or a photograph to create your Style Match.</span></aside>
+          </section>
+
+          <div class="studio-actions">
+            <button id="backButton" class="studio-button studio-button--quiet" type="button" disabled>Back</button>
+            <button id="nextButton" class="studio-button" type="button">Next</button>
+          </div>
+        </form>
+      </div>
+
+      <section id="result" class="studio-result" aria-labelledby="result-title" hidden tabindex="-1">
+        <header class="result-hero"><p class="result-reference" id="resultReference"></p><h2 id="result-title"></h2><p id="resultSummary"></p></header>
+        <section class="result-grid" aria-label="Your style direction details">
+          <article class="result-panel result-panel--direction"><p class="panel-kicker">Your style direction</p><h3>Key recommendations</h3><dl id="directionList"></dl></article>
+          <article class="result-panel result-panel--palette"><p class="panel-kicker">Colour story</p><h3 id="paletteTitle"></h3><p id="paletteStory"></p><div id="paletteSwatches" class="palette-swatches"></div></article>
+          <article class="result-panel"><p class="panel-kicker">Why it suits you</p><h3>Made for your moment.</h3><ol id="resultReasons" class="result-reasons"></ol></article>
+          <article class="result-panel result-panel--estimate"><p class="panel-kicker">Indicative workmanship</p><p id="estimateValue" class="estimate-value"></p><p id="priceCopy"></p><details class="price-details"><summary>What affects my price?</summary><ul id="priceDrivers"></ul></details></article>
+          <article class="result-panel result-panel--detail"><p class="panel-kicker">Fabric, detail &amp; construction</p><h3>Atelier notes</h3><p id="fabricRecommendation"></p><p id="detailRecommendation"></p><h4 id="complexityCategory"></h4><ul id="complexityDrivers" class="complexity-drivers"></ul><p id="complexityCopy"></p></article>
+          <aside id="brandVisual" class="result-panel result-panel--brand" aria-label="Jane.M Atelier brand visual"><span class="result-brand-reference" role="img" aria-label="Gold three-dimensional Jane M Atelier logo"></span></aside>
+        </section>
+        <section class="whatsapp-panel" aria-label="Continue your Jane.M consultation"><div><p class="eyebrow">Your next step</p><h3>Build your detailed designer brief.</h3><p>Recommended: add your preferences and measurements first, create your full brief, then choose exactly what to share with Jane.M. You can also send this quick direction now.</p><ol class="brief-path" aria-label="Detailed brief steps"><li><strong>Add preferences &amp; measurements</strong><span>Optional, private, and verified during fitting.</span></li><li><strong>Create &amp; review your brief</strong><span>See every detail before you share it.</span></li></ol></div><div class="whatsapp-panel__actions"><button id="openAdvanced" class="studio-button studio-button--gold" type="button" aria-expanded="false" aria-controls="advancedForm">Build Detailed Designer Brief</button><a id="quickWhatsApp" class="studio-button studio-button--quiet" href="https://wa.me/26662790946" target="_blank" rel="noopener">Send Quick Direction on WhatsApp <span aria-hidden="true">↗</span></a></div></section>
+        <section class="share-panel"><div><p class="eyebrow">Keep your direction</p><h3>Share or save your Style Profile</h3><p>Share only your public profile, colour story and silhouette.</p></div><div class="share-actions"><button id="shareButton" class="studio-button studio-button--quiet" type="button">Share My Style Profile</button><button id="downloadCardButton" class="studio-button studio-button--quiet" type="button">Download Style Card</button></div><p id="shareFeedback" class="action-feedback" aria-live="polite"></p></section>
+        <aside class="result-disclaimer">This is an inspiration concept based on your brief. Jane.M will refine the design, confirm measurements, check availability and provide your final quotation.</aside>
+
+        <section class="advanced-panel" aria-labelledby="advanced-title">
+          <div class="advanced-panel__intro"><div><p class="eyebrow">Step 1 of 3 · Your private consultation layer</p><h3 id="advanced-title">Add details, measurements &amp; visual direction</h3><p>Everything stays on this device until you choose to share it. When ready, create your full brief and send it to Jane.M.</p></div></div>
+          <form id="advancedForm" class="advanced-form" hidden novalidate>
+            <div class="advanced-form__grid">
+              <label>Exact neckline preference<select name="neckline"><option value="">Let JaneM advise</option><option>Boat neckline</option><option>Sweetheart neckline</option><option>Square neckline</option><option>V neckline</option><option>Off-shoulder neckline</option><option>High neckline</option></select></label>
+              <label>Sleeve preference<select name="sleeves"><option value="">Let JaneM advise</option><option>Sleeveless</option><option>Cap sleeve</option><option>Short sleeve</option><option>Long sleeve</option><option>Sheer sleeve</option><option>Detachable sleeve</option></select></label>
+              <label>Fabric preference<select name="fabric"><option value="">Let JaneM advise</option><option>Crepe</option><option>Satin</option><option>Silk or silk-blend</option><option>Organza</option><option>Lace</option><option>Textured fabric</option></select></label>
+              <label>Embellishment level<select name="embellishment"><option value="">Keep it understated</option><option>Minimal</option><option>Refined detail</option><option>Statement detail</option></select></label>
+              <label class="advanced-form__wide">Specific design features<textarea name="features" rows="3" maxlength="300" placeholder="For example: corset detail, a slit, pockets, draping or a bow"></textarea></label>
+              <label class="advanced-form__wide">Additional notes<textarea name="notes" rows="4" maxlength="500" placeholder="Share anything JaneM should consider about comfort, movement or the occasion."></textarea></label>
+            </div>
+
+            <section class="measurement-capture" aria-labelledby="measurement-title">
+              <label class="measurement-toggle"><input id="captureMeasurements" name="captureMeasurements" type="checkbox"><span><strong id="measurement-title">Take my measurements now</strong><small>Use the guided flow to add the details you have. JaneM will verify every measurement during fitting.</small></span></label>
+              <div id="measurementFlow" class="measurement-flow" hidden>
+                <aside class="measurement-guide"><p class="panel-kicker">Guided measurement flow</p><h4>Measure with confidence.</h4><p>Use a soft tape over fitted clothing. Keep it level and snug, not tight. Add centimetres or inches below.</p>
+                  <div class="guide-slide is-active" data-guide="0">
+                    <svg viewBox="0 0 300 500" role="img" aria-label="Measurement guide for shoulder, bust, waist, hip and dress length"><rect width="300" height="500" fill="#fff"/><circle cx="150" cy="55" r="27" fill="none" stroke="#17130f" stroke-width="4"/><path d="M130 86 Q150 104 170 86 L184 175 Q170 220 174 275 L194 445 M170 175 L230 255 M130 175 L70 255 M126 175 Q110 220 126 275 L106 445" fill="none" stroke="#17130f" stroke-width="5" stroke-linecap="round"/><line x1="92" y1="116" x2="208" y2="116" stroke="#b4863d" stroke-width="3"/><line x1="92" y1="155" x2="208" y2="155" stroke="#b4863d" stroke-width="3"/><line x1="94" y1="201" x2="206" y2="201" stroke="#b4863d" stroke-width="3"/><line x1="96" y1="248" x2="204" y2="248" stroke="#b4863d" stroke-width="3"/><line x1="150" y1="88" x2="150" y2="445" stroke="#b4863d" stroke-width="2" stroke-dasharray="6 5"/><text x="211" y="120" font-size="13">Shoulder</text><text x="211" y="159" font-size="13">Bust</text><text x="211" y="205" font-size="13">Waist</text><text x="211" y="252" font-size="13">Hip</text><text x="158" y="375" font-size="13">Dress length</text></svg>
+                  </div>
+                  <div class="guide-slide" data-guide="1" hidden>
+                    <svg viewBox="0 0 300 500" role="img" aria-label="Measurement guide for upper arm, sleeve length, shoulder-to-waist, height and heel height"><rect width="300" height="500" fill="#fff"/><circle cx="150" cy="55" r="27" fill="none" stroke="#17130f" stroke-width="4"/><path d="M130 86 Q150 104 170 86 L184 175 Q170 220 174 275 L194 445 M170 175 L230 255 M130 175 L70 255 M126 175 Q110 220 126 275 L106 445" fill="none" stroke="#17130f" stroke-width="5" stroke-linecap="round"/><ellipse cx="213" cy="198" rx="18" ry="10" fill="none" stroke="#b4863d" stroke-width="3"/><line x1="181" y1="110" x2="230" y2="255" stroke="#b4863d" stroke-width="3" stroke-dasharray="6 5"/><line x1="150" y1="88" x2="150" y2="201" stroke="#b4863d" stroke-width="3" stroke-dasharray="6 5"/><line x1="82" y1="445" x2="218" y2="445" stroke="#b4863d" stroke-width="3"/><line x1="150" y1="28" x2="150" y2="445" stroke="#b4863d" stroke-width="2" stroke-dasharray="6 5"/><line x1="194" y1="445" x2="220" y2="420" stroke="#b4863d" stroke-width="3"/><text x="205" y="180" font-size="13">Upper arm</text><text x="205" y="285" font-size="13">Sleeve length</text><text x="158" y="145" font-size="13">Shoulder-to-waist</text><text x="158" y="360" font-size="13">Height</text><text x="218" y="430" font-size="13">Heel height</text></svg>
+                  </div>
+                  <div class="guide-nav"><button id="guidePrevious" type="button" disabled>Previous</button><span id="guideCount" aria-live="polite">1 of 2</span><button id="guideNext" type="button">Next</button></div>
+                </aside>
+                <div class="measurement-fields"><div class="measure-unit"><label>Measurement unit<select name="measureUnit"><option value="cm">Centimetres (cm)</option><option value="in">Inches (in)</option></select></label><p>Enter only what you know. Height and heel height are optional; JaneM verifies every final measurement at fitting.</p></div><p id="measurementValidationStatus" class="measurement-validation" role="status">Enter the figures you know. We will check them for common entry errors before you create your brief.</p><div class="measure-grid"><label>Bust<input name="bust" inputmode="decimal" maxlength="12" placeholder="Fullest point"></label><label>Waist<input name="waist" inputmode="decimal" maxlength="12" placeholder="Natural waist"></label><label>Hip<input name="hip" inputmode="decimal" maxlength="12" placeholder="Fullest point"></label><label>Shoulder width<input name="shoulder" inputmode="decimal" maxlength="12" placeholder="Point to point"></label><label>Upper arm<input name="upperArm" inputmode="decimal" maxlength="12" placeholder="Fullest point"></label><label>Sleeve length<input name="sleeveLength" inputmode="decimal" maxlength="12" placeholder="Shoulder to cuff"></label><label>Shoulder to waist<input name="torso" inputmode="decimal" maxlength="12" placeholder="Over bust"></label><label>Dress length<input name="dressLength" inputmode="decimal" maxlength="12" placeholder="Shoulder to hem"></label><label>Height (optional)<input name="height" inputmode="decimal" maxlength="12" placeholder="Without shoes"></label><label>Heel height (optional)<input name="heelHeight" inputmode="decimal" maxlength="12" placeholder="If wearing heels"></label></div><section id="measurementReview" class="measurement-review" aria-live="polite" hidden><h5>Measurements need a quick review.</h5><p id="measurementRangeMessage" hidden>Please double-check this measurement. It is outside the usual range expected for this measurement.</p><p id="measurementConsistencyMessage" hidden>Some measurements appear inconsistent. Please review them before continuing.</p><ul id="measurementReviewList"></ul><div class="measurement-review__actions"><button id="editMeasurements" class="studio-button studio-button--quiet" type="button">Edit measurements</button><button id="keepMeasurements" class="studio-button" type="button">Confirm for JaneM to verify</button></div></section></div>
+              </div>
+            </section>
+
+            <div class="photo-note"><label for="referencePhoto">Reference photograph, optional</label><input id="referencePhoto" name="referencePhoto" type="file" accept="image/*"><p id="photoStatus">A selected photograph stays on this device. It is not uploaded or included in a message; you can choose to attach it yourself in WhatsApp.</p></div>
+            <div class="concept-board" id="conceptBoard" hidden aria-live="polite"></div>
+            <div id="briefPreview" class="designer-brief" hidden aria-live="polite"></div>
+            <div class="advanced-actions"><button id="createBrief" class="studio-button" type="button">Create My Detailed Brief</button><button id="previewConcept" class="studio-button studio-button--quiet" type="button">Visualize My Look</button><button id="copyBrief" class="studio-button studio-button--quiet" type="button" hidden>Copy Brief</button><button id="downloadBrief" class="studio-button studio-button--quiet" type="button" hidden>Download Brief</button></div>
+            <p id="briefFeedback" class="action-feedback" aria-live="polite"></p>
+            <div id="detailedHandoff" class="detailed-handoff" hidden><div><h4>Your detailed brief is ready.</h4><p>Your supplied measurements are included in this detailed WhatsApp brief and remain marked for JaneM to verify. Reference photographs are never attached automatically.</p><label class="consent-check"><input id="includeMeasurements" type="checkbox" checked><span>Include the measurements I entered in this detailed WhatsApp brief.</span></label><label class="consent-check"><input id="includeSensitive" type="checkbox"><span>Also include my additional private notes for JaneM.</span></label></div><a id="detailedWhatsApp" class="studio-button studio-button--gold" href="https://wa.me/26662790946" target="_blank" rel="noopener">Send Detailed Brief on WhatsApp <span aria-hidden="true">↗</span></a></div>
+          </form>
+        </section>
+
+        <div class="restart-row"><button id="restartButton" class="studio-button studio-button--quiet" type="button">Start a New Style Match</button><button id="clearSavedButton" class="studio-link-button" type="button" hidden>Clear saved answers on this device</button></div>
+        <a id="mobileWhatsApp" class="mobile-result-cta" href="https://wa.me/26662790946" target="_blank" rel="noopener">Continue with JaneM on WhatsApp <span aria-hidden="true">↗</span></a>
+      </section>
+    </section>
+
+    <section class="studio-seo-copy" aria-labelledby="studio-search-title">
+      <div class="studio-shell studio-seo-copy__inner"><p class="eyebrow">JaneM atelier, Maseru</p><h2 id="studio-search-title">Start with a style direction. Refine it with the atelier.</h2><div><p>JaneM Style Studio is a free starting point for women planning graduation dresses in Lesotho, wedding guest dresses, birthday looks, corporate-event outfits and bespoke occasion wear in Maseru. Your result gives you a focused direction before a made-to-measure conversation.</p><p>Explore the <a href="../catalogue.html">JaneM catalogue</a>, browse <a href="../wedding-guest-occasion-dresses/">occasion dress directions</a>, or use your style match to begin a thoughtful WhatsApp consultation.</p></div></div>
+    </section>
+  </main>
+
+  <footer><div class="container footer-bottom"><span>© 2026 Jane.M Lesotho</span><span>Elegantly you. Uniquely Jane.M.</span></div></footer>
+
+  <script src="../config.js"></script>
+  <script src="../analytics.js"></script>
+  <script src="../seo-analytics.js"></script>
+  <script src="../script.js"></script>
+  <script src="recommendations.js?v=20260810measure"></script>
+  <script src="measurement-review.js?v=20260810measure"></script>
+  <script src="studio.js?v=20260810contrast2"></script>
 </body>
 </html>

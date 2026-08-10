@@ -4,6 +4,8 @@
   "scripts": {
     "build": "node scripts/build-seo-site.js",
     "test:seo": "node scripts/validate-seo.js",
-    "test": "npm run build && npm run test:seo"
+    "test:studio": "node scripts/test-style-studio.js",
+    "test:theme": "node scripts/test-style-studio-theme.js",
+    "test": "npm run build && npm run test:studio && npm run test:theme && npm run test:seo"
   }
 }
