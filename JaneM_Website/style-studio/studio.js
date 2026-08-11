@@ -24,6 +24,7 @@
   const complexityCategory = document.getElementById("complexityCategory");
   const complexityDrivers = document.getElementById("complexityDrivers");
   const complexityCopy = document.getElementById("complexityCopy");
+  const brandVisual = document.getElementById("brandVisual");
   const quickWhatsApp = document.getElementById("quickWhatsApp");
   const mobileWhatsApp = document.getElementById("mobileWhatsApp");
   const shareButton = document.getElementById("shareButton");
@@ -133,6 +134,7 @@
     paletteTitle.textContent = recommendation.palette.name;
     paletteStory.textContent = recommendation.palette.story;
     paletteSwatches.innerHTML = recommendation.palette.colours.map(([name, colour]) => `<div class="palette-swatch"><span style="--colour:${escapeHtml(colour)}"></span><span>${escapeHtml(name)}</span></div>`).join("");
+    brandVisual.style.setProperty("--client-hero-colour", recommendation.palette.colours[0][1]);
     resultReasons.innerHTML = whyItSuits(interpretation).map(reason => `<li>${escapeHtml(reason)}</li>`).join("");
     estimateValue.textContent = recommendation.workmanship;
     priceCopy.textContent = "Your final quote is tailored to your chosen fabric, detailing and construction.";
