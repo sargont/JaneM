@@ -192,6 +192,16 @@ html[data-theme="dark"] .studio-page .result-panel--brand{background:radial-grad
 html[data-theme="dark"] .studio-page .result-panel--brand::before{position:absolute;z-index:1;inset:0;display:block;background:radial-gradient(circle at 52% 43%,rgba(222,182,94,.28),transparent 32%),linear-gradient(135deg,#10352b 0%,#14221c 53%,#090e0c 100%);mix-blend-mode:multiply;opacity:.88;content:"";pointer-events:none}
 html[data-theme="dark"] .studio-page .result-brand-reference{filter:brightness(.48) contrast(1.7) saturate(1.42) sepia(.38);mix-blend-mode:normal;opacity:1}
 html[data-theme="dark"] .studio-page .result-panel--brand::after{z-index:2;background:linear-gradient(0deg,#0d1713 0 45%,rgba(13,23,19,.82) 72%,rgba(13,23,19,0) 100%)}
+
+/* Supplied Jane.M couture mark: an editorial atelier display, not a rotating emblem. */
+.studio-page .result-panel--brand{background:linear-gradient(135deg,#f7f0e6 0%,#e6d1ad 52%,#b9955c 100%)}
+.studio-page .result-brand-reference{background-image:url("../assets/style-studio/janem-couture-logo-reference.png");background-size:contain;background-position:center;background-repeat:no-repeat;filter:none;mix-blend-mode:normal;opacity:1;animation:janem-couture-logo-drift 8s ease-in-out infinite;will-change:transform}
+.studio-page .result-panel--brand::before,.studio-page .result-panel--brand::after{display:none}
+html[data-theme="dark"] .studio-page .result-panel--brand{background:linear-gradient(135deg,#f5ecdf 0%,#dec59c 55%,#a87b40 100%);box-shadow:inset 0 0 0 1px rgba(244,216,164,.22)}
+html[data-theme="dark"] .studio-page .result-brand-reference{filter:none;mix-blend-mode:normal;opacity:1}
+@media (max-width:560px){.studio-page .result-panel--brand{min-height:260px}.studio-page .result-brand-reference{background-size:contain;background-position:center}}
+@keyframes janem-couture-logo-drift{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(0,-7px,0) scale(1.012)}}
+@media (prefers-reduced-motion:reduce){.studio-page .result-brand-reference{animation:none;will-change:auto}}
 html[data-theme="dark"] .studio-page .atelier-emblem-panel{background:radial-gradient(circle at 50% 44%,rgba(204,165,92,.25),transparent 34%),linear-gradient(135deg,#0b1512,#1a241e 54%,#120f0c)}
 html[data-theme="dark"] .studio-page .atelier-emblem-panel::before{background:linear-gradient(125deg,rgba(240,207,140,.12),transparent 42%,rgba(0,0,0,.42))}
 html[data-theme="dark"] .studio-page .atelier-emblem-stage img{filter:brightness(1.1) sepia(.38) saturate(1.1) drop-shadow(0 22px 13px rgba(0,0,0,.62))}

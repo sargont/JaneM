@@ -12,7 +12,8 @@ const requiredTokens = [
 ];
 requiredTokens.forEach(token => assert.match(css, new RegExp(`${token}:`), `${token} must be defined as a semantic theme token`));
 assert.match(css, /html\[data-theme="dark"\]\s*\{[\s\S]*--surface-primary:/, "dark mode must define its own semantic palette");
-assert.match(css, /html\[data-theme="dark"\][\s\S]*\.result-panel--brand::before[\s\S]*mix-blend-mode:multiply/, "the logo panel needs a dedicated dark-mode treatment");
+assert.match(css, /janem-couture-logo-reference\.png/, "the supplied couture logo should replace the previous 3D emblem");
+assert.match(css, /html\[data-theme="dark"\][\s\S]*\.result-panel--brand\{background:linear-gradient\(135deg,#f5ecdf/, "the couture logo panel needs a legible dark-mode treatment");
 assert.match(css, /\.choice-card:has\(input:checked\)::after[\s\S]*content:"✓"/, "selected answer cards need an explicit visual indicator");
 
 function luminance(hex) {
