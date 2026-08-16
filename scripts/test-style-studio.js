@@ -67,4 +67,9 @@ assert.match(graduationBrief.whatsapp["Pricing drivers"], /Lower:.*Upper:/i);
 assert.ok(graduationBrief.whatsapp["Pricing drivers"].length < 180, "WhatsApp pricing guidance should stay concise");
 assert.equal(classifyFeatureText("slit, pockets and beading").category, "concrete design feature");
 
+const lightConstruction = interpretDesign({ occasion: "Wedding guest", urgency: "1–3 months away", personality: "Classic", fit: "Softly flowing", garmentLength: "Knee length", coverage: "Balanced", colour: "Soft lights", budget: "Under M1,800" }, {});
+const complexConstruction = interpretDesign({ occasion: "Birthday or celebration", urgency: "More than 3 months away", personality: "Bold", fit: "Statement volume", garmentLength: "Floor length", coverage: "Open to a little drama", colour: "Warm earths", budget: "M4,800+" }, { sleeves: "Long sleeve", fabric: "Organza", embellishment: "Statement detail", features: "corset detail, train and draping" });
+assert.equal(lightConstruction.recommendation["Construction complexity"], "Light construction");
+assert.equal(complexConstruction.recommendation["Construction complexity"], "Complex construction");
+
 console.log(`Style Studio recommendation, interpretation and measurement-review tests passed: ${scenarios.length} baseline scenarios plus the Graduation brief.`);

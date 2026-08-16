@@ -59,14 +59,25 @@
   const guideCount = document.getElementById("guideCount");
   const restartButton = document.getElementById("restartButton");
   const clearSavedButton = document.getElementById("clearSavedButton");
+  const discoveryCopy = document.getElementById("discoveryCopy");
+  const discoveryLooks = document.getElementById("discoveryLooks");
+  const discoveryLink = document.getElementById("discoveryLink");
+  const relatedLooksGrid = document.getElementById("relatedLooksGrid");
   const track = (event, details = {}) => window.JaneMAnalytics?.track(event, details);
   const { recommend, interpretDesign } = window.JaneMStyleRecommendations;
   let step = 0;
+  let furthestQuickStep = 0;
   let started = false;
   let current = null;
   let guideIndex = 0;
   let measurementReviewConfirmed = false;
   let pendingMeasurementAction = null;
+  const JOURNEY_STORAGE_KEY = "janem-style-studio-journey-v2";
+  const COLLECTION_LOOKS = [
+    { name: "Golden Hour", image: "../assets/look-gold.jpg", alt: "Ivory and gold tiered corset dress by Jane.M", note: "Ivory, gold and a sculpted corset direction", occasions: ["Graduation", "Wedding guest", "Birthday or celebration", "Special occasion"] },
+    { name: "Classic Grace", image: "../assets/look-sleeves.jpg", alt: "Puff-sleeve corset mini dress by Jane.M", note: "A polished puff-sleeve and corset detail direction", occasions: ["Wedding guest", "Corporate event", "Birthday or celebration", "Special occasion"] },
+    { name: "Midnight Allure", image: "../assets/look-blue.jpg", alt: "Navy corset evening gown by Jane.M", note: "A navy evening direction with refined corsetry", occasions: ["Evening gala", "Corporate event", "Birthday or celebration", "Special occasion"] }
+  ];
 
   const escapeHtml = (value) => String(value).replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
   const compact = (value) => String(value || "").replace(/\s+/g, " ").trim();
@@ -77,16 +88,104 @@
   const shortNeckline = value => compact(value).replace(/ neckline$/i, "").replace(/^(soft|clean|balanced|refined)\s+/i, "");
   const shortSleeve = value => compact(value).replace(/ direction$/i, "").replace(/^(elegant|sleek)\s+/i, "");
 
+  function collectionMatches(occasion) {
+    const exact = COLLECTION_LOOKS.filter(look => look.occasions.includes(occasion));
+    return [...exact, ...COLLECTION_LOOKS.filter(look => !exact.includes(look))].slice(0, 3);
+  }
+  function renderDiscovery(occasion = answer("occasion")) {
+    const looks = collectionMatches(occasion);
+    const occasionLabel = occasion || "your occasion";
+    discoveryCopy.textContent = `These genuine Jane.M pieces are a useful starting point for ${occasionLabel.toLowerCase()}.`;
+    discoveryLooks.innerHTML = looks.slice(0, 2).map(look => `<figure><img src="${look.image}" width="900" height="1600" loading="lazy" decoding="async" alt="${escapeHtml(look.alt)}"><figcaption>${escapeHtml(look.name)}</figcaption></figure>`).join("");
+    discoveryLink.href = "../catalogue.html";
+    discoveryLink.textContent = occasion === "Graduation" ? "Explore graduation looks →" : "Explore the collection →";
+  }
+  function renderRelatedLooks(occasion) {
+    relatedLooksGrid.innerHTML = collectionMatches(occasion).map(look => `<article class="related-look"><img src="${look.image}" width="900" height="1600" loading="lazy" decoding="async" alt="${escapeHtml(look.alt)}"><div><b>${escapeHtml(look.name)}</b><span>${escapeHtml(look.note)}</span></div></article>`).join("");
+  }
+  function availableJourneySteps() {
+    if (current && !result.hidden) return new Set([0, 1, 2, 3, 4, 5]);
+    return new Set([[0], [0, 1], [0, 1, 2], [0, 1, 2, 5]][furthestQuickStep] || [0]);
+  }
+  function setJourneyRail(activeIndex) {
+    const available = availableJourneySteps();
+    document.querySelectorAll("[data-journey-step]").forEach(item => {
+      const index = Number(item.dataset.journeyStep);
+      const isAvailable = available.has(index);
+      item.classList.toggle("is-active", index === activeIndex);
+      item.classList.toggle("is-complete", isAvailable && index !== activeIndex);
+      item.disabled = !isAvailable;
+      item.title = isAvailable ? `Go to chapter ${index + 1}` : "Complete the earlier chapters first";
+      if (index === activeIndex) item.setAttribute("aria-current", "step");
+      else item.removeAttribute("aria-current");
+    });
+  }
+
+  function openAdvancedJourneyChapter(index) {
+    if (advancedForm.hidden) {
+      advancedForm.hidden = false;
+      openAdvanced.setAttribute("aria-expanded", "true");
+      openAdvanced.textContent = "Close detail tools";
+    }
+    setJourneyRail(index);
+    const section = document.querySelector(index === 3 ? ".consultation-section--measurements" : ".consultation-section--inspiration");
+    requestAnimationFrame(() => section?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }));
+  }
+
+  function navigateJourney(index) {
+    if (!availableJourneySteps().has(index)) return;
+    track("style_studio_journey_navigate", { destination_chapter: index + 1, experience_state: current ? "result" : "quick" });
+    if (current && index >= 3 && index <= 4) { openAdvancedJourneyChapter(index); return; }
+    if (current && index === 5) {
+      setJourneyRail(5);
+      result.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+      return;
+    }
+    const quickStep = { 0: 0, 1: 1, 2: 2, 5: 3 }[index];
+    if (quickStep === undefined) return;
+    if (current) {
+      result.hidden = true;
+      document.getElementById("studioApp").hidden = false;
+    }
+    step = quickStep;
+    saveJourney();
+    updateStep();
+    requestAnimationFrame(() => document.getElementById("studioApp").scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }));
+  }
+  function saveJourney() {
+    try { sessionStorage.setItem(JOURNEY_STORAGE_KEY, JSON.stringify({ answers: answers(), step, furthestQuickStep })); clearSavedButton.hidden = false; } catch (_) {}
+  }
+  function clearJourney() {
+    try { sessionStorage.removeItem(JOURNEY_STORAGE_KEY); } catch (_) {}
+    clearSavedButton.hidden = true;
+  }
+  function restoreJourney() {
+    try {
+      const saved = JSON.parse(sessionStorage.getItem(JOURNEY_STORAGE_KEY) || "null");
+      if (!saved?.answers) return;
+      Object.entries(saved.answers).forEach(([name, value]) => {
+        const input = form.querySelector(`[name="${name}"][value="${CSS.escape(value)}"]`);
+        if (input) input.checked = true;
+      });
+      step = Math.max(0, Math.min(Number(saved.step) || 0, steps.length - 1));
+      furthestQuickStep = Math.max(step, Math.min(Number(saved.furthestQuickStep) || 0, steps.length - 1));
+      clearSavedButton.hidden = false;
+    } catch (_) {}
+  }
+
   function updateStep() {
     steps.forEach((item, index) => { item.hidden = index !== step; item.classList.toggle("is-active", index === step); });
-    const labels = ["Your occasion", "Your style energy", "Coverage and colour", "Your starting point"];
-    document.getElementById("stepLabel").textContent = `Step ${step + 1} of ${steps.length}`;
+    const labels = ["Your occasion", "Your style", "Your design details", "Review & brief"];
+    const chapterIndexes = [0, 1, 2, 5];
+    const chapter = chapterIndexes[step];
+    document.getElementById("stepLabel").textContent = `Chapter ${chapter + 1} of 6`;
     document.getElementById("stepPrompt").textContent = labels[step];
-    document.getElementById("progressStatus").textContent = `Step ${step + 1} of ${steps.length}: ${labels[step]}`;
-    document.getElementById("progressBar").style.width = `${((step + 1) / steps.length) * 100}%`;
+    document.getElementById("progressStatus").textContent = `Chapter ${chapter + 1} of 6: ${labels[step]}`;
+    document.getElementById("progressBar").style.width = `${((chapter + 1) / 6) * 100}%`;
     backButton.disabled = step === 0;
     nextButton.textContent = step === steps.length - 1 ? "Reveal My Style Match" : "Next";
     validationMessage.hidden = true;
+    setJourneyRail(chapter);
     steps[step].querySelector("input")?.focus({ preventScroll: true });
   }
 
@@ -123,14 +222,19 @@
     const detail = advancedValues();
     resultSummary.textContent = interpretation.recommendation["Design direction"];
     const specification = [
-      ["Silhouette", shortSilhouette(recommendation.silhouette)],
-      ["Neckline", shortNeckline(detail.neckline || recommendation.neckline)],
-      ["Sleeve", shortSleeve(detail.sleeves || recommendation.sleeves)],
-      ["Length", data.garmentLength === "No preference / advise me" ? recommendation.length : data.garmentLength],
-      ["Colour direction", recommendation.palette.colours.map(([name]) => name).join(", ")],
-      ["Fabric direction", recommendation.fabric]
+      ["Occasion", data.occasion, "occasion"],
+      ["Event timing", data.urgency, "occasion"],
+      ["Style personality", data.personality, "style"],
+      ["Silhouette", shortSilhouette(recommendation.silhouette), "silhouette"],
+      ["Length", data.garmentLength === "No preference / advise me" ? recommendation.length : data.garmentLength, "length"],
+      ["Neckline", shortNeckline(detail.neckline || recommendation.neckline), "neckline"],
+      ["Sleeve", shortSleeve(detail.sleeves || recommendation.sleeves), "sleeve"],
+      ["Coverage", data.coverage, "style"],
+      ["Colour direction", recommendation.palette.colours.map(([name]) => name).join(", "), "colour"],
+      ["Fabric direction", recommendation.fabric, "fabric"],
+      ["Indicative workmanship", recommendation.workmanship, "construction"]
     ];
-    directionList.innerHTML = specification.map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join("");
+    directionList.innerHTML = specification.map(([label, value, icon]) => `<div><img src="../assets/style-studio/icon-${icon}.svg" width="24" height="24" alt="" aria-hidden="true"><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join("");
     paletteTitle.textContent = recommendation.palette.name;
     paletteStory.textContent = recommendation.palette.story;
     paletteSwatches.innerHTML = recommendation.palette.colours.map(([name, colour]) => `<div class="palette-swatch"><span style="--colour:${escapeHtml(colour)}"></span><span>${escapeHtml(name)}</span></div>`).join("");
@@ -155,6 +259,8 @@
     renderConsultationCore();
     quickWhatsApp.href = whatsappLink(quickMessage());
     mobileWhatsApp.href = quickWhatsApp.href;
+    renderRelatedLooks(data.occasion);
+    setJourneyRail(5);
     result.hidden = false;
     document.getElementById("studioApp").hidden = true;
     track("style_studio_result_view", { occasion_category: data.occasion, style_profile_id: recommendation.id, completion_state: "quick" });
@@ -203,6 +309,7 @@
   }
   async function shareProfile() {
     if (!current) return;
+    shareFeedback.classList.remove("is-success");
     const text = publicShareText();
     try {
       if (navigator.share) {
@@ -225,23 +332,19 @@
   }
 
   function resultCardSvg() {
-    const { recommendation } = current;
-    const lines = [recommendation.summary, `Silhouette: ${recommendation.silhouette}`].map(text => compact(text).match(/.{1,55}(?:\s|$)|.{1,55}/g) || []);
-    const descriptionLines = lines[0].slice(0, 3);
-    const silhouetteLines = lines[1].slice(0, 2);
-    const colours = recommendation.palette.colours.map(([, colour], index) => `<rect x="${112 + index * 74}" y="535" width="56" height="56" fill="${colour}"/>`).join("");
-    const textNodes = descriptionLines.map((line, index) => `<text x="112" y="${332 + index * 30}" class="body">${escapeHtml(line.trim())}</text>`).join("") + silhouetteLines.map((line, index) => `<text x="112" y="${445 + index * 30}" class="body">${escapeHtml(line.trim())}</text>`).join("");
-    return `<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="720" viewBox="0 0 1080 720"><style>.eyebrow{font:700 16px Arial,sans-serif;letter-spacing:4px}.title{font:600 67px Georgia,serif}.body{font:400 22px Arial,sans-serif}.small{font:700 15px Arial,sans-serif;letter-spacing:2px}</style><rect width="1080" height="720" fill="#15120f"/><circle cx="930" cy="105" r="230" fill="#b38a45" opacity=".16"/><text x="112" y="116" fill="#e0bd7d" class="eyebrow">JANE.M STYLE STUDIO</text><text x="112" y="213" fill="#fff" class="title">${escapeHtml(recommendation.profile)}</text><text x="112" y="269" fill="#d9cfc5" class="small">YOUR PERSONAL STYLE DIRECTION</text>${textNodes}<text x="112" y="505" fill="#e0bd7d" class="small">COLOUR STORY · ${escapeHtml(recommendation.palette.name.toUpperCase())}</text>${colours}<text x="112" y="654" fill="#d9cfc5" class="body">Try Style Studio · ${escapeHtml(publicStudioUrl())}</text></svg>`;
+    return window.JaneMStyleCard.buildStyleCardSvg({ recommendation: current.recommendation, publicUrl: publicStudioUrl() });
   }
   function downloadStyleCard() {
     if (!current) return;
+    const filename = `JaneM-${current.recommendation.id}-Style-Profile.svg`;
     const blob = new Blob([resultCardSvg()], { type: "image/svg+xml;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
-    link.href = url; link.download = `JaneM-${current.recommendation.id}-Style-Profile.svg`;
+    link.href = url; link.download = filename;
     document.body.append(link); link.click(); link.remove();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
-    shareFeedback.textContent = "Your privacy-safe Style Profile card has downloaded.";
+    shareFeedback.classList.add("is-success");
+    shareFeedback.textContent = `Style Card downloaded — find “${filename}” in your Downloads.`;
     track("style_studio_share", { method: "download_card", style_profile_id: current.recommendation.id });
   }
 
@@ -324,6 +427,7 @@
     return {
       reference: recommendation.id,
       profile: recommendation.profile,
+      createdAt: new Date().toISOString(),
       clientPreferences: interpretation.clientPreferences,
       styleRecommendation: interpretation.recommendation,
       construction: interpretation.construction,
@@ -331,6 +435,7 @@
       whatsapp: interpretation.whatsapp,
       featureInfo: interpretation.featureInfo,
       measurements: measurements(detail, assessment),
+      collectionSuggestions: collectionMatches(data.occasion).map(({ name, note }) => ({ name, note })),
       measurementAssessment: assessment,
       summary: recommendation.summary,
       disclaimer: "Starting brief for consultation. Jane.M confirms measurements, construction, fabric, availability and final quotation before production."
@@ -366,7 +471,9 @@
     ].join("\n");
   }
   function renderBrief(brief) {
-    briefPreview.innerHTML = `<div class="designer-brief__head"><p class="panel-kicker">Reference: ${escapeHtml(brief.reference)}</p><h4>${escapeHtml(brief.profile)}</h4><p>${escapeHtml(brief.disclaimer)}</p></div><div class="designer-brief__body"><section class="designer-brief__section designer-brief__section--full"><h5>Section A — Client preferences</h5>${definitionList(brief.clientPreferences)}</section><section class="designer-brief__section designer-brief__section--full"><h5>Measurements supplied</h5>${definitionList(brief.measurements)}</section><section class="designer-brief__section designer-brief__section--full"><h5>Section B — Jane.M Style Studio recommendation</h5>${definitionList(brief.styleRecommendation)}</section><section class="designer-brief__section designer-brief__section--full"><h5>Section C — To confirm with Jane.M</h5>${definitionList(brief.atelierDecisions)}</section></div>`;
+    const suppliedMeasurements = Object.keys(brief.measurements).some(key => key !== "status");
+    const collectionList = brief.collectionSuggestions.map(look => `${look.name} — ${look.note}`).join("; ");
+    briefPreview.innerHTML = `<div class="designer-brief__head"><p class="panel-kicker">Your Style Brief · Reference: ${escapeHtml(brief.reference)}</p><h4>${escapeHtml(brief.profile)}</h4><p>${escapeHtml(brief.disclaimer)}</p></div><div class="designer-brief__body"><section class="designer-brief__section designer-brief__section--full"><h5>At a glance</h5>${definitionList(brief.clientPreferences)}</section><section class="designer-brief__section designer-brief__section--full"><h5>Measurements</h5>${suppliedMeasurements ? "<p><strong>Client-provided preliminary measurements — Jane.M must verify before cutting/production.</strong></p>" : ""}${definitionList(brief.measurements)}</section><section class="designer-brief__section designer-brief__section--full"><h5>Style direction</h5>${definitionList(brief.styleRecommendation)}</section><section class="designer-brief__section designer-brief__section--full"><h5>Inspiration &amp; Jane.M collection</h5><p>${escapeHtml(collectionList)}</p></section><section class="designer-brief__section designer-brief__section--full"><h5>To confirm with Jane.M</h5>${definitionList(brief.atelierDecisions)}</section></div>`;
     briefPreview.hidden = false;
   }
   function conceptPreview() {
@@ -383,7 +490,7 @@
   }
   function detailedMessage() {
     const detail = advancedValues();
-    const brief = designerBrief(detail);
+    const brief = current?.brief || designerBrief(detail);
     const preferences = brief.clientPreferences;
     const recommendation = brief.styleRecommendation;
     const whatsappRecommendation = brief.whatsapp;
@@ -428,12 +535,13 @@
   function createDetailedBrief() {
     if (!current || !ensureMeasurementsReviewed(createDetailedBrief)) return;
     const brief = designerBrief();
+    current.brief = brief;
     renderBrief(brief);
     saveStyleStudioResult({ reference: brief.reference, clientPreferences: brief.clientPreferences, styleRecommendation: brief.styleRecommendation, construction: brief.construction, atelierDecisions: brief.atelierDecisions, measurements: brief.measurements, verificationRequired: brief.measurementAssessment.isQuestionable, visualizationPrompt: buildVisualizationPrompt(brief, brief.measurementAssessment) });
     detailedHandoff.hidden = false;
     copyBrief.hidden = false;
-    downloadBrief.hidden = false;
     updateDetailedLink();
+    setJourneyRail(5);
     briefFeedback.textContent = "Your detailed brief is ready to review, copy or download. Review the consent note before sending anything sensitive.";
     track("style_studio_brief_complete", { style_profile_id: current.recommendation.id, completion_state: "advanced" });
     detailedHandoff.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "nearest" });
@@ -467,15 +575,18 @@
     if (!started) { started = true; track("style_studio_start"); }
     validationMessage.hidden = true;
     event.target.closest("[data-required]")?.removeAttribute("aria-invalid");
+    if (event.target.name === "occasion") renderDiscovery(event.target.value);
+    saveJourney();
   });
   nextButton.addEventListener("click", () => {
     if (!validateCurrentStep()) return;
     const data = answers();
     track("style_studio_step_complete", { step_number: step + 1, occasion_category: data.occasion || "not_set" });
     if (step === steps.length - 1) { renderResult(); return; }
-    step += 1; updateStep();
+    step += 1; furthestQuickStep = Math.max(furthestQuickStep, step); saveJourney(); updateStep();
   });
   backButton.addEventListener("click", () => { if (step > 0) { step -= 1; updateStep(); } });
+  document.querySelectorAll("[data-journey-step]").forEach(button => button.addEventListener("click", () => navigateJourney(Number(button.dataset.journeyStep))));
   quickWhatsApp.addEventListener("click", () => { if (current) track("style_studio_whatsapp_click", { cta_location: "quick_result", style_profile_id: current.recommendation.id }); });
   mobileWhatsApp.addEventListener("click", () => { if (current) track("style_studio_whatsapp_click", { cta_location: "mobile_result", style_profile_id: current.recommendation.id }); });
   shareButton.addEventListener("click", shareProfile);
@@ -483,30 +594,39 @@
   openAdvanced.addEventListener("click", () => {
     const isOpen = !advancedForm.hidden;
     advancedForm.hidden = isOpen; openAdvanced.setAttribute("aria-expanded", String(!isOpen));
-    openAdvanced.textContent = isOpen ? "Build Detailed Designer Brief" : "Close detailed brief tools";
-    if (!isOpen && current) { track("style_studio_advanced_start", { style_profile_id: current.recommendation.id }); requestAnimationFrame(() => advancedForm.scrollIntoView({ behavior: "auto", block: "start" })); advancedForm.querySelector("select")?.focus({ preventScroll: true }); }
+    openAdvanced.textContent = isOpen ? "Add details to my brief" : "Close detail tools";
+    if (!isOpen && current) { setJourneyRail(3); track("style_studio_advanced_start", { style_profile_id: current.recommendation.id }); requestAnimationFrame(() => advancedForm.scrollIntoView({ behavior: "auto", block: "start" })); advancedForm.querySelector("select")?.focus({ preventScroll: true }); }
   });
   previewConcept.addEventListener("click", conceptPreview);
   createBrief.addEventListener("click", createDetailedBrief);
   copyBrief.addEventListener("click", async () => {
     if (!current) return;
-    try { await copyText(briefText(designerBrief())); briefFeedback.textContent = "Your detailed designer brief has been copied."; }
+    try { await copyText(briefText(current.brief || designerBrief())); briefFeedback.textContent = "Your detailed designer brief has been copied."; }
     catch { briefFeedback.textContent = "Your browser could not copy the brief. You can still download it."; }
   });
   downloadBrief.addEventListener("click", () => {
     if (!current) return;
-    const blob = new Blob([briefText(designerBrief())], { type: "text/plain;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url; link.download = `JaneM-${current.recommendation.id}-Designer-Brief.txt`;
-    document.body.append(link); link.click(); link.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-    briefFeedback.textContent = "Your detailed designer brief has downloaded.";
+    const brief = current.brief || designerBrief();
+    const filename = `JaneM-${brief.reference}-Style-Brief.pdf`;
+    try {
+      window.JaneMStyleBriefPdf.download(brief, { whatsApp: "+266 6279 0946" });
+      const message = `Style Brief PDF downloaded — find “${filename}” in your Downloads.`;
+      shareFeedback.classList.add("is-success");
+      shareFeedback.textContent = message;
+      briefFeedback.textContent = message;
+      track("style_studio_pdf_download", { style_profile_id: current.recommendation.id });
+    } catch (_) {
+      const message = "Your Style Brief PDF could not be prepared. Please try again.";
+      shareFeedback.classList.remove("is-success");
+      shareFeedback.textContent = message;
+      briefFeedback.textContent = message;
+    }
   });
   [includeMeasurements, includeSensitive].forEach(control => control.addEventListener("change", updateDetailedLink));
-  captureMeasurements.addEventListener("change", () => { resetMeasurementReview(); syncMeasurementFlow(); updateMeasurementValidation(); refreshCreatedBrief(); });
+  captureMeasurements.addEventListener("change", () => { resetMeasurementReview(); current && (current.brief = null); syncMeasurementFlow(); updateMeasurementValidation(); setJourneyRail(captureMeasurements.checked ? 3 : 4); refreshCreatedBrief(); });
   ["input", "change"].forEach(type => advancedForm.addEventListener(type, event => {
     if (["measureUnit", ...measurementFields.map(([, name]) => name)].includes(event.target.name)) { resetMeasurementReview(); updateMeasurementValidation({ reveal: type === "change" }); }
+    if (current) current.brief = null;
     refreshCreatedBrief();
   }));
   editMeasurements.addEventListener("click", () => {
@@ -527,17 +647,19 @@
   guidePrevious.addEventListener("click", () => showGuide(guideIndex - 1));
   guideNext.addEventListener("click", () => showGuide(guideIndex + 1));
   detailedWhatsApp.addEventListener("click", () => { updateDetailedLink(); if (current) track("style_studio_whatsapp_click", { cta_location: "detailed_brief", style_profile_id: current.recommendation.id, sensitive_details_included: includeSensitive.checked ? "yes" : "no" }); });
-  referencePhoto.addEventListener("change", () => { photoStatus.textContent = referencePhoto.files?.[0] ? `“${referencePhoto.files[0].name}” is selected only in this browser. It has not been uploaded.` : "A selected photograph stays on this device. It is not uploaded or included in a message; you can choose to attach it yourself in WhatsApp."; });
+  referencePhoto.addEventListener("change", () => { if (current) current.brief = null; setJourneyRail(4); photoStatus.textContent = referencePhoto.files?.[0] ? `“${referencePhoto.files[0].name}” is selected only in this browser. It has not been uploaded.` : "A selected photograph stays on this device. It is not uploaded or included in a message; you can choose to attach it yourself in WhatsApp."; });
   restartButton.addEventListener("click", () => {
-    form.reset(); advancedForm.reset(); current = null; step = 0; started = false; resetMeasurementReview();
-    result.hidden = true; document.getElementById("studioApp").hidden = false; detailedHandoff.hidden = true; conceptBoard.hidden = true; briefPreview.hidden = true; copyBrief.hidden = true; downloadBrief.hidden = true; advancedForm.hidden = true;
-    openAdvanced.setAttribute("aria-expanded", "false"); openAdvanced.textContent = "Build Detailed Designer Brief";
+    form.reset(); advancedForm.reset(); current = null; step = 0; furthestQuickStep = 0; started = false; clearJourney(); resetMeasurementReview();
+    result.hidden = true; document.getElementById("studioApp").hidden = false; detailedHandoff.hidden = true; conceptBoard.hidden = true; briefPreview.hidden = true; copyBrief.hidden = true; advancedForm.hidden = true;
+    openAdvanced.setAttribute("aria-expanded", "false"); openAdvanced.textContent = "Add details to my brief";
     photoStatus.textContent = "A selected photograph stays on this device. It is not uploaded or included in a message; you can choose to attach it yourself in WhatsApp.";
     syncMeasurementFlow();
     updateStep(); document.getElementById("quick-match").scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
   });
-  clearSavedButton.hidden = true;
+  clearSavedButton.addEventListener("click", () => { clearJourney(); clearSavedButton.textContent = "Saved answers cleared"; setTimeout(() => { clearSavedButton.textContent = "Clear saved answers on this device"; }, 1600); });
 
+  restoreJourney();
+  renderDiscovery();
   syncMeasurementFlow();
   updateStep();
   track("style_studio_view", { cta_location: "page" });
