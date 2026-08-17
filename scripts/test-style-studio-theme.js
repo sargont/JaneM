@@ -34,4 +34,15 @@ const darkPairs = [
 ];
 darkPairs.forEach(([foreground, background, name]) => assert.ok(contrast(foreground, background) >= 4.5, `${name} must meet WCAG AA; received ${contrast(foreground, background).toFixed(2)}:1`));
 
+const sharedPairs = [
+  ["fff7ed", "123f36", "light selected-budget supporting copy"],
+  ["5f5348", "fffdfa", "light studio secondary text"],
+  ["756a5f", "fbf8f3", "light global muted text"],
+  ["876020", "fffdfa", "light studio label text"],
+  ["b6aaa0", "0f0d0b", "dark global muted text"],
+  ["d0a55e", "0f0d0b", "dark global navigation accent"]
+];
+sharedPairs.forEach(([foreground, background, name]) => assert.ok(contrast(foreground, background) >= 4.5, `${name} must meet WCAG AA; received ${contrast(foreground, background).toFixed(2)}:1`));
+assert.match(css, /\.budget-choices label:has\(input:checked\)>span>small\{color:var\(--text-on-dark\)!important\}/, "selected budget supporting copy must use the dark-surface text token");
+
 console.log("Style Studio semantic theme and key dark-mode contrast tests passed.");
