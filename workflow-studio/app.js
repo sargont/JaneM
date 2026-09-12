@@ -1,8 +1,10 @@
 const W = Workflow, $ = s => document.querySelector(s), key = 'janem-workroom-v1';
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const day = n => new Date(Date.parse(W.today()+'T12:00:00Z')+n*86400000).toISOString().slice(0,10);
-function seed(){return {team:[{name:'Tailor 1',hours:6,skills:'Cutting, sewing, finishing'}],jobs:[['Occasion dress','Sample customer A','Sewing',2,'High',''],['Two-piece set','Sample customer B','Intake',7,'Normal','Awaiting fabric delivery'],['Bridesmaid dress','Sample customer C','Fitting',1,'Urgent','']].map((x,i)=>({id:'JM-DEMO-00'+(i+1),customer:x[1],garment:x[0],stage:x[2],due:day(x[3]),accepted:day(-3),event:day(x[3]+2),priority:x[4],blocker:x[5],quantity:1,owner:'Tailor 1',deposit:'Received',contact:'',brief:'Fictional example for planning review.',measurements:'Not yet recorded',materials:'Confirm fabric and trims',notes:'',fitting:'',tasks:[{name:i===2?'First fitting':'Sewing',date:day(0),owner:'Tailor 1',hours:i===2?1:4,done:false}]}))};}
-let state;try{state=JSON.parse(localStorage.getItem(key))||seed();}catch{state=seed();$('#message').textContent='Saved data could not be read. Sample data loaded; export before making changes.';}
+function seed(){return {team:[{name:'Tailor 1',hours:6,skills:'Cutting, sewing, finishing'}],jobs:[]};}
+let state;try{state=JSON.parse(localStorage.getItem(key))||seed();}catch{state=seed();$('#message').textContent='Saved data could not be read. A new empty workspace was created.';}
+const removedDemoJobs=state.jobs.filter(j=>String(j.id||'').startsWith('JM-DEMO-'));
+if(removedDemoJobs.length){state.jobs=state.jobs.filter(j=>!String(j.id||'').startsWith('JM-DEMO-'));try{localStorage.setItem(key,JSON.stringify(state));}catch{}$('#message').textContent='Removed '+removedDemoJobs.length+' fictional sample job(s).';}
 state.team.forEach(t=>t.skills=W.normalizeSkills(t.skills));
 let view='today', draftPhotos=[];const expandedCards=new Set();
 const skillOptions = selected => [...new Set([...W.skills,...W.normalizeSkills(selected)])].map(s=>`<option ${W.normalizeSkills(selected).includes(s)?'selected':''}>${esc(s)}</option>`).join('');
