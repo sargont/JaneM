@@ -12,12 +12,14 @@ w.HTMLDialogElement.prototype.showModal=function(){this.open=true;};
 w.HTMLDialogElement.prototype.close=function(){this.open=false;};
 w.eval(fs.readFileSync(__dirname+'/core.js','utf8'));
 w.localStorage.setItem('janem-workroom-v1',JSON.stringify({team:[{name:'Tailor 1',hours:6,skills:['Measurements','Pattern making','Cutting','Sewing','Fitting','Finishing']}],jobs:[
-  {id:'TEST-001',customer:'Sample customer A',garment:'Occasion dress',stage:'Sewing',due:W.today(),accepted:'2026-09-01',event:'2026-09-15',priority:'High',blocker:'',quantity:1,owner:'Tailor 1',deposit:'Received',contact:'',brief:'Test fixture',measurements:'',materials:'',notes:'',fitting:'',tasks:[{name:'Sewing',skill:'Sewing',date:W.today(),owner:'Tailor 1',hours:4,done:false}]},
+  {id:'TEST-001',customer:'Sample customer A',garment:'Occasion dress',stage:'Sewing',due:W.today(),accepted:'2026-09-01',event:'2026-09-15',priority:'High',blocker:'',quantity:1,owner:'Tailor 1',deposit:'Received',contact:'',brief:'Test fixture',measurements:'Bust 92 cm · Waist 70 cm',materials:'Satin crepe',notes:'',fitting:'2026-09-14',tasks:[{name:'Sewing',skill:'Sewing',date:W.today(),owner:'Tailor 1',hours:4,done:false}]},
   {id:'TEST-002',customer:'Sample customer B',garment:'Two-piece set',stage:'Intake',due:'2026-09-16',accepted:'2026-09-01',event:'2026-09-20',priority:'Normal',blocker:'Awaiting fabric delivery',quantity:1,owner:'Tailor 1',deposit:'Received',contact:'',brief:'Test fixture',measurements:'',materials:'',notes:'',fitting:'',tasks:[{name:'Sewing',skill:'Sewing',date:W.today(),owner:'Tailor 1',hours:4,done:false}]},
   {id:'TEST-003',customer:'Sample customer C',garment:'Bridesmaid dress',stage:'Fitting',due:'2026-09-18',accepted:'2026-09-01',event:'2026-09-22',priority:'Urgent',blocker:'',quantity:1,owner:'Tailor 1',deposit:'Received',contact:'',brief:'Test fixture',measurements:'',materials:'',notes:'',fitting:'',tasks:[{name:'First fitting',skill:'Fitting',date:W.today(),owner:'Tailor 1',hours:1,done:false}]}
 ]}));
 w.eval(fs.readFileSync(__dirname+'/app.js','utf8'));
 w.document.querySelector('[data-view="board"]').click();assert.equal(w.document.querySelectorAll('.card').length,3);
+assert.ok(w.document.querySelector('[data-card="TEST-001"] .card-glance').textContent.includes('Bust 92 cm'));
+assert.ok(w.document.querySelector('[data-card="TEST-001"] .card-glance').textContent.includes('Satin crepe'));
 w.document.querySelector('[data-view="team"]').click();
 assert.equal(w.document.querySelectorAll('td.over').length,1);
 w.document.querySelector('[data-view="board"]').click();
