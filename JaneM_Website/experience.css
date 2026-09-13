@@ -57,8 +57,7 @@ button,a,input,select,textarea,summary{touch-action:manipulation}
 @media(max-width:480px){#daily-outfits{grid-template-columns:1fr}.outfit-card__heading{min-height:0;padding:22px}.outfit-pieces{display:grid;grid-template-columns:1fr;gap:0}.outfit-card>.exp-actions{flex-wrap:wrap}.daily-controls .exp-fields{grid-template-columns:1fr}.daily-controls .exp-field--wide{grid-column:1}.wardrobe-fields{grid-template-columns:1fr}.wardrobe-fields>label:first-child{grid-column:auto}.hero-actions .btn{width:100%;justify-content:space-between}.collection-edit__grid .exp-actions>.exp-button{flex:1}}
 @media(prefers-reduced-motion:reduce){.atelier-signature img,.edit-look__image img{transition:none}.atelier-signature figure:hover img,.edit-look__image:hover img{transform:none}html{scroll-behavior:auto}}
 
-/* Founder profile treatment on the public home page. */
-.atelier-signature{grid-template-columns:minmax(220px,.72fr) 1.28fr;gap:clamp(32px,6vw,76px);padding-block:90px}
-.atelier-signature figure{background:#ddd}
-.atelier-signature img{height:620px;object-fit:cover;object-position:center 18%}
-@media(max-width:760px){.atelier-signature{grid-template-columns:1fr;gap:28px;padding-block:48px}.atelier-signature img{height:min(118vw,520px);object-position:center 18%}}
+/* Keep the home-page atelier panel authentic: the founder, not a synthetic wordmark. */
+.atelier-signature__portrait{background:#e9e2db!important}
+.atelier-signature__portrait img{height:560px;object-fit:cover;object-position:center 18%}
+@media(max-width:760px){.atelier-signature__portrait img{height:440px;object-position:center 18%}}
