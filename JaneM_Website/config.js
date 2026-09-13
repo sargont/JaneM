@@ -23,7 +23,7 @@ window.JaneMConfig = { googleAnalyticsMeasurementId: "G-LZ7JHY0VQ8", googleTagMa
     });
   }
 
-  fetch("/api/public-content", { cache: "no-store" })
+  fetch(new URL("api/public-content", document.currentScript.src), { cache: "no-store" })
     .then((response) => response.ok ? response.json() : null)
     .then((content) => {
       if (!content) return;

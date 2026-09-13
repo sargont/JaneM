@@ -19,8 +19,8 @@ const defaultContent = {
     googleTagManagerContainerId: ""
   },
   hero: {
-    eyebrow: "Jane.M Atelier, Maseru, Lesotho • Graduation Collection 2026",
-    lead: "Jane.M Atelier creates made-to-measure women’s fashion in Maseru for graduation, wedding and special-occasion moments that feel personal, refined and unforgettable."
+    eyebrow: "Jane.M Atelier · Made in Maseru, Lesotho",
+    lead: "Personal style for the everyday. Made-to-measure fashion for the moments you’ll remember."
   },
   promotion: {
     discountText: "30% OFF",

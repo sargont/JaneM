@@ -8,6 +8,10 @@
     "test:theme": "node scripts/test-style-studio-theme.js",
     "test:studio-pdf": "node scripts/test-style-studio-pdf.js",
     "test:style-card": "node scripts/test-style-card.js",
-    "test": "npm run build && npm run test:studio && npm run test:studio-pdf && npm run test:style-card && npm run test:theme && npm run test:seo"
+    "test": "npm run build && npm run test:studio && npm run test:studio-pdf && npm run test:style-card && npm run test:theme && npm run test:daily && npm run test:seo",
+    "test:daily": "node scripts/test-daily-studio.js && node scripts/test-experience-flows.js && node scripts/test-studio-navigation.js"
+  },
+  "devDependencies": {
+    "jsdom": "^26.1.0"
   }
 }

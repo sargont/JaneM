@@ -12,3 +12,6 @@ tmp/
 .env
 .env.*
 !.env.example
+
+# Private Sites preview has its own sanitized source repository
+output/janem-private-preview/

@@ -82,6 +82,7 @@
   const escapeHtml = (value) => String(value).replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
   const compact = (value) => String(value || "").replace(/\s+/g, " ").trim();
   const publicStudioUrl = () => document.querySelector('link[rel="canonical"]')?.href || "https://sargont.github.io/JaneM/style-studio/";
+  document.getElementById("edit-occasion-answers")?.addEventListener("click", () => navigateJourney(0));
   const answer = name => form.querySelector(`[name="${name}"]:checked`)?.value || "";
   const answers = () => Object.fromEntries(QUESTION_NAMES.map(name => [name, answer(name)]));
   const shortSilhouette = (value) => ({ "fluid A-line with soft movement": "Fluid A-line", "contoured fit-and-flare with a defined waist": "Fit-and-flare", "sculpted column with a clean vertical line": "Sculpted column", "structured full-skirt silhouette with a focused waist": "Structured full skirt", "balanced A-line with a softly defined waist": "Balanced A-line" }[value] || value);
@@ -104,53 +105,27 @@
     relatedLooksGrid.innerHTML = collectionMatches(occasion).map(look => `<article class="related-look"><img src="${look.image}" width="900" height="1600" loading="lazy" decoding="async" alt="${escapeHtml(look.alt)}"><div><b>${escapeHtml(look.name)}</b><span>${escapeHtml(look.note)}</span></div></article>`).join("");
   }
   function availableJourneySteps() {
-    if (current && !result.hidden) return new Set([0, 1, 2, 3, 4, 5]);
-    return new Set([[0], [0, 1], [0, 1, 2], [0, 1, 2, 5]][furthestQuickStep] || [0]);
+    return new Set(Array.from({ length: furthestQuickStep + 1 }, (_, index) => index));
   }
   function setJourneyRail(activeIndex) {
     const available = availableJourneySteps();
     document.querySelectorAll("[data-journey-step]").forEach(item => {
       const index = Number(item.dataset.journeyStep);
-      const isAvailable = available.has(index);
       item.classList.toggle("is-active", index === activeIndex);
-      item.classList.toggle("is-complete", isAvailable && index !== activeIndex);
-      item.disabled = !isAvailable;
-      item.title = isAvailable ? `Go to chapter ${index + 1}` : "Complete the earlier chapters first";
+      item.classList.toggle("is-complete", index < activeIndex);
+      item.disabled = !available.has(index);
+      item.title = available.has(index) ? `Edit step ${index + 1}` : "Complete the earlier steps first";
       if (index === activeIndex) item.setAttribute("aria-current", "step");
       else item.removeAttribute("aria-current");
     });
   }
-
-  function openAdvancedJourneyChapter(index) {
-    if (advancedForm.hidden) {
-      advancedForm.hidden = false;
-      openAdvanced.setAttribute("aria-expanded", "true");
-      openAdvanced.textContent = "Close detail tools";
-    }
-    setJourneyRail(index);
-    const section = document.querySelector(index === 3 ? ".consultation-section--measurements" : ".consultation-section--inspiration");
-    requestAnimationFrame(() => section?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }));
-  }
-
   function navigateJourney(index) {
     if (!availableJourneySteps().has(index)) return;
-    track("style_studio_journey_navigate", { destination_chapter: index + 1, experience_state: current ? "result" : "quick" });
-    if (current && index >= 3 && index <= 4) { openAdvancedJourneyChapter(index); return; }
-    if (current && index === 5) {
-      setJourneyRail(5);
-      result.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
-      return;
-    }
-    const quickStep = { 0: 0, 1: 1, 2: 2, 5: 3 }[index];
-    if (quickStep === undefined) return;
-    if (current) {
-      result.hidden = true;
-      document.getElementById("studioApp").hidden = false;
-    }
-    step = quickStep;
-    saveJourney();
-    updateStep();
-    requestAnimationFrame(() => document.getElementById("studioApp").scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }));
+    result.hidden = true;
+    document.getElementById("studioApp").hidden = false;
+    step = index;
+    saveJourney(); updateStep();
+    document.getElementById("quick-match").scrollIntoView({ behavior: "auto", block: "start" });
   }
   function saveJourney() {
     try { sessionStorage.setItem(JOURNEY_STORAGE_KEY, JSON.stringify({ answers: answers(), step, furthestQuickStep })); clearSavedButton.hidden = false; } catch (_) {}
@@ -163,27 +138,31 @@
     try {
       const saved = JSON.parse(sessionStorage.getItem(JOURNEY_STORAGE_KEY) || "null");
       if (!saved?.answers) return;
-      Object.entries(saved.answers).forEach(([name, value]) => {
+      Object.entries(saved.answers).filter(([name]) => QUESTION_NAMES.includes(name)).forEach(([name, value]) => {
         const input = form.querySelector(`[name="${name}"][value="${CSS.escape(value)}"]`);
         if (input) input.checked = true;
       });
       step = Math.max(0, Math.min(Number(saved.step) || 0, steps.length - 1));
       furthestQuickStep = Math.max(step, Math.min(Number(saved.furthestQuickStep) || 0, steps.length - 1));
+      const firstIncomplete = steps.findIndex(item => [...item.querySelectorAll("[data-required]")].some(group => !group.querySelector("input:checked")));
+      if (firstIncomplete >= 0) { step = Math.min(step, firstIncomplete); furthestQuickStep = Math.min(furthestQuickStep, firstIncomplete); }
       clearSavedButton.hidden = false;
     } catch (_) {}
   }
 
   function updateStep() {
+    document.querySelector(".journey-rail").hidden = false;
+    document.querySelector(".studio-intro").hidden = false;
     steps.forEach((item, index) => { item.hidden = index !== step; item.classList.toggle("is-active", index === step); });
-    const labels = ["Your occasion", "Your style", "Your design details", "Review & brief"];
-    const chapterIndexes = [0, 1, 2, 5];
+    const labels = ["Your occasion", "Style & silhouette", "Colour & comfort", "Your budget"];
+    const chapterIndexes = [0, 1, 2, 3];
     const chapter = chapterIndexes[step];
-    document.getElementById("stepLabel").textContent = `Chapter ${chapter + 1} of 6`;
+    document.getElementById("stepLabel").textContent = `Step ${chapter + 1} of 4`;
     document.getElementById("stepPrompt").textContent = labels[step];
-    document.getElementById("progressStatus").textContent = `Chapter ${chapter + 1} of 6: ${labels[step]}`;
-    document.getElementById("progressBar").style.width = `${((chapter + 1) / 6) * 100}%`;
+    document.getElementById("progressStatus").textContent = `Step ${chapter + 1} of 4: ${labels[step]}`;
+    document.getElementById("progressBar").style.width = `${((chapter + 1) / 4) * 100}%`;
     backButton.disabled = step === 0;
-    nextButton.textContent = step === steps.length - 1 ? "Reveal My Style Match" : "Next";
+    nextButton.textContent = step === steps.length - 1 ? "See my style direction →" : "Continue →";
     validationMessage.hidden = true;
     setJourneyRail(chapter);
     steps[step].querySelector("input")?.focus({ preventScroll: true });
@@ -234,7 +213,10 @@
       ["Fabric direction", recommendation.fabric, "fabric"],
       ["Indicative workmanship", recommendation.workmanship, "construction"]
     ];
-    directionList.innerHTML = specification.map(([label, value, icon]) => `<div><img src="../assets/style-studio/icon-${icon}.svg" width="24" height="24" alt="" aria-hidden="true"><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join("");
+    const primary = new Set(["Silhouette", "Length", "Neckline", "Sleeve", "Colour direction"]);
+    const more = document.getElementById("directionMore");
+    if (more) more.innerHTML = specification.filter(([label]) => !primary.has(label)).map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join("");
+    directionList.innerHTML = specification.filter(([label]) => primary.has(label)).map(([label, value, icon]) => `<div><img src="../assets/style-studio/icon-${icon}.svg" width="24" height="24" alt="" aria-hidden="true"><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join("");
     paletteTitle.textContent = recommendation.palette.name;
     paletteStory.textContent = recommendation.palette.story;
     paletteSwatches.innerHTML = recommendation.palette.colours.map(([name, colour]) => `<div class="palette-swatch"><span style="--colour:${escapeHtml(colour)}"></span><span>${escapeHtml(name)}</span></div>`).join("");
@@ -251,6 +233,10 @@
     complexityCopy.textContent = "Complexity is based on silhouette, structure, detailing and finishing.";
   }
   function renderResult() {
+    detailedHandoff.hidden = true; conceptBoard.hidden = true; briefPreview.hidden = true; copyBrief.hidden = true;
+    advancedForm.hidden = true; openAdvanced.setAttribute("aria-expanded", "false"); openAdvanced.textContent = "Add optional details";
+    document.querySelector(".journey-rail").hidden = true;
+    document.querySelector(".studio-intro").hidden = true;
     const data = answers();
     const recommendation = recommend(data);
     current = { data, recommendation };
@@ -583,9 +569,9 @@
     const data = answers();
     track("style_studio_step_complete", { step_number: step + 1, occasion_category: data.occasion || "not_set" });
     if (step === steps.length - 1) { renderResult(); return; }
-    step += 1; furthestQuickStep = Math.max(furthestQuickStep, step); saveJourney(); updateStep();
+    step += 1; furthestQuickStep = Math.max(furthestQuickStep, step); saveJourney(); updateStep(); document.getElementById("quick-match").scrollIntoView({behavior:"auto",block:"start"});
   });
-  backButton.addEventListener("click", () => { if (step > 0) { step -= 1; updateStep(); } });
+  backButton.addEventListener("click", () => { if (step > 0) { step -= 1; saveJourney(); updateStep(); } });
   document.querySelectorAll("[data-journey-step]").forEach(button => button.addEventListener("click", () => navigateJourney(Number(button.dataset.journeyStep))));
   quickWhatsApp.addEventListener("click", () => { if (current) track("style_studio_whatsapp_click", { cta_location: "quick_result", style_profile_id: current.recommendation.id }); });
   mobileWhatsApp.addEventListener("click", () => { if (current) track("style_studio_whatsapp_click", { cta_location: "mobile_result", style_profile_id: current.recommendation.id }); });
@@ -594,7 +580,7 @@
   openAdvanced.addEventListener("click", () => {
     const isOpen = !advancedForm.hidden;
     advancedForm.hidden = isOpen; openAdvanced.setAttribute("aria-expanded", String(!isOpen));
-    openAdvanced.textContent = isOpen ? "Add details to my brief" : "Close detail tools";
+    openAdvanced.textContent = isOpen ? "Add optional details" : "Close optional details";
     if (!isOpen && current) { setJourneyRail(3); track("style_studio_advanced_start", { style_profile_id: current.recommendation.id }); requestAnimationFrame(() => advancedForm.scrollIntoView({ behavior: "auto", block: "start" })); advancedForm.querySelector("select")?.focus({ preventScroll: true }); }
   });
   previewConcept.addEventListener("click", conceptPreview);

@@ -1,0 +1,12 @@
+KimaD Workroom
+
+1. Keep the four application files together in one folder:
+   index.html, app.js, core.js and style.css.
+2. Double-click index.html to open the Workroom in Chrome or Edge.
+3. Add the first tailor's name and skills under Team, then create jobs.
+4. Use Export backup regularly. The data lives only in that browser on that laptop.
+
+For a more reliable local address, open a terminal in this folder and run:
+python3 -m http.server 4175
+
+Then open http://localhost:4175 in a browser.
