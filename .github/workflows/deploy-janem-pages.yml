@@ -37,6 +37,7 @@ jobs:
 
       - name: Build and validate SEO site
         run: |
+          npm ci
           npm test
 
       - name: Upload Jane.M website
