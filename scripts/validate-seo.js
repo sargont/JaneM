@@ -14,7 +14,7 @@ if (!robots.includes("Disallow: /admin/") || !robots.includes("Sitemap:")) fail.
 if (/<loc>[^<]*(?:\/admin\/|catalogue\.pdf)/.test(sitemap)) fail.push("sitemap contains an excluded URL");
 for (const file of files) {
   const html = fs.readFileSync(file, "utf8"); const relative = path.relative(site, file);
-  if (relative === "404.html" || relative === "admin.html") continue;
+  if (relative === "404.html" || relative === "admin.html" || /^google[a-z0-9]+\.html$/i.test(relative)) continue;
   const title = html.match(/<title>([^<]+)<\/title>/i)?.[1]; const description = html.match(/<meta name="description" content="([^"]+)"/i)?.[1]; const canonical = html.match(/<link rel="canonical" href="([^"]+)"/i)?.[1];
   if (!title) fail.push(`${relative}: missing title`); else { if (titles.has(title)) fail.push(`${relative}: duplicate title with ${titles.get(title)}`); titles.set(title, relative); }
   if (!description) fail.push(`${relative}: missing description`); else { if (descriptions.has(description)) fail.push(`${relative}: duplicate description with ${descriptions.get(description)}`); descriptions.set(description, relative); }
