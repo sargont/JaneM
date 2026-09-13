@@ -51,7 +51,7 @@ assert.ok(w.document.querySelector('#job-warning').textContent.includes('Skill m
 w.document.querySelector('#close').click();
 w.document.querySelector('[data-view="staff"]').click();
 assert.equal(w.document.querySelectorAll('select[multiple]').length,0);
-const staffForm=w.document.querySelector('[data-staff]');
+const staffForm=w.document.querySelector('[data-staff-record]');
 const check=staffForm.querySelector('input[value="Measurements"]');check.checked=true;
 staffForm.elements.name.value='Mosa';
 staffForm.dispatchEvent(new w.Event('submit',{cancelable:true}));
