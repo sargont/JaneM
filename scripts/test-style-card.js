@@ -13,7 +13,7 @@ const card = buildStyleCardSvg({
 
 assert.match(card, /width="1080" height="1350"/, "Style Card should export at a social-ready portrait size.");
 assert.match(card, />Jane\.M<\/text>/, "Style Card must carry the Jane.M lockup.");
-assert.match(card, /JANE\.M LESOTHO/, "Style Card must identify the Jane.M Lesotho brand.");
+assert.match(card, /JANE\.M ATELIER/, "Style Card must identify the Jane.M Atelier brand.");
 assert.match(card, /WHATSAPP \+266 6279 0946/, "Style Card must carry contact details.");
 assert.match(card, /fill="#f3e8da" class="body"/, "Style Card body copy must be high contrast on the dark ground.");
 assert.match(card, /fill="#f3e8da" class="detail"/, "Style Card silhouette copy must be high contrast on the dark ground.");
