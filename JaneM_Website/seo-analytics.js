@@ -34,6 +34,14 @@
     form.dataset.analyticsStarted = "true";
     track(form.dataset.formType + "_start");
   });
+  const campaign = new URLSearchParams(window.location.search);
+  const attribution = ["utm_source", "utm_medium", "utm_campaign", "utm_content"]
+    .reduce((result, key) => {
+      const value = campaign.get(key);
+      if (value && /^[a-z0-9_. -]{1,80}$/i.test(value)) result[key.replace("utm_", "")] = value;
+      return result;
+    }, {});
+  if (Object.keys(attribution).length) track("campaign_landing", { path: window.location.pathname, ...attribution });
   track("organic_landing_page", { path: window.location.pathname });
   if (/catalogue\.html$/.test(window.location.pathname)) track("catalogue_view");
   if (/\/collection\//.test(window.location.pathname)) track("individual_look_view");

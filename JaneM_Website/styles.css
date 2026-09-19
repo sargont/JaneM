@@ -52,6 +52,7 @@ h1, h2, h3 { font-family: var(--serif); margin-top: 0; line-height: .98; }
 h1 { font-size: clamp(4rem, 8vw, 7.7rem); font-weight: 600; letter-spacing: -.05em; margin-bottom: 26px; }
 h1 span { color: var(--gold-dark); font-style: italic; }
 .hero-lead { max-width: 610px; font-size: 1.1rem; color: var(--muted); }
+.hero-reassurance { max-width: 550px; margin: -10px 0 0; color: var(--muted); font-size: .82rem; }
 .hero-actions { display: flex; gap: 12px; margin: 34px 0 26px; flex-wrap: wrap; }
 .btn {
   display: inline-flex; justify-content: center; align-items: center;
@@ -83,6 +84,20 @@ h1 span { color: var(--gold-dark); font-style: italic; }
   border: 3px solid var(--gold);
   font-family: var(--serif); font-weight: 700; font-size: 1.1rem; line-height: 1.05;
 }
+.occasion-paths { padding: clamp(60px, 8vw, 108px) 0; background: #f5eee4; }
+.occasion-paths__heading { display: grid; grid-template-columns: minmax(0, .88fr) minmax(280px, .52fr); gap: 42px; align-items: end; margin-bottom: 34px; }
+.occasion-paths__heading h2 { margin: 0; font-size: clamp(2.8rem, 5.5vw, 5.5rem); line-height: .88; }
+.occasion-paths__heading h2 em { color: var(--gold-dark); }
+.occasion-paths__heading > p { max-width: 470px; margin: 0; color: var(--muted); }
+.occasion-paths__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(21,18,15,.14); border: 1px solid rgba(21,18,15,.14); }
+.occasion-paths__grid a { position: relative; display: grid; min-height: 218px; align-content: end; gap: 10px; padding: 26px; background: var(--paper); color: var(--ink); text-decoration: none; transition: background .2s ease, color .2s ease, transform .2s ease; }
+.occasion-paths__grid a:hover, .occasion-paths__grid a:focus-visible { background: var(--black); color: #fff; transform: translateY(-4px); }
+.occasion-paths__grid span { align-self: start; color: var(--gold-dark); font-family: var(--serif); font-size: 1.4rem; font-style: italic; }
+.occasion-paths__grid strong { font-family: var(--serif); font-size: clamp(2rem, 3vw, 2.7rem); font-weight: 600; }
+.occasion-paths__grid small { color: var(--muted); font-size: .85rem; }
+.occasion-paths__grid a:hover small, .occasion-paths__grid a:focus-visible small { color: #d7cdc4; }
+.occasion-paths__grid b { position: absolute; right: 26px; top: 26px; font-size: 1.25rem; font-weight: 400; }
+
 .statement { position: relative; overflow: hidden; background: radial-gradient(circle at 82% 18%, rgba(179,138,69,.13), transparent 27%), var(--black); color: white; }
 .statement::before { content: ""; position: absolute; inset: 0; border-top: 1px solid rgba(217,184,123,.18); border-bottom: 1px solid rgba(217,184,123,.18); pointer-events: none; }
 .statement-inner { min-height: 280px; display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(210px, .55fr); align-items: center; gap: clamp(45px, 8vw, 120px); padding-block: 52px; }
@@ -318,7 +333,7 @@ footer a, footer p { display: block; color: #bcb2a8; text-decoration: none; marg
   .style-studio-cta__inner { align-items: flex-start; flex-direction: column; }
   .site-nav.open { display: flex; }
   .hero { padding-top: 42px; }
-  .hero-grid, .section-heading, .promo-card, .footer-grid, .catalogue-gallery-heading, .page-hero__layout, .catalogue-hero__layout { grid-template-columns: 1fr; }
+  .hero-grid, .section-heading, .promo-card, .footer-grid, .catalogue-gallery-heading, .page-hero__layout, .catalogue-hero__layout, .occasion-paths__heading { grid-template-columns: 1fr; }
   .hero-copy { order: 2; }
   .hero-media { order: 1; justify-self: center; }
   .hero-media video { width: 290px; }
@@ -341,6 +356,10 @@ footer a, footer p { display: block; color: #bcb2a8; text-decoration: none; marg
   h1 { font-size: 4.1rem; }
   .hero-actions .btn { width: 100%; }
   .hero-meta { display: grid; }
+  .occasion-paths { padding-block: 52px; }
+  .occasion-paths__heading { gap: 16px; }
+  .occasion-paths__grid { grid-template-columns: 1fr; }
+  .occasion-paths__grid a { min-height: 152px; }
   .look-grid { grid-template-rows: repeat(3, 450px); }
   .steps { grid-template-columns: 1fr; }
   .steps li, .steps li:last-child { border: 0; border-top: 1px solid rgba(21,18,15,.2); }
