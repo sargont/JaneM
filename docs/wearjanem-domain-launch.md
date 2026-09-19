@@ -43,3 +43,17 @@ After the domain resolves and HTTPS is enabled:
 2. Submit `https://wearjanem.com/sitemap.xml`.
 3. Inspect and request indexing for the home page, wedding-dresses page and graduation-dresses page.
 4. Keep the existing GitHub Pages property during migration so Google can observe the new canonical URLs and redirects.
+
+## Social and messaging touchpoints
+
+Use the same identity everywhere: **Jane.M Atelier** is the business name; **Wear Jane.M** is the invitation and campaign line; `wearjanem.com` is the one website link.
+
+| Touchpoint | Name or headline | Website / bio copy |
+|---|---|---|
+| Facebook | **Jane.M Atelier** | Made-to-measure womenswear in Maseru. Wedding, graduation, corsetry and occasion dressing. Consultations in Lesotho and remotely for South Africa. **Wear Jane.M** · wearjanem.com |
+| Instagram | Display name: **Jane.M Atelier \| Wear Jane.M** | Made-to-measure fashion · Maseru, Lesotho<br>Wedding · graduation · corsetry · occasion<br>Consultations by appointment + remotely 🇱🇸 🇿🇦<br>↓ wearjanem.com |
+| YouTube / JaneM TV | **JaneM TV by Jane.M Atelier** | Fashion, corsetry and design education from Liteboho Mokhethi. Explore the atelier and book a consultation at wearjanem.com. |
+| WhatsApp Business | **Jane.M Atelier** | Welcome to Jane.M Atelier. Share your occasion, date, preferred style and budget, or browse wearjanem.com to begin. |
+| Google Business Profile | **Jane.M Atelier** (only if this is the business name used on signage and client-facing materials) | Use the suggested Google description above and set the Website field to `https://wearjanem.com`. |
+
+Do not replace old social usernames just to match the domain. Keep established handles where changing them would lose recognition, then update the display name, bio and one website link.
