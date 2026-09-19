@@ -1,6 +1,6 @@
 # Jane.M Website
 
-A responsive static website for Jane.M Lesotho.
+A responsive static website for Jane.M Atelier.
 
 ## Included
 - Graduation campaign landing page

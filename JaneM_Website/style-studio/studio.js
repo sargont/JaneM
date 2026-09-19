@@ -81,7 +81,7 @@
 
   const escapeHtml = (value) => String(value).replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
   const compact = (value) => String(value || "").replace(/\s+/g, " ").trim();
-  const publicStudioUrl = () => document.querySelector('link[rel="canonical"]')?.href || "https://sargont.github.io/JaneM/style-studio/";
+  const publicStudioUrl = () => document.querySelector('link[rel="canonical"]')?.href || "https://wearjanem.com/style-studio/";
   document.getElementById("edit-occasion-answers")?.addEventListener("click", () => navigateJourney(0));
   const answer = name => form.querySelector(`[name="${name}"]:checked`)?.value || "";
   const answers = () => Object.fromEntries(QUESTION_NAMES.map(name => [name, answer(name)]));

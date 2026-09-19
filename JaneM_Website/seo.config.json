@@ -2,9 +2,11 @@
   "productionUrl": "https://wearjanem.com/",
   "customDomain": "https://wearjanem.com/",
   "businessName": "Jane.M Atelier",
-  "alternateBusinessName": "Jane.M Lesotho",
   "country": "Lesotho",
-  "serviceArea": ["Maseru", "Lesotho"],
+  "serviceArea": [
+    "Maseru",
+    "Lesotho"
+  ],
   "telephone": "+26662790946",
   "whatsApp": "https://wa.me/26662790946",
   "email": "officialjanem@gmail.com",

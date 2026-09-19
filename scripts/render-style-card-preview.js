@@ -10,7 +10,7 @@ const card = buildStyleCardSvg({
     silhouette: "Contoured fit-and-flare with a defined waist",
     palette: { name: "Soft-light elegance", colours: [["Champagne", "#d7b981"], ["Blush", "#d8a5a1"], ["Ivory", "#f6eee3"]] }
   },
-  publicUrl: "https://sargont.github.io/JaneM/style-studio/"
+  publicUrl: "https://wearjanem.com/style-studio/"
 });
 
 fs.mkdirSync(path.dirname(output), { recursive: true });
