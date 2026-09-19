@@ -33,7 +33,7 @@ After `https://wearjanem.com` opens correctly, update the Website field to that 
 
 Suggested description:
 
-> Jane.M Atelier is a Maseru-based made-to-measure womenswear studio founded by fashion designer Liteboho Mokhethi. Wear Jane.M for custom graduation dresses, wedding dresses, corsetry, bridesmaid dresses and evening gowns. Consultations are available by appointment in Maseru and remotely for South African clients; travel may be considered for larger projects. Explore the collection, begin a consultation and discover JaneM TV at wearjanem.com.
+> Jane.M Atelier is a Maseru-based made-to-measure womenswear studio founded by fashion designer Liteboho Mokhethi. Wear Jane.M for custom graduation dresses, wedding dresses, corsetry, bridesmaid dresses and evening gowns. Consultations are available by appointment in Maseru and remotely for South African clients; travel may be considered for larger projects. Explore the collection, begin a consultation and discover JaneM TV.
 
 ## Search Console
 
