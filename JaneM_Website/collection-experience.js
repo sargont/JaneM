@@ -16,6 +16,7 @@
  render();
  document.querySelectorAll('[data-save-look]').forEach(b=>{if(saved.includes(b.dataset.saveLook)){b.textContent='Saved ✓';b.setAttribute('aria-pressed','true');}});
  const form=$('consultation-form');if(!form)return;
+ window.JaneMAnalytics?.track('consultation_request_view');
  const selectedHash=window.location.hash.slice(1);
  const shortlist=$('booking-shortlist');
  shortlist.innerHTML=looks.map(l=>`<label class="exp-check"><input type="checkbox" name="look" value="${l.id}" ${saved.includes(l.id)||l.id===selectedHash?'checked':''}>${esc(l.name)}</label>`).join('');
