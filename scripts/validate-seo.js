@@ -20,7 +20,7 @@ for (const file of files) {
   if (!description) fail.push(`${relative}: missing description`); else { if (descriptions.has(description)) fail.push(`${relative}: duplicate description with ${descriptions.get(description)}`); descriptions.set(description, relative); }
   if (!canonical || !canonical.startsWith(base)) fail.push(`${relative}: invalid canonical`);
   if ((html.match(/rel="canonical"/g) || []).length !== 1) fail.push(`${relative}: expected one canonical`);
-  const shouldBeNoindex = relative === "journal/index.html";
+  const shouldBeNoindex = false;
   if (!shouldBeNoindex) indexablePages += 1;
   if (shouldBeNoindex ? !html.includes('meta name="robots" content="noindex,follow') : !html.includes('meta name="robots" content="index,follow')) fail.push(`${relative}: incorrect robots directive`);
   const canonicalPath = canonical ? new URL(canonical).pathname : "";
