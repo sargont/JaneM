@@ -19,7 +19,8 @@
     const link = event.target.closest("a, button");
     if (!link) return;
     const explicit = link.dataset.analyticsEvent;
-    if (explicit) track(explicit, { link_url: safeLinkUrl(link.href) });
+    const context = { link_url: safeLinkUrl(link.href), cta_location: link.dataset.analyticsLocation || link.dataset.analyticsEvent || "unspecified" };
+    if (explicit) track(explicit, context);
     else if (/wa\.me/.test(link.href || "")) track("whatsapp_click", { link_url: safeLinkUrl(link.href) });
     else if (/^tel:/.test(link.href || "")) track("phone_click", { link_url: safeLinkUrl(link.href) });
     else if (/catalogue\.pdf/.test(link.href || "")) track("catalogue_download", { link_url: safeLinkUrl(link.href) });
