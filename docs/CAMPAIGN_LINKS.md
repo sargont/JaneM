@@ -13,7 +13,19 @@ Use lower-case values with hyphens. Never put a client name, phone number or any
 | Facebook graduation post | `https://wearjanem.com/graduation-dresses-lesotho/?utm_source=facebook&utm_medium=organic-social&utm_campaign=graduation-2026` |
 | JaneM TV video description | `https://wearjanem.com/designer/?utm_source=youtube&utm_medium=organic-video&utm_campaign=janem-tv` |
 | WhatsApp Status | `https://wearjanem.com/booking/?utm_source=whatsapp&utm_medium=status&utm_campaign=consultation` |
-| Google Business Profile post | `https://wearjanem.com/booking/?utm_source=google-business-profile&utm_medium=organic-local&utm_campaign=consultation` |
+| Google Business Profile website button | `https://wearjanem.com/?utm_source=google-business-profile&utm_medium=organic-local&utm_campaign=profile` |
+| Google Business Profile booking or post | `https://wearjanem.com/booking/?utm_source=google-business-profile&utm_medium=organic-local&utm_campaign=consultation` |
+
+Use the normal clean domain, `https://wearjanem.com/`, for spoken references, print material and places where a long link looks unprofessional. Use the tagged versions where the platform lets you paste a website link and the full link will not be shown prominently to customers.
+
+## Profile update checklist
+
+- Google Business Profile website: `https://wearjanem.com/?utm_source=google-business-profile&utm_medium=organic-local&utm_campaign=profile`
+- Google Business Profile booking/posts: `https://wearjanem.com/booking/?utm_source=google-business-profile&utm_medium=organic-local&utm_campaign=consultation`
+- Instagram bio: `https://wearjanem.com/?utm_source=instagram&utm_medium=organic-social&utm_campaign=profile`
+- Facebook page website: `https://wearjanem.com/?utm_source=facebook&utm_medium=organic-social&utm_campaign=profile`
+- YouTube channel link: `https://wearjanem.com/designer/?utm_source=youtube&utm_medium=organic-video&utm_campaign=janem-tv`
+- WhatsApp Business catalogue/profile: `https://wearjanem.com/booking/?utm_source=whatsapp&utm_medium=profile&utm_campaign=consultation`
 
 ## Event funnel to review monthly
 

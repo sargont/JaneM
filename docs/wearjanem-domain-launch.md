@@ -29,7 +29,26 @@ Do not create a CNAME record for `@` in Namecheap BasicDNS. DNS and certificate 
 
 ## Google Business Profile
 
-After `https://wearjanem.com` opens correctly, update the Website field to that address. Keep the profile name as **Jane.M Atelier**.
+After `https://wearjanem.com` opens correctly, update the Website field to:
+
+`https://wearjanem.com/?utm_source=google-business-profile&utm_medium=organic-local&utm_campaign=profile`
+
+Use this for booking links or Google Business Profile posts:
+
+`https://wearjanem.com/booking/?utm_source=google-business-profile&utm_medium=organic-local&utm_campaign=consultation`
+
+Keep the profile name as **Jane.M Atelier**.
+
+Current management note, 22 September 2026: the correct public listing is manageable in Search as `JaneM Lesotho Atelier` in Ha Foso with `6279 0946`, and `wearjanem.com` appears as the website result. The remaining Google prompt is **Profile strength / Complete info**, so review Google’s suggested missing fields before treating the profile as fully optimized.
+
+Profile-strength items to check:
+
+- Website link points to the tagged Google Business Profile URL above.
+- Services include real offerings: bespoke wedding dresses, bridesmaid dresses, graduation dresses, evening gowns, corsetry, custom women's wear, remote consultations and large-project travel where applicable.
+- Directions, address pin and service area are correct.
+- Products or services include strong photos for wedding, graduation, corsetry and evening looks.
+- Booking or update links point to the consultation page when Google allows a URL.
+- Reviews are answered, especially recent 5-star reviews.
 
 Suggested description:
 
@@ -54,6 +73,6 @@ Use the same identity everywhere: **Jane.M Atelier** is the business name; **Wea
 | Instagram | Display name: **Jane.M Atelier \| Wear Jane.M** | Made-to-measure fashion · Maseru, Lesotho<br>Wedding · graduation · corsetry · occasion<br>Consultations by appointment + remotely 🇱🇸 🇿🇦<br>↓ wearjanem.com |
 | YouTube / JaneM TV | **JaneM TV by Jane.M Atelier** | Fashion, corsetry and design education from Liteboho Mokhethi. Explore the atelier and book a consultation at wearjanem.com. |
 | WhatsApp Business | **Jane.M Atelier** | Welcome to Jane.M Atelier. Share your occasion, date, preferred style and budget, or browse wearjanem.com to begin. |
-| Google Business Profile | **Jane.M Atelier** (only if this is the business name used on signage and client-facing materials) | Use the suggested Google description above and set the Website field to `https://wearjanem.com`. |
+| Google Business Profile | **Jane.M Atelier** (only if this is the business name used on signage and client-facing materials) | Use the suggested Google description above and set the Website field to the tagged Google Business Profile link in this document. |
 
 Do not replace old social usernames just to match the domain. Keep established handles where changing them would lose recognition, then update the display name, bio and one website link.

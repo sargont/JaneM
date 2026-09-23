@@ -29,8 +29,8 @@ Record clicks, impressions, CTR and average position. Compare the last 28 days w
 
 Use tagged links whenever a post or advert points to the site. Example:
 
-`https://wearjanem.com/graduation-dresses-lesotho/?utm_source=instagram&utm_medium=social&utm_campaign=graduation_2026`
+`https://wearjanem.com/graduation-dresses-lesotho/?utm_source=instagram&utm_medium=organic-social&utm_campaign=graduation-2026`
 
-Use `facebook`, `instagram`, `youtube`, `whatsapp_status`, `google_business` or `partner` as the source; use `social`, `video`, `messaging`, `local` or `referral` as the medium; and use a short campaign name such as `graduation_2026` or `bridal_2027`.
+Use `facebook`, `instagram`, `youtube`, `whatsapp`, `google-business-profile` or `partner` as the source; use `organic-social`, `organic-video`, `status`, `organic-local` or `referral` as the medium; and use a short campaign name such as `graduation-2026`, `bridal-2027`, `profile` or `consultation`.
 
 The site records campaign landings without collecting visitor names, messages or form answers.
