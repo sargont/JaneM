@@ -458,3 +458,17 @@ html[data-theme="dark"] .page-hero__media img { filter: saturate(.86) contrast(1
   html[data-theme="dark"] .price-table-wrap tr { background: #1a1613; }
   html[data-theme="dark"] .price-table-wrap td:first-child { color: #f3ece4; }
 }
+
+.seo-price-card {
+  margin-top: 2rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid rgba(167, 122, 44, .35);
+  background: rgba(250, 246, 239, .78);
+  box-shadow: 0 18px 45px rgba(25, 18, 12, .08);
+}
+.seo-price-card h2 { margin: .2rem 0 .75rem; }
+.seo-price-card ul { list-style: none; padding: 0; margin: 1rem 0; display: grid; gap: .65rem; }
+.seo-price-card li { display: flex; justify-content: space-between; gap: 1rem; border-bottom: 1px solid rgba(25, 18, 12, .12); padding-bottom: .55rem; }
+.seo-price-card li span { color: var(--muted, #6f675d); text-align: right; }
+.seo-price-card .fine-print { font-size: .92rem; color: var(--muted, #6f675d); }
+@media (max-width: 640px) { .seo-price-card li { display: block; } .seo-price-card li span { display: block; text-align: left; margin-top: .15rem; } }
