@@ -125,7 +125,7 @@
       line(PAGE.left, PAGE.footerTop, PAGE.right, PAGE.footerTop, GOLD, 0.65);
       rawText("Jane.M", PAGE.left, 51, { font: "F3", size: 14, colour: BURGUNDY });
       rawText("LESOTHO", 102, 49, { font: "F2", size: 5.8, colour: GOLD_DARK });
-      rawText("Maseru, Lesotho  |  WhatsApp +266 6279 0946  |  officialjanem@gmail.com", 157, 50, { font: "F1", size: 6.2, colour: MUTED });
+      rawText("Maseru, Lesotho  |  WhatsApp +266 6279 0946  |  wearjanem.com", 157, 50, { font: "F1", size: 6.2, colour: MUTED });
       rawText(`STYLE BRIEF  |  ${brief.reference}  |  ${index + 1} / ${pages.length}`, PAGE.left, 32, { font: "F2", size: 6.2, colour: GOLD_DARK });
       rawText("Private consultation document - final design and measurements are confirmed at fitting.", 233, 32, { font: "F1", size: 5.9, colour: MUTED });
     };

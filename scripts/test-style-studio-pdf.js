@@ -20,7 +20,7 @@ assert.match(pdf, /Client-provided measurements are a private starting point/);
 assert.match(pdf, /FITTING VERIFICATION/);
 assert.match(pdf, /Golden Hour/);
 assert.match(pdf, /Maseru, Lesotho/);
-assert.match(pdf, /officialjanem@gmail\.com/);
+assert.match(pdf, /wearjanem\.com/);
 assert.match(pdf, /Times-Italic/);
 assert.match(pdf, /xref/);
 
