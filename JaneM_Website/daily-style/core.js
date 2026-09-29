@@ -1,0 +1,74 @@
+(function(root, factory) { const api = factory(); if (typeof module === 'object' && module.exports) module.exports = api; else root.JaneMDaily = api; })(typeof globalThis !== 'undefined' ? globalThis : this, function() {
+  'use strict';
+  const slots = ['look', 'shoes', 'layer', 'finish'];
+  const labels = {look:'The look', shoes:'Shoes', layer:'A layer', finish:'The finish'};
+  const pieces = [
+    ['red-wrap','look','Ruby wrap dress','Red · soft drape · daytime','#ad3e41','wrap',['red','soft','day']],
+    ['navy-column','look','Midnight column','Navy · clean lines · evening','#34425b','gown',['navy','sleek','evening']],
+    ['ivory-lace','look','Ivory lace midi','Ivory · lace detail · daytime','#e6d7c0','lace',['ivory','lace','day']],
+    ['teal-midi','look','Printed midi','Teal · patterned · daytime','#377b78','print',['teal','print','day']],
+    ['black-jumpsuit','look','Tailored jumpsuit','Black · clean lines · evening','#353232','jumpsuit',['black','sleek','evening']],
+    ['gold-gown','look','Golden evening gown','Gold · soft shine · evening','#bd9451','gown',['gold','shine','evening']],
+    ['gold-heels','shoes','Gold block heels','Gold · steady block heel','#bd9451','heel',['gold','stable','dressy']],
+    ['black-flats','shoes','Black ballet flats','Black · flat sole','#353232','flat',['black','flat','stable']],
+    ['cream-trainers','shoes','Cream trainers','Cream · casual flats','#e6d7c0','trainer',['ivory','flat','casual']],
+    ['navy-pumps','shoes','Navy pumps','Navy · slim heel','#34425b','heel',['navy','heel','dressy']],
+    ['cream-knit','layer','Cream cardigan','Cream · warm and soft','#e6d7c0','knit',['ivory','warm','soft']],
+    ['black-blazer','layer','Black blazer','Black · warm tailoring','#353232','blazer',['black','warm','tailored']],
+    ['sheer-wrap','layer','Light wrap','Neutral · light drape','#c4aba0','shawl',['neutral','light','soft']],
+    ['navy-coat','layer','Navy coat','Navy · warm tailoring','#34425b','coat',['navy','warm','tailored']],
+    ['gold-cuff','finish','Sculpted gold cuff','Gold · statement shine','#bd9451','cuff',['gold','statement','shine']],
+    ['pearl-studs','finish','Pearl earrings','Ivory · quiet detail','#e6d7c0','earrings',['ivory','quiet']],
+    ['print-scarf','finish','Printed scarf','Teal · statement print','#377b78','scarf',['teal','print','statement']],
+    ['black-clutch','finish','Minimal clutch','Black · quiet detail','#353232','bag',['black','quiet']]
+  ].map(([id,slot,name,note,colour,shape,tags])=>({id,slot,name,note,colour,shape,tags}));
+  const brief = (title,scene,goals,tip) => ({title,scene,goals:slots.map((slot,i)=>({slot,tag:goals[i][0],label:goals[i][1]})),tip});
+  const challenges = [
+    brief('The graduation edit','A proud daytime moment, photographs outside and a cool evening ahead.',[['day','Choose a daytime look'],['stable','Choose a stable sole or block heel'],['warm','Bring a warm layer'],['quiet','Keep the finishing detail quiet']], 'A layer is part of the outfit. Plan it with the dress instead of adding it at the door.'),
+    brief('A little red','Let one vivid colour lead a look for a lunch celebration.',[['red','Make red the main colour'],['flat','Keep the shoes flat'],['soft','Add a softly draped layer'],['quiet','Choose a quiet finishing detail']], 'A strong colour can carry a whole outfit. Simple accessories give it room.'),
+    brief('After dark','A dinner invitation calls for clean lines and one gleam of gold.',[['evening','Start with an evening look'],['dressy','Choose dressy shoes'],['tailored','Add a tailored layer'],['gold','Finish with gold']], 'Contrast can be subtle: a crisp layer changes the mood of a fluid dress.'),
+    brief('Print in the spotlight','Build a relaxed celebration look around a patterned piece.',[['print','Let a printed look lead'],['stable','Choose stable footwear'],['light','Keep the layer light'],['quiet','Keep the accessory quiet']], 'Repeat one colour from a print when choosing the rest of an outfit.'),
+    brief('The creative commute','An expressive workday, with walking on the agenda.',[['sleek','Choose a look with clean lines'],['flat','Choose flat shoes'],['tailored','Add a tailored layer'],['statement','Add one statement accessory']], 'A single expressive detail can make familiar basics feel personal.'),
+    brief('Golden hour','An evening celebration that catches the light.',[['gold','Start with a gold look'],['dressy','Choose dressy footwear'],['light','Add a light layer'],['quiet','Balance it with a quiet accessory']], 'When a fabric shines, a quieter finish lets its texture remain the focus.'),
+    brief('Sunday softness','A gentle palette for a relaxed daytime gathering.',[['ivory','Start with ivory'],['flat','Choose flat footwear'],['soft','Choose a soft layer'],['ivory','Finish with an ivory detail']], 'Related pale shades do not have to match exactly to feel considered.'),
+    brief('Dinner in navy','Deep blue, a crisp layer and a luminous accent.',[['navy','Choose a navy look'],['dressy','Choose dressy shoes'],['tailored','Bring a tailored layer'],['shine','Add a little shine']], 'Navy and gold offer contrast without needing a second bold colour.'),
+    brief('Weekend gallery','A little art, a little walking and a playful print.',[['day','Choose a daytime look'],['casual','Keep the shoes casual'],['warm','Plan for cooler weather'],['print','Finish with a printed accessory']], 'Practical shoes can be an intentional part of a styled outfit.'),
+    brief('The guest edit','For this imaginary wedding, the brief asks for teal, steady shoes and a light layer.',[['teal','Choose teal as the main colour'],['stable','Choose stable footwear'],['light','Bring a light layer'],['gold','Finish with a gold accent']], 'For a real wedding, follow the couple’s dress code before any general styling advice.'),
+    brief('Black with personality','A tailored base and an accessory that starts a conversation.',[['black','Start with a black look'],['flat','Choose flat shoes'],['tailored','Add tailoring'],['statement','Add a statement finish']], 'Shape and texture can make a mostly dark outfit feel rich rather than flat.'),
+    brief('The lace balance','Make texture the focus for a daytime occasion.',[['lace','Choose lace detail'],['dressy','Choose dressy footwear'],['soft','Add a soft layer'],['quiet','Choose an understated finish']], 'Detailed fabric already does a lot of the styling. Accessories can support it.'),
+    brief('Office to supper','A streamlined look that works with a warm layer.',[['sleek','Choose clean lines'],['stable','Choose steady footwear'],['warm','Add warmth'],['gold','Add a gold finish']], 'Changing one accessory is often enough to shift the mood of a familiar outfit.'),
+    brief('A red-letter evening','A bright dress with darker supporting pieces.',[['red','Let red lead'],['black','Choose black shoes'],['black','Choose a black layer'],['quiet','Keep the accessory simple']], 'Repeating a supporting colour can connect the separate parts of a look.'),
+    brief('Teal and cream','A print-led daytime look with softer neutrals.',[['teal','Choose the teal look'],['ivory','Choose cream shoes'],['ivory','Add a cream layer'],['quiet','Keep the finish quiet']], 'Neutrals are useful partners when you want a pattern to stand out.'),
+    brief('The gala arrival','An evening silhouette and a deliberate statement.',[['evening','Choose an evening look'],['dressy','Choose dressy shoes'],['light','Choose a light layer'],['statement','Add a statement accessory']], 'Check how the whole look moves and feels, not only how it photographs.'),
+    brief('Cool morning plans','A daytime look built for warmth and walking.',[['day','Start with a daytime look'],['flat','Choose flat footwear'],['warm','Choose a warm layer'],['quiet','Finish quietly']], 'Comfort requirements are useful design constraints, not a styling compromise.'),
+    brief('Navy, softly','Take a formal-looking silhouette in a softer direction.',[['navy','Choose navy'],['flat','Choose flat shoes'],['soft','Add a soft layer'],['ivory','Finish with ivory']], 'Shoes and layers can make the same dress feel quite different.'),
+    brief('An unexpected pairing','Tailoring meets trainers and a playful accessory.',[['sleek','Choose clean lines'],['casual','Choose casual footwear'],['tailored','Add a tailored layer'],['print','Finish with print']], 'Try changing the expected shoe first when you want a fresh outfit combination.'),
+    brief('The birthday glow','Gold, a block heel and a small detail to finish.',[['shine','Choose a shimmering look'],['stable','Choose stable footwear'],['soft','Choose a soft layer'],['quiet','Keep the accessory quiet']], 'One focal point can be enough. Leave some visual space around it.'),
+    brief('A touch of heritage','Use the patterned piece as a starting point for a personal celebration look.',[['print','Start with a printed look'],['dressy','Choose dressy footwear'],['warm','Bring a warm layer'],['statement','Add a statement finish']], 'For a Seshoeshoe brief, discuss the actual fabric and its meaning with the designer; these game sketches are only styling ideas.'),
+    brief('Quiet celebration','Texture, softness and minimal accessories.',[['lace','Choose a lace look'],['flat','Keep the shoes flat'],['soft','Bring a soft layer'],['quiet','Keep the finish understated']], 'A special outfit can be subtle. Texture can provide interest without extra shine.'),
+    brief('One bold move','Let a statement accessory lift a clean base.',[['sleek','Start with clean lines'],['black','Choose black footwear'],['warm','Choose warmth'],['statement','Add a statement accessory']], 'Build from the piece you most want to wear, then choose its supporting pieces.'),
+    brief('Red meets gold','A warm colour story for a dressy celebration.',[['red','Choose red'],['gold','Choose gold shoes'],['light','Keep the layer light'],['gold','Repeat gold in the finish']], 'Repeating a metal tone is one way to connect accessories; it is a choice, not a rule.'),
+    brief('The photo moment','Pale texture with a darker frame and a neat finish.',[['ivory','Choose an ivory look'],['navy','Choose navy footwear'],['navy','Bring a navy layer'],['quiet','Add a quiet accessory']], 'Try the intended layer during a fitting so you can assess the complete silhouette.'),
+    brief('A patterned afternoon','A printed look styled for an easy day out.',[['print','Choose a patterned look'],['casual','Choose casual shoes'],['soft','Choose a soft layer'],['ivory','Finish with ivory']], 'Rewearing a dress with different shoes can reveal an entirely new use for it.'),
+    brief('The tailored evening','Dark tailoring, warm coverage and a flash of gold.',[['black','Start with black'],['dressy','Choose dressy shoes'],['tailored','Choose a tailored layer'],['shine','Finish with shine']], 'Notice proportions: the length of a jacket changes the lines of an outfit.'),
+    brief('Gold after sunset','A gold silhouette with navy supporting pieces.',[['gold','Start with gold'],['navy','Choose navy shoes'],['navy','Add a navy layer'],['quiet','Choose a quiet finish']], 'Deep colours can give warm metallic tones a calmer setting.'),
+    brief('The comfortable invitation','A celebration look with flats and a little personality.',[['day','Choose a daytime look'],['flat','Keep the shoes flat'],['light','Add a light layer'],['statement','Choose a statement finish']], 'Choose shoes for the actual venue and time on your feet, then style around them.'),
+    brief('Your final flourish','A clean silhouette, steady shoes and your bold finishing touch.',[['sleek','Choose clean lines'],['stable','Choose stable footwear'],['soft','Add a soft layer'],['statement','Make the final accessory bold']], 'Keep combinations you enjoy. A personal style library can be more useful than chasing every trend.')
+  ];
+  function dateKey(now = new Date()) { return new Date(now.getTime()+7200000).toISOString().slice(0,10); }
+  function dayNumber(key) { if (!/^\d{4}-\d{2}-\d{2}$/.test(key)) return NaN; const n = Date.parse(key+'T00:00:00Z'); return Number.isFinite(n) && new Date(n).toISOString().slice(0,10)===key ? Math.floor(n/86400000) : NaN; }
+  function shift(key, days) { return new Date((dayNumber(key)+days)*86400000).toISOString().slice(0,10); }
+  const epoch = dayNumber('2026-09-29');
+  function challenge(key) { const n=dayNumber(key); if (!Number.isFinite(n)) throw Error('Invalid challenge date'); const index=((n-epoch)%challenges.length+challenges.length)%challenges.length; return {...challenges[index], id:'brief-'+(index+1), date:key, number:index+1}; }
+  function selection(value) { const clean={}; for(const slot of slots) {const p=pieces.find(p=>p.id===value?.[slot]&&p.slot===slot); if(p)clean[slot]=p.id;}return clean; }
+  function score(c, value) { const chosen=selection(value); const checks=c.goals.map(g=>({...g,met:!!pieces.find(p=>p.id===chosen[g.slot])?.tags.includes(g.tag)}));return {complete:slots.every(s=>chosen[s]), points:checks.filter(g=>g.met).length,checks}; }
+  function normalise(raw) { const result={version:1,results:{},drafts:{},visits:[],playedDates:[]}; if(!raw||raw.version!==1)return result;
+    for(const [day,value] of Object.entries(raw.results||{}).slice(-180)) {if(!Number.isFinite(dayNumber(day)))continue; const chosen=selection(value?.selection);const checked=score(challenge(day),chosen);if(checked.complete)result.results[day]={selection:chosen,points:checked.points};}
+    for(const [day,value] of Object.entries(raw.drafts||{}).slice(-30))if(Number.isFinite(dayNumber(day)))result.drafts[day]=selection(value);
+    result.playedDates=[...new Set((Array.isArray(raw.playedDates)?raw.playedDates:[]).filter(d=>Number.isFinite(dayNumber(d))))].sort().slice(-180);
+    result.visits=[...new Set((Array.isArray(raw.visits)?raw.visits:[]).filter(d=>Number.isFinite(dayNumber(d))))].sort().slice(-180);return result;
+  }
+  function record(state, key, chosen, playedAt=dateKey()) { const check=score(challenge(key),chosen);if(!check.complete)return state; const copy=normalise(state); if(!copy.results[key]||copy.results[key].points<=check.points)copy.results[key]={selection:selection(chosen),points:check.points}; copy.drafts[key]=selection(chosen);if(Number.isFinite(dayNumber(playedAt)))copy.playedDates=[...new Set([...copy.playedDates,playedAt])].sort().slice(-180);return copy; }
+  function stats(state, today) {const days=Object.keys(state.results).filter(d=>d<=today);const played=new Set(state.playedDates);let streak=0,cursor=played.has(today)?today:shift(today,-1);while(played.has(cursor)){streak++;cursor=shift(cursor,-1);}return {total:days.length,streak,week:Array.from({length:7},(_,i)=>{const d=shift(today,i-6);return{date:d,done:played.has(d)};})};}
+  return {slots,labels,pieces,challenges,dateKey,dayNumber,shift,challenge,selection,score,normalise,record,stats};
+});

@@ -61,3 +61,5 @@ button,a,input,select,textarea,summary{touch-action:manipulation}
 .atelier-signature__portrait{background:#e9e2db!important}
 .atelier-signature__portrait img{height:560px;object-fit:cover;object-position:center 18%}
 @media(max-width:760px){.atelier-signature__portrait img{height:440px;object-position:center 18%}}
+
+.daily-invitation .text-link + .text-link { display:flex; width:fit-content; margin-top:16px; }
