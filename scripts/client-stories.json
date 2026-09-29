@@ -1,0 +1,19 @@
+[
+  {
+    "id": "manala-red-dress",
+    "title": "’Manala’s red occasion dress",
+    "category": "Occasionwear",
+    "summary": "For ’Manala, a vivid red palette brings together a structured, patterned bodice and a flowing skirt. The asymmetric strap adds a distinctive line, balancing the detail above with the softer movement below.",
+    "image": "assets/client-stories/manala-red-dress-appreciation-card.jpg",
+    "imageAlt": "’Manala’s Jane.M appreciation card showing the red dress design, sketches and a personal note",
+    "imageWidth": 1120,
+    "imageHeight": 1400,
+    "video": "assets/client-stories/manala-red-dress-reveal.mp4",
+    "poster": "assets/client-stories/manala-red-dress-poster.jpg",
+    "videoTitle": "’Manala’s finished red dress",
+    "published": "2026-09-28",
+    "story": [
+      "The appreciation card brings the design sketches and garment details together, tracing the look from its drawn silhouette to the finished piece shown in the video. A personal note from Jane.M completes the delivery: a small keepsake to accompany a dress made for her."
+    ]
+  }
+]
