@@ -142,3 +142,57 @@ html[data-theme="dark"] .daily-game { --game-paper:#15120f; --game-panel:#201b17
  .brief-start { display:inline-flex; align-items:center; justify-content:center; width:100%; min-height:44px; padding:10px; border:1px solid var(--game-line); border-radius:3px; background:var(--game-soft); color:var(--game-ink); font-size:.8rem!important; font-weight:700!important; margin-top:14px; }
  .game-header .site-nav { background:transparent; }
 }
+/* Fashion plates and responsive interaction — no continuously running effects. */
+.outfit-board { background:radial-gradient(ellipse at 25% 0%,var(--game-panel),transparent 70%),var(--game-soft); border:1px solid var(--game-line); padding:22px 24px 14px; border-radius:12px; }
+.preview-piece { border-radius:8px; min-height:166px; transition:background .2s,border-color .2s; }
+.preview-piece.filled { box-shadow:0 5px 14px #24191508; border-color:var(--game-line); }
+.preview-piece svg { width:96px; height:120px; }
+.piece-option { padding:14px 10px 17px; border-radius:10px; overflow:hidden; transition:border-color .2s,box-shadow .2s,transform .2s; }
+.piece-option.selected { padding:13px 9px 16px; background:var(--game-panel); box-shadow:0 0 0 3px #b38a4519; }
+.option-art { width:100%; display:grid; place-items:center; border-radius:7px; background:radial-gradient(ellipse at 50% 30%,#fffdf7 0%,#eee6d9 85%); margin-bottom:10px; }
+.option-art::after { content:''; position:absolute; inset:9px; border:1px solid #b38a4520; border-radius:80px 80px 3px 3px; pointer-events:none; }
+.option-art svg { position:relative; z-index:1; width:138px; height:170px; transition:transform .3s cubic-bezier(.2,.7,.3,1); }
+.piece-option input { z-index:3; top:21px; left:19px; }
+.option-tick { z-index:3; width:23px; height:23px; place-items:center; right:7px; top:7px; border-radius:50%; background:#8a6833; color:white; }
+.selected .option-tick { display:grid; }
+.piece-option strong { font-size:.79rem; }
+.piece-option small { font-size:.67rem; }
+@media(hover:hover) and (prefers-reduced-motion:no-preference) {
+ .piece-option:hover { transform:translateY(-3px); box-shadow:0 9px 22px #2419150c; }
+ .piece-option:hover .option-art svg { transform:translateY(-3px) rotate(-2deg); }
+ .preview-piece:hover { border-color:var(--gold-dark); }
+}
+html[data-theme="dark"] .option-art { background:radial-gradient(ellipse at 50% 25%,#e6d8c2,#bcae98); }
+.game-check { border-radius:8px; transition:background .2s,box-shadow .2s; }
+.game-check:not(:disabled) { background:linear-gradient(110deg,#c5a265,#b38a45); box-shadow:0 4px 14px #b38a4526; }
+.game-result { position:relative; overflow:hidden; border-radius:12px; }
+.result-medallion { width:80px; height:80px; margin-bottom:20px; border-radius:50%; display:grid; place-items:center; background:conic-gradient(#b38a45 calc(var(--score) * 25%),var(--game-soft) 0); box-shadow:0 0 0 5px var(--game-soft); }
+.result-medallion span { width:66px; height:66px; border-radius:50%; background:var(--game-panel); display:grid; place-items:center; font:600 1.5rem var(--serif); }
+.motion-toggle { border:0; background:transparent; padding:0; color:var(--game-muted); text-decoration:underline; text-underline-offset:3px; min-height:32px; font-size:inherit!important; }
+.daily-game[data-motion="off"] *, .daily-game[data-motion="off"] *::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; }
+@media(max-width:760px) {
+ .outfit-board { padding:16px 10px 10px; }
+ .preview-piece { min-height:132px; }.preview-piece svg { width:64px; height:84px; }
+ .option-art svg { width:112px; height:146px; }.piece-option { padding:10px 8px 14px; }.piece-option.selected { padding:9px 7px 13px; }
+ .piece-option input { top:17px; left:15px; }.option-art::after { inset:7px; }.piece-option strong { font-size:.75rem; }
+}
+@media(prefers-reduced-motion:reduce) { .daily-game *, .daily-game *::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
+/* The reveal shows the outfit worn together, rather than another set of tiles. */
+.runway-reveal { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.85fr); gap:28px; align-items:center; padding-bottom:28px; margin-bottom:28px; border-bottom:1px solid var(--game-line); }
+.runway-stage { margin:0; padding:18px 10px 16px; border:1px solid #cab796; border-radius:160px 160px 8px 8px; background:radial-gradient(ellipse at 50% 35%,#fffdf6,#e8ddca); overflow:hidden; }
+#runway-outfit svg { display:block; width:100%; max-height:510px; }
+.outfit-figure { transform-box:fill-box; transform-origin:50% 100%; }
+.runway-stage figcaption { color:#80663c; text-align:center; font-size:.54rem; letter-spacing:.17em; margin-top:4px; }
+.runway-details h2 { font-size:2.5rem; line-height:1.05; }
+.runway-details > p { font-size:.85rem; color:var(--game-muted); }
+#runway-pieces { list-style:none; padding:0; display:grid; gap:16px; margin:24px 0; }
+#runway-pieces li { display:flex; align-items:center; gap:12px; font-size:.83rem; }
+#runway-pieces small { display:block; color:var(--game-muted); font-size:.62rem; margin-bottom:4px; }
+.runway-swatch { width:13px; height:13px; border:1px solid #9f8a68; border-radius:50%; flex:none; }
+.runway-controls { display:flex; flex-wrap:wrap; gap:8px; }
+.runway-controls button { border:1px solid var(--game-line); border-radius:4px; background:var(--game-soft); color:var(--game-ink); padding:10px; min-height:44px; font-size:.72rem!important; }
+.runway-controls button:disabled { opacity:.5; cursor:default; }
+.runway-details .runway-note { font-size:.67rem; line-height:1.6; margin-top:18px; }
+.saved-art.saved-outfit { display:block; background:radial-gradient(ellipse at 50% 30%,#fffdf6,#e8ddca); }
+.saved-outfit svg { display:block; max-height:290px; margin:auto; }
+@media(max-width:760px) { .runway-reveal { grid-template-columns:1fr; gap:24px; }.runway-stage { width:100%; max-width:320px; justify-self:center; }#runway-outfit svg { max-height:440px; }.runway-details h2 { font-size:2rem; }#runway-pieces { grid-template-columns:1fr 1fr; gap:14px 10px; }#runway-pieces li { font-size:.75rem; gap:8px; } }

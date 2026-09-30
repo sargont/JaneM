@@ -34,3 +34,6 @@ Review after four weeks; do not infer success from extra pageviews alone. Keep i
 ## Verification
 
 Run `npm run test:daily-game` and `npm test`. Tests cover every brief being solvable, midnight rollover, corrupted/blocked storage, repeat attempts, archived-brief streak integrity, restoration, result rendering and analytics deduplication. Review desktop/mobile, light/dark, keyboard selection, reveal, lookbook, archive, export and reset in a browser. Check the downloaded PNG visually.
+
+## Composed outfit reveal
+`daily-style/runway.js` renders the exact four selected pieces on a fashion figure. Reveal animation is finite, can be replayed, and honours both device and game reduced-motion settings. The layer can be hidden for inspection without changing the score or saved selection. The lookbook and downloaded style card use this same composition; exports include all four pieces. These are styling illustrations, not fitting simulations.

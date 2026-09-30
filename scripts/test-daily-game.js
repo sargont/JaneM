@@ -24,22 +24,26 @@ assert.equal(C.normalise({version:1,results:{[date]:{selection:look,points:999}}
 assert.deepEqual(C.selection({look:'black-clutch',shoes:'<script>'}),{});
 assert.deepEqual(C.normalise({version:1,results:{bad:{selection:look}}}).results,{});
 assert.deepEqual(C.normalise({version:1,visits:[null,{},'2026-02-30',date,date]}).visits,[date]);
-function app(raw,blocked=false) {
+function app(raw,blocked=false,reduced=false) {
 const dom=new JSDOM(fs.readFileSync('JaneM_Website/daily-style/index.html','utf8'),{runScripts:'outside-only',url:'https://wearjanem.com/daily-style/'}),w=dom.window;
-w.setInterval=()=>0;w.JaneMAnalytics={events:[],track(...e){this.events.push(e);}};
+w.motionCalls=[];w.matchMedia=()=>({matches:reduced,addEventListener(){}});w.Element.prototype.animate=function(frames,options){w.motionCalls.push({frames,options});};w.setInterval=()=>0;w.JaneMAnalytics={events:[],track(...e){this.events.push(e);}};
 if(raw)w.localStorage.setItem('janem-daily-style-v1',raw);
 if(blocked)Object.defineProperty(w,'localStorage',{get(){throw Error('Blocked');}});
-for(const file of ['core.js','art.js','game.js'])w.eval(fs.readFileSync('JaneM_Website/daily-style/'+file,'utf8'));
+for(const file of ['core.js','art.js','runway.js','game.js'])w.eval(fs.readFileSync('JaneM_Website/daily-style/'+file,'utf8'));
 return dom;
 }
 const dom=app(),w=dom.window,d=w.document;
 const choose=(slot,id)=>{d.querySelector('[data-slot="'+slot+'"]').click();const input=d.querySelector('input[value="'+id+'"]');input.checked=true;input.dispatchEvent(new w.Event('change',{bubbles:true}));};
 const current=w.JaneMDaily.dateKey(),winning=solve(C.challenge(current));
 for(const [slot,id]of Object.entries(winning))choose(slot,id);
+assert.ok(w.motionCalls.length>0,'Selections animate when motion is enabled');
 assert.equal(d.getElementById('check-look').disabled,false);
 d.getElementById('check-look').click();
 assert.equal(d.getElementById('game-result').hidden,false);
 assert.equal(d.querySelectorAll('#result-checks .met').length,4);
+for(const [slot,id] of Object.entries(winning))assert.equal(d.querySelector(`#runway-outfit [data-outfit-part="${slot}"]`).dataset.piece,id,'The reveal wears the exact selected pieces');
+d.getElementById('toggle-layer').click();assert.equal(d.querySelector('#runway-outfit .outfit-layer').getAttribute('display'),'none');assert.equal(d.querySelector('#runway-outfit [data-outfit-part="look"]').dataset.piece,winning.look);d.getElementById('toggle-layer').click();
+
 assert.ok(d.getElementById('enquire-look').href.startsWith('https://wa.me/26662790946'));
 assert.equal(w.JaneMAnalytics.events.filter(e=>e[0]==='daily_style_complete').length,1);
 d.getElementById('check-look').click();
@@ -52,5 +56,11 @@ assert.equal(restored.window.document.getElementById('check-look').disabled,fals
 assert.equal(restored.window.document.getElementById('saved-count').textContent,'1');
 const corrupt=app('{bad');assert.equal(corrupt.window.document.querySelectorAll('.piece-option').length,6);
 const denied=app(null,true);assert.match(denied.window.document.getElementById('storage-note').textContent,/cannot save/);
-for(const item of [dom,restored,corrupt,denied])item.window.close();
+const quiet=app(null,false,true);quiet.window.document.querySelector('[data-slot="shoes"]').click();assert.equal(quiet.window.motionCalls.length,0,'Device reduced motion disables JS animations');
+d.getElementById('motion-toggle').click();const before=w.motionCalls.length;d.querySelector('[data-slot="shoes"]').click();assert.equal(w.motionCalls.length,before,'Manual motion toggle disables animations');
+const artIds=new Set();for(const piece of C.pieces){const svg=w.JaneMDailyArt.svg(piece);const xml=new w.DOMParser().parseFromString(svg,'image/svg+xml');assert.equal(xml.querySelector('parsererror'),null,'Illustration is valid SVG');for(const el of xml.querySelectorAll('[id]')){assert.ok(!artIds.has(el.id),'SVG IDs are unique across pieces');artIds.add(el.id);}for(const match of svg.matchAll(/url\(#([^)]+)\)/g))assert.ok(xml.getElementById(match[1]),'SVG paint reference resolves within exported illustration');}
+for(const look of C.pieces.filter(p=>p.slot==='look'))for(const layer of C.pieces.filter(p=>p.slot==='layer'))for(const finish of C.pieces.filter(p=>p.slot==='finish'))for(const shoes of C.pieces.filter(p=>p.slot==='shoes')){
+ const picks={look:look.id,layer:layer.id,finish:finish.id,shoes:shoes.id};const svg=w.JaneMRunway.outfit(picks);const xml=new w.DOMParser().parseFromString(svg,'image/svg+xml');assert.equal(xml.querySelector('parsererror'),null);assert.equal(xml.querySelectorAll('[data-piece]').length,4);for(const m of svg.matchAll(/url\(#([^)]+)\)/g))assert.ok(xml.getElementById(m[1]),'Composed export paint reference resolves');
+}
+for(const item of [dom,restored,corrupt,denied,quiet])item.window.close();
 console.log('Daily Style game passed: 30 solvable briefs, timezone rollover, fair scoring, archive-safe streaks, replay deduplication, persistence, analytics and storage fallback.');
