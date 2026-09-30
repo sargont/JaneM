@@ -1,19 +1,3 @@
-
-const toggle = document.querySelector('.nav-toggle');
-const nav = document.querySelector('.site-nav');
-
-toggle?.addEventListener('click', () => {
-  const isOpen = nav.classList.toggle('open');
-  toggle.setAttribute('aria-expanded', String(isOpen));
-});
-
-nav?.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    nav.classList.remove('open');
-    toggle.setAttribute('aria-expanded', 'false');
-  });
-});
-
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -32,6 +16,3 @@ const observer = new IntersectionObserver((entries) => {
 
 if (!prefersReducedMotion) document.querySelectorAll('.section-heading, .look-card, .promo-card, .steps li').forEach(el => observer.observe(el));
 
-function closeNavigation(restoreFocus=false) { if (!nav?.classList.contains('open')) return; nav.classList.remove('open'); toggle?.setAttribute('aria-expanded','false'); if (restoreFocus) toggle?.focus(); }
-document.addEventListener('keydown', e=>{if(e.key==='Escape')closeNavigation(true);});
-document.addEventListener('click', e=>{if(!nav?.contains(e.target)&&!toggle?.contains(e.target))closeNavigation();});

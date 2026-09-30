@@ -34,12 +34,28 @@ return dom;
 }
 const dom=app(),w=dom.window,d=w.document;
 const choose=(slot,id)=>{d.querySelector('[data-slot="'+slot+'"]').click();const input=d.querySelector('input[value="'+id+'"]');input.checked=true;input.dispatchEvent(new w.Event('change',{bubbles:true}));};
+assert.equal(d.getElementById('home-view').hidden,false);
+assert.equal(d.getElementById('today-view').hidden,true);
+d.getElementById('play-spark').click();
+assert.equal(d.getElementById('home-view').hidden,true);
+assert.equal(d.getElementById('today-view').hidden,false);
+assert.equal(d.querySelectorAll('#live-outfit [data-piece]').length,0);
+assert.equal(d.getElementById('check-look').disabled,true);
 const current=w.JaneMDaily.dateKey(),winning=solve(C.challenge(current));
 for(const [slot,id]of Object.entries(winning))choose(slot,id);
+assert.equal(d.querySelectorAll('#live-outfit [data-piece]').length,4);
+assert.equal(d.getElementById('cohesion-meter').value,4);
 assert.ok(w.motionCalls.length>0,'Selections animate when motion is enabled');
 assert.equal(d.getElementById('check-look').disabled,false);
 d.getElementById('check-look').click();
 assert.equal(d.getElementById('game-result').hidden,false);
+assert.equal(d.getElementById('builder-layout').hidden,true,'Reveal replaces the builder');
+w.eval(fs.readFileSync('JaneM_Website/daily-style/handoff.js','utf8'));
+const handoff=w.JaneMSparkHandoff.read(new URL(d.getElementById('studio-handoff').href).search,w.JaneMDaily);
+assert.deepEqual({...handoff.picks},{...winning});
+assert.ok(handoff.description.includes(C.challenge(current).title));
+assert.equal(w.JaneMSparkHandoff.read('?from=style-spark&spark_day=garbage',w.JaneMDaily),null);
+assert.equal(w.JaneMSparkHandoff.read('?from=style-spark&spark_day=2026-09-30&spark_look=%3Cscript%3E',w.JaneMDaily),null);
 assert.equal(d.querySelectorAll('#result-checks .met').length,4);
 for(const [slot,id] of Object.entries(winning))assert.equal(d.querySelector(`#runway-outfit [data-outfit-part="${slot}"]`).dataset.piece,id,'The reveal wears the exact selected pieces');
 d.getElementById('toggle-layer').click();assert.equal(d.querySelector('#runway-outfit .outfit-layer').getAttribute('display'),'none');assert.equal(d.querySelector('#runway-outfit [data-outfit-part="look"]').dataset.piece,winning.look);d.getElementById('toggle-layer').click();
@@ -50,6 +66,8 @@ d.getElementById('check-look').click();
 assert.equal(w.JaneMAnalytics.events.filter(e=>e[0]==='daily_style_complete').length,1);
 d.querySelector('[data-view="saved"]').click();
 assert.equal(d.querySelectorAll('.saved-look').length,1);
+assert.match(d.getElementById('level-copy').textContent,/First spark/);
+assert.equal(d.querySelectorAll('.milestones .earned').length,1);
 assert.equal(d.getElementById('today-view').hidden,true);
 const restored=app(w.localStorage.getItem('janem-daily-style-v1'));
 assert.equal(restored.window.document.getElementById('check-look').disabled,false,'Draft persists across reload');
@@ -62,5 +80,6 @@ const artIds=new Set();for(const piece of C.pieces){const svg=w.JaneMDailyArt.sv
 for(const look of C.pieces.filter(p=>p.slot==='look'))for(const layer of C.pieces.filter(p=>p.slot==='layer'))for(const finish of C.pieces.filter(p=>p.slot==='finish'))for(const shoes of C.pieces.filter(p=>p.slot==='shoes')){
  const picks={look:look.id,layer:layer.id,finish:finish.id,shoes:shoes.id};const svg=w.JaneMRunway.outfit(picks);const xml=new w.DOMParser().parseFromString(svg,'image/svg+xml');assert.equal(xml.querySelector('parsererror'),null);assert.equal(xml.querySelectorAll('[data-piece]').length,4);for(const m of svg.matchAll(/url\(#([^)]+)\)/g))assert.ok(xml.getElementById(m[1]),'Composed export paint reference resolves');
 }
-for(const item of [dom,restored,corrupt,denied,quiet])item.window.close();
+const randomApp=app(),rd=randomApp.window.document;rd.getElementById('play-spark').click();rd.getElementById('surprise-look').click();assert.equal(rd.querySelectorAll('#live-outfit [data-piece]').length,4);assert.equal(rd.getElementById('saved-count').textContent,'0','Random preview is not a completion');rd.getElementById('check-look').click();assert.equal(rd.getElementById('saved-count').textContent,'1');rd.getElementById('retry-look').click();assert.equal(rd.getElementById('builder-layout').hidden,false);assert.equal(rd.getElementById('game-result').hidden,true);
+for(const item of [randomApp,dom,restored,corrupt,denied,quiet])item.window.close();
 console.log('Daily Style game passed: 30 solvable briefs, timezone rollover, fair scoring, archive-safe streaks, replay deduplication, persistence, analytics and storage fallback.');

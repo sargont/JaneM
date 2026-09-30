@@ -1,4 +1,12 @@
 (() => {
+  const sparkInspiration = window.JaneMSparkHandoff?.read(window.location.search, window.JaneMDaily);
+  if (sparkInspiration) {
+    const banner=document.createElement('aside');banner.className='spark-inspiration';
+    const heading=document.createElement('h2');heading.textContent='Your Style Spark inspiration';
+    const detail=document.createElement('p');detail.textContent=sparkInspiration.description;
+    const help=document.createElement('p');help.textContent='We will include this direction in your consultation brief. Answer the questions below for your real occasion.';
+    banner.append(heading,detail,help);document.getElementById('quickForm').before(banner);
+  }
   const WHATSAPP_NUMBER = "26662790946";
   const QUESTION_NAMES = ["occasion", "urgency", "personality", "fit", "garmentLength", "coverage", "colour", "budget"];
   const { fields: measurementFields, assessMeasurements } = window.JaneMMeasurementReview;
@@ -259,6 +267,7 @@
     return [
       "Hello JaneM, I completed the JaneM Style Studio and would love to refine this look.", "",
       `Reference: ${recommendation.id}`,
+      ...(sparkInspiration ? [`Style Spark inspiration: ${sparkInspiration.description}`] : []),
       `Occasion: ${data.occasion}`,
       `Event timing: ${data.urgency}`,
       `Style profile: ${recommendation.profile}`,
@@ -414,7 +423,7 @@
       reference: recommendation.id,
       profile: recommendation.profile,
       createdAt: new Date().toISOString(),
-      clientPreferences: interpretation.clientPreferences,
+      clientPreferences: {...interpretation.clientPreferences, ...(sparkInspiration ? {"Style Spark inspiration": sparkInspiration.description} : {})},
       styleRecommendation: interpretation.recommendation,
       construction: interpretation.construction,
       atelierDecisions: interpretation.atelierDecisions,
@@ -488,6 +497,7 @@
       "Hello JaneM, I completed the Detailed Designer Brief from Style Studio.", "",
       `Reference: ${brief.reference}`, "",
       "CLIENT PREFERENCES",
+      ...(sparkInspiration ? [`Style Spark inspiration: ${sparkInspiration.description}`] : []),
       `Occasion: ${preferences.Occasion}`,
       `Timing: ${preferences["Event timing"]}`,
       `Style personality: ${preferences["Style personality"]}`,

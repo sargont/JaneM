@@ -260,3 +260,5 @@ html[data-theme="dark"] .studio-nav-signature{border-left-color:rgba(255,244,232
 
 /* A selected premium surface must never retain the low-contrast default supporting copy. */
 .studio-page .budget-choices label:has(input:checked)>span>small{color:var(--text-on-dark)!important}
+
+.spark-inspiration{padding:20px;margin:0 0 24px;border:1px solid #b38a45;border-radius:16px}.spark-inspiration h2{font-size:24px;margin:0 0 10px}.spark-inspiration p{font-size:15px;margin:8px 0}

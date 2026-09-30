@@ -3,7 +3,7 @@ const fs=require('node:fs'),path=require('node:path');
 const {JSDOM,VirtualConsole}=require('jsdom');
 const virtualConsole=new VirtualConsole();virtualConsole.on('jsdomError',error=>{throw error;});
 const root=path.resolve(__dirname,'../JaneM_Website');
-function load(route,scripts){const dom=new JSDOM(fs.readFileSync(path.join(root,route),'utf8'),{url:'https://example.com/'+route,runScripts:'outside-only',pretendToBeVisual:true,virtualConsole});const w=dom.window;w.matchMedia=()=>({matches:true});w.CSS={escape:s=>s.replace(/["\\]/g,'\\$&')};w.HTMLElement.prototype.scrollIntoView=function(){};scripts.forEach(s=>w.eval(fs.readFileSync(path.join(root,'style-studio',s),'utf8')));return dom;}
+function load(route,scripts,search=""){const dom=new JSDOM(fs.readFileSync(path.join(root,route),'utf8'),{url:'https://example.com/'+route+search,runScripts:'outside-only',pretendToBeVisual:true,virtualConsole});const w=dom.window;w.matchMedia=()=>({matches:true});w.CSS={escape:s=>s.replace(/["\\]/g,'\\$&')};w.HTMLElement.prototype.scrollIntoView=function(){};scripts.forEach(s=>w.eval(fs.readFileSync(path.join(root,'style-studio',s),'utf8')));return dom;}
 const daily=load('style-studio/today/index.html',['daily-core.js','daily.js','app-navigation.js']);
 const d=daily.window.document;
 function active(id){assert.equal(d.querySelectorAll('[data-studio-panel]:not([hidden])').length,1);assert.equal(d.getElementById(id).hidden,false);assert.equal(d.getElementById('tab-'+id).getAttribute('aria-selected'),'true');}
@@ -23,3 +23,12 @@ o.getElementById('nextButton').click();o.getElementById('backButton').click();as
 for(let i=0;i<4;i++)o.getElementById('nextButton').click();assert.equal(o.getElementById('result').hidden,false);assert.equal(o.getElementById('briefPreview').hidden,true);
 occasion.window.history.replaceState(null,'','#choose');occasion.window.dispatchEvent(new occasion.window.PopStateEvent('popstate'));assert.equal(o.getElementById('studio-choose').hidden,false);
 [daily,occasion].forEach(dom=>dom.window.close());console.log('Studio navigation passed: tabs, keyboard, save-to-plan transition, browser history, category controls, validation, four-step completion and editing.');
+
+const spark=load('style-studio/index.html',['../daily-style/core.js','../daily-style/handoff.js','recommendations.js','measurement-review.js','brief-pdf.js','style-card.js','studio.js','app-navigation.js'],'?from=style-spark&spark_day=2026-09-30&spark_look=red-wrap&spark_shoes=gold-heels&spark_layer=black-blazer&spark_finish=pearl-studs#occasion');
+const sd=spark.window.document;
+assert.match(sd.querySelector('.spark-inspiration').textContent,/Ruby wrap dress/);
+assert.equal(sd.getElementById('occasion-workspace').hidden,false,'Spark handoff opens the occasion flow directly');
+for(let i=0;i<4;i++){const section=sd.querySelector('.studio-step:not([hidden])');section.querySelectorAll('[data-required]').forEach(group=>group.querySelector('input').click());sd.getElementById('nextButton').click();}
+assert.match(decodeURIComponent(sd.getElementById('quickWhatsApp').href),/Style Spark inspiration: A little red.*Ruby wrap dress/);
+spark.window.close();
+console.log('Style Spark selections appear in the occasion flow and the reviewable WhatsApp brief.');

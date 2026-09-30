@@ -1,6 +1,6 @@
 const {JSDOM}=require('jsdom');
 const appHeader=prefix=>`<header class="studio-app-header"><a class="studio-app-brand" href="${prefix}index.html" aria-label="Jane.M home">Jane.M <span>STYLE STUDIO</span></a><nav aria-label="Studio navigation"><a href="${prefix}style-studio/#choose">Change experience</a><a href="${prefix}index.html#collection">Back to the collection ↗</a></nav></header>`;
-const appFooter=prefix=>`<footer class="studio-app-footer"><span>Jane.M · Your personal Style Studio</span><a href="${prefix}daily-style/">Play Daily Style ↗</a><a href="${prefix}privacy/">Privacy &amp; your saved data</a></footer>`;
+const appFooter=prefix=>`<footer class="studio-app-footer"><span>Jane.M · Your personal Style Studio</span><a href="${prefix}daily-style/">Play Style Spark ↗</a><a href="${prefix}privacy/">Privacy &amp; your saved data</a></footer>`;
 function dailySurface(markup){
  const dom=new JSDOM(markup), d=dom.window.document, root=d.querySelector('.container');
  d.querySelector('.mode-nav')?.remove();

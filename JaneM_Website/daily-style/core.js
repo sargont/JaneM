@@ -3,23 +3,23 @@
   const slots = ['look', 'shoes', 'layer', 'finish'];
   const labels = {look:'The look', shoes:'Shoes', layer:'A layer', finish:'The finish'};
   const pieces = [
-    ['red-wrap','look','Ruby wrap dress','Red · soft drape · daytime','#ad3e41','wrap',['red','soft','day']],
-    ['navy-column','look','Midnight column','Navy · clean lines · evening','#34425b','gown',['navy','sleek','evening']],
+    ['red-wrap','look','Ruby wrap dress','Red · soft drape · daytime','#e95850','wrap',['red','soft','day']],
+    ['navy-column','look','Midnight column','Navy · clean lines · evening','#344c76','gown',['navy','sleek','evening']],
     ['ivory-lace','look','Ivory lace midi','Ivory · lace detail · daytime','#e6d7c0','lace',['ivory','lace','day']],
-    ['teal-midi','look','Printed midi','Teal · patterned · daytime','#377b78','print',['teal','print','day']],
+    ['teal-midi','look','Printed midi','Teal · patterned · daytime','#157e83','print',['teal','print','day']],
     ['black-jumpsuit','look','Tailored jumpsuit','Black · clean lines · evening','#353232','jumpsuit',['black','sleek','evening']],
-    ['gold-gown','look','Golden evening gown','Gold · soft shine · evening','#bd9451','gown',['gold','shine','evening']],
-    ['gold-heels','shoes','Gold block heels','Gold · steady block heel','#bd9451','heel',['gold','stable','dressy']],
+    ['gold-gown','look','Golden evening gown','Gold · soft shine · evening','#e1b345','gown',['gold','shine','evening']],
+    ['gold-heels','shoes','Gold block heels','Gold · steady block heel','#e1b345','heel',['gold','stable','dressy']],
     ['black-flats','shoes','Black ballet flats','Black · flat sole','#353232','flat',['black','flat','stable']],
     ['cream-trainers','shoes','Cream trainers','Cream · casual flats','#e6d7c0','trainer',['ivory','flat','casual']],
-    ['navy-pumps','shoes','Navy pumps','Navy · slim heel','#34425b','heel',['navy','heel','dressy']],
+    ['navy-pumps','shoes','Navy pumps','Navy · slim heel','#344c76','heel',['navy','heel','dressy']],
     ['cream-knit','layer','Cream cardigan','Cream · warm and soft','#e6d7c0','knit',['ivory','warm','soft']],
     ['black-blazer','layer','Black blazer','Black · warm tailoring','#353232','blazer',['black','warm','tailored']],
     ['sheer-wrap','layer','Light wrap','Neutral · light drape','#c4aba0','shawl',['neutral','light','soft']],
-    ['navy-coat','layer','Navy coat','Navy · warm tailoring','#34425b','coat',['navy','warm','tailored']],
-    ['gold-cuff','finish','Sculpted gold cuff','Gold · statement shine','#bd9451','cuff',['gold','statement','shine']],
+    ['navy-coat','layer','Navy coat','Navy · warm tailoring','#344c76','coat',['navy','warm','tailored']],
+    ['gold-cuff','finish','Sculpted gold cuff','Gold · statement shine','#e1b345','cuff',['gold','statement','shine']],
     ['pearl-studs','finish','Pearl earrings','Ivory · quiet detail','#e6d7c0','earrings',['ivory','quiet']],
-    ['print-scarf','finish','Printed scarf','Teal · statement print','#377b78','scarf',['teal','print','statement']],
+    ['print-scarf','finish','Printed scarf','Teal · statement print','#157e83','scarf',['teal','print','statement']],
     ['black-clutch','finish','Minimal clutch','Black · quiet detail','#353232','bag',['black','quiet']]
   ].map(([id,slot,name,note,colour,shape,tags])=>({id,slot,name,note,colour,shape,tags}));
   const brief = (title,scene,goals,tip) => ({title,scene,goals:slots.map((slot,i)=>({slot,tag:goals[i][0],label:goals[i][1]})),tip});
