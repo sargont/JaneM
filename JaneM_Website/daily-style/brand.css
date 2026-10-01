@@ -6,3 +6,5 @@ html[data-theme=dark]{--ink:#f6efe5;--paper:#15120f;--cream:#241d18;--muted:#c1b
 @media(max-width:1200px){.game-tabs{top:72px}.game-layout .live-muse{top:148px}}
 @media(max-width:760px){.spark-context{padding:18px 6px 4px}.spark-context>a{font-size:25px}.spark-context>a span{font-size:8px;margin-left:5px}.spark-context>span{font-size:10px}.welcome-copy h1{font-size:54px}.spark-primary{font-size:13px}.game-tabs{top:72px}.game-layout .live-muse{top:138px}.game-result{scroll-margin-top:140px}.muse-bubble{font-size:18px}.welcome-muse{margin-top:42px}.game-tabs button{font-size:11px}.runway-details h2{font-size:38px}}
 @media(max-height:650px){.game-layout .live-muse{position:static}}
+
+.arcade-back{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:22px 0 0;font-size:12px;color:var(--muted)}.arcade-back a{text-underline-offset:4px}
