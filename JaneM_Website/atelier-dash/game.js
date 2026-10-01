@@ -4,6 +4,10 @@ const C=window.AtelierDash,$=id=>document.getElementById(id),canvas=$('maze'),ct
 if(!ctx){$('overlay-copy').textContent='Your browser cannot draw this game. Try Style Spark instead.';$('start').disabled=true;return;}
 let state=C.create(),running=false,frame=0,last=0,acc=0,previous=null,bests={classic:0,practice:0},endRecorded=false;
 try{const data=JSON.parse(localStorage.getItem(STORE)||'{}');for(const mode of ['classic','practice'])if(Number.isSafeInteger(data[mode])&&data[mode]>=0)bests[mode]=data[mode];}catch{$('save-note').textContent='Best-score saving is unavailable. You can still play this session.';}
+const audio=window.DashSound.create(window.AudioContext||window.webkitAudioContext);let soundOn=true;
+try{soundOn=localStorage.getItem('janem-atelier-dash-sound')!=='off';}catch{}
+function soundButton(){audio.set(soundOn);$('sound').textContent=soundOn?'Sound on':'Sound off';$('sound').setAttribute('aria-pressed',String(soundOn));$('sound').setAttribute('aria-label',soundOn?'Sound effects enabled. Mute sound':'Sound effects muted. Enable sound');}
+soundButton();$('sound').addEventListener('click',()=>{soundOn=!soundOn;soundButton();try{localStorage.setItem('janem-atelier-dash-sound',soundOn?'on':'off');}catch{}if(soundOn){audio.unlock();audio.play('stitch');}if(running)canvas.focus({preventScroll:true});});
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const track=(event,detail={})=>window.JaneMAnalytics?.track(event,{game:'atelier_dash',mode:state.mode,round:state.round,...detail});
 function announce(text){$('announcement').textContent=text;}
@@ -38,18 +42,18 @@ function draw(t=1){ctx.clearRect(0,0,608,608);ctx.fillStyle='#18211e';ctx.fillRe
  for(let i=0;i<state.enemies.length;i++)scissors(lerp(state.enemies[i],previous?.enemies[i],t),i);
  spool(lerp(state.player,previous?.player,t));
 }
-function stop(){running=false;cancelAnimationFrame(frame);last=0;acc=0;previous=null;$('pause').disabled=true;draw();}
+function stop(){audio.stop();running=false;cancelAnimationFrame(frame);last=0;acc=0;previous=null;$('pause').disabled=true;draw();}
 function showOverlay(title,copy,kicker,action){$('overlay-title').textContent=title;$('overlay-copy').textContent=copy;$('overlay-kicker').textContent=kicker;$('start').textContent=action;$('overlay').hidden=false;$('mode-label').hidden=true;$('restart').hidden=true;$('share').hidden=true;$('share-status').textContent='';}
-function finish(){stop();best();if(!endRecorded){track(state.status==='delivered'?'atelier_dash_round_complete':state.status==='won'?'atelier_dash_complete':'atelier_dash_game_over',{score:state.score});endRecorded=true;}
+function finish(){stop();audio.play(state.status);best();if(!endRecorded){track(state.status==='delivered'?'atelier_dash_round_complete':state.status==='won'?'atelier_dash_complete':'atelier_dash_game_over',{score:state.score});endRecorded=true;}
  if(state.status==='delivered'){showOverlay('Beautifully delivered.','Your '+['evening dress','garden dress'][state.round-1]+' is complete. Next: a new supply route and faster scissors. You keep your score and remaining lives.','ROUND '+state.round+' COMPLETE','Next round →');}
  else{const won=state.status==='won';showOverlay(won?'Collection complete.':'Every designer starts again.',won?'Three looks delivered. That was quite a run. Your final score: '+state.score.toLocaleString()+'.':'You scored '+state.score.toLocaleString()+' on round '+state.round+'. Try turning early at junctions and save a thimble for a tight corner.',won?'THREE ROUNDS · THREE LOOKS':'RUN FINISHED','Play again →');$('mode-label').hidden=false;$('share').hidden=false;}
  announce($('overlay-title').textContent+' '+$('overlay-copy').textContent);$('start').focus({preventScroll:true});
 }
 function loop(time){if(!running)return;if(!last)last=time;acc+=Math.min(time-last,300);last=time;
- while(acc>=STEP&&running){previous=capture();C.step(state);acc-=STEP;sync();for(const e of state.events){if(e==='hit')announce('Scissors caught you. '+state.lives+' lives left. Supplies kept.');if(e==='supply')announce(state.collected.at(-1)+' collected. '+state.collected.length+' of four supplies.');if(e==='shield')announce('Thimble collected. Six seconds of protection.');}if(state.status!=='playing'){finish();return;}}
+ while(acc>=STEP&&running){previous=capture();const remaining=state.remaining;C.step(state);acc-=STEP;sync();if(state.remaining<remaining&&state.remaining%2===0)audio.play('stitch');for(const event of state.events)if(['hit','supply','shield','deflect'].includes(event))audio.play(event);for(const e of state.events){if(e==='hit')announce('Scissors caught you. '+state.lives+' lives left. Supplies kept.');if(e==='supply')announce(state.collected.at(-1)+' collected. '+state.collected.length+' of four supplies.');if(e==='shield')announce('Thimble collected. Six seconds of protection.');}if(state.status!=='playing'){finish();return;}}
  draw(reduced.matches?1:Math.min(1,acc/STEP));frame=requestAnimationFrame(loop);
 }
-function begin(){if(running)return;if(state.status==='delivered')state=C.create(state.round+1,state.mode,{score:state.score,lives:state.lives});else if(state.status!=='playing'||!$('mode-label').hidden)state=C.create(1,$('mode').value);
+function begin(){if(running)return;audio.unlock();audio.play('start');if(state.status==='delivered')state=C.create(state.round+1,state.mode,{score:state.score,lives:state.lives});else if(state.status!=='playing'||!$('mode-label').hidden)state=C.create(1,$('mode').value);
  endRecorded=false;sync();$('overlay').hidden=true;$('pause').disabled=false;running=true;last=0;acc=0;previous=null;canvas.focus({preventScroll:true});document.querySelector('.play-panel').scrollIntoView?.({block:'start',behavior:'instant'});track('atelier_dash_start',{resumed:state.ticks>0});announce('Round '+state.round+'. Use arrows or swipe to move.');frame=requestAnimationFrame(loop);
 }
 function pause(reason='Take a breather.'){if(!running)return;stop();showOverlay('Workroom paused.',reason+' Your score and supplies are safe while you stay here.','YOUR RUN IS ON HOLD','Resume →');$('restart').hidden=false;announce('Game paused.');$('start').focus({preventScroll:true});track('atelier_dash_pause');}
@@ -59,7 +63,7 @@ const keys={ArrowUp:'up',ArrowDown:'down',ArrowLeft:'left',ArrowRight:'right',w:
 canvas.addEventListener('keydown',e=>{const dir=keys[e.key]||keys[e.key.toLowerCase()];if(dir&&running){e.preventDefault();C.steer(state,dir);}if((e.key===' '||e.key==='Escape')&&running){e.preventDefault();pause();}});
 for(const button of document.querySelectorAll('[data-dir]')){button.addEventListener('pointerdown',e=>{if(running){e.preventDefault();C.steer(state,button.dataset.dir);canvas.focus({preventScroll:true});}});button.addEventListener('click',()=>{if(running)C.steer(state,button.dataset.dir);});}
 let swipe=null;canvas.addEventListener('pointerdown',e=>{if(!running)return;swipe={x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId);});canvas.addEventListener('pointermove',e=>{if(!swipe||!running)return;const dx=e.clientX-swipe.x,dy=e.clientY-swipe.y;if(Math.max(Math.abs(dx),Math.abs(dy))<12)return;C.steer(state,Math.abs(dx)>Math.abs(dy)?dx>0?'right':'left':dy>0?'down':'up');swipe={x:e.clientX,y:e.clientY};});for(const event of ['pointerup','pointercancel'])canvas.addEventListener(event,()=>{swipe=null;});
-canvas.addEventListener('blur',()=>{if(running)pause('Paused while you use another control.');});document.addEventListener('visibilitychange',()=>{if(document.hidden)pause('Paused while you were away.');});window.addEventListener('blur',()=>pause('Paused while you were away.'));
+canvas.addEventListener('blur',e=>{if(running&&!e.relatedTarget?.closest('.game-tools,.dpad'))pause('Paused while you use another control.');});document.addEventListener('visibilitychange',()=>{if(document.hidden)pause('Paused while you were away.');});window.addEventListener('blur',()=>pause('Paused while you were away.'));
 $('share').addEventListener('click',async()=>{const text='I scored '+state.score+' in Jane.M Atelier Dash ('+state.mode+'), reaching round '+state.round+'! Can you deliver all three looks? https://wearjanem.com/atelier-dash/';try{await navigator.clipboard.writeText(text);$('share-status').textContent='Score copied. Paste it into your chat.';track('atelier_dash_share',{score:state.score});}catch{$('share-status').textContent=text;}});
 sync();draw();
 })();

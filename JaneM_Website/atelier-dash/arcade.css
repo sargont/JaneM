@@ -6,5 +6,7 @@
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 /* Keep the whole board visible below the persistent website navigation. */
 @media(min-width:651px){.dash-layout{grid-template-columns:minmax(300px,min(660px,calc(100svh - 200px))) minmax(240px,1fr)}}
-.play-panel{scroll-margin-top:98px}
-@media(max-width:1200px){.play-panel{scroll-margin-top:84px}}
+.play-panel{scroll-margin-top:0}
+@media(max-width:1200px){.play-panel{scroll-margin-top:0}}
+
+.game-tools{display:flex;gap:6px;align-items:center}.scorebar .game-tools button{font-size:10px;padding:8px 10px;min-height:38px}@media(max-width:650px){.game-tools{flex-direction:column;gap:4px}.scorebar .game-tools button{padding:4px 10px;min-height:28px}.scorebar{min-height:78px}}
