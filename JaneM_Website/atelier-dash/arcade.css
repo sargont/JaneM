@@ -10,3 +10,8 @@
 @media(max-width:1200px){.play-panel{scroll-margin-top:0}}
 
 .game-tools{display:flex;gap:6px;align-items:center}.scorebar .game-tools button{font-size:10px;padding:8px 10px;min-height:38px}@media(max-width:650px){.game-tools{flex-direction:column;gap:4px}.scorebar .game-tools button{padding:4px 10px;min-height:28px}.scorebar{min-height:78px}}
+
+.pattern-cover{height:280px;padding:20px;background:#25332b;position:relative;display:flex;align-items:center;overflow:hidden}.pattern-cover svg{width:100%;height:auto}.game-card{display:flex;flex-direction:column}.game-card-copy{flex:1;display:flex;flex-direction:column;align-items:start}.game-card-copy .gold-button{margin-top:auto}.game-card-copy p:not(.eyebrow){min-height:0;margin-bottom:22px}
+@media(min-width:1050px){.game-collection{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.game-card-copy{padding:24px}.spark-cover,.maze-cover,.pattern-cover{height:250px}.spark-cover{padding:10px}.spark-cover img{width:150px;height:285px}.spark-cover>span{font-size:26px}.game-card-copy .gold-button{padding:12px 18px;font-size:12px}}
+@media(min-width:651px) and (max-width:1049px){.game-collection{grid-template-columns:1fr 1fr}.game-card:last-child{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr}.game-card:last-child .pattern-cover{height:100%;min-height:280px}}
+@media(max-width:650px){.pattern-cover{height:250px}}
