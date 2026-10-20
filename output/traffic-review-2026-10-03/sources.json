@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 1,
+  "items": [
+    {
+      "id": "weekly-traffic",
+      "title": "Traffic is low; Google search sessions held steady",
+      "queries": [
+        {
+          "id": "ga-week",
+          "source": {
+            "label": "GA4 OfficialJaneM \u2014 Home and Traffic acquisition",
+            "links": [
+              {
+                "label": "Google Analytics",
+                "url": "https://analytics.google.com/analytics/web/"
+              }
+            ],
+            "filters": [
+              "All users",
+              "All countries"
+            ],
+            "caveats": [
+              "These are recorded browser users and sessions, not verified prospective customers. Internal testing has not been excluded in this review.",
+              "The prior-period changes are displayed by GA4. The older 23 September audit uses a different window and was not used for this comparison."
+            ]
+          },
+          "reportingPeriod": "26 September\u20132 October 2026 versus 19\u201325 September 2026",
+          "columns": [
+            "metric",
+            "current",
+            "comparison"
+          ],
+          "rows": [
+            {
+              "metric": "Active users",
+              "current": 28,
+              "comparison": "Down 63.2%"
+            },
+            {
+              "metric": "New users",
+              "current": 21,
+              "comparison": "Down 71.6%"
+            },
+            {
+              "metric": "Returning users",
+              "current": 8,
+              "comparison": "Up 100%"
+            },
+            {
+              "metric": "Page views",
+              "current": 152,
+              "comparison": "Up 5.6%"
+            },
+            {
+              "metric": "Total sessions",
+              "current": 56,
+              "comparison": "Not recorded"
+            },
+            {
+              "metric": "Direct sessions",
+              "current": 36,
+              "comparison": "Down 47.1%"
+            },
+            {
+              "metric": "Organic Search sessions",
+              "current": 14,
+              "comparison": "Unchanged"
+            },
+            {
+              "metric": "Organic Social sessions",
+              "current": 4,
+              "comparison": "Down 33.3%"
+            },
+            {
+              "metric": "Unassigned sessions",
+              "current": 2,
+              "comparison": "Up 100%"
+            }
+          ],
+          "methods": [
+            {
+              "language": "calculation",
+              "code": "Current sessions reconcile: 36 + 14 + 4 + 2 = 56."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "customer-actions",
+      "title": "WhatsApp actions and game activity involve small numbers",
+      "queries": [
+        {
+          "id": "ga-events",
+          "source": {
+            "label": "GA4 OfficialJaneM \u2014 Events",
+            "links": [
+              {
+                "label": "Google Analytics",
+                "url": "https://analytics.google.com/analytics/web/"
+              }
+            ],
+            "filters": [
+              "All users",
+              "All countries"
+            ],
+            "caveats": [
+              "WhatsApp events record link clicks, not sent messages, paid orders or unique leads. Users can overlap across events.",
+              "Game events may include internal or local-preview testing; two to four users per game are insufficient to establish retention improvement."
+            ]
+          },
+          "reportingPeriod": "26 September\u20132 October 2026",
+          "columns": [
+            "event",
+            "count",
+            "users"
+          ],
+          "rows": [
+            {
+              "event": "whatsapp_click",
+              "count": 2,
+              "users": 2
+            },
+            {
+              "event": "style_studio_whatsapp_click",
+              "count": 1,
+              "users": 1
+            },
+            {
+              "event": "style_studio_view",
+              "count": 10,
+              "users": 6
+            },
+            {
+              "event": "daily_style_start",
+              "count": 9,
+              "users": 4
+            },
+            {
+              "event": "atelier_dash_start",
+              "count": 17,
+              "users": 3
+            },
+            {
+              "event": "pattern_drop_start",
+              "count": 5,
+              "users": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "technical-readiness",
+      "title": "Sampled public pages are accessible; current Google indexing remains unverified",
+      "queries": [
+        {
+          "id": "site-check",
+          "source": {
+            "label": "Live wearjanem.com pages and tracking code",
+            "links": [
+              {
+                "label": "Jane.M website",
+                "url": "https://wearjanem.com/"
+              },
+              {
+                "label": "Sitemap",
+                "url": "https://wearjanem.com/sitemap.xml"
+              },
+              {
+                "label": "Pattern Drop",
+                "url": "https://wearjanem.com/pattern-drop/"
+              }
+            ],
+            "caveats": [
+              "Checks cover the home, wedding, graduation, client-stories and Pattern Drop pages, not every resource. Public accessibility does not prove Google indexing.",
+              "Search Console denied the currently signed-in account access to the domain property. Current query impressions and indexing status could not be inspected."
+            ]
+          },
+          "summary": "The sampled pages loaded. Home, wedding, graduation and client-stories pages have matching HTTPS canonicals and index/follow directives. Pattern Drop is live and in the 37-URL sitemap. The live Analytics loader lacks a preview-host exclusion; local source also emits organic_landing_page without checking traffic source."
+        }
+      ]
+    }
+  ]
+}
